@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Strategy — MIRAS</title>
+<meta name="description" content="We do the research and write the plan before anyone opens a design file.">
+<meta name="theme-color" content="#2B3BF0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- PLACEHOLDER: miras.qa is a placeholder domain (as in sitemap.xml and robots.txt). Confirm the real domain with MIRAS and update the canonical, hreflang and og: URLs below. -->
+<link rel="canonical" href="https://miras.qa/strategy.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/strategy.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/strategy.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/strategy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Strategy — MIRAS">
+<meta property="og:description" content="We do the research and write the plan before anyone opens a design file.">
+<meta property="og:url" content="https://miras.qa/strategy.html">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_QA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* strategy.html (r2): the depth chart hero, the five questions, the service rows. Shared rules: motifs.css, site.css. */
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* services header, the scale move: the page's one giant line, set to the full measure (--hs fits it to the wrap, never past
+   the giant token), and the lead under its far end, level with the service descriptions (the diagonal) */
+#services > .wrap{container-type:inline-size}
+.svc-head{--hs:min(clamp(80px,14.5vw,250px),18.6cqi);position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(20px,2.6vw,36px);margin-bottom:clamp(40px,5.5vw,76px)}
+html[lang=ar] .svc-head{--hs:min(clamp(58px,10vw,170px),13.4cqi)}
+.svc-head .display{grid-column:1 / -1;margin:0;font:var(--fs-giant);font-size:var(--hs);letter-spacing:var(--ls-giant);white-space:nowrap}
+.svc-head .lead{grid-column:6 / -1;margin:0;max-width:30ch;color:var(--soft);text-wrap:balance}
+@media (max-width:820px){.svc-head .lead{grid-column:3 / -1}}
+@media (max-width:520px){.svc-head .lead{grid-column:2 / -1}}
+/* this page's move: the questions' dotted Flare route carries on down the outer margin, with a diamond at the headline and at each service */
+#services > .wrap{position:relative}
+#services > .wrap::before{content:"";position:absolute;top:calc(-1 * var(--pad));bottom:0;inset-inline-start:calc(var(--m) / 2 - 2px);width:4px;pointer-events:none;
+  background:radial-gradient(circle,var(--flare) 1.3px,transparent 1.8px) 50% 0/4px 11px repeat-y}
+.svc-head::before,.svc-row::before{content:"";position:absolute;inset-inline-start:calc(var(--m) / -2 - 5px);width:10px;height:10px;background:var(--flare);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);pointer-events:none}
+.svc-head::before{top:calc(var(--hs) * .5 - 5px)}
+.svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(30px,3.4vw,56px) * .54 - 5px)}
+html[lang=ar] .svc-head::before{top:calc(var(--hs) * .66 - 5px)}
+html[lang=ar] .svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(24px,2.4vw,38px) * .74 - 5px)}
+@media (max-width:759px){.svc-head::before,.svc-row::before{width:8px;height:8px;inset-inline-start:calc(var(--m) / -2 - 4px)}}
+/* service rows: the name is the link and the whole row is its target; "Ask about this" is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+/* the Next band previews the Branding mark as a print crop: flat colour, no vignette. The art runs to the band's far
+   edge, which cuts the water lines; only their near ends ease in, over the first tenth, so they never stop on a ruled edge */
+.next > .next-art{overflow:hidden;margin-inline-end:calc(-1 * var(--m))}
+.next-art > canvas{-webkit-mask:linear-gradient(90deg,transparent,#000 10%);mask:linear-gradient(90deg,transparent,#000 10%)}
+html[dir=rtl] .next-art > canvas{-webkit-mask-image:linear-gradient(270deg,transparent,#000 10%);mask-image:linear-gradient(270deg,transparent,#000 10%)}
+.related{padding-top:clamp(40px,7vh,80px)}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+
+/* the questions we answer first: a route of soundings that steps one column deeper with each question */
+.qs-wrap{row-gap:0}
+/* the heading answers the diagonal from the other side: top right (cols 8–12), on the first question's baseline. Its top
+   padding is the row's padding plus the gap between the two sizes' baselines (each line box puts its baseline at
+   size × (line-height + .67) / 2 in Instrument Serif and in IBM Plex Sans Arabic), from the --fs-display and --fs-head sizes */
+.qs-t{grid-column:6 / -1;margin-bottom:clamp(30px,5vw,64px)}
+.qs{grid-column:1 / -1;position:relative;list-style:none;margin:0;padding:0}
+@media (min-width:1000px){
+  .qs-t{grid-column:8 / -1;grid-row:1;align-self:start;position:relative;z-index:2;margin:0;
+    padding-top:calc(clamp(18px,2.6vw,38px) + .785 * clamp(52px,8vw,140px) - .835 * clamp(36px,4.4vw,70px))}
+  html[lang=ar] .qs-t{padding-top:calc(clamp(18px,2.6vw,38px) + .935 * clamp(42px,6.2vw,104px) - .985 * clamp(30px,3.6vw,56px))}
+  .qs{grid-row:1}
+  .qs > li:first-of-type p{grid-column:2 / span 6}
+}
+.qs > li{--i:0;position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-block:clamp(18px,2.6vw,38px);font:var(--fs-display);letter-spacing:var(--ls-display)}
+.qs .qd{grid-column:1;justify-self:start;align-self:start;position:relative;z-index:1;width:10px;height:10px;margin-top:.4em;background:var(--flare);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.qs p{grid-column:2 / -1;margin:0;color:var(--fg);text-wrap:balance}
+.qs .qr{position:absolute;inset-inline-end:0;inset-inline-start:calc(var(--i) * (100% + var(--gut)) / 12);bottom:0;height:1px;background:color-mix(in srgb,var(--shore) 28%,transparent);transform-origin:0 50%;transition:transform .6s var(--ease)}
+html[dir=rtl] .qs .qr{transform-origin:100% 50%}
+.qs.js > li:not(.in) .qr{transform:scaleX(0)}
+.qs-route{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.qs-route path{fill:none;stroke:var(--flare);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 9}
+html[lang=ar] .qs .qd{margin-top:.55em}
+@media (min-width:760px){
+  .qs > li:nth-of-type(2){--i:1}.qs > li:nth-of-type(2) .qd{grid-column:2}.qs > li:nth-of-type(2) p{grid-column:3 / -1}
+  .qs > li:nth-of-type(3){--i:2}.qs > li:nth-of-type(3) .qd{grid-column:3}.qs > li:nth-of-type(3) p{grid-column:4 / -1}
+  .qs > li:nth-of-type(4){--i:3}.qs > li:nth-of-type(4) .qd{grid-column:4}.qs > li:nth-of-type(4) p{grid-column:5 / -1}
+  .qs > li:nth-of-type(5){--i:4}.qs > li:nth-of-type(5) .qd{grid-column:5}.qs > li:nth-of-type(5) p{grid-column:6 / -1}
+}
+@media (prefers-reduced-motion:reduce){.qs .qr{transition:none}}
+@media (max-width:759px){
+  .qs > li{grid-template-columns:22px minmax(0,1fr);column-gap:12px}
+  .qs p{grid-column:2}
+  .qs-t{grid-column:1 / -1}
+}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+</style>
+</head>
+<body data-page="strategy">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-tide" data-nav-dark>
+    <canvas class="motif" data-motif="chart" data-ink="shore" data-labels="[data-i18n='sv.0.n'],[data-i18n='sv.1.n'],[data-i18n='sv.2.n']" data-here="#chHere" data-goal="#chGoal" data-opts='{"route":[[.068,.14],[.23,.25],[.40,.29],[.57,.38]]}' aria-hidden="true"></canvas>
+    <span id="chHere" class="sr-only" data-i18n="ch.here">Today</span>
+    <span id="chGoal" class="sr-only" data-i18n="ch.goal">Next year</span>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Strategy</h1>
+    <p class="lead" data-i18n="h.d">We do the research and write the plan before anyone opens a design file.</p>
+  </section>
+
+  <section class="sec t-deep edge-top" id="questions" aria-labelledby="qsT">
+    <div class="wrap g12 qs-wrap">
+      <h2 class="heading qs-t" id="qsT" data-i18n="qs.t">We answer these first.</h2>
+      <ol class="qs">
+        <li><span class="qd" aria-hidden="true"></span><p data-i18n="qs.0">Who is this for?</p><span class="qr" data-reveal aria-hidden="true"></span></li>
+        <li><span class="qd" aria-hidden="true"></span><p data-i18n="qs.1">What do they think of you now?</p><span class="qr" data-reveal aria-hidden="true"></span></li>
+        <li><span class="qd" aria-hidden="true"></span><p data-i18n="qs.2">What should they think instead?</p><span class="qr" data-reveal aria-hidden="true"></span></li>
+        <li><span class="qd" aria-hidden="true"></span><p data-i18n="qs.3">Where will they hear it?</p><span class="qr" data-reveal aria-hidden="true"></span></li>
+        <li><span class="qd" aria-hidden="true"></span><p data-i18n="qs.4">How will we know it worked?</p><span class="qr" data-reveal aria-hidden="true"></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">Yours, in writing.</h2><p class="lead" data-i18n="sv.lead">Your team can work from it without us.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=strategy-0" data-i18n="sv.0.n" aria-describedby="svA0">Research &amp; insights</a></h3><div><p class="lead" data-i18n="sv.0.d">We talk to your customers and study your competitors, then show you what we found.</p><ul class="slash"><li data-i18n="sv.0.0">Market map</li><li data-i18n="sv.0.1">Audience profiles</li><li data-i18n="sv.0.2">Competitor review</li><li data-i18n="sv.0.3">Insight report</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=strategy-1" data-i18n="sv.1.n" aria-describedby="svA1">Brand strategy</a></h3><div><p class="lead" data-i18n="sv.1.d">We decide what you stand for and write the lines your staff will repeat.</p><ul class="slash"><li data-i18n="sv.1.0">Positioning</li><li data-i18n="sv.1.1">Purpose &amp; values</li><li data-i18n="sv.1.2">Messaging</li><li data-i18n="sv.1.3">Brand story</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=strategy-2" data-i18n="sv.2.n" aria-describedby="svA2">Marketing plans</a></h3><div><p class="lead" data-i18n="sv.2.d">Which channels get your budget, and when, for the next quarter and year.</p><ul class="slash"><li data-i18n="sv.2.0">Channel mix</li><li data-i18n="sv.2.1">Budget split</li><li data-i18n="sv.2.2">Campaign calendar</li><li data-i18n="sv.2.3">KPI dashboard</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore related" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Concepts that began with a plan.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-flare band edge-top" href="branding.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Branding</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><canvas class="motif" data-motif="mark" data-ink="deep" data-opts='{"mini":true}'></canvas></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Strategy — MIRAS", "ar": "الاستراتيجية — ميراس"}; window.PAGE_AR = {
+"h.word": "الاستراتيجية",
+"meta.d": "نُجري الأبحاث ونكتب الخطة قبل أن يفتح أحد ملف تصميم.",
+"h.d": "نُجري الأبحاث ونكتب الخطة قبل أن يفتح أحد ملف تصميم.",
+"ch.here": "اليوم",
+"ch.goal": "العام المقبل",
+"qs.t": "أسئلة نجيب عنها أولاً.",
+"qs.0": "مَن جمهورك؟",
+"qs.1": "كيف يرونك اليوم؟",
+"qs.2": "وكيف تريدهم أن يروك؟",
+"qs.3": "أين سيسمعون رسالتك؟",
+"qs.4": "كيف سنعرف أنها نجحت؟",
+"sv.t": "مكتوبة، وتبقى لك.",
+"sv.lead": "يعمل بها فريقك من دوننا.",
+"sv.0.n": "الأبحاث والرؤى",
+"sv.0.d": "نتحدّث إلى عملائك وندرس منافسيك، ثم نضع أمامك ما وجدناه.",
+"sv.0.0": "خريطة السوق",
+"sv.0.1": "ملفات الجمهور",
+"sv.0.2": "مراجعة المنافسين",
+"sv.0.3": "تقرير الرؤى",
+"sv.1.n": "استراتيجية العلامة",
+"sv.1.d": "نحدّد ما تمثّله علامتك، ونكتب العبارات التي سيردّدها فريقك.",
+"sv.1.0": "التموضع",
+"sv.1.1": "الغاية والقيم",
+"sv.1.2": "الرسائل",
+"sv.1.3": "قصة العلامة",
+"sv.2.n": "خطط التسويق",
+"sv.2.d": "أيّ القنوات تستحق ميزانيتك ومتى، للربع والعام القادمين.",
+"sv.2.0": "مزيج القنوات",
+"sv.2.1": "توزيع الميزانية",
+"sv.2.2": "تقويم الحملات",
+"sv.2.3": "لوحة المؤشرات",
+"wk.t": "مشاريع مفاهيمية بدأت بخطة.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "العلامة التجارية"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$, $$ = M.$$;
+  // related work: a pair chosen for this page, set 7/5 (the strategy concept, then the booking flow that began as a plan);
+  // if the admin's list no longer has one, this discipline's projects fill in, then the rest
+  const PAIR = ['noor-clinics', 'saffar'], SIZE = ['big', 'third'];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'strategy'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 2);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // the questions: each rule draws across once as its row arrives; a dashed route links the diamonds
+  const qs = $('.qs'); if (!qs) return;
+  const rows = $$(':scope > li', qs), NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg'), path = document.createElementNS(NS, 'path');
+  svg.setAttribute('class', 'qs-route'); svg.setAttribute('aria-hidden', 'true'); svg.append(path); qs.append(svg);
+  const measure = () => {
+    const d = rows.map((li, i) => { const q = li.querySelector('.qd'); return (i ? 'L' : 'M') + (li.offsetLeft + q.offsetLeft + q.offsetWidth / 2) + ' ' + (li.offsetTop + q.offsetTop + q.offsetHeight / 2); }).join('');
+    svg.setAttribute('width', qs.offsetWidth); svg.setAttribute('height', qs.offsetHeight); path.setAttribute('d', d);
+  };
+  qs.classList.add('js');
+  if (M.reduce || !('IntersectionObserver' in window)) rows.forEach(li => li.classList.add('in'));
+  else {
+    // a row that arrives also settles every row above it (a jump or a restored scroll position never leaves a rule undrawn)
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting && e.boundingClientRect.top > 0) return; rows.slice(0, rows.indexOf(e.target) + 1).forEach(li => { li.classList.add('in'); io.unobserve(li); }); }), { rootMargin: '0px 0px -18% 0px' });
+    rows.forEach(li => io.observe(li));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(qs); else addEventListener('resize', measure, { passive: true });
+  M.onLang(() => measure()); // the diamonds swap sides in Arabic
+})();
+</script>
+</body>
+</html>

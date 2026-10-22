@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>About — MIRAS</title>
+<meta name="description" content="MIRAS is a marketing agency in Lusail, Qatar. We plan a brand and make its work, then keep it running after launch, in Arabic and English.">
+<meta name="theme-color" content="#2B3BF0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=r2">
+<link rel="canonical" href="https://miras.qa/about.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/about.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/about.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:url" content="https://miras.qa/about.html">
+<meta property="og:title" content="About — MIRAS">
+<meta property="og:description" content="MIRAS is a marketing agency in Lusail, Qatar. We plan a brand and make its work, then keep it running after launch, in Arabic and English.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="MIRAS, with Mira riding a wave in front of an orange sun">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — MIRAS">
+<meta name="twitter:description" content="MIRAS is a marketing agency in Lusail, Qatar. We plan a brand and make its work, then keep it running after launch, in Arabic and English.">
+<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* About. Fields: Deep hero (the Lusail horizon at the real time) → Shore path marquee → Shore storyboard → Foam Mira → Shore studio → footer.
+   System rules: see the top of assets/motifs.css (no eyebrows, no numbering, no italic outside the motif words, radius ≤ 2px). */
+
+/* hero: the headline across 11 columns, the lead in 7–12, the horizon full-bleed underneath (the next section's curved top edge covers its lowest water lines) */
+.ab-hero{min-height:0;padding-bottom:0}
+.ab-head{row-gap:clamp(18px,2.4vw,34px);align-items:end}
+.ab-head h1{grid-column:1 / span 11}
+.ab-head .lead{grid-column:7 / -1;margin-top:0;max-width:36ch;text-wrap:pretty} /* phones: "English." never alone on the last line */
+.hero.ab-hero > .hz{z-index:0} /* beneath the curved top edge of the next section */
+/* the sky starts below the lead: at midday the sun climbs to 12px under the canvas top, and it must never sit behind the words */
+.hz{position:relative;height:calc(min(46vh,560px) + 44px);min-height:250px;margin:0 calc(-1 * var(--m))}
+/* the caption names the picture; the sun itself is the time (the studio clock below gives the digits) */
+.hz-cap{position:absolute;z-index:1;bottom:58px;inset-inline-end:var(--m);margin:0;padding:6px 12px;background:var(--deep);color:var(--shore);font:var(--fs-small)}
+/* the sun crosses the sky from the inline start to the inline end through the day (the canvas mirrors in RTL);
+   from midday on, the caption moves to the start side so it never covers the sun's reflection */
+.hz[data-sun=end] .hz-cap{inset-inline:var(--m) auto}
+
+/* path marquee: the services in both languages on one moving line; it bleeds off both edges */
+.ab-mq{padding-block:clamp(6px,1.6vw,22px) 0}
+
+/* storyboard: the process in four posterised film frames.
+   The stepped frames are the header's counterweight: the heading takes columns 8–12 (mirrored in RTL), in the corner the step-down
+   leaves empty above frames 3 and 4, as the top step of the staircase. It sits 24px above frame 1's top edge, so the step words that
+   ride above frames 3 and 4 keep 30px or more of paper under its descenders (Arabic descends deeper) */
+.ab-sb{padding-top:clamp(56px,8vh,96px)}
+.ab-sb-head{margin-bottom:-40px}
+.ab-sb-head h2{grid-column:8 / -1;position:relative;z-index:2}
+.ab-sb .storyboard:focus-visible{outline-offset:6px}
+
+/* Mira: she stands on drawn ripples and steps 40px over the section edge; flat, no shadow */
+.ab-mira{padding-bottom:0;overflow:visible}
+.ab-mira .g12{align-items:end}
+.ab-mira-art{grid-column:1 / span 5;position:relative;z-index:2;margin:0 0 -40px;display:flex;flex-direction:column;align-items:center;justify-self:center}
+/* capped at 340px tall: the art is 512×680 px, so on a 2× screen anything taller than 340 CSS px is drawn larger than its pixels (soft edges) */
+.ab-mira-art img{height:min(clamp(300px,52vh,450px),340px);width:auto;max-width:none;position:relative;z-index:1}
+/* two rings continue the puddle drawn in the art: centred on it (53.2% across, 93.2% down the image; the art is not mirrored in RTL), behind the art;
+   the box is 700×140 image px, so the art's own puddle (471×90) sits inside the inner ring */
+.ab-mira-art .ripple{position:absolute;z-index:0;left:53.2%;top:93.2%;width:136.7%;height:auto;aspect-ratio:700/140;transform:translate(-50%,-50%);color:var(--tide60);pointer-events:none}
+.ab-mira-txt{grid-column:7 / -1;align-self:center;padding-block:clamp(20px,4vh,40px) var(--pad)}
+.ab-mira-txt .lead{margin-top:clamp(18px,2vw,28px);max-width:34ch;color:var(--soft);text-wrap:pretty}
+
+/* studio: the Lusail clock as the page's one giant type moment, the open/closed line and the address beside it */
+.ab-studio{padding-top:calc(var(--pad) + 20px)}
+.ab-studio .g12{align-items:end;row-gap:28px}
+.ab-clock{grid-column:1 / span 7;margin:0;font:400 clamp(80px,14.5vw,250px)/.86 var(--serif);letter-spacing:-.035em;color:var(--tide);font-variant-numeric:tabular-nums;direction:ltr;text-align:start}
+html[dir=rtl] .ab-clock{text-align:right}
+.ab-studio-info{grid-column:8 / -1;padding-bottom:.6em}
+.status{display:flex;align-items:center;gap:12px;margin:0}
+.ab-studio-info .lead{text-wrap:pretty} /* no time or word left alone on the last line */
+.ab-studio-info .soft{color:var(--soft)}
+.ab-studio-info > .lead ~ .lead{margin-top:12px} /* the advice under the live status (the hidden message spans sit between them) */
+.ab-where{margin-top:30px}
+.ab-addr{margin-top:6px;font:400 30px/1.15 var(--serif);letter-spacing:-.01em}
+html[lang=ar] .ab-addr{font:600 24px/1.5 var(--ar);letter-spacing:0}
+
+@media (max-width:900px){
+  .ab-head h1,.ab-head .lead{grid-column:1 / -1}
+  /* one column: Mira stands centred under the words in both languages. The art is not mirrored and its puddle sits 3.2% of its width
+     right of centre, so the figure moves back by that much and the rings centre on the column. Her height is capped so the outer
+     ring (136.7% of her width) never runs past the page margins: a start-aligned figure pushed the rings off the right edge in RTL */
+  .ab-mira-art{grid-column:1 / -1;justify-self:center;margin-inline-start:0;translate:-3.2% 0}
+  .ab-mira-art img{height:min(clamp(260px,44vh,360px),calc((100vw - 2 * var(--m)) * .97))}
+  .ab-mira-txt{grid-column:1 / -1;grid-row:1;padding-bottom:28px}
+  .ab-clock,.ab-studio-info{grid-column:1 / -1}
+  .ab-studio-info{padding-bottom:0}
+}
+@media (max-width:759px){
+  .hz{height:calc(30vh + 44px);min-height:230px}
+  .ab-head h1{text-wrap:balance} /* three short lines, no word left alone */
+  /* phones: the frames scroll sideways with no step-down, so the heading spans the column above them, clear of the first step word */
+  .ab-sb-head{margin-bottom:24px}
+  .ab-sb-head h2{grid-column:1 / -1}
+  .ab-clock{font-size:max(80px,min(28vw,250px))}
+}
+</style>
+</head>
+<body data-page="about">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about" aria-current="page">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main" tabindex="-1">
+  <section class="hero t-deep ab-hero" data-nav-dark>
+    <div class="g12 ab-head">
+      <h1 class="display" data-i18n="a.t">A marketing agency in Lusail.</h1>
+      <p class="lead" data-i18n="a.d">We plan the brand, make the work and run it after launch, in Arabic and English.</p>
+    </div>
+    <div class="hz">
+      <canvas class="motif" data-motif="horizon" data-ink="shore" data-opts='{"horizon":.62,"clock":true,"lines":7,"water":"tide60","maxH":.3,"sunR":.13}' aria-hidden="true"></canvas>
+      <p class="hz-cap" data-i18n="a.now">Lusail, now</p>
+    </div>
+    <script>(function (hz) {
+      /* before the first paint, the caption takes the half of the sky the sun (or moon) is not in, so it never jumps across once the
+         page has loaded. MOTIFS.sunAt keeps the sun in the end half from solar noon to solar midnight; these are its monthly solar
+         noons, (sunrise + sunset) / 2 in Lusail minutes. The page script re-checks it every 15s with MOTIFS.sunAt itself */
+      var q = new Date(Date.now() + 108e5), m = q.getUTCHours() * 60 + q.getUTCMinutes() + q.getUTCSeconds() / 60;
+      var d = (m - [702.5, 711.5, 707, 698.5, 695, 696, 700.5, 700.5, 694, 686.5, 684.5, 693.5][q.getUTCMonth()] + 1440) % 1440;
+      hz.dataset.sun = d > 0 && d < 720 ? 'end' : 'start';
+      /* phones: the skyline takes more of the narrow width (read once, before motifs.js mounts the canvas) */
+      if (matchMedia('(max-width:759px)').matches) hz.querySelector('canvas').dataset.opts = '{"horizon":.6,"clock":true,"lines":7,"water":"tide60","span":[.3,.97],"maxH":.26}';
+    })(document.currentScript.previousElementSibling);</script>
+  </section>
+
+  <section class="t-shore edge-top ab-mq" aria-label="Our services" data-i18n-aria="mq.a">
+    <svg class="motif" id="mq" data-motif="wavetext" data-opts='{"marquee":true,"speed":40,"amp":.12,"lambda":.6}' data-cms="text.a.m1" aria-hidden="true"></svg>
+    <ul class="sr-only"><li data-i18n="a.m1">Strategy</li><li data-i18n="a.m2">Branding</li><li data-i18n="a.m3">Campaigns</li><li data-i18n="a.m4">Content</li><li data-i18n="a.m5">Websites</li><li data-i18n="a.m6">Social media</li><li data-i18n="a.m7">Paid ads</li></ul>
+  </section>
+
+  <section class="sec t-shore ab-sb" id="process">
+    <div class="wrap">
+      <div class="g12 ab-sb-head"><h2 class="heading" id="hpT" data-i18n="hp.t">How a project runs.</h2></div>
+      <div class="motif storyboard" data-motif="storyboard" data-frames="17,57,105,217" role="region" aria-labelledby="hpT">
+        <ol class="sb-list">
+          <li><figure><img src="assets/film/t/f0017.webp?v=r2" width="480" height="270" alt="" loading="lazy" decoding="async"></figure><h3 class="sr-only" data-i18n="hp.0">Listen</h3><p class="sb-d" data-i18n="hp.0d">We read what you have and talk to your customers.</p></li>
+          <li><figure><img src="assets/film/t/f0057.webp?v=r2" width="480" height="270" alt="" loading="lazy" decoding="async"></figure><h3 class="sr-only" data-i18n="hp.1">Plan</h3><p class="sb-d" data-i18n="hp.1d">You sign off one written plan and its targets.</p></li>
+          <li><figure><img src="assets/film/t/f0105.webp?v=r2" width="480" height="270" alt="" loading="lazy" decoding="async"></figure><h3 class="sr-only" data-i18n="hp.2">Create</h3><p class="sb-d" data-i18n="hp.2d">We make the work, and you review it before anything goes out.</p></li>
+          <li><figure><img src="assets/film/t/f0217.webp?v=r2" width="480" height="270" alt="" loading="lazy" decoding="async"></figure><h3 class="sr-only" data-i18n="hp.3">Launch</h3><p class="sb-d" data-i18n="hp.3d">It goes live, and you get a report every month.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec t-foam edge-top ab-mira">
+    <div class="wrap g12">
+      <figure class="ab-mira-art">
+        <img src="assets/mira-arrive.png?v=r2" width="512" height="680" alt="Mira, a small blue figure made of water, waving." loading="lazy" decoding="async" data-media="mira" data-i18n-alt="mi.alt">
+        <svg class="ripple" viewBox="0 0 700 140" aria-hidden="true"><ellipse cx="350" cy="70" rx="270" ry="52"/><ellipse cx="350" cy="70" rx="334" ry="64"/></svg>
+      </figure>
+      <div class="ab-mira-txt">
+        <h2 class="display" data-i18n="mi.t">This is Mira.</h2>
+        <p class="lead" data-i18n="mi.d">She starts in our brand film and closes every page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top ab-studio" id="studio">
+    <div class="wrap g12">
+      <h2 class="ab-clock"><span class="sr-only" data-i18n="sd.now">Time in Lusail now:</span> <span id="clock">16:00</span></h2>
+      <div class="ab-studio-info">
+        <p class="status lead"><span class="sunmark" id="clockDot" aria-hidden="true"></span><span id="clockStatus"></span></p>
+        <div hidden><span data-i18n="sd.open">Open now. Visitors welcome.</span><span data-i18n="sd.today">Closed right now. We open at {open} today.</span><span data-i18n="sd.tomorrow">Closed for the night. Back tomorrow at {open}.</span><span data-i18n="sd.weekend">Closed for the weekend. Back {day} at {open}.</span><span data-i18n="sd.closedFor">Closed today for {label}. Back {day} at {open}.</span><span data-i18n="sd.hoursFor">{label} hours today: {open}–{close}.</span></div>
+        <p class="lead soft" data-i18n="sd.t">Visit during opening hours, or email us first.</p>
+        <p class="small soft ab-where" data-i18n="sd.where">Find us</p>
+        <p class="ab-addr" data-i18n="sd.addr">Al Fardan Tower, Lusail, Qatar</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "About — MIRAS", "ar": "من نحن — ميراس"}; window.PAGE_AR = {
+"meta.d": "خبراء استراتيجية ومصمّمون وكتّاب في لوسيل، قطر. نخطّط لعلامتك، ونصنع موادها، وندير حملاتها بعد الإطلاق، بالعربية والإنجليزية.",
+"a.t": "وكالة تسويق في لوسيل.",
+"a.d": "نخطّط لعلامتك، ونصنع موادها، وندير حملاتها بعد الإطلاق، بالعربية والإنجليزية.",
+"a.now": "لوسيل الآن",
+"mq.a": "خدماتنا",
+"a.m1": "الاستراتيجية",
+"a.m2": "العلامة التجارية",
+"a.m3": "الحملات",
+"a.m4": "المحتوى",
+"a.m5": "المواقع",
+"a.m6": "منصّات التواصل",
+"a.m7": "الإعلانات المدفوعة",
+"hp.t": "كيف يسير المشروع.",
+"hp.0": "نُصغي",
+"hp.0d": "نقرأ كل ما لديك، ونتحدّث إلى عملائك.",
+"hp.1": "نخطّط",
+"hp.1d": "توافق على خطة مكتوبة واحدة وأهدافها.",
+"hp.2": "نصنع",
+"hp.2d": "ننتج الأعمال، وتراجعها قبل أن يُنشر أي شيء.",
+"hp.3": "نُطلق",
+"hp.3d": "تنطلق الحملة، ويصلك تقرير كل شهر.",
+"mi.alt": "ميرا، شخصية زرقاء صغيرة من الماء، تلوّح بيدها.",
+"mi.t": "هذه ميرا.",
+"mi.d": "تبدأ ميرا في فيلم علامتنا، وتختم كل صفحة.",
+"sd.now": "الساعة الآن في لوسيل:",
+"sd.t": "زُرنا خلال ساعات الدوام، أو راسلنا أولاً.",
+"sd.where": "تجدنا في",
+"sd.addr": "برج الفردان، لوسيل، قطر",
+"sd.open": "مفتوحون الآن، ونرحّب بزيارتك.",
+"sd.today": "مغلقون الآن، ونفتح اليوم الساعة {open}.",
+"sd.tomorrow": "أغلقنا لهذا اليوم، ونعود غداً الساعة {open}.",
+"sd.weekend": "مغلقون في عطلة نهاية الأسبوع، ونعود يوم {day} الساعة {open}.",
+"sd.closedFor": "مغلقون اليوم بمناسبة {label}، ونعود يوم {day} الساعة {open}.",
+"sd.hoursFor": "دوام {label} اليوم من {open} إلى {close}."
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+// The clock and the open/closed line follow content.studio (hours, days, time zone and special days, set in the admin).
+// The horizon's sun reads the real Lusail time on its own (MOTIFS.sunAt).
+(() => {
+  const M = MIRAS, $ = M.$, $$ = M.$$, MO = window.MOTIFS, hz = $('.hz');
+  function tick() {
+    const h = M.hours(), st = $('#clockStatus');
+    $('#clock').textContent = h.time;
+    st.textContent = M.text('sd.' + h.key, h.vars);
+    st.dataset.cms = 'text.sd.' + h.key; // the message actually showing, so inspect and "show in preview" find it
+    $('#clockDot').classList.toggle('off', !h.open);
+    // the caption keeps to the half of the sky the sun (or moon) is not in, so it never covers the reflection
+    // (x runs from the inline start; the horizon canvas mirrors in RTL)
+    const s = MO && MO.sunAt && MO.sunAt(new Date());
+    if (hz && s) hz.dataset.sun = s.x > .5 ? 'end' : 'start';
+  }
+  M.onLang(tick); setInterval(tick, 15000);
+
+  // the path marquee: each service in English, then in Arabic, separated by the Flare "~" (redrawn on language and content changes)
+  const KEYS = ['a.m1', 'a.m2', 'a.m3', 'a.m4', 'a.m5', 'a.m6', 'a.m7'], mq = $('#mq');
+  M.onLang(() => {
+    const m = MO && MO.get(mq); if (!m || !m.setItems) return;
+    m.setItems(KEYS.flatMap(k => [{ text: M.textIn(k, 'en'), lang: 'en' }, { text: M.textIn(k, 'ar'), lang: 'ar' }]));
+  });
+
+  // the storyboard: its step words point the admin's inspect at their own keys; on phones it scrolls sideways, so it takes focus there
+  const sb = $('.storyboard');
+  if (sb) {
+    MO && MO.get(sb);
+    $$('.sb-wave text', sb).forEach((t, i) => t.setAttribute('data-cms', 'text.hp.' + i));
+    const fit = () => { if (sb.scrollWidth > sb.clientWidth + 2) sb.setAttribute('tabindex', '0'); else sb.removeAttribute('tabindex'); };
+    fit(); addEventListener('resize', fit, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

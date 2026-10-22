@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Branding — MIRAS</title>
+<meta name="description" content="We name your brand, draw it and write how it speaks, in Arabic and English.">
+<meta name="theme-color" content="#FF5A23">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- PLACEHOLDER: miras.qa is a placeholder domain (as in sitemap.xml and robots.txt). Confirm the real domain with MIRAS and update the canonical, hreflang and og: URLs below. -->
+<link rel="canonical" href="https://miras.qa/branding.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/branding.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/branding.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/branding.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Branding — MIRAS">
+<meta property="og:description" content="We name your brand, draw it and write how it speaks, in Arabic and English.">
+<meta property="og:url" content="https://miras.qa/branding.html">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_QA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* branding.html (r2): the monogram drawn in water, the service rows, the name demo. Shared rules: motifs.css, site.css. */
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* services header, the scale move: the headline across cols 1–11; the first row's description sits under its far end (the diagonal) */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);margin-bottom:clamp(28px,4vw,56px)}
+.svc-head .display{grid-column:1 / span 11;margin:0;text-wrap:balance}
+@media (max-width:759px){.svc-head .display{grid-column:1 / -1}}
+/* this page's move: each service carries its own drawn object under its name, in the 5-column slot: the monogram drawn in
+   water (identity, a still frame of the hero's motif), one name set in both scripts (naming), and one idea reflowed for a
+   billboard, a bus shelter and a phone (campaigns) */
+.svc-row > .svc-obj{grid-column:1 / -1;align-self:start;margin-top:clamp(8px,1.2vw,18px);color:var(--deep)}
+@media (min-width:821px){.svc-row > .svc-obj{grid-column:1 / span 5;grid-row:2}.svc-row > div{grid-row:1 / span 2}}
+/* identity: the water runs out into the margin, the monogram's left edge sits on the name's. On a phone the bleed is wider than
+   the page gutter (--m), so the water fades out where the screen edge crosses the canvas (--bleed less --m; no effect on
+   desktop, where that is zero or less). In RTL the bleed is on the right, so the fade moves to the right end. */
+.svc-mark{--bleed:clamp(64px,6.4vw,92px);display:block;width:clamp(240px,23vw,330px);height:clamp(100px,8.6vw,124px);margin-inline-start:calc(-1 * var(--bleed));
+  -webkit-mask:linear-gradient(90deg,transparent max(0px,calc(var(--bleed) - var(--m))),#000 24%,#000 76%,transparent);mask:linear-gradient(90deg,transparent max(0px,calc(var(--bleed) - var(--m))),#000 24%,#000 76%,transparent)}
+html[dir=rtl] .svc-mark{-webkit-mask:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent calc(100% - max(0px,calc(var(--bleed) - var(--m)))));mask:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent calc(100% - max(0px,calc(var(--bleed) - var(--m)))))}
+/* naming: one name, the same word in both scripts */
+.svc-name{display:flex;align-items:baseline;gap:.26em;font:400 clamp(46px,4.8vw,72px)/1.1 var(--serif);letter-spacing:-.02em}
+.svc-name [lang=ar]{font:600 .78em/1.1 var(--ar);letter-spacing:0}
+.svc-name .sl{color:var(--flare);font-weight:300;transform:translateY(.04em)}
+/* campaigns: the same sun, line and headline, on a billboard (3:1, on its legs) and a bus shelter panel (1:2, under its
+   roof), both standing on one ground line, and on a phone (9:19.5) playing it as a short ad, its scrub bar a sixth of
+   the way along */
+.svc-camp{display:block;width:min(100%,386px);height:auto;overflow:visible}
+.svc-camp .o{fill:none;stroke:currentColor;stroke-width:1;vector-effect:non-scaling-stroke}
+.svc-camp .h{fill:none;stroke:currentColor;stroke-opacity:.35;stroke-width:1;vector-effect:non-scaling-stroke}
+.svc-camp .t{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke}
+.svc-camp .s{fill:var(--flare)}
+html[dir=rtl] .svc-camp{transform:scaleX(-1)} /* the billboard leads on the reading side */
+/* service rows: the name is the link and the whole row is its target; "Ask about this" is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+/* hero: the lead ends well before the monogram's loop */
+.hero.t-flare .lead{max-width:34ch}
+/* three layers, not four: the word, its curl and the hatched monogram. No outline echo here (the hatch is the second layer),
+   and the canvas runs 7% past the far edge so the mark's centre moves out to about .75W, clear of the word's middle */
+.hero.t-flare > .wave-title .echo{display:none}
+@media (min-width:760px){.hero.t-flare > canvas.motif{width:107%}}
+/* the Next band previews Content: the contact strip, tilted like its hero, runs off the page edge */
+.next{overflow-x:clip}
+/* physical sides: the strip itself is direction:ltr, so logical insets would not follow the page */
+.next-art > .reel.mini{--fh:clamp(96px,8.6vw,124px);top:50%;bottom:auto;left:0;right:calc(-1 * var(--m));width:auto;max-width:none;height:auto;transform:translateY(-50%) rotate(-3deg)}
+html[dir=rtl] .next-art > .reel.mini{left:calc(-1 * var(--m));right:0;display:flex;justify-content:flex-end;transform:translateY(-50%) rotate(3deg)} /* frames run off the left edge */
+
+/* the name demo: type a name, see it set on a billboard, a post and a bag label (nothing is sent until the link is used) */
+.tn{align-items:start;row-gap:clamp(40px,6vw,64px)}
+.tn-l{grid-column:1 / span 5;display:flex;flex-direction:column;align-items:flex-start}
+.tn-l .heading{max-width:12ch}
+.tn-d{margin-top:20px;max-width:38ch;font:var(--fs-lead);color:var(--soft)}
+.tn-field{display:flex;flex-direction:column;gap:8px;width:100%;max-width:440px;margin-top:clamp(30px,4vw,48px)}
+.tn-field label{font:var(--fs-small);color:var(--soft)}
+.tn-field input{width:100%;font:400 clamp(28px,2.6vw,40px)/1.2 var(--serif);letter-spacing:-.01em;color:var(--fg);background:transparent;border:0;border-bottom:1.5px solid color-mix(in srgb,var(--shore) 55%,transparent);border-radius:0;padding:6px 0 10px}
+.tn-field input::placeholder{color:color-mix(in srgb,var(--shore) 42%,transparent)}
+.tn-field input:focus{outline:none;border-bottom-color:var(--flare);box-shadow:0 1.5px 0 var(--flare)}
+html[lang=ar] .tn-field input{font:600 clamp(24px,2.2vw,34px)/1.4 var(--ar);letter-spacing:0}
+.tn-field input.is-ar{font-family:var(--ar);font-weight:600;letter-spacing:0}
+.tn-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.tn-acts .pill.ghost{color:var(--shore)}
+
+.tn-r{grid-column:6 / -1;min-width:0}
+.tn-wave{height:clamp(84px,8.6vw,132px);margin-bottom:clamp(8px,1.2vw,18px)}
+.tn-wave text{font-size:clamp(48px,6.6vw,108px)}
+.tn-wave[data-script=ar] text{font-size:clamp(38px,4.8vw,78px)}
+.tn-apps{--a:var(--tide);--b:var(--shore);display:grid;grid-template-columns:44% minmax(0,1fr);grid-template-areas:"bill bill" "post tag";gap:clamp(16px,1.8vw,24px) clamp(18px,2.4vw,34px);align-items:start}
+.tn-apps figure{margin:0;min-width:0}
+.tn-name{display:block;overflow-wrap:anywhere;font-family:var(--serif);font-weight:400;letter-spacing:-.02em;transition:color .3s var(--ease)}
+.tn-apps.is-ar .tn-name{font-family:var(--ar);font-weight:600;letter-spacing:0}
+/* billboard: colour A, the name in colour B, a single tide line along its foot */
+.tn-bill{grid-area:bill}
+.tn-board{position:relative;aspect-ratio:3/1;display:flex;align-items:center;padding-inline:6%;background:var(--a);color:var(--b);container-type:inline-size;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--shore) 18%,transparent);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.tn-board .tn-name{font-size:min(19cqw,calc(170cqw / var(--len,8)));line-height:1;white-space:nowrap}
+.tn-apps.is-ar .tn-board .tn-name{font-size:min(15cqw,calc(150cqw / var(--len,8)));line-height:1.3}
+.tn-apps.is-long .tn-board .tn-name{white-space:normal;text-wrap:balance;font-size:min(14cqw,calc(340cqw / var(--len,8)));line-height:.95}
+.tn-apps.is-long.is-ar .tn-board .tn-name{font-size:min(10.5cqw,calc(280cqw / var(--len,8)));line-height:1.25}
+.tn-tide{position:absolute;inset-inline:0;bottom:13%;width:100%;height:12px;overflow:visible}
+.tn-tide path{fill:none;stroke:var(--b);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:stroke .3s var(--ease)}
+/* the legs stand on a ground line that runs the board's width */
+.tn-legs{display:block;height:clamp(16px,1.8vw,26px);background:linear-gradient(currentColor,currentColor) 18% 0/1px 100% no-repeat,linear-gradient(currentColor,currentColor) 82% 0/1px 100% no-repeat,linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;color:color-mix(in srgb,var(--shore) 45%,transparent)}
+/* social post: colour B, the name stacked, the curl as its full stop */
+.tn-post{grid-area:post;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;padding:9%;background:var(--b);color:var(--a);container-type:inline-size;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--shore) 18%,transparent);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.tn-post .tn-name{white-space:pre-line;font-size:min(30cqw,calc(150cqw / var(--wlen,6)),calc(74cqw / var(--lines,1)));line-height:.92}
+.tn-apps.is-ar .tn-post .tn-name{font-size:min(22cqw,calc(120cqw / var(--wlen,6)),calc(52cqw / var(--lines,1)));line-height:1.35}
+.tn-post .tn-curl{display:inline-block;width:.42em;height:.42em;margin-inline-start:.08em;vertical-align:baseline;overflow:visible}
+.tn-apps.is-ar .tn-post .tn-curl{transform:scaleX(-1)}
+.tn-post .tn-rule{display:block;width:34%;height:1.5px;margin-bottom:auto;background:currentColor;opacity:.5}
+/* bag label: a 2:3 tag hanging from a 1px string; Latin names run up the tag, Arabic stays upright. The tag's cell starts
+   back up across the row gap, so the string is tied to the billboard's ground line, and the string runs on over the tag
+   to its punched hole (::after) */
+.tn-tag{grid-area:tag;align-self:stretch;display:flex;flex-direction:column;align-items:center}
+.tn-apps > .tn-tag{margin-top:calc(-1 * clamp(16px,1.8vw,24px))} /* past .tn-apps figure{margin:0} */
+.tn-string{display:block;flex:1 1 auto;width:1px;min-height:24px;background:color-mix(in srgb,var(--shore) 55%,transparent)}
+.tn-label{position:relative;flex:none;width:min(62%,170px);aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;padding:12% 10%;background:var(--a);color:var(--b);container-type:inline-size;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--shore) 18%,transparent);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.tn-label::before{content:"";position:absolute;top:7%;left:50%;width:7%;aspect-ratio:1;transform:translateX(-50%);background:var(--deep);box-shadow:0 0 0 1px color-mix(in srgb,var(--shore) 30%,transparent)}
+.tn-label::after{content:"";position:absolute;top:0;left:calc(50% - .5px);width:1px;height:9.4%;background:color-mix(in srgb,var(--shore) 55%,transparent)}
+.tn-label .tn-name{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;font-size:min(52cqw,calc(360cqw / var(--len,8)));line-height:1}
+.tn-apps.is-ar .tn-label .tn-name{writing-mode:horizontal-tb;transform:none;white-space:normal;text-align:center;font-size:min(26cqw,calc(150cqw / var(--wlen,6)));line-height:1.35}
+/* before anything is typed the sample shows at full strength; a caret after the billboard's name says "type here" */
+.tn-apps.is-empty .tn-board .tn-name::after{content:"";display:inline-block;width:max(2px,.028em);height:.78em;margin-inline-start:.08em;vertical-align:-.04em;background:var(--caret,var(--flare));animation:tn-caret 1s steps(2) infinite}
+@keyframes tn-caret{to{visibility:hidden}}
+.tn-apps{cursor:text}
+@media (min-width:901px){.tn-l{position:sticky;top:18vh}} /* the form travels beside the mock-ups */
+@media (max-width:900px){
+  .tn-l,.tn-r{grid-column:1 / -1}
+}
+@media (max-width:520px){
+  .tn-apps{grid-template-columns:52% minmax(0,1fr)}
+  .tn-label{width:min(80%,170px)}
+  .tn-acts .pill{flex:1 1 auto}
+}
+@media (prefers-reduced-motion:reduce){.tn-name,.tn-board,.tn-post,.tn-label,.tn-tide path{transition:none}.tn-apps.is-empty .tn-board .tn-name::after{animation:none}}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+</style>
+</head>
+<body data-page="branding">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-flare">
+    <canvas class="motif" data-motif="mark" data-ink="deep" aria-hidden="true"></canvas>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Branding</h1>
+    <p class="lead" data-i18n="h.d">We name your brand, draw it and write how it speaks, in Arabic and English.</p>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">How you look and sound.</h2></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=branding-0" data-i18n="sv.0.n" aria-describedby="svA0">Brand identity</a></h3><canvas class="svc-obj svc-mark" data-motif="mark" data-ink="deep" data-opts='{"mini":true}' aria-hidden="true"></canvas><div><p class="lead" data-i18n="sv.0.d">A logo and visual kit that works on a pin badge and a tower wrap.</p><ul class="slash"><li data-i18n="sv.0.0">Logo &amp; lockups</li><li data-i18n="sv.0.1">Colour &amp; type</li><li data-i18n="sv.0.2">Visual system</li><li data-i18n="sv.0.3">Brand guidelines</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=branding-1" data-i18n="sv.1.n" aria-describedby="svA1">Naming &amp; tone of voice</a></h3><span class="svc-obj svc-name" aria-hidden="true"><span lang="en">Noor</span><span class="sl">/</span><span lang="ar">نور</span></span><div><p class="lead" data-i18n="sv.1.d">Names that sound right in Arabic and English, and rules for how you speak.</p><ul class="slash"><li data-i18n="sv.1.0">Name options</li><li data-i18n="sv.1.1">Name checks</li><li data-i18n="sv.1.2">Tagline</li><li data-i18n="sv.1.3">Voice guide</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=branding-2" data-i18n="sv.2.n" aria-describedby="svA2">Campaigns &amp; advertising</a></h3><svg class="svc-obj svc-camp" viewBox="0 0 386 112" aria-hidden="true"><rect class="o" x=".5" y=".5" width="216" height="72"/><path class="o" d="M40 72.5V111.5M176 72.5V111.5"/><path class="h" d="M0 111.5H313"/><path class="h" d="M.5 50.5H216.5"/><path class="s" d="M150 50.5a17 17 0 0 1 34 0z"/><path class="t" d="M16 22H86M16 32H62"/><path class="o" d="M240 .5H313.5M312.5 .5V111.5"/><rect class="o" x="246.5" y="11.5" width="50" height="100"/><path class="h" d="M246.5 66.5H296.5"/><path class="s" d="M260.5 66.5a11 11 0 0 1 22 0z"/><path class="t" d="M254 86H286M254 95H274"/><rect class="o" x="334.5" y=".5" width="51" height="111" rx="2"/><path class="t" d="M354 7H366"/><path class="h" d="M334.5 58.5H385.5"/><path class="s" d="M349 58.5a11 11 0 0 1 22 0z"/><path class="t" d="M343 82H376M343 90H364"/><path class="h" d="M341 103.5H379"/><path class="t" d="M341 103.5H353"/></svg><div><p class="lead" data-i18n="sv.2.d">One idea, and every ad built from it.</p><ul class="slash"><li data-i18n="sv.2.0">Campaign idea</li><li data-i18n="sv.2.1">Key visuals</li><li data-i18n="sv.2.2">Outdoor &amp; print</li><li data-i18n="sv.2.3">Digital ads</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="tryName" aria-labelledby="tnT">
+    <div class="wrap g12 tn">
+      <div class="tn-l">
+        <h2 class="heading" id="tnT" data-i18n="tn.t">Type your brand name.</h2>
+        <p class="tn-d" data-i18n="tn.d">We’ll set it on a billboard, a post and a bag. A real identity starts with a brief.</p>
+        <div class="tn-field">
+          <label for="tnIn" data-i18n="tn.label">Brand name</label>
+          <input id="tnIn" type="text" maxlength="24" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Your brand">
+        </div>
+        <span id="tnPh" hidden data-i18n="tn.ph">Your brand</span>
+        <div class="tn-acts">
+          <button type="button" class="pill ghost" id="tnSwap" data-i18n="tn.swap">Another colour pair</button>
+          <a class="pill flare" id="tnSend" href="contact.html?service=branding-0" data-i18n="tn.b">Send us this name</a>
+        </div>
+      </div>
+      <div class="tn-r" aria-hidden="true">
+        <svg class="wave-title motif tn-wave" data-motif="wavetext" data-src="#tnPh"></svg>
+        <div class="tn-apps is-empty" id="tnApps">
+          <figure class="tn-bill"><div class="tn-board"><span class="tn-name"></span><svg class="tn-tide" viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0 6C25 1 50 1 75 6S125 11 150 6 200 1 225 6 275 11 300 6"/></svg></div><span class="tn-legs"></span></figure>
+          <figure class="tn-post"><span class="tn-rule"></span><span class="tn-name"></span></figure>
+          <figure class="tn-tag"><span class="tn-string"></span><div class="tn-label"><span class="tn-name"></span></div></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Two brands we redrew.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-foam band edge-top" href="content.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Content</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><div class="motif reel" data-motif="reel" data-opts='{"mini":true}' data-frames="49,105,217"></div></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Branding — MIRAS", "ar": "العلامة التجارية — ميراس"}; window.PAGE_AR = {
+"h.word": "العلامة التجارية",
+"meta.d": "نسمّي علامتك ونرسمها ونكتب طريقة كلامها، بالعربية والإنجليزية.",
+"h.d": "نسمّي علامتك ونرسمها ونكتب طريقة كلامها، بالعربية والإنجليزية.",
+"sv.t": "كيف تبدو، وكيف تتكلّم.",
+"sv.0.n": "الهوية البصرية",
+"sv.0.d": "شعار ونظام بصري يعمل على دبّوس صغير كما يعمل على واجهة برج.",
+"sv.0.0": "الشعار وتراكيبه",
+"sv.0.1": "الألوان والخطوط",
+"sv.0.2": "النظام البصري",
+"sv.0.3": "دليل الهوية",
+"sv.1.n": "التسمية ونبرة الصوت",
+"sv.1.d": "أسماء تُنطق بسلاسة بالعربية والإنجليزية، وقواعد لطريقة كلامك.",
+"sv.1.0": "خيارات الأسماء",
+"sv.1.1": "فحص الأسماء",
+"sv.1.2": "العبارة التسويقية",
+"sv.1.3": "دليل النبرة",
+"sv.2.n": "الحملات والإعلانات",
+"sv.2.d": "فكرة واحدة، ومنها نبني كل إعلان.",
+"sv.2.0": "فكرة الحملة",
+"sv.2.1": "التصاميم الرئيسية للحملة",
+"sv.2.2": "الإعلانات الخارجية والمطبوعة",
+"sv.2.3": "الإعلانات الرقمية",
+"tn.t": "اكتب اسم علامتك.",
+"tn.d": "سنضعه على لوحة إعلانية ومنشور وكيس. أما الهوية الحقيقية فتبدأ بطلب.",
+"tn.label": "اسم العلامة",
+"tn.ph": "علامتك",
+"tn.swap": "ألوان أخرى",
+"tn.b": "أرسل لنا هذا الاسم",
+"wk.t": "علامتان أعدنا رسمهما.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "المحتوى"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$, $$ = M.$$;
+  // related work: a pair chosen for this page, set 5/7 (the two identities); if the admin's list no longer has one, this
+  // discipline's projects fill in, then the rest
+  const PAIR = ['halwa-lab', 'noor-clinics'], SIZE = ['third', 'big'];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'branding'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 2);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+
+  // the identity row's monogram is a still: drawn on resize and language change only, never on the loop (the hero's mark moves)
+  const rm = window.MOTIFS?.get($('.svc-mark'));
+  if (rm) try { Object.defineProperty(rm, 'animated', { configurable: true, get: () => false }); } catch (e) {}
+
+  // the name demo. Everything stays on this page; the name only travels if the visitor follows "Send us this name".
+  const inp = $('#tnIn'), apps = $('#tnApps'), send = $('#tnSend'), swap = $('#tnSwap'), wave = $('.tn-wave');
+  if (!inp || !apps) return;
+  const AR = /[؀-ۿ]/, NS = 'http://www.w3.org/2000/svg';
+  const PAIRS = [['tide', 'shore'], ['flare', 'deep'], ['foam', 'deep'], ['deep', 'flare'], ['shore', 'tide'], ['deep', 'foam']];
+  let pair = 0;
+  const curl = () => { const s = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use'); s.setAttribute('class', 'tn-curl'); s.setAttribute('viewBox', '0 0 16 16'); u.setAttribute('href', '#m-curl'); s.append(u); return s; };
+  function paint() {
+    const typed = inp.value.replace(/\s+/g, ' ').trim().slice(0, 24), name = typed || M.text('tn.ph'), words = name.split(' ');
+    const ar = AR.test(name);
+    apps.classList.toggle('is-ar', ar); apps.classList.toggle('is-empty', !typed); apps.classList.toggle('is-long', words.length > 1 && name.length > 12); inp.classList.toggle('is-ar', AR.test(typed));
+    apps.style.setProperty('--len', Math.max(4, name.length));
+    apps.style.setProperty('--wlen', Math.max(3, ...words.map(w => w.length)));
+    apps.style.setProperty('--lines', words.length);
+    $$('.tn-board .tn-name, .tn-label .tn-name', apps).forEach(el => { el.textContent = name; });
+    const post = $('.tn-post .tn-name', apps); post.textContent = words.join('\n'); post.append(curl());
+    send.href = 'contact.html?service=branding-0' + (typed ? '&company=' + encodeURIComponent(typed) : '');
+    window.MOTIFS?.get(wave)?.setText(typed || null);
+  }
+  function colours() {
+    const [a, b] = PAIRS[pair];
+    apps.style.setProperty('--a', `var(--${a})`); apps.style.setProperty('--b', `var(--${b})`);
+    apps.style.setProperty('--caret', a === 'flare' ? 'var(--deep)' : 'var(--flare)'); // the caret never sits Flare on Flare
+  }
+  inp.addEventListener('input', paint);
+  apps.addEventListener('click', () => inp.focus()); // the mock-ups are a picture of the field: a click there types into it
+  swap.addEventListener('click', () => { pair = (pair + 1) % PAIRS.length; colours(); });
+  M.onLang(() => { inp.placeholder = M.text('tn.ph'); paint(); });
+  colours();
+})();
+</script>
+</body>
+</html>

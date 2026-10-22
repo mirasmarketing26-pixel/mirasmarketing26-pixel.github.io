@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Work — MIRAS</title>
+<meta name="description" content="Concept projects by MIRAS, a new creative marketing agency in Lusail. Each is made the way we'd make yours.">
+<meta name="theme-color" content="#2B3BF0">
+<!-- the share card and the address pair: the English page and its Arabic twin (?lang=ar), each its own canonical -->
+<link rel="canonical" href="https://miras.qa/work.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/work.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/work.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/work.html">
+<script>try{if(new URLSearchParams(location.search).get('lang')==='ar')document.querySelector('link[rel=canonical]').href='https://miras.qa/work.html?lang=ar'}catch(e){}</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Work — MIRAS">
+<meta property="og:description" content="Concept projects by MIRAS, a new creative marketing agency in Lusail. Each is made the way we'd make yours.">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark, and Mira riding a wave past an orange sun.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint: the headline is measured against its metric fallbacks, so nothing reflows when they land -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" data-page-faces onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* Work (r2). System rules: see the top of assets/motifs.css. No eyebrow, no settle, no CTA band.
+   Header = the Counterweight: w.t at --fs-giant in columns 1–8; columns 9–12 hold w.d and the discipline chips, their foot on
+   the headline's last line, so the first board starts right under the headline (a third of the first screen is work).
+   821–1199px: the Scale move (headline across 10 columns, the column in 7–12 below it); phones stack.
+   Grid by index mod 5: wide / big + small / small + big (rows 12 / 7+5 / 5+7). The first wide board bleeds off the edge. */
+.work-hero{padding:clamp(130px,19vh,200px) var(--m) 0}
+.work-hero .g12{row-gap:clamp(24px,3.4vw,48px)}
+/* the headline may run into the gutter beside it: the face's metric fallback sets ~4% wider, and with the gutter it still
+   breaks where the face does, so nothing reflows when the face arrives (its words end well short of the column anyway) */
+.work-hero h1{grid-column:1 / span 8;grid-row:1;margin:0;margin-inline-end:calc(-1 * var(--gut));text-wrap:balance}
+/* the Arabic giant at 10vw needs nine columns for «موجزها بأنفسنا.»; a step smaller it keeps its two lines in eight, in
+   Plex and in the system Arabic faces it shows in first (Geeza Pro, SF Arabic, Noto), so the lines never re-break */
+html[lang=ar] .work-hero h1{font-size:clamp(52px,8.3vw,146px)}
+.work-side{grid-column:9 / -1;grid-row:1;align-self:end;display:flex;flex-direction:column;gap:clamp(20px,1.9vw,28px);min-width:0}
+.work-side .lead{margin:0;max-width:42ch;color:var(--soft);text-wrap:pretty}
+/* the chips in three even columns (All · Strategy · Branding / Content · Digital), not four and a stray one; they ease in a
+   little on a small laptop, where four columns are narrow (the Arabic names are the widest: 347px at full padding) */
+.work-side .filters{display:grid;grid-template-columns:repeat(3,max-content);gap:10px;margin:0}
+#filters .chip{min-height:44px;justify-content:center;padding-inline:clamp(11px,calc((100vw - 1200px) / 48 + 11px),16px)}
+#filters .chip[aria-pressed=true]{background:var(--flare);color:var(--deep);border-color:var(--flare)}
+.work-list{padding:clamp(36px,4.6vh,56px) var(--m) var(--pad)}
+/* the cards arrive with the script: until then the list holds the screen, so nothing below it shows and then jumps away */
+.work-list:not(.ready){min-height:130svh}
+.work-list .cards{row-gap:clamp(48px,6vw,88px)}
+@media (max-width:1199px){
+  .work-hero h1{grid-column:1 / span 10;margin-inline-end:0}
+  html[lang=ar] .work-hero h1{font-size:clamp(58px,10vw,170px)}
+  .work-side{grid-column:7 / -1;grid-row:2}
+  .work-list{padding-top:clamp(48px,7vh,80px)}
+}
+.work-list .card.wide .board{margin-inline-end:calc(-1 * var(--m))}
+/* a small card hangs beside its big partner like a block on the home board, from a mooring line. The line is tied to the big
+   board's top corner (the row's top edge), runs taut across the gutter past the thread, then eases into a gentle swell and
+   runs off the page edge (the grid break). The thread drops from the line to the small card's top, on the partner's side.
+   .tie-s: the big partner sits on the small card's inline-start side; .tie-e: on its inline-end side.
+   --moor-l / --moor-r: the line drawn from a tie on the left / right; the masks are 1:1 (16px tall, the line on y = 8). */
+.work-list{overflow-x:clip;--moor-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3000 16'%3E%3Cpath d='M0 8H72C129.6 5.93 174.4 5.93 232 8C289.6 16 334.4 16 392 8C449.6 0 494.4 0 552 8C609.6 16 654.4 16 712 8C769.6 0 814.4 0 872 8C929.6 16 974.4 16 1032 8C1089.6 0 1134.4 0 1192 8C1249.6 16 1294.4 16 1352 8C1409.6 0 1454.4 0 1512 8C1569.6 16 1614.4 16 1672 8C1729.6 0 1774.4 0 1832 8C1889.6 16 1934.4 16 1992 8C2049.6 0 2094.4 0 2152 8C2209.6 16 2254.4 16 2312 8C2369.6 0 2414.4 0 2472 8C2529.6 16 2574.4 16 2632 8C2689.6 0 2734.4 0 2792 8C2849.6 16 2894.4 16 2952 8C3009.6 0 3054.4 0 3112 8' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");--moor-r:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3000 16'%3E%3Cpath d='M3000 8H2928C2870.4 5.93 2825.6 5.93 2768 8C2710.4 16 2665.6 16 2608 8C2550.4 0 2505.6 0 2448 8C2390.4 16 2345.6 16 2288 8C2230.4 0 2185.6 0 2128 8C2070.4 16 2025.6 16 1968 8C1910.4 0 1865.6 0 1808 8C1750.4 16 1705.6 16 1648 8C1590.4 0 1545.6 0 1488 8C1430.4 16 1385.6 16 1328 8C1270.4 0 1225.6 0 1168 8C1110.4 16 1065.6 16 1008 8C950.4 0 905.6 0 848 8C790.4 16 745.6 16 688 8C630.4 0 585.6 0 528 8C470.4 16 425.6 16 368 8C310.4 0 265.6 0 208 8C150.4 16 105.6 16 48 8C-9.6 0 -54.4 0 -112 8' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E")}
+.work-list .card.small{--off:clamp(96px,12vw,180px);--thr:clamp(18px,1.9vw,30px);position:relative;align-self:start;margin-top:var(--off)}
+.work-list .card.small::before,.work-list .card.small::after{content:"";position:absolute;background:var(--deep);opacity:.6;pointer-events:none}
+.work-list .card.small::before{bottom:100%;width:1px;height:var(--off)}
+.work-list .card.small::after{bottom:calc(100% + var(--off) - 8px);height:16px}
+.work-list .card.tie-s::before{inset-inline-start:var(--thr)}
+.work-list .card.tie-e::before{inset-inline-end:var(--thr)}
+.work-list .card.tie-s::after{inset-inline:calc(-1 * var(--gut)) calc(-1 * var(--m))}
+.work-list .card.tie-e::after{inset-inline:calc(-1 * var(--m)) calc(-1 * var(--gut))}
+.work-list .card.small:not(.tie-s):not(.tie-e){--off:0px}
+.work-list .card.small:not(.tie-s):not(.tie-e)::before,.work-list .card.small:not(.tie-s):not(.tie-e)::after{display:none}
+/* the tie is on the left: start in LTR, end in RTL */
+html[dir=ltr] .work-list .card.tie-s::after,html[dir=rtl] .work-list .card.tie-e::after{-webkit-mask:var(--moor-l) 0 0 / 3000px 16px no-repeat;mask:var(--moor-l) 0 0 / 3000px 16px no-repeat}
+html[dir=rtl] .work-list .card.tie-s::after,html[dir=ltr] .work-list .card.tie-e::after{-webkit-mask:var(--moor-r) 100% 0 / 3000px 16px no-repeat;mask:var(--moor-r) 100% 0 / 3000px 16px no-repeat}
+@media (max-width:820px){
+  .work-hero h1,.work-side{grid-column:1 / -1}
+  /* a phone wraps the chips as they come (three and two at 390px), at their full padding */
+  .work-side .filters{display:flex;flex-wrap:wrap}
+  #filters .chip{padding-inline:16px}
+  .work-list .cards{row-gap:56px}
+  .work-list .card.small{--off:0px}
+  .work-list .card.small::before,.work-list .card.small::after{display:none}
+}
+/* the card captions: no line ends on a lone word; on a phone the tags go under the name instead of squeezing beside it */
+.work-list .card .meta h3{text-wrap:balance}
+.work-list .card .line{text-wrap:pretty}
+@media (max-width:520px){
+  .work-list .card .meta{flex-direction:column;align-items:flex-start;gap:4px}
+  .work-list .card .tags{text-align:start}
+}
+</style>
+</head>
+<body data-page="work">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work" aria-current="page">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main" tabindex="-1">
+  <section class="work-hero t-shore">
+    <div class="g12">
+      <h1 class="giant" data-i18n="w.t">Briefs we set ourselves.</h1>
+      <div class="work-side">
+        <p class="lead" data-i18n="w.d">We’re new. Every project here is a concept, made the way we’d make yours.</p>
+        <!-- the chips are written here as the script draws them, so the column has its height before the script runs -->
+        <div class="filters" id="filters" role="group" aria-label="Filter by discipline" data-i18n-aria="w.f"><button type="button" class="chip" data-f="all" aria-pressed="true" data-cms="shared.c.all">All</button><button type="button" class="chip" data-f="strategy" aria-pressed="false" data-cms="shared.s.strategy">Strategy</button><button type="button" class="chip" data-f="branding" aria-pressed="false" data-cms="shared.s.branding">Branding</button><button type="button" class="chip" data-f="content" aria-pressed="false" data-cms="shared.s.content">Content</button><button type="button" class="chip" data-f="digital" aria-pressed="false" data-cms="shared.s.digital">Digital</button></div>
+        <!-- the count of the projects shown: read out once a discipline is picked (the script writes it on a chip click, not on the first draw) -->
+        <p class="sr-only" id="filterStatus" role="status" aria-live="polite"></p>
+        <span hidden data-i18n="w.n0">No projects shown</span><span hidden data-i18n="w.n1">Showing 1 project</span><span hidden data-i18n="w.n2">Showing 2 projects</span><span hidden data-i18n="w.nf">Showing {n} projects</span><span hidden data-i18n="w.nm">Showing {n} projects</span>
+      </div>
+    </div>
+  </section>
+  <section class="work-list t-shore">
+    <div class="cards" id="grid"></div>
+    <span hidden data-i18n="c.all">All</span>
+  </section>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span>
+       <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span>
+       <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Work — MIRAS", "ar": "أعمالنا — ميراس"}; window.PAGE_AR = {
+"w.t": "مشاريع كتبنا موجزها بأنفسنا.",
+"w.d": "نحن وكالة جديدة. كل مشروع هنا مفاهيمي، صنعناه كما سنصنع مشروعك.",
+"meta.d": "مشاريع مفاهيمية من ميراس، وكالة تسويق إبداعية جديدة في لوسيل. صنعنا كلّ مشروع منها كما سنصنع مشروعك.",
+"w.f": "تصفية حسب التخصص",
+"w.n0": "لا توجد مشاريع معروضة",
+"w.n1": "نعرض مشروعاً واحداً",
+"w.n2": "نعرض مشروعين",
+"w.nf": "نعرض {n} مشاريع",
+"w.nm": "نعرض {n} مشروعاً"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+// Projects come from content.work (assets/work.js holds the defaults and draws the boards); discipline names are the shared keys s.<discipline>.
+(() => {
+  const SIZES = ['wide', 'big', 'small', 'small', 'big'];
+  let filter = new URLSearchParams(location.search).get('d') || 'all';
+  let shown = 0;
+  const liveCount = MIRAS.$('#filterStatus');
+  // the count line (the live region above) is written only when a discipline is picked, so the first draw and a language switch stay quiet
+  function announce() {
+    const k = shown === 0 ? 'w.n0' : shown === 1 ? 'w.n1' : shown === 2 ? 'w.n2' : shown <= 10 ? 'w.nf' : 'w.nm';
+    const txt = MIRAS.text(k, { n: shown });
+    // a count that repeats (two disciplines with two projects each) is cleared first, so the screen reader still reads it out
+    if (liveCount.textContent === txt) { liveCount.textContent = ''; setTimeout(() => { liveCount.textContent = txt; }, 60); } else liveCount.textContent = txt;
+  }
+  function render() {
+    const keys = ['all', ...Object.keys(DISCIPLINES)];
+    if (!keys.includes(filter)) filter = 'all';
+    // the URL names the discipline (?d=), so a filtered view can be shared or bookmarked and comes back with Back; All leaves it out
+    if (!MIRAS.cms) try { const u = new URL(location.href); if (filter === 'all') u.searchParams.delete('d'); else u.searchParams.set('d', filter); history.replaceState(history.state, '', u); } catch (e) {}
+    MIRAS.$('#filters').innerHTML = keys.map(k => { const key = k === 'all' ? 'c.all' : 's.' + k; return `<button type="button" class="chip" data-f="${k}" aria-pressed="${k === filter}" data-cms="shared.${key}">${MIRAS.t(key)}</button>`; }).join('');
+    const list = WORK.filter(p => filter === 'all' || p.discipline === filter);
+    shown = list.length;
+    // rows of 12 / 7+5 / 5+7; a card left without its partner spans the row
+    const sizes = list.map((p, i) => SIZES[i % 5]);
+    if (list.length % 5 === 2 || list.length % 5 === 4) sizes[list.length - 1] = 'wide';
+    // a small card is moored to its big partner's top corner: tie-s when the partner comes first, tie-e when it follows
+    const cls = sizes.map((z, i) => z !== 'small' ? z : sizes[i - 1] === 'big' ? 'small tie-s' : sizes[i + 1] === 'big' ? 'small tie-e' : z);
+    MIRAS.$('#grid').innerHTML = list.map((p, i) => workCard(p, MIRAS.lang, cls[i])).join('');
+    // a filtered card carries the discipline too, so the project's way back to Work returns to this view
+    if (filter !== 'all') MIRAS.$$('#grid a.card').forEach(a => { const [page, qs] = a.getAttribute('href').split('?'); const q = new URLSearchParams(qs); q.set('d', filter); a.setAttribute('href', `${page}?${q}`); });
+    // the list stops holding its placeholder height once the cards are in
+    MIRAS.$('.work-list').classList.add('ready');
+    MIRAS.watch();
+  }
+  // a language switch clears the count rather than re-reading it: the next chip pick writes it in the new language
+  MIRAS.onLang(() => { liveCount.textContent = ''; render(); });
+  // the boards are drawn for the card's shape, which changes at the phone breakpoint
+  matchMedia('(max-width:820px)').addEventListener('change', render);
+  MIRAS.$('#filters').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b || document.documentElement.classList.contains('cms-inspect')) return; filter = b.dataset.f; render(); announce(); MIRAS.$(`#filters [data-f="${filter}"]`)?.focus(); });
+})();
+</script>
+</body>
+</html>

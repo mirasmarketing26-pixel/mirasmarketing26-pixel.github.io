@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Contact — MIRAS</title>
+<meta name="description" content="Start a project with MIRAS, a creative marketing agency in Lusail. We reply within one working day.">
+<meta name="theme-color" content="#2B3BF0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=r2">
+<link rel="canonical" href="https://miras.qa/contact.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/contact.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/contact.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:url" content="https://miras.qa/contact.html">
+<meta property="og:title" content="Contact — MIRAS">
+<meta property="og:description" content="Start a project with MIRAS, a creative marketing agency in Lusail. We reply within one working day.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="MIRAS, with Mira riding a wave in front of an orange sun">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — MIRAS">
+<meta name="twitter:description" content="Start a project with MIRAS, a creative marketing agency in Lusail. We reply within one working day.">
+<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* Contact. Fields: Tide hero (the form in the first viewport, the brief poster beside it) → Shore FAQ → footer (no ask: this page is the ask).
+   System rules: see the top of assets/motifs.css (no eyebrows, no numbering, no italic outside the motif words, radius ≤ 2px). */
+
+/* hero: words, contact details and the poster in cols 1–5; the brief in cols 7–12 */
+.k-hero{min-height:100svh;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);align-items:start;align-content:center;padding:clamp(92px,12vh,120px) var(--m) clamp(48px,7vh,80px)}
+.k-left{grid-column:1 / span 5;grid-row:1}
+.k-poster{margin-top:28px;width:min(340px,100%)} /* full size: its sun and horizon sit inside the first 900px, the sand runs on below the fold */
+.k-hero #brief{grid-column:7 / -1;grid-row:1;margin-top:clamp(18px,3vh,28px)} /* its top stays > 100px: the admin's "go to" scrolls to it */
+/* the wave title hands the page over ("Over to you"). It is wider than the words under it, so on desktop it also takes the
+   empty column 6 (+1 column +1 gutter) and stops a gutter short of the form.
+   The start margin puts the first letter on the lead's edge. Still, it only takes back the italic's side bearing (Arabic: the
+   .02 of width the wave keeps clear at the end). Moving, the wave also carries the words in by about a quarter of its width
+   times the title's depth in the first screen (desktop and phones ≈ .13, tablets ≈ .09), so the margin takes that back too */
+svg.k-word{height:clamp(104px,13vw,196px);margin-inline-start:-1.4%}
+svg.k-word[data-script=ar]{margin-inline-start:-2.4%}
+.k-word text{font-size:clamp(64px,12vw,200px)}
+.k-word[data-script=ar] text{font-size:clamp(52px,9vw,150px)}
+@media (min-width:960px){svg.k-word{width:calc(120% + var(--gut) / 5);height:clamp(104px,12vw,230px)}}
+@media (prefers-reduced-motion:no-preference){svg.k-word{margin-inline-start:-4.5%}svg.k-word[data-script=ar]{margin-inline-start:-6.2%}}
+@media (prefers-reduced-motion:no-preference) and (min-width:760px) and (max-width:959px){svg.k-word{margin-inline-start:-3%}svg.k-word[data-script=ar]{margin-inline-start:-4.6%}}
+/* the measure is in em, not ch: ch follows the font, so the lead would lose a line when the web font replaces its fallback */
+.k-hero .k-lead{margin-top:clamp(4px,1vh,12px);max-width:22em;color:var(--soft);text-wrap:pretty}
+html[lang=ar] .k-hero .k-lead{max-width:20.4em}
+.direct{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-top:clamp(18px,3vh,30px)}
+.direct .small{color:var(--soft);margin-bottom:2px}
+.direct a{color:var(--fg);text-decoration:none;font:400 32px/1.2 var(--serif);letter-spacing:-.01em}
+.direct #dWa{font-size:24px}
+/* the links are wave underlines, and a phone needs a 44px tap box: at 28px type the email box was 41.6px. The box grows to 44px
+   at least, and the text sits at its bottom edge, so the wave stays 2px under the words whatever the size of the type */
+.direct .wave-underline{min-height:44px;display:flex;flex-direction:column;justify-content:flex-end}
+.direct .k-addr{font:var(--fs-body);color:var(--soft)}
+
+/* the form: Shore on Tide */
+.k-hero form{gap:20px 24px}
+/* two equal columns that may shrink below an input's default 20-character width: with plain 1fr they held at 215px each and
+   pushed the form 31px past the page margin on small laptops (960–1100px) */
+@media (min-width:901px){.k-hero form{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.k-hero .field{gap:8px}
+.k-hero .field textarea{min-height:92px}
+.k-hero legend{margin-bottom:10px}
+.k-hero input:-webkit-autofill,.k-hero textarea:-webkit-autofill{-webkit-text-fill-color:var(--fg);-webkit-box-shadow:0 0 0 1000px var(--bg) inset;caret-color:var(--fg)}
+/* the note always takes its own line under the buttons, so it never jumps down when the web font widens them */
+.send .soft{flex-basis:100%;font:var(--fs-small);color:var(--soft)}
+/* a brief that has gone out: Send brief keeps its place and says so (the locked look of index.html's brief) */
+.send button[aria-disabled=true],.send button[aria-disabled=true]:hover,.send button[aria-disabled=true]:focus-visible{opacity:1;background:transparent;color:var(--shore);box-shadow:inset 0 0 0 1.5px var(--shore);cursor:default}
+/* the spam trap is out of sight from the first paint (site.js styles it too, but only once it has loaded) */
+.hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* a 44px+ tap target, the same as index.html's form link; the negative margin cancels the padding, so the row and the form keep their exact positions */
+.status-line a{display:inline-block;padding:12px 0;margin:-12px 0;color:var(--fg);text-underline-offset:.22em;text-decoration-thickness:1px}
+html[lang=ar] .status-line,html[lang=ar] .send .soft{font-family:var(--ar)}
+/* errors sit on the blue hero: Shore text with a Flare dash (orange text on blue is 2.3:1), the same as the home form */
+.err{display:flex;align-items:center;gap:10px;color:var(--shore)}
+.err::before{content:"";width:10px;height:1.5px;background:var(--flare);flex:none}
+.err[hidden]{display:none}
+/* the answer after sending: a marked block, not a small grey line */
+#briefStatus.is-done{padding:16px 20px;border-inline-start:3px solid var(--flare);background:rgba(255,255,255,.08);color:var(--shore);font-size:18px;font-weight:600;line-height:1.45;scroll-margin-block:96px 40vh}
+#briefStatus:focus{outline:none} /* focused only so a repeat press is read out; it is not a control */
+
+/* the services as a two-column checklist: an 18px square box, filled Shore with the Tide curl when picked */
+#picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gut);border-top:1px solid var(--hair)}
+#picks .chip{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:40px;padding:7px 0;border:0;border-bottom:1px solid var(--hair);border-radius:0;background:none;color:var(--fg);font:500 16px/1.3 var(--sans);text-align:start;text-wrap:pretty}
+#picks .chip::before{content:"";flex:none;width:18px;height:18px;border-radius:1px;box-shadow:inset 0 0 0 1.5px var(--shore);background:transparent;transition:background-color .25s var(--ease)}
+#picks .chip::after{content:"";position:absolute;inset-inline-start:2px;top:50%;width:14px;height:14px;margin-top:-7px;background:var(--tide);-webkit-mask:var(--curl) center/contain no-repeat;mask:var(--curl) center/contain no-repeat;opacity:0;transition:opacity .25s var(--ease)}
+#picks .chip:hover::before{background:color-mix(in srgb,var(--shore) 24%,transparent)}
+#picks .chip[aria-pressed=true]{background:none;color:var(--fg);border-color:var(--hair)}
+#picks .chip[aria-pressed=true]::before{background:var(--shore)}
+#picks .chip[aria-pressed=true]::after{opacity:1}
+#picks .chip:focus-visible{outline-offset:2px}
+html[dir=rtl] #picks .chip::after{transform:scaleX(-1)}
+html[lang=ar] #picks .chip{font-family:var(--ar);font-size:15px}
+@media (pointer:coarse){#picks .chip{min-height:44px}}
+
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance} /* "Before / you ask." on two lines, not "ask." alone */
+.k-faq .faq-list{grid-column:6 / -1}
+/* a question that wraps breaks into even lines; an answer keeps its last words together ("قبل أن" never ends a line, "عمل." never sits alone) */
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+
+@media (prefers-reduced-motion:reduce){#picks .chip::before,#picks .chip::after{transition:none}}
+@media (max-width:959px){
+  /* phones and tablets: words, contact details, the form, then the poster */
+  .k-hero{display:flex;flex-direction:column;justify-content:flex-start;padding-top:110px}
+  .k-left{display:contents}
+  .k-hero #brief{order:1;align-self:stretch;margin-top:clamp(34px,6vh,56px)} /* the full width, whatever the length of its labels */
+  .k-poster{order:2;width:min(340px,100%);margin-top:clamp(40px,7vh,64px);align-self:center}
+  .k-faq-t,.k-faq .faq-list{grid-column:1 / -1}
+  .k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}
+}
+@media (max-width:759px){
+  svg.k-word{height:clamp(96px,27vw,130px)}
+  .k-word text{font-size:max(64px,28vw)}
+  .k-word[data-script=ar] text{font-size:max(52px,19vw)}
+  .direct a{font-size:28px}
+  #picks .chip{font-size:15px;line-height:1.25}
+}
+</style>
+</head>
+<body data-page="contact">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact" aria-current="page">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main" tabindex="-1">
+  <section class="hero t-tide k-hero" data-nav-dark>
+    <div class="k-left">
+      <svg class="wave-title motif k-word" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="k.word">Over to you</h1>
+      <p class="lead k-lead" data-i18n="k.d">Tell us what you’re working on. We reply within one working day with a few questions.</p>
+      <div class="direct">
+        <p class="small" data-i18n="dr.l">Or directly</p>
+        <a class="wave-underline" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+        <a class="wave-underline" id="dWa" dir="ltr" data-cms="studio.whatsapp" hidden></a>
+        <p class="k-addr" data-i18n="dr.addr">Al Fardan Tower, Lusail, Qatar</p>
+      </div>
+      <figure class="motif-brief k-poster" aria-hidden="true">
+        <canvas data-motif="brief"></canvas>
+        <p class="brief-name" data-cms="text.bp.empty"></p>
+        <img class="brief-mira" src="assets/mira-arrive.png?v=r2" width="512" height="680" alt="" loading="lazy" decoding="async" hidden>
+      </figure>
+      <div hidden><span data-i18n="bp.empty">Your brief</span></div>
+    </div>
+    <form id="brief" novalidate>
+      <div class="field"><label for="fName" data-i18n="fm.name">Your name</label><input id="fName" name="name" autocomplete="name" required><p class="err" id="fNameErr" hidden data-i18n="fm.nameErr">Please add your name.</p></div>
+      <div class="field"><label for="fEmail" data-i18n="fm.email">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" dir="ltr" required><p class="err" id="fEmailErr" hidden data-i18n="fm.emailErr">That email address doesn’t look right.</p><p class="err" id="fEmailMissing" hidden data-i18n="fm.emailMissing">Please add your email.</p></div>
+      <div class="field full"><label for="fCo" data-i18n="fm.co">Company (optional)</label><input id="fCo" name="company" autocomplete="organization" maxlength="120"></div>
+      <div class="field" id="fPhoneRow" hidden><label for="fPhone" data-i18n="fm.phone">Phone or WhatsApp (optional)</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40"></div>
+      <div class="field sel" id="fBudgetRow" hidden><label for="fBudget" data-i18n="fm.budget">Budget (optional)</label><select id="fBudget" name="budget"><option value="">—</option></select></div>
+      <div class="hp" aria-hidden="true"><label for="fWeb">Leave this empty</label><input id="fWeb" name="website" tabindex="-1" autocomplete="off"></div>
+      <fieldset class="field full"><legend data-i18n="fm.svc">What do you need?</legend><div class="picks" id="picks"><button type="button" class="chip" data-svc="0" data-id="research" aria-pressed="false" data-i18n="sv.0">Research &amp; insights</button><button type="button" class="chip" data-svc="1" data-id="strategy" aria-pressed="false" data-i18n="sv.1">Brand strategy</button><button type="button" class="chip" data-svc="2" data-id="plans" aria-pressed="false" data-i18n="sv.2">Marketing plans</button><button type="button" class="chip" data-svc="3" data-id="identity" aria-pressed="false" data-i18n="sv.3">Brand identity</button><button type="button" class="chip" data-svc="4" data-id="naming" aria-pressed="false" data-i18n="sv.4">Naming &amp; tone of voice</button><button type="button" class="chip" data-svc="5" data-id="campaigns" aria-pressed="false" data-i18n="sv.5">Campaigns &amp; advertising</button><button type="button" class="chip" data-svc="6" data-id="film" aria-pressed="false" data-i18n="sv.6">Video &amp; reels</button><button type="button" class="chip" data-svc="7" data-id="photo" aria-pressed="false" data-i18n="sv.7">Photography</button><button type="button" class="chip" data-svc="8" data-id="copy" aria-pressed="false" data-i18n="sv.8">Copywriting</button><button type="button" class="chip" data-svc="9" data-id="web" aria-pressed="false" data-i18n="sv.9">Websites &amp; landing pages</button><button type="button" class="chip" data-svc="10" data-id="smm" aria-pressed="false" data-i18n="sv.10">Social media</button><button type="button" class="chip" data-svc="11" data-id="growth" aria-pressed="false" data-i18n="sv.11">Performance &amp; SEO</button></div></fieldset>
+      <div class="field full"><label for="fMsg" data-i18n="fm.msg">Tell us more</label><textarea id="fMsg" name="message"></textarea></div>
+      <div class="send"><button class="pill flare" type="submit" data-i18n="fm.send">Send brief</button><button class="pill ghost" type="button" id="copyBrief" data-i18n="fm.copy">Copy the brief</button><span class="soft" data-i18n="fm.note">Opens your email app with all of this filled in.</span><span class="soft" data-i18n="fm.noteDirect" hidden>Goes straight to the studio.</span></div>
+      <p class="status-line" id="privacyRow"><a id="privacyLink" href="privacy.html" target="_blank" rel="noopener" data-i18n="fm.privacy">How we handle your details</a></p>
+      <p class="status-line" role="status" id="briefStatus" tabindex="-1"></p>
+      <div hidden><span data-i18n="fm.opening">Opening your email app with the brief filled in.</span><span data-i18n="fm.copied">Copied. Paste it into an email to {email}.</span><span data-i18n="fm.copyFail">Couldn’t copy. Email us at {email}.</span><span data-i18n="fm.subject">New project brief for MIRAS</span><span data-i18n="fm.lName">Name</span><span data-i18n="fm.lEmail">Email</span><span data-i18n="fm.lCo">Company</span><span data-i18n="fm.lSvc">Services</span><span data-i18n="fm.lPhone">Phone</span><span data-i18n="fm.lBudget">Budget</span><span data-i18n="fm.sending">Sending your brief…</span><span data-i18n="fm.sent">Got it. Your brief is with us. We reply within one working day.</span></div>
+    </form>
+  </section>
+
+  <section class="sec t-shore edge-top k-faq" id="questions">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" data-i18n="q.t">Before you ask.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Do you work in Arabic?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">Yes. Everything we make can be done in Arabic, English or both, and each language is written on its own terms, not translated word for word.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">Can we hire you for just one thing?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">Of course. Pick one service or all twelve. If something else needs fixing first, we’ll say so.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Do you also run the ads and the social accounts?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">Yes. We plan and buy media, run your social accounts and report every month.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span data-i18n="q.3">Can we see past work?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p data-i18n="a.3">We’re new and have no client case study yet. Our concept projects show how we work, or we can start with a small project you can judge us on.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span data-i18n="q.4">How much does it cost?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p data-i18n="a.4">It depends on what you need. We quote after a first call: one fixed price, in writing, before any work starts.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa5" id="qq5"><span data-i18n="q.5">How do we start?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa5" role="region" aria-labelledby="qq5"><div><p data-i18n="a.5">Fill in the brief at the top of this page, or email us.</p></div></div></li></ul>
+    </div>
+  </section>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Contact — MIRAS", "ar": "تواصل معنا — ميراس"}; window.PAGE_AR = {
+"meta.d": "ابدأ مشروعك مع ميراس، وكالة تسويق إبداعية في لوسيل. نردّ خلال يوم عمل واحد.",
+"k.word": "الكلمة لك",
+"k.d": "أخبرنا بما تعمل عليه، وسنردّ خلال يوم عمل واحد ببعض الأسئلة.",
+"dr.l": "أو مباشرة",
+"dr.addr": "برج الفردان، لوسيل، قطر",
+"fm.name": "اسمك",
+"fm.nameErr": "أضف اسمك من فضلك.",
+"fm.email": "بريدك الإلكتروني",
+"fm.emailErr": "يبدو أن البريد الإلكتروني غير صحيح.",
+"fm.emailMissing": "أضف بريدك الإلكتروني من فضلك.",
+"fm.co": "الشركة (اختياري)",
+"fm.phone": "الهاتف أو واتساب (اختياري)",
+"fm.budget": "الميزانية (اختياري)",
+"fm.svc": "ما الذي تحتاجه؟",
+"sv.0": "الأبحاث والرؤى",
+"sv.1": "استراتيجية العلامة",
+"sv.2": "خطط التسويق",
+"sv.3": "الهوية البصرية",
+"sv.4": "التسمية ونبرة الصوت",
+"sv.5": "الحملات والإعلانات",
+"sv.6": "الفيديو والمقاطع القصيرة",
+"sv.7": "التصوير الفوتوغرافي",
+"sv.8": "كتابة المحتوى",
+"sv.9": "المواقع وصفحات الهبوط",
+"sv.10": "منصّات التواصل",
+"sv.11": "الإعلانات المدفوعة والبحث",
+"fm.msg": "حدّثنا أكثر",
+"fm.send": "أرسل الطلب",
+"fm.copy": "انسخ الطلب",
+"fm.note": "سيُفتح بريدك ورسالتك جاهزة.",
+"fm.noteDirect": "يصل الطلب مباشرة إلى الاستوديو.",
+"fm.privacy": "كيف نتعامل مع بياناتك",
+"fm.opening": "جارٍ فتح تطبيق البريد والرسالة جاهزة.",
+"fm.copied": "نُسخ الطلب. الصقه في رسالة إلى {email}.",
+"fm.copyFail": "تعذّر النسخ. راسلنا على {email}.",
+"fm.subject": "طلب مشروع جديد لميراس",
+"fm.lName": "الاسم",
+"fm.lEmail": "البريد",
+"fm.lCo": "الشركة",
+"fm.lSvc": "الخدمات",
+"fm.lPhone": "الهاتف",
+"fm.lBudget": "الميزانية",
+"fm.sending": "جارٍ إرسال طلبك…",
+"fm.sent": "وصلنا طلبك، ونردّ خلال يوم عمل واحد.",
+"bp.empty": "طلبك",
+"q.t": "قبل أن تسأل.",
+"q.0": "هل تعملون بالعربية؟",
+"a.0": "نعم. كل ما نصنعه يمكن أن يكون بالعربية أو الإنجليزية أو باللغتين، وكل لغة تُكتب بروحها الخاصة، لا بترجمة حرفية.",
+"q.1": "هل يمكننا التعاون معكم في شيء واحد فقط؟",
+"a.1": "بالتأكيد. اختر خدمة واحدة أو الاثنتي عشرة كلها، وإن رأينا أن شيئاً آخر يحتاج إلى إصلاح أولاً، فسنخبرك.",
+"q.2": "هل تديرون الإعلانات وحسابات التواصل أيضاً؟",
+"a.2": "نعم. نخطّط للإعلانات ونشتري مساحاتها، وندير حساباتك على منصّات التواصل، ونرسل تقريراً كل شهر.",
+"q.3": "هل يمكننا رؤية أعمال سابقة؟",
+"a.3": "نحن جدد، ولا توجد لدينا دراسة حالة لعميل بعد. مشاريعنا المفاهيمية تُظهر طريقة عملنا، ويسعدنا أن نبدأ بمشروع صغير تحكم علينا من خلاله.",
+"q.4": "كم التكلفة؟",
+"a.4": "تعتمد على ما تحتاجه. نقدّم عرض السعر بعد أول مكالمة: سعر ثابت واحد، مكتوب، قبل أن يبدأ أي عمل.",
+"q.5": "كيف نبدأ؟",
+"a.5": "املأ الطلب أعلى هذه الصفحة، أو راسلنا بالبريد."
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+// The studio's email, WhatsApp, form service, optional fields and privacy link come from content.studio (set in the admin).
+// The brief poster (assets/motifs.js, type "brief") calms its sea and raises its sun as the brief fills in.
+(() => {
+const M = MIRAS, $ = M.$, $$ = M.$$, S = M.studio, MO = window.MOTIFS;
+const Q = new URLSearchParams(location.search);
+const want = new Set();
+// ?service=branding-0 from a services page ticks that service; ?company= (the Branding name demo) fills the company
+const pre = Q.get('service');
+const MAP = { strategy: 0, branding: 3, content: 6, digital: 9 };
+if (pre) { const [d, i] = pre.split('-'); if (d in MAP) want.add(MAP[d] + M.clamp(+i || 0, 0, 2)); }
+const preCo = String(Q.get('company') || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 120);
+if (preCo) $('#fCo').value = preCo;
+const chips = () => $$('#picks .chip');
+const sync = () => chips().forEach(b => b.setAttribute('aria-pressed', want.has(+b.dataset.svc)));
+const join = list => list.join(M.lang === 'ar' ? '، ' : ', ');
+const label = b => b.textContent.replace(/\s+/g, ' ').trim(); // a service's name as plain text (the no-break space below becomes a space)
+
+// the poster: c = name .2 + valid email .2 + a service .2 + 40+ characters of message .3 + company .1; one line per discipline, in pick order
+const DISC = ['strategy', 'strategy', 'strategy', 'branding', 'branding', 'branding', 'content', 'content', 'content', 'digital', 'digital', 'digital'];
+const posterCv = $('.k-poster canvas');
+let sent = false;
+function poster() {
+  const p = MO && posterCv ? MO.get(posterCv) : null; if (!p || !p.set) return;
+  const empty = M.text('bp.empty');
+  if (sent) return p.set({ sent: true, empty }); // the brief has left: keep what was sent, with Mira on the sand
+  const name = $('#fName').value.trim(), co = $('#fCo').value.trim(), email = $('#fEmail'), msg = $('#fMsg').value.trim();
+  const c = (name ? .2 : 0) + (email.value.trim() && email.checkValidity() ? .2 : 0) + (want.size ? .2 : 0) + (msg.length >= 40 ? .3 : 0) + (co ? .1 : 0);
+  p.set({ c: Math.min(1, c), name: co || name, picks: [...new Set([...want].map(i => DISC[i]).filter(Boolean))], sent: false, empty });
+}
+const touched = () => { if (sent) { sent = false; } poster(); };
+
+// the status line says one thing at a time. Its text is kept as a key and its variables, not as words, so a language switch writes it again in the new language
+let statusMsg = { key: '', vars: null, answer: false };
+function showStatus() {
+  const st = $('#briefStatus'), m = statusMsg;
+  st.textContent = m.key ? M.text(m.key, m.vars) : '';
+  st.classList.toggle('is-done', m.answer && !!m.key);
+}
+function say(key, vars, answer = false) { statusMsg = { key, vars: vars || null, answer }; showStatus(); }
+// the answer after sending: shown as a block and brought into view (it sits under a long form, often below the fold on a phone)
+function done(key) {
+  lockKey = key; // the line a repeat press on a locked form answers with
+  say(key, null, true);
+  $('#briefStatus').scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' });
+}
+
+// the studio's details and the optional parts of the form, redrawn whenever the language or the content changes
+function paint() {
+  sync();
+  // on a narrow screen a service name wraps: "&" goes down with the word after it, never left at a line end (the copy keeps plain spaces)
+  chips().forEach(b => b.childNodes.forEach(n => { if (n.nodeType === 3 && n.data.includes(' & ')) n.data = n.data.replace(/ & /g, ' &\u00a0'); }));
+  const wa = String(S.whatsapp || '').replace(/\D/g, ''), waLink = $('#dWa');
+  waLink.hidden = !wa; if (wa) { waLink.href = 'https://wa.me/' + wa; waLink.textContent = S.phoneLabel || '+' + wa; } else waLink.removeAttribute('href');
+  const ff = S.formFields || {}, ph = $('#fPhoneRow'), bu = $('#fBudgetRow'), sel = $('#fBudget');
+  ph.hidden = !ff.phone; bu.hidden = !ff.budget;
+  ph.classList.toggle('full', !ff.budget); bu.classList.toggle('full', !ff.phone); // one optional field alone takes the whole row
+  const was = sel.value, list = M.budgets();
+  sel.replaceChildren(new Option('—', ''), ...list.map((b, i) => new Option(b, String(i))));
+  sel.value = was !== '' && +was < list.length ? was : '';
+  $$('[data-i18n="fm.note"]').forEach(el => el.hidden = !!S.formEndpoint);
+  $$('[data-i18n="fm.noteDirect"]').forEach(el => el.hidden = !S.formEndpoint);
+  const url = M.safeUrl(S.privacyUrl) || '';
+  $('#privacyRow').hidden = !url; if (url) $('#privacyLink').href = url;
+  showStatus();
+  poster();
+}
+M.onLang(paint);
+$('#picks').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const i = +b.dataset.svc; want.has(i) ? want.delete(i) : want.add(i); sync(); unlockBrief(); touched(); });
+$('#faq').addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+const picked = () => [...want].sort((a, b) => a - b).map(i => $(`#picks [data-svc="${i}"]`)).filter(Boolean);
+// phone and budget only when the studio turned them on; the budget is kept as the English range at that place
+function extras() {
+  const ff = S.formFields || {}, i = ff.budget && $('#fBudget').value !== '' ? +$('#fBudget').value : -1;
+  return { phone: ff.phone ? $('#fPhone').value.trim().slice(0, 40) : '', budget: i >= 0 ? (M.budgets('en')[i] ?? M.budgets()[i] ?? '') : '', budgetLabel: i >= 0 ? (M.budgets()[i] ?? '') : '' };
+}
+function compose(max = 1500) {
+  const t = M.text, ex = extras(), svc = join(picked().map(label)) || '—';
+  let msg = $('#fMsg').value.trim(); if (msg.length > max) msg = msg.slice(0, max) + '…';
+  return `${t('fm.lName')}: ${$('#fName').value.trim()}\n${t('fm.lEmail')}: ${$('#fEmail').value.trim()}` + (ex.phone ? `\n${t('fm.lPhone')}: ${ex.phone}` : '') +
+    `\n${t('fm.lCo')}: ${$('#fCo').value.trim() || '—'}` + (ex.budgetLabel ? `\n${t('fm.lBudget')}: ${ex.budgetLabel}` : '') + `\n${t('fm.lSvc')}: ${svc}\n\n${msg}`;
+}
+const to = () => String(S.email || '').replace(/[\s?&#]/g, '');
+// an empty email and a wrong one have their own lines (fEmailMissing, fEmailErr), as on the home page; only the line for this case shows
+function setErr(el, bad, kind = 'Err') {
+  const err = $('#' + el.id + kind);
+  for (const k of ['Err', 'Missing']) { const p = $('#' + el.id + k); if (p) p.hidden = !(bad && k === kind); }
+  if (bad) { el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', err.id); } else { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); }
+}
+// once a valid brief has gone out, a repeat press does not send it again, but it answers: the same line comes back and takes focus, so it is heard.
+// the next edit frees Send brief again, and so does the visitor's return from the mail app, so a missed app never strands the form
+let briefLocked = false, lockKey = 'fm.opening', handoff = false;
+const sendBtn = () => $('#brief .send button[type=submit]');
+const unlockBrief = () => { if (briefLocked) { briefLocked = false; sendBtn()?.removeAttribute('aria-disabled'); } };
+const relock = () => { done(lockKey); $('#briefStatus').focus({ preventScroll: true }); };
+const back = () => { if (handoff && !document.hidden) { handoff = false; unlockBrief(); } };
+document.addEventListener('visibilitychange', back);
+window.addEventListener('focus', back);
+$('#brief').addEventListener('input', e => { if (e.target.hasAttribute('aria-invalid')) setErr(e.target, false); unlockBrief(); touched(); });
+$('#brief').addEventListener('change', () => { unlockBrief(); poster(); });
+$('#brief').addEventListener('submit', async e => {
+  e.preventDefault(); if (briefLocked) return relock();
+  const name = $('#fName'), email = $('#fEmail'), badN = !name.value.trim(), noE = !email.value.trim(), badE = noE || !email.checkValidity();
+  setErr(name, badN); setErr(email, badE, noE ? 'Missing' : 'Err');
+  if (badN || badE) return (badN ? name : email).focus();
+  briefLocked = true; sendBtn()?.setAttribute('aria-disabled', 'true');
+  // spam: a bot fills the hidden field. It sees the normal answer; nothing is sent or kept.
+  // (no timer: a person who autofills and presses Enter at once is real, and must not get a success that sent nothing)
+  const trap = $('#fWeb').value;
+  if (trap) { M.track('brief_blocked', { why: 'trap', page: M.page }); done(S.formEndpoint ? 'fm.sent' : 'fm.opening'); return; }
+  const ex = extras(), T = M.touch || {};
+  const lead = { id: 'site-' + Date.now().toString(36), at: new Date().toISOString(), name: name.value.trim(), email: email.value.trim(), company: $('#fCo').value.trim(), phone: ex.phone, budget: ex.budget,
+                 waves: [], services: picked().map(b => b.dataset.id).filter(Boolean), words: [], message: $('#fMsg').value.trim(), lang: M.lang, source: 'site', page: M.page,
+                 ref: T.ref || '', utm: { source: T.source || '', medium: T.medium || '', campaign: T.campaign || '' }, landing: T.landing || '' };
+  M.track('brief', { services: lead.services.join(','), n: lead.services.length, page: M.page }); M.keepLead(lead);
+  if (S.formEndpoint) {
+    // a form service (Formspree, Web3Forms, a webhook…) set in the admin; if it fails, fall back to the email app
+    lockKey = 'fm.sending'; say('fm.sending');
+    try {
+      const r = await fetch(S.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...lead, picks: join(picked().map(label)), _subject: M.text('fm.subject') }) });
+      if (!r.ok) throw new Error(r.status);
+      done('fm.sent'); poster(); sent = true; e.target.reset(); want.clear(); paint(); return;
+    } catch (err) {}
+  }
+  handoff = true;
+  location.href = `mailto:${to()}?subject=${encodeURIComponent(M.text('fm.subject'))}&body=${encodeURIComponent(compose())}`;
+  done('fm.opening');
+  poster(); sent = true; poster();
+});
+$('#copyBrief').addEventListener('click', async () => { try { await navigator.clipboard.writeText(compose(4000)); say('fm.copied', { email: to() }); } catch (err) { say('fm.copyFail', { email: to() }); } });
+})();
+</script>
+</body>
+</html>

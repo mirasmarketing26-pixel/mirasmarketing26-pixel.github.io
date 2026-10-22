@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Project — MIRAS</title>
+<meta name="description" content="A concept project by MIRAS, a creative marketing agency in Lusail.">
+<meta name="theme-color" content="#2B3BF0">
+<!-- the share card is the generic MIRAS one (one file serves every project). The canonical and the address pair carry the
+     project (?p=…) and are written by the page script once it knows which project it shows -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="A concept project — MIRAS">
+<meta property="og:description" content="A concept project by MIRAS, a creative marketing agency in Lusail.">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark, and Mira riding a wave past an orange sun.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint: the page script holds the board until this sheet has applied (see reveal) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" data-page-faces onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* an unknown ?p=: the not-found hero stands alone in the main column; the project's own sections are not drawn */
+main.is-missing > :not(#pMissing){display:none!important}
+.proj-missing .display{grid-column:1 / span 9}
+.proj-missing .lead{grid-column:1 / span 7}
+@media (max-width:759px){.proj-missing .display,.proj-missing .lead{grid-column:1 / -1}}
+.proj-missing .actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+/* Project (r2). System rules: see the top of assets/motifs.css.
+   Shore hero (Scale move) → the project's board, margin to margin, its photo inset opens on click → Deep slate band →
+   brief / idea / made rows → the system (Counterweight: the heading and the name set in both faces in cols 1–7, the
+   pattern tile in cols 8–12; palette bars bleed edge to edge; the Saffar booking flow) → mock-ups (2 columns) → the next
+   project on Deep: its name and arrow beside its board. */
+.proj-hero{padding:clamp(130px,19vh,200px) var(--m) clamp(36px,5vh,64px);row-gap:clamp(16px,2.2vw,30px)}
+/* the hero's text comes with the script: each line holds its height from the first paint (the label its 44px row, the name
+   and the line one line each), so the board below doesn't drop when the words arrive */
+.proj-label{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;min-height:44px;font:var(--fs-small);color:var(--soft)}
+#pName,#pLine{min-height:.9em;min-height:1lh}
+.proj-label .badge{background:var(--flare);color:var(--deep)}
+.proj-label a{display:inline-flex;align-items:center;min-height:44px;color:var(--fg);text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.32em}
+#pName{grid-column:1 / span 10;grid-row:2;align-self:baseline;margin:0;text-wrap:balance}
+/* the counterweight: the name in the other script, in the project's own face and colour, cols 8–12 on the name's baseline
+   (in Arabic the Latin name takes the left). Sized to fit its five columns: --k is the longest line's width in ems. */
+.proj-hero.has-alt #pName{grid-column:1 / span 7}
+.proj-alt{grid-column:8 / -1;grid-row:2;align-self:baseline;margin:0;container-type:inline-size;color:var(--alt,var(--fg))}
+.proj-alt[hidden]{display:none}
+.proj-alt > span{display:block;white-space:nowrap;font-size:clamp(40px,5vw,90px);font-size:min(clamp(44px,6vw,104px),calc(90cqi / var(--k,6)));line-height:1.18}
+.proj-alt.caps > span{text-transform:uppercase;line-height:1.02}
+#pLine{grid-column:7 / -1;grid-row:3;max-width:40ch;color:var(--soft);text-wrap:pretty}
+@media (max-width:820px){
+  #pName,#pLine,.proj-hero.has-alt #pName{grid-column:1 / -1}
+  .proj-alt{grid-column:1 / -1;grid-row:3;justify-self:end;width:min(100%,520px)}
+  /* its start is the page's end (the other script runs the other way): the two names step across the screen. The Latin name
+     is always at the left and the Arabic at the right, in both languages (as on desktop), so this stack is the counterweight:
+     keep it, don't right-align the Latin line in Arabic (that would split the pairing from the English page) */
+  .proj-alt > span{font-size:min(clamp(40px,12vw,64px),calc(100cqi / var(--k,6)));text-align:start}
+  #pLine{grid-row:4}
+}
+
+.proj-art{padding:0 var(--m)}
+/* the board is drawn by the script, and shows once the type above it has its faces (1.5s at most): until then its place
+   is kept but nothing in it shows (no empty tint, no button alone), and nothing above it re-wraps after it appears */
+.proj-art{transition:opacity .35s var(--ease),visibility 0s}
+.proj-art:not(.ready){visibility:hidden;opacity:0}
+@media (prefers-reduced-motion:reduce){.proj-art{transition:none}}
+.proj-board{--ratio:16/9;cursor:zoom-in}
+.proj-board.is-open{cursor:zoom-out}
+.proj-board.no-inset{cursor:auto}
+/* the photo toggle is a corner tag like the Concept badge, not a button stuck on the artwork: Shore, Deep words, square
+   corners; Flare only while the photo is open. Its hit area runs 9px past the tag on each side (44px tall). */
+.board-toggle{position:absolute;z-index:3;top:12px;inset-inline-end:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:0;border-radius:2px;background:var(--shore);color:var(--deep);font:500 13px/1.1 var(--sans);letter-spacing:0;cursor:pointer;transition:background-color .25s var(--ease),color .25s var(--ease)}
+html[lang=ar] .board-toggle{font:500 13px/1.25 var(--ar);padding-block:5px}
+.board-toggle::after{content:"";position:absolute;inset:-9px -6px}
+@media (hover:hover) and (pointer:fine){.board-toggle:hover{background:var(--deep);color:var(--shore)}}
+.board-toggle[aria-pressed=true]{background:var(--flare);color:var(--deep)}
+/* the state is drawn as well as coloured: a plus at the tag's end that turns into a cross while the photo is open. The label
+   stays the same in both states (aria-pressed carries the state for assistive tech); the box is fixed, so the tag never reflows */
+.board-toggle::before{content:"";order:1;flex:none;width:9px;height:9px;background:linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 100% no-repeat;transition:transform .3s var(--ease)}
+.board-toggle[aria-pressed=true]::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.board-toggle::before{transition:none}}
+/* a Shore ring inside a Deep one reads on the light boards and the night ones alike */
+.board-toggle:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px var(--shore),0 0 0 4px var(--deep)}
+.proj-note{margin-top:16px;color:var(--soft);max-width:60ch;text-wrap:pretty}
+@media (max-width:759px){.proj-board{--ratio:4/5}}
+
+.slate{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px var(--gut);margin-top:clamp(44px,7vh,80px);padding:clamp(28px,4.4vh,46px) var(--m);background:var(--bg);color:var(--fg)}
+.slate > div{min-width:0}
+.slate dt{color:color-mix(in srgb,var(--shore) 60%,transparent)}
+.slate dd{margin:10px 0 0;font:500 15px/1.4 var(--sans);overflow-wrap:anywhere}
+html[lang=ar] .slate dd{font-family:var(--ar)}
+.slate a{color:inherit;text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.3em}
+@media (pointer:coarse){.slate a{display:inline-flex;align-items:center;min-height:44px;margin-block:-12px}}
+@media (max-width:759px){.slate{grid-template-columns:1fr 1fr}}
+
+.story{padding:var(--pad) var(--m) clamp(64px,9vh,110px)}
+.st-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:14px;padding-block:clamp(28px,4.4vh,48px);border-top:1px solid var(--hair)}
+.st-row:last-child{border-bottom:1px solid var(--hair)}
+.st-row > h2{grid-column:1 / span 4;margin:0}
+.st-row > :not(h2){grid-column:5 / span 7;margin:0}
+.st-row .lead{max-width:44ch;text-wrap:pretty}
+/* the ruled list runs to the grid's edge, as the row rules above and below it do (the leads keep their 44ch measure) */
+.st-row > .made{grid-column:5 / -1}
+.made{list-style:none;padding:0}
+.made li{font:var(--fs-sub);letter-spacing:var(--ls-sub);padding-block:12px;border-bottom:1px solid var(--hair)}
+.made li:first-child{padding-top:0}.made li:last-child{border-bottom:0;padding-bottom:0}
+@media (max-width:820px){.st-row > h2,.st-row > :not(h2),.st-row > .made{grid-column:1 / -1}}
+
+.system{padding:0 var(--m) var(--pad)}
+.sys-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(28px,3.2vw,48px);align-items:start;padding-top:clamp(40px,6vh,70px)}
+.sys-head h2{grid-column:1 / span 7;grid-row:1;margin:0}
+/* the tile stands beside the heading and the type, as tall as the two together */
+.sys-tile{grid-column:8 / -1;grid-row:1 / span 2;margin:0}
+.ka-tile{--ratio:4/5}
+.sys-tile figcaption{margin-top:12px;color:var(--soft)}
+.sys-block{margin-top:clamp(70px,10vh,120px)}
+.sys-block > h3{margin:0 0 clamp(20px,3vw,34px)}
+.swatches{list-style:none;display:flex;margin:0 calc(-1 * var(--m));padding:0;min-height:clamp(300px,48vh,480px)}
+.swatches li{flex:var(--w) 1 0;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:6px;padding:20px clamp(12px,1.6vw,26px);background:var(--c);color:var(--ink)}
+.swatches li:first-child{padding-inline-start:var(--m)}
+.swatches .data{color:inherit}
+.swatches .sw-en{font:500 15px/1.3 var(--sans)}
+.swatches .sw-ar{font:500 15px/1.6 var(--ar)}
+/* a colour close to the page's Shore (a cream, a sand, a white) would lose its top and bottom edges and leave a hole in the
+   strip: it gets a Deep hairline along both */
+.swatches li.near{box-shadow:inset 0 1px 0 color-mix(in srgb,var(--deep) 14%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--deep) 14%,transparent)}
+/* the type, under the heading: the project's own name set in each of its faces at display size, fitted to one line
+   (--k = the name's width in ems), under a hairline that carries the face's name and a small Aa / أب index */
+.specimen{grid-column:1 / span 7;grid-row:2;display:flex;flex-direction:column;gap:clamp(24px,2.6vw,38px);min-width:0}
+.specimen > h3{margin:0}
+.spec{min-width:0;container-type:inline-size;padding-top:12px;border-top:1px solid var(--hair)}
+.spec-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:0;color:var(--soft)}
+.spec-i{font-size:clamp(26px,2.3vw,38px);line-height:1.1}
+.spec-name{margin:clamp(8px,1.2vw,18px) 0 0;white-space:nowrap;font-size:min(clamp(52px,8vw,140px),calc(100cqi / var(--k,6)));line-height:1.1;letter-spacing:0;color:var(--fg)}
+.spec-name.caps{text-transform:uppercase}
+/* Arabic marks rise well above the Latin capitals, and Ruqaa and Lalezar descend deep: a taller line for the Arabic name */
+.spec-ar .spec-name{line-height:1.4}
+html[dir=ltr] .spec-name{text-align:left}
+html[dir=rtl] .spec-name{text-align:right}
+html[lang=ar] .specimen > h3{order:-2}
+html[lang=ar] .spec-ar{order:-1}
+/* type set in the project's faces waits for them (work.js adds ka-ready within 1.2s), so it never jumps from the fallback */
+html:not(.ka-ready) :is(.proj-alt,.spec-i,.spec-name,.pr){opacity:0}
+/* the heading and its line stand level with the top of the phone, not floating halfway down its side */
+.proto-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:36px;align-items:start}
+.proto-copy{grid-column:1 / span 6}
+/* .heading, in Arabic too (the shared html[lang=ar] h3 rule would otherwise set it at the sub size) */
+.proto-copy > h3.heading{margin:0;font:var(--fs-head);letter-spacing:var(--ls-head)}
+.proto-copy > .lead{margin:clamp(16px,1.6vw,24px) 0 0;max-width:34ch;color:var(--soft);text-wrap:pretty}
+.phone{grid-column:8 / span 4;justify-self:center;width:min(100%,320px);aspect-ratio:9/17;border:10px solid var(--pc-frame);border-radius:24px;background:var(--pc-bg);color:var(--pc-ink);overflow:hidden}
+.pr{display:flex;flex-direction:column;height:100%;padding:28px 20px 20px;gap:18px;font-family:var(--pc-latin);font-weight:var(--pc-w)}
+html[lang=ar] .pr{font-family:var(--pc-arabic);font-weight:var(--pc-aw)}
+.pr-bars{display:flex;gap:6px}
+.pr-bars span{flex:1;height:4px;background:color-mix(in srgb,var(--pc-ink) 18%,transparent)}
+.pr-bars span.on{background:var(--pc-acc)}
+.pr-q{margin:6px 0 0;font-size:30px;line-height:1.1;outline:none}
+html[lang=ar] .pr-q{line-height:1.45}
+.pr-opts{display:flex;flex-direction:column;gap:10px}
+.pr-opt,.pr-next{min-height:48px;padding:0 16px;border-radius:2px;font:inherit;font-size:17px;cursor:pointer;text-align:start;transition:background-color .3s var(--ease),color .3s var(--ease)}
+.pr-opt{background:transparent;color:var(--pc-ink);border:1.5px solid color-mix(in srgb,var(--pc-ink) 35%,transparent)}
+.pr-opt[aria-pressed=true]{background:var(--pc-acc);border-color:var(--pc-acc);color:var(--pc-ink)}
+.pr-next{margin-top:auto;border:0;background:var(--pc-frame);color:var(--pc-bg);text-align:center}
+.pr-next:disabled{opacity:.35;cursor:default}
+.pr-opt:focus-visible,.pr-next:focus-visible{outline:2px solid var(--pc-ink);outline-offset:2px}
+.pr-sum{list-style:none;margin:0;padding:0;font-size:18px;line-height:1.5}
+.pr-sum li{padding-block:8px;border-bottom:1.5px solid color-mix(in srgb,var(--pc-ink) 22%,transparent)}
+@media (max-width:820px){.sys-head h2,.specimen,.proto-copy,.phone{grid-column:1 / -1}.sys-tile{grid-column:1 / -1;grid-row:3;max-width:520px}}
+@media (max-width:759px){
+  .swatches{flex-direction:column;min-height:0}
+  .swatches li{flex:none;min-height:calc(var(--w) * 26px + 96px);padding-inline:var(--m)}
+  /* the hex is the one value to read off a swatch: 13px on a phone, where each swatch is a full-width row */
+  .swatches .data{font-size:13px;letter-spacing:.06em}
+}
+
+.mocks{padding:clamp(40px,6vh,80px) var(--m) var(--pad)}
+.mk-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--gut);align-items:start}
+.mk-grid > h2{grid-column:1 / span 5;margin:0}
+#pGallery{display:contents}
+.mk{position:relative;margin:0;grid-column:6 / -1}
+.mk:nth-child(even){grid-column:1 / span 5}
+.mk:first-child{grid-row:span 2}
+/* one mock-up: the heading stands on the photo's foot line, a counterweight across from it, not a label left at its top */
+.mk-grid.one > h2{align-self:end}
+.mk-grid.one .mk{grid-row:1}
+.mk img{display:block;width:100%;height:auto;border-radius:0}
+.mk .badge{position:absolute;top:12px;inset-inline-start:12px}
+@media (max-width:820px){.mk-grid > h2,.mk,.mk:nth-child(even){grid-column:1 / -1}.mk:first-child,.mk-grid.one .mk{grid-row:auto}}
+
+/* the next project, on Deep (§2.3): the label, its name and the Flare arrow in cols 1–7 on the foot line of its board in
+   cols 8–12 (the board as a card has it: the photo inset and the Concept badge, the photo opening on hover). The band's wave
+   edge rises into the Shore above; the Deep footer below gets its Tide60 seam from motifs.css. */
+.proj-next{grid-template-rows:1fr auto auto;align-content:stretch;min-height:0;padding-block:clamp(56px,8vh,96px) clamp(64px,9vh,110px)}
+.proj-next > .small{grid-row:2}
+/* the name and its arrow set as one run of text, so a long name breaks evenly (Corniche / Night Run, not Corniche Night /
+   Run) and the arrow stays on the last word */
+.proj-next > .display{grid-row:3;display:block;text-wrap:balance}
+.proj-next > .display .arrow{margin-inline-start:.3em}
+.proj-next .arrow{color:var(--flare)}
+.proj-next > .next-board{grid-column:8 / -1;grid-row:1 / span 3;--ratio:4/3;background:none}
+.board.no-inset::after{display:none}
+@media (hover:hover) and (pointer:fine){
+  html[dir] .proj-next:hover .board .inset,html[dir] .proj-next:focus-visible .board .inset{transform:none;clip-path:inset(0)}
+  .proj-next:hover .board::after,.proj-next:focus-visible .board::after{opacity:0}
+  .proj-next:hover .ka-alt,.proj-next:focus-visible .ka-alt{fill:var(--ka-swap)}
+}
+@media (max-width:759px){
+  .proj-next{grid-template-rows:auto}
+  .proj-next > .next-board{grid-column:1 / -1;grid-row:1;margin-bottom:clamp(24px,6vw,36px)}
+}
+</style>
+</head>
+<body data-page="project">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work" aria-current="page">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main" class="t-shore" tabindex="-1" style="background:var(--shore)">
+  <section class="proj-hero proj-missing t-shore g12" id="pMissing" hidden>
+    <h1 class="display" data-i18n="p.nf.t">That project isn’t here.</h1>
+    <p class="lead" data-i18n="p.nf.d">The link may be mistyped, or the project has moved. All of our concept work is on one page.</p>
+    <div class="actions"><a class="pill flare" href="work.html" data-i18n="p.nf.b">Back to all work</a></div>
+  </section>
+  <section class="proj-hero t-shore g12">
+    <p class="proj-label" id="pLabel"></p>
+    <h1 class="display" id="pName"></h1>
+    <p class="proj-alt" id="pAlt" aria-hidden="true" hidden></p>
+    <p class="lead" id="pLine"></p>
+  </section>
+  <div class="proj-art t-shore">
+    <figure class="board proj-board" id="pBoard">
+      <img id="pCover" class="inset" width="1600" height="900" alt="" decoding="async">
+      <button type="button" class="board-toggle" id="pToggle" aria-pressed="false" data-i18n="p.zoom">See the photo</button>
+    </figure>
+    <p class="small proj-note" data-i18n="p.note">A concept, not client work: we invented the business and its name.</p>
+  </div>
+  <dl class="slate t-deep">
+    <div><dt class="data" data-i18n="p.client">Sector</dt><dd id="pClient"></dd></div>
+    <div><dt class="data" data-i18n="p.disc">Discipline</dt><dd id="pDisc"></dd></div>
+    <div><dt class="data" data-i18n="p.year">Year</dt><dd id="pYear"></dd></div>
+    <div><dt class="data" data-i18n="p.type">Type</dt><dd data-i18n="c.concept">Concept</dd></div>
+  </dl>
+  <section class="story t-shore">
+    <div class="st-row"><h2 class="sub" data-i18n="p.brief">The brief</h2><p class="lead" id="pBrief"></p></div>
+    <div class="st-row"><h2 class="sub" data-i18n="p.idea">The idea</h2><p class="lead" id="pIdea"></p></div>
+    <div class="st-row"><h2 class="sub" data-i18n="p.made">In the concept</h2><ul class="made" id="pMade"></ul></div>
+  </section>
+  <section class="system t-shore" aria-labelledby="sysT">
+    <div class="sys-head">
+      <h2 class="display" id="sysT" data-i18n="p.system">The system</h2>
+      <div class="specimen">
+        <h3 class="sub" data-i18n="p.fonts">Typefaces</h3>
+        <div class="spec"><p class="spec-top"><span class="spec-i" id="pAa" lang="en" dir="ltr" aria-hidden="true">Aa</span><span class="small" id="pLatin" dir="ltr"></span></p><p class="spec-name" id="pSpecEn" lang="en" dir="ltr" aria-hidden="true"></p></div>
+        <div class="spec spec-ar"><p class="spec-top"><span class="spec-i" id="pAb" lang="ar" dir="rtl" aria-hidden="true">أب</span><span class="small" id="pArabic" dir="ltr"></span></p><p class="spec-name" id="pSpecAr" lang="ar" dir="rtl" aria-hidden="true"></p></div>
+      </div>
+      <figure class="sys-tile"><div class="board ka-tile" id="pTile"></div><figcaption class="small" data-i18n="p.pattern">Pattern</figcaption></figure>
+    </div>
+    <div class="sys-block">
+      <h3 class="sub" data-i18n="p.palette">Colour</h3>
+      <ol class="swatches" id="pPalette"></ol>
+    </div>
+    <div class="sys-block proto-row" id="pProtoRow" hidden>
+      <div class="proto-copy"><h3 class="heading" data-i18n="p.proto">Try the booking flow.</h3>
+        <p class="lead" data-i18n="p.protoD">Tap an answer on each screen. Three questions, then it’s booked.</p></div>
+      <div class="phone" id="pPhone"><div class="pr" id="pProto"></div></div>
+    </div>
+  </section>
+  <section class="mocks t-shore" id="pMocks" aria-labelledby="mkT">
+    <div class="mk-grid">
+      <h2 class="display" id="mkT" data-i18n="p.mock">Mock-ups</h2>
+      <div id="pGallery"></div>
+    </div>
+    <span hidden data-i18n="p.mock1">Mock-up</span>
+  </section>
+  <a class="next t-deep proj-next" id="pNext" href="work.html">
+    <p class="small" data-i18n="p.next">Next project</p>
+    <p class="display"><span id="pNextName"></span><span class="arrow" aria-hidden="true">→</span></p>
+    <figure class="board next-board" id="pNextBoard" aria-hidden="true">
+      <img id="pNextCover" class="inset" width="1600" height="900" alt="" loading="lazy" decoding="async">
+      <span class="badge" data-i18n="c.concept">Concept</span>
+    </figure>
+  </a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span>
+       <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span>
+       <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Project — MIRAS", "ar": "مشروع — ميراس"}; window.PAGE_AR = {
+"p.note": "مشروع مفاهيمي، وليس عملاً لعميل: النشاط التجاري واسمه من ابتكارنا.",
+"p.zoom": "اعرض الصورة",
+"p.mock": "نماذج تطبيقية",
+"p.client": "القطاع",
+"p.disc": "التخصص",
+"p.year": "السنة",
+"p.type": "النوع",
+"p.brief": "الموجز",
+"p.idea": "الفكرة",
+"p.made": "ما يشمله المشروع",
+"p.system": "النظام البصري",
+"p.pattern": "النقش",
+"p.palette": "الألوان",
+"p.fonts": "الخطوط",
+"p.proto": "جرّب مسار الحجز.",
+"p.protoD": "اختر إجابة في كل شاشة. ثلاثة أسئلة، ثم يتمّ الحجز.",
+"p.mock1": "نموذج تطبيقي",
+"p.next": "المشروع التالي",
+"p.nf.t": "هذا المشروع غير موجود.",
+"p.nf.d": "ربما الرابط خاطئ، أو أن المشروع انتقل. كل أعمالنا المفاهيمية في صفحة واحدة.",
+"p.nf.b": "العودة إلى كل الأعمال"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+// The project comes from content.work (assets/work.js holds the defaults and draws the boards), so it is looked up again
+// whenever the content or the language changes.
+(() => {
+  const M = MIRAS, $ = M.$, esc = M.esc, MW = window.MIRAS_WORK, slug = new URLSearchParams(location.search).get('p');
+  // the discipline the visitor was browsing on Work (work.html passes it as ?d=): the links back to Work and on to the next project keep it
+  const from = new URLSearchParams(location.search).get('d'), via = Object.keys(MW.disciplines).includes(from) ? `d=${from}` : '';
+  if (via) M.$$('a[href="work.html"]').forEach(a => a.setAttribute('href', `work.html?${via}`));
+  const html = document.documentElement, phone = matchMedia('(max-width:759px)');
+  const board = $('#pBoard'), toggle = $('#pToggle'), tile = $('#pTile');
+  const inspecting = () => html.classList.contains('cms-inspect');
+  // the board and its tag show together once drawn and once the hero's faces are in (the page's own, and the project's from
+  // work.js, which marks html.ka-ready), or after 1.5s whatever has arrived: the name and line above never move after it shows
+  let shown = false;
+  function reveal() {
+    if (shown) return;
+    shown = true;
+    // two frames after the faces load, so the lines they re-wrap have settled while the board is still hidden
+    const show = () => requestAnimationFrame(() => requestAnimationFrame(() => $('.proj-art').classList.add('ready')));
+    const ka = new Promise(r => {
+      if (html.classList.contains('ka-ready')) return r();
+      const mo = new MutationObserver(() => { if (html.classList.contains('ka-ready')) { mo.disconnect(); r(); } });
+      mo.observe(html, { attributes: true, attributeFilter: ['class'] });
+    });
+    // the page's own sheet is preloaded (the head), so it may not have applied yet: the name and the line are asked for in
+    // their faces only once it has, or the request would resolve at once for the fallback they show until then
+    const sheet = document.querySelector('link[data-page-faces]');
+    const sheeted = new Promise(r => {
+      if (!sheet || sheet.sheet) return r();
+      sheet.addEventListener('load', () => { if (sheet.sheet) r(); });
+      sheet.addEventListener('error', r);
+    });
+    // the page's faces as the name and the line use them (their own letters)
+    const faces = sheeted.then(() => Promise.all(['#pName', '#pLine'].map(q => $(q)).map(el => document.fonts ? document.fonts.load(getComputedStyle(el).font, el.textContent) : null)));
+    Promise.race([Promise.all([faces, ka]), new Promise(r => setTimeout(r, 1500))]).then(show, show);
+  }
+  // the prototype's place survives a language switch
+  const flow = { slug: '', step: 0, picks: [] };
+  let P = null, idx = 0;
+
+  // relative luminance of a #hex; the words on a colour bar take Deep or Shore, whichever reads better on it
+  const lum = hex => {
+    let h = hex.slice(1); if (h.length === 3) h = h.replace(/./g, c => c + c);
+    const [r, g, b] = [0, 2, 4].map(i => { const v = parseInt(h.slice(i, i + 2), 16) / 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
+    return .2126 * r + .7152 * g + .0722 * b;
+  };
+  const inkOn = hex => { const L = lum(hex); return (L + .05) / (lum('#0D0F2E') + .05) >= (lum('#F2EADB') + .05) / (L + .05) ? 'var(--deep)' : 'var(--shore)'; };
+  // a colour within 1.25:1 of the page's Shore (either side of it) needs its hairlines to keep its edges
+  const nearShore = hex => { const a = lum(hex) + .05, b = lum('#F2EADB') + .05; return Math.max(a, b) / Math.min(a, b) < 1.25; };
+  const replaceArt = (box, svg) => { box.querySelector(':scope > svg')?.remove(); box.insertAdjacentHTML('afterbegin', svg); };
+  // a project's cover into an <img class="inset">: the 800px WebP beside a default file, an upload by its id. False when there is none.
+  function setPhoto(img, p, cms, sizes, alt) {
+    const up = MW.upId(p.cover), ph = MW.photo(MW.src(p.cover, p.slug)), own = !up && ph.srcset && MW.photo(p.cover).srcset;
+    if (own) { img.srcset = ph.srcset; img.sizes = sizes; } else { img.removeAttribute('srcset'); img.removeAttribute('sizes'); }
+    img.hidden = !ph.src;
+    if (ph.src && img.getAttribute('src') !== ph.src) img.src = ph.src;
+    img.width = ph.w; img.height = ph.h; img.alt = alt; img.dataset.cms = cms; img.style.objectPosition = MW.focal(p);
+    if (up) img.dataset.up = up; else delete img.dataset.up;
+    return !!ph.src;
+  }
+
+  // the photo inset opens on a click or tap anywhere on the board, and closes on the next one
+  const setOpen = on => { board.classList.toggle('is-open', on); toggle.setAttribute('aria-pressed', String(on)); };
+  board.addEventListener('click', () => { if (!inspecting() && !board.classList.contains('no-inset')) setOpen(!board.classList.contains('is-open')); });
+
+  /* ---- the Saffar booking flow: three questions, then a summary; every control is a real button ---- */
+  const okProto = p => p && Array.isArray(p.en) && p.en.length >= 4 && p.opts && Array.isArray(p.opts.en) && p.opts.en.length >= 3;
+  function drawFlow(l, focus) {
+    const pr = P.proto, box = $('#pProto'), lx = Array.isArray(pr[l]) && pr[l].length >= 4 ? l : 'en', at = k => `work.${idx}.proto.${k}`;
+    const q = pr[lx], opts = Array.isArray(pr.opts?.[lx]) && pr.opts[lx].length >= 3 ? pr.opts[lx] : pr.opts.en, ol = opts === pr.opts.en ? 'en' : lx;
+    const word = o => String(o?.[l] ?? o?.en ?? '');
+    const bars = `<div class="pr-bars" aria-hidden="true">${[0, 1, 2].map(i => `<span${i <= flow.step ? ' class="on"' : ''}></span>`).join('')}</div>`;
+    if (flow.step >= 3) {
+      box.innerHTML = `${bars}<p class="pr-q" tabindex="-1" data-cms="${at(lx + '.3')}">${esc(q[3])}</p>` +
+        `<ul class="pr-sum">${flow.picks.map((v, s) => `<li data-cms="${at(`opts.${ol}.${s}.${v}`)}">${esc(opts[s]?.[v] ?? '')}</li>`).join('')}</ul>` +
+        `<button type="button" class="pr-next" data-act="again" data-cms="${at('again.' + l)}">${esc(word(pr.again))}</button>`;
+    } else {
+      const s = flow.step, list = Array.isArray(opts[s]) ? opts[s] : [];
+      box.innerHTML = `${bars}<p class="pr-q" id="prQ" tabindex="-1" data-cms="${at(lx + '.' + s)}">${esc(q[s])}</p>` +
+        `<div class="pr-opts" role="group" aria-labelledby="prQ">${list.map((o, i) => `<button type="button" class="pr-opt" data-opt="${i}" aria-pressed="${flow.picks[s] === i}" data-cms="${at(`opts.${ol}.${s}.${i}`)}">${esc(o)}</button>`).join('')}</div>` +
+        `<button type="button" class="pr-next" data-act="next"${flow.picks[s] == null ? ' disabled' : ''} data-cms="${at('next.' + l)}">${esc(word(pr.next))}</button>`;
+    }
+    if (focus) box.querySelector(focus)?.focus();
+  }
+  $('#pProto').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || inspecting() || !P?.proto) return;
+    if (b.dataset.opt != null) { flow.picks[flow.step] = +b.dataset.opt; flow.picks.length = flow.step + 1; drawFlow(M.lang, `[data-opt="${b.dataset.opt}"]`); }
+    else if (b.dataset.act === 'next' && flow.picks[flow.step] != null) { flow.step++; drawFlow(M.lang, '.pr-q'); }
+    else if (b.dataset.act === 'again') { flow.step = 0; flow.picks = []; drawFlow(M.lang, '.pr-q'); }
+  });
+
+  /* the hero's counterweight: the name in the other script, set in the project's face for that script, in the project's
+     most colourful colour that holds 3:1 on Shore. Long names break at the space nearest the middle; --k is the longest line in ems. */
+  const SHORE = lum('#F2EADB'), marks = /[\u064B-\u065F\u0670]/g;
+  function drawAlt(l, name) {
+    const el = $('#pAlt'), hero = el.parentElement, y = P[l === 'ar' ? 'en' : 'ar'] || {}, txt = String(y.name ?? '').trim();
+    const on = !!txt && txt !== String(name).trim();
+    el.hidden = !on; hero.classList.toggle('has-alt', on);
+    if (!on) { el.textContent = ''; return; }
+    const F = MW.faces(P)[l === 'ar' ? 'latin' : 'arabic'], caps = l === 'ar' && (P.motif === 'oval' || P.motif === 'dunes');
+    let lines = [txt];
+    const sp = [...txt.matchAll(/ /g)].map(m => m.index), len = txt.replace(marks, '').length;
+    if (sp.length && len > 12) { const at = sp.reduce((a, b) => Math.abs(b - txt.length / 2) < Math.abs(a - txt.length / 2) ? b : a); lines = [txt.slice(0, at), txt.slice(at + 1)]; }
+    const k = Math.max(...lines.map(t => t.replace(marks, '').length)) * (caps ? F.cap : F.adv) * 1.04;
+    const hexes = (P.palette || []).map(c => c && c.hex).filter(h => /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(h || '') && (SHORE + .05) / (lum(h) + .05) >= 3);
+    const chroma = h => { const v = (h.length === 4 ? h.slice(1).replace(/./g, c => c + c) : h.slice(1)).match(/../g).map(x => parseInt(x, 16)); return Math.max(...v) - Math.min(...v); };
+    // the most colourful of the project's colours that reads on Shore (Corniche's electric blue rather than its night)
+    const ink = hexes.reduce((a, h) => !a || chroma(h) > chroma(a) ? h : a, '');
+    el.lang = l === 'ar' ? 'en' : 'ar'; el.dir = l === 'ar' ? 'ltr' : 'rtl'; el.classList.toggle('caps', caps);
+    el.style.cssText = `--k:${Math.max(1, k).toFixed(2)};${ink ? `--alt:${ink};` : ''}font-family:${F.css};font-weight:${F.w}`;
+    el.innerHTML = lines.map(t => `<span>${esc(t)}</span>`).join('');
+    el.dataset.cms = `work.${idx}.name`;
+  }
+
+  /* the project's own address: the canonical keeps ?p= (each project is its own page), the Arabic twin adds lang=ar and is
+     its own canonical. Written here, where the project is known (an unknown ?p= shows the first project, so it names that
+     one). The share card in the head stays the generic MIRAS one; its title and line follow the project for in-page use. */
+  const SITE = 'https://miras.qa/project.html';
+  function headLink(rel, lang) {
+    const sel = `link[rel="${rel}"]${lang ? `[hreflang="${lang}"]` : ''}`;
+    let el = document.head.querySelector(sel);
+    if (!el) { el = document.createElement('link'); el.rel = rel; if (lang) el.hreflang = lang; document.head.append(el); }
+    return el;
+  }
+  function addresses(s, x) {
+    // the canonical follows the address, not the visitor's saved language: the Arabic address (lang=ar) names itself
+    const en = `${SITE}?p=${encodeURIComponent(s)}`, ar = `${en}&lang=ar`;
+    headLink('canonical').href = new URLSearchParams(location.search).get('lang') === 'ar' ? ar : en;
+    headLink('alternate', 'en').href = en; headLink('alternate', 'ar').href = ar; headLink('alternate', 'x-default').href = en;
+    document.head.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+    document.head.querySelector('meta[property="og:description"]')?.setAttribute('content', String(x.line || '').trim());
+  }
+  function render(l) {
+    if (!WORK.length) { $('#pName').textContent = ''; $('#pAlt').hidden = true; return; }
+    // no ?p= at all shows the first project; a slug that matches none shows the not-found state, not another project
+    const at0 = WORK.findIndex(p => p.slug === slug), missing = !!slug && at0 < 0;
+    $('#main').classList.toggle('is-missing', missing); $('#pMissing').hidden = !missing;
+    if (missing) {
+      // never indexed, and no canonical or alternates for the bad address
+      document.head.querySelectorAll('link[rel="canonical"],link[rel="alternate"][hreflang]').forEach(el => el.remove());
+      const m = document.head.querySelector('meta[name="robots"]') || Object.assign(document.createElement('meta'), { name: 'robots' });
+      m.content = 'noindex'; document.head.append(m);
+      document.title = `${M.text('p.nf.t')} — ${l === 'ar' ? 'ميراس' : 'MIRAS'}`; M.meta?.(M.text('p.nf.d'));
+      M.watch(); return;
+    }
+    idx = Math.max(0, at0); P = WORK[idx];
+    const N = WORK[(idx + 1) % WORK.length], x = P[l] || P.en, at = k => `work.${idx}.${k}`;
+    const d = DISCIPLINES[P.discipline] || DISCIPLINES.branding, dn = M.text('s.' + P.discipline);
+    document.title = `${x.name} — ${l === 'ar' ? 'ميراس' : 'MIRAS'}`;
+    addresses(P.slug, x);
+    MW.fonts();
+
+    // hero: the Concept badge and the discipline, the name, the line
+    $('#pLabel').innerHTML = `<span class="badge" data-cms="shared.c.concept">${esc(M.text('c.concept'))}</span><span aria-hidden="true">·</span><a href="${esc(d.page)}" data-cms="shared.s.${esc(P.discipline)}">${esc(dn)}</a>`;
+    $('#pName').textContent = x.name; $('#pName').dataset.cms = at('name');
+    $('#pLine').textContent = x.line; $('#pLine').dataset.cms = at('line');
+    M.meta?.(x.line);
+    drawAlt(l, x.name);
+
+    // the board: the identity drawn in code, the cover photo set into it. The name is set twice just above it (the h1 and the
+    // other script's counterweight), so the board comes without its lockup
+    replaceArt(board, MW.keyArt(P, l, phone.matches ? 4 / 5 : 16 / 9, { bare: true }));
+    const hasCover = setPhoto($('#pCover'), P, at('cover'), '(max-width:820px) 100vw, 86vw', x.name);
+    // no cover photo: the board alone, without the inset frame or its button
+    toggle.hidden = !hasCover; board.classList.toggle('no-inset', !hasCover); if (!hasCover) setOpen(false);
+    reveal();
+
+    // the slate
+    $('#pClient').textContent = x.client; $('#pClient').dataset.cms = at('client');
+    $('#pDisc').innerHTML = `<a href="${esc(d.page)}" data-cms="shared.s.${esc(P.discipline)}">${esc(dn)}</a>`;
+    $('#pYear').textContent = P.year; $('#pYear').dataset.cms = at('year');
+
+    // the story
+    $('#pBrief').textContent = x.brief; $('#pBrief').dataset.cms = at('brief');
+    $('#pIdea').textContent = x.idea; $('#pIdea').dataset.cms = at('idea');
+    $('#pMade').innerHTML = (x.made || []).map((m, k) => `<li data-cms="${at('made.' + k)}">${esc(m)}</li>`).join('');
+
+    // the system: the pattern alone, the palette (largest first), the two faces, the booking flow for projects that carry one
+    replaceArt(tile, MW.keyArt(P, l, 4 / 5, { plain: true }));
+    const pal = (P.palette || []).filter(c => /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(c.hex || ''));
+    $('#pPalette').innerHTML = pal.map((c, i) => `<li${nearShore(c.hex) ? ' class="near"' : ''} style="--c:${c.hex};--w:${[4, 3, 2, 1][i] || 1};--ink:${inkOn(c.hex)}">` +
+      `<span class="data" dir="ltr" data-cms="${at(`palette.${i}.hex`)}">${esc(c.hex.toUpperCase())}</span><span class="sw-en" lang="en" data-cms="${at(`palette.${i}.en`)}">${esc(c.en)}</span><span class="sw-ar" lang="ar" dir="rtl" data-cms="${at(`palette.${i}.ar`)}">${esc(c.ar)}</span></li>`).join('');
+    const F = MW.faces(P);
+    $('#pAa').style.cssText = `font-family:${F.latin.css};font-weight:${F.latin.w}`;
+    $('#pAb').style.cssText = `font-family:${F.arabic.css};font-weight:${F.arabic.w}`;
+    $('#pLatin').textContent = `${F.latin.fam} ${F.latin.w}`; $('#pLatin').dataset.cms = at('fonts.latin');
+    $('#pArabic').textContent = `${F.arabic.fam} ${F.arabic.w}`; $('#pArabic').dataset.cms = at('fonts.arabic');
+    // the specimen is the project's own name in each face, on one line (--k = its width in ems), in capitals where the board
+    // sets the Latin name in capitals; a name without letters of that script falls back to Aa / أب
+    const caps = P.motif === 'oval' || P.motif === 'dunes', nEn = String(P.en?.name ?? '').trim(), nAr = String(P.ar?.name ?? '').trim();
+    const tEn = /[A-Za-z]/.test(nEn) ? nEn : 'Aa', tAr = /[\u0621-\u064A]/.test(nAr) ? nAr : 'أب';
+    const ems = (t, adv) => Math.max(1, t.replace(marks, '').length * adv * 1.06).toFixed(2);
+    const sEn = $('#pSpecEn'), sAr = $('#pSpecAr');
+    sEn.textContent = tEn; sEn.classList.toggle('caps', caps); sEn.dataset.cms = at('name');
+    sEn.style.cssText = `font-family:${F.latin.css};font-weight:${F.latin.w};--k:${ems(tEn, caps ? F.latin.cap : F.latin.adv)}`;
+    sAr.textContent = tAr; sAr.dataset.cms = at('name');
+    sAr.style.cssText = `font-family:${F.arabic.css};font-weight:${F.arabic.w};--k:${ems(tAr, F.arabic.adv)}`;
+    const showFlow = okProto(P.proto);
+    $('#pProtoRow').hidden = !showFlow;
+    if (showFlow) {
+      if (flow.slug !== P.slug) { flow.slug = P.slug; flow.step = 0; flow.picks = []; }
+      const C = MW.colours(P), phoneEl = $('#pPhone');
+      phoneEl.style.cssText = `--pc-acc:${C[0]};--pc-bg:${C[2]};--pc-frame:${C[3]};--pc-ink:${C[3]};--pc-latin:${F.latin.css};--pc-w:${F.latin.w};--pc-arabic:${F.arabic.css};--pc-aw:${F.arabic.w}`;
+      drawFlow(l);
+    }
+
+    // mock-ups: only the project's own images, none when there are none. One image takes the singular heading and no badge
+    // (the word would sit twice in one glance); two or more each carry the Mock-up badge under the plural heading
+    const one = M.text('p.mock1'), mk = $('#mkT'), single = (P.images || []).length === 1, mkKey = single ? 'p.mock1' : 'p.mock';
+    if (mk.dataset.i18n !== mkKey) { mk.dataset.i18n = mkKey; mk.textContent = M.text(mkKey); }
+    mk.parentElement.classList.toggle('one', single);
+    $('#pGallery').innerHTML = (P.images || []).map((v, i) => {
+      const id = MW.upId(v), pic = MW.photo(MW.src(v, P.slug, i)), own = !id && pic.srcset && MW.photo(v).srcset;
+      return `<figure class="mk"><img src="${esc(pic.src)}"${own ? ` srcset="${esc(pic.srcset)}" sizes="(max-width:820px) 100vw, 50vw"` : ''} width="${pic.w}" height="${pic.h}"${id ? ` data-up="${id}"` : ''} alt="${esc(`${x.name} · ${one}`)}" loading="lazy" decoding="async" data-cms="${at('images.' + i)}">${single ? '' : `<span class="badge" data-cms="text.p.mock1">${esc(one)}</span>`}</figure>`;
+    }).join('');
+    $('#pMocks').hidden = !(P.images || []).length;
+
+    // the next project: its board beside its name (without the lockup, the name is right there), with its photo and the
+    // Concept badge, as a card shows it
+    const ni = WORK.indexOf(N), nb = $('#pNextBoard');
+    $('#pNext').href = `project.html?p=${encodeURIComponent(N.slug)}${via ? `&${via}` : ''}`;
+    $('#pNextName').textContent = (N[l] || N.en).name; $('#pNextName').dataset.cms = `work.${ni}.name`;
+    replaceArt(nb, MW.keyArt(N, l, 4 / 3, { bare: true }));
+    nb.classList.toggle('no-inset', !setPhoto($('#pNextCover'), N, `work.${ni}.cover`, '(max-width:759px) 100vw, 36vw', ''));
+    $('#pNext').hidden = N === P;
+    M.watch();
+  }
+  M.onLang(render);
+  // the boards are drawn for their shape, which changes at the phone breakpoint
+  phone.addEventListener('change', () => render(M.lang));
+  // the pattern tile drifts only while it is on screen (never with reduced motion: see assets/work.js)
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => tile.classList.toggle('is-live', e.isIntersecting))).observe(tile);
+})();
+</script>
+</body>
+</html>

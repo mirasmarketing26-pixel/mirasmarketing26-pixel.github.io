@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Page not found — MIRAS</title>
+<meta name="description" content="This page could not be found.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B3BF0">
+<!-- Served for any unknown address, including nested ones, so every path here is root-absolute. -->
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=r2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!-- the faces load without blocking the first paint --><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="preload" as="image" href="/assets/mira-arrive.png?v=r2">
+<link rel="stylesheet" href="/assets/motifs.css?v=r3">
+<link rel="stylesheet" href="/assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* 404: the words take columns 1–7 and sit at the foot of the Tide field. Columns 8–12 are a block of Shore that
+   runs off the end edge and down onto the footer: the shore. Blue Mira, the footer's Mira, stands in it on Tide
+   ripples and waves back toward the words. Flat colour on flat colour, no shadow. */
+.nf{--fb:clamp(50px,8vh,90px);align-content:end;row-gap:0}
+.nf .lead{max-width:34ch;text-wrap:pretty}
+html[lang=ar] .nf .heading{max-width:20ch}
+/* the Arabic lead breaks into even halves on a phone, never between «إحدى» and «هذه الصفحات» */
+html[lang=ar] .nf .lead{text-wrap:balance}
+.nf .nf-art{
+  --mh:clamp(270px,36vh,330px); /* Mira's height; her ripples scale with her */
+  grid-column:8 / -1;grid-row:1 / span 6;align-self:end;justify-self:stretch;position:relative;
+  height:clamp(400px,58vh,540px);margin-inline-end:calc(-1 * var(--m));margin-bottom:calc(-1 * var(--fb));
+  padding:0 0 clamp(44px,7vh,72px);justify-content:flex-end;background:var(--shore);color:var(--deep)}
+.nf .nf-stand{display:flex;flex-direction:column;align-items:center}
+.nf .nf-mira{height:var(--mh);will-change:transform}
+.nf .ripple{width:calc(var(--mh) * 1.15);height:auto;aspect-ratio:220 / 32;margin-top:calc(var(--mh) * -.085);color:var(--tide)}
+/* the code is the block's tag, top start corner, like the label on a sample */
+.nf .nf-code{position:absolute;inset-block-start:26px;inset-inline-start:28px;margin:0;color:color-mix(in srgb,var(--deep) 62%,transparent)}
+/* phones and portrait tablets: the shore becomes a full-bleed band under the links, with Mira at its end side */
+@media (max-width:900px){
+  .nf > *{grid-column:1 / -1;grid-row:auto}
+  .nf .nf-art{--mh:clamp(190px,28vw,250px);order:9;grid-column:1 / -1;grid-row:auto;height:auto;margin:48px calc(-1 * var(--m)) calc(-1 * var(--fb));padding:34px var(--m) 30px;align-items:flex-end}
+  .nf .nf-stand{margin-inline-end:clamp(0px,5vw,48px)}
+  .nf .nf-code{inset-block-start:24px;inset-inline-start:var(--m)}
+}
+/* small phones: Home takes the first row, the two other ways back share the second (no orphan button) */
+@media (max-width:480px){
+  .nf .actions{display:grid;grid-template-columns:1fr 1fr}
+  .nf .actions .pill.flare{grid-column:1 / -1}
+}
+</style>
+</head>
+<body data-page="404">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="/"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="/work.html" data-i18n="n.work">Work</a><a href="/#plan" data-i18n="n.services">Services</a><a href="/about.html" data-i18n="n.about">About</a><a href="/contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="/contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="/" data-i18n="n.home">Home</a><a href="/work.html" data-i18n="n.work">Work</a><a href="/#plan" data-i18n="n.services">Services</a><a href="/about.html" data-i18n="n.about">About</a><a href="/contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero nf t-tide" data-nav-dark>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><span class="wave-src sr-only" data-i18n="nf.word">Not found</span>
+    <h1 class="heading" data-i18n="nf.t">This page doesn’t exist or has moved.</h1>
+    <p class="lead" data-i18n="nf.d">Check the link, or go to one of these:</p>
+    <div class="actions"><a class="pill flare" href="/" data-i18n="n.home">Home</a><a class="pill ghost" href="/work.html" data-i18n="cta.w">See the work</a><a class="pill ghost" href="/contact.html" data-i18n="n.contact">Contact</a></div>
+    <div class="nf-art" id="nfArt">
+      <div class="nf-stand">
+        <img class="nf-mira" id="nfMira" src="/assets/mira-arrive.png?v=r2" width="512" height="680" alt="" decoding="async">
+        <svg class="ripple" aria-hidden="true"></svg>
+      </div>
+      <p class="data nf-code" data-i18n="nf.l">404</p>
+    </div>
+  </section>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span>
+       <a class="pill flare" href="/contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="/assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span>
+       <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="/work.html" data-i18n="n.work">Work</a><a href="/strategy.html" data-i18n="s.strategy">Strategy</a><a href="/branding.html" data-i18n="s.branding">Branding</a><a href="/content.html" data-i18n="s.content">Content</a><a href="/digital.html" data-i18n="s.digital">Digital</a><a href="/about.html" data-i18n="n.about">About</a><a href="/contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="/privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="/terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="/cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Page not found — MIRAS", "ar": "الصفحة غير موجودة — ميراس"}; window.PAGE_AR = {
+"meta.d": "لم نجد هذه الصفحة.",
+"nf.l": "404",
+"nf.word": "غير موجودة",
+"nf.t": "ربما حُذفت هذه الصفحة أو نُقلت إلى مكان آخر.",
+"nf.d": "تحقّق من الرابط، أو انتقل إلى إحدى هذه الصفحات:"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="/assets/content.js"></script>
+<script src="/assets/motifs.js?v=r3"></script>
+<script src="/assets/site.js?v=r3"></script>
+<script>
+// Mira looks around: she leans toward the pointer (fine pointers only, never in reduced motion), on the shared
+// motifs loop. In English she stands on the right and faces the words (mirrored); in Arabic the words are on her
+// right already. The lean is measured from her footing (the ripple), which never moves.
+(() => {
+  const M = window.MOTIFS, art = document.getElementById('nfArt'), mira = document.getElementById('nfMira');
+  if (!M || !art || !mira) return;
+  const foot = art.querySelector('.ripple') || art;
+  const fine = matchMedia('(pointer: fine)');
+  let px = null, a = 0, shown = '';
+  addEventListener('pointermove', e => { if (e.pointerType === 'mouse' || e.pointerType === 'pen') px = e.clientX; }, { passive: true });
+  document.documentElement.addEventListener('pointerleave', () => { px = null; }, { passive: true });
+  const face = () => (M.rtl() ? 1 : -1);
+  const paint = () => { const s = `rotate(${a.toFixed(2)}deg) scaleX(${face()})`; if (s !== shown) { mira.style.transform = s; shown = s; } };
+  M.onFrame((t, dt) => {
+    let target = 0;
+    if (!M.reduce && fine.matches && px != null) { const r = foot.getBoundingClientRect(); target = Math.max(-6, Math.min(6, (px - (r.left + r.width / 2)) / 40)); }
+    if (M.reduce) a = 0; else a += (target - a) * (1 - Math.exp(-(dt || .016) * 6));
+    if (Math.abs(target - a) < .01) a = target;
+    paint();
+  }, { el: art });
+  paint();
+  // the language switch moves Mira to the other side: face the words again
+  new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
+})();
+</script>
+</body>
+</html>

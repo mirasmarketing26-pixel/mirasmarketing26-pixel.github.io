@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Content — MIRAS</title>
+<meta name="description" content="We film, photograph and write everything your customers see.">
+<meta name="theme-color" content="#BFF0DD">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- PLACEHOLDER: miras.qa is a placeholder domain (as in sitemap.xml and robots.txt). Confirm the real domain with MIRAS and update the canonical, hreflang and og: URLs below. -->
+<link rel="canonical" href="https://miras.qa/content.html">
+<link rel="alternate" hreflang="en" href="https://miras.qa/content.html">
+<link rel="alternate" hreflang="ar" href="https://miras.qa/content.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://miras.qa/content.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Content — MIRAS">
+<meta property="og:description" content="We film, photograph and write everything your customers see.">
+<meta property="og:url" content="https://miras.qa/content.html">
+<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_QA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r3">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* content.html (r2): the contact sheet hero, the service rows, one frame cut for four screens. Shared rules: motifs.css, site.css. */
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* services header, the counterweight: the headline and its lead in cols 1–6; cols 8–12 hold the proof, the frame the
+   contact sheet above ticks (F161), set inside the crop marks of the crops section further down. The page runs in that
+   order: the contact sheet, the frame picked from it, then one frame cut for four screens */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto 1fr;column-gap:var(--gut);row-gap:clamp(20px,2.4vw,32px);margin-bottom:clamp(40px,5.5vw,76px)}
+.svc-head .display{grid-column:1 / span 7;grid-row:1;margin:0}
+.svc-head .lead{grid-column:1 / span 6;grid-row:2;align-self:start;margin:0;max-width:28ch;color:var(--soft);text-wrap:balance}
+.svc-shot{grid-column:8 / -1;grid-row:1 / span 2;align-self:start;margin:9px 9px 0}
+.svc-shot figcaption{margin-top:20px;font:var(--fs-small);color:var(--soft)}
+@media (max-width:759px){
+  .svc-head{grid-template-rows:auto}
+  .svc-head .display,.svc-head .lead{grid-column:1 / -1}
+  .svc-shot{grid-column:3 / -1;grid-row:3;margin-top:clamp(14px,3vw,22px)}
+}
+/* service rows: the name is the link and the whole row is its target; "Ask about this" is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+/* the Next band previews the Digital climb as a print crop: flat colour, no vignette. The art takes cols 8–12 at the
+   band's full height and runs out to its far edge, so the band's own edges cut the lines (the footer's hairline is the
+   floor); only their near ends ease in, over the first tenth, so they never stop on a ruled edge */
+@media (min-width:760px){.next{min-height:max(40vh,calc(clamp(160px,28vh,260px) + 2 * clamp(70px,10vh,120px)))}} /* the same height as the bands whose art is in flow */
+.next > .next-art{position:absolute;grid-area:auto;align-self:stretch;inset-block:0;inset-inline-end:0;inset-inline-start:calc(var(--m) + 7 * (100% - 2 * var(--m) - 11 * var(--gut)) / 12 + 7 * var(--gut));height:auto;overflow:hidden}
+.next-art > canvas{-webkit-mask:linear-gradient(90deg,transparent,#000 10%);mask:linear-gradient(90deg,transparent,#000 10%)}
+html[dir=rtl] .next-art > canvas{-webkit-mask-image:linear-gradient(270deg,transparent,#000 10%);mask-image:linear-gradient(270deg,transparent,#000 10%)}
+
+/* hero: the strip of film lies across the page and the word rides clear beneath it, never touching: at the top of its
+   ride the tallest letter (C, t; alef and lam in Arabic) keeps at least 12px of Foam under the tilted sprocket band. The
+   frame numbers sit in the top band, between the sprockets and the frames. The top padding is trimmed on wide screens so
+   strip, word and lead still sit in the first screen */
+.c-hero{justify-content:center;padding-bottom:clamp(44px,7vh,80px)}
+@media (min-width:760px){.c-hero{padding-top:clamp(104px,13vh,140px)}}
+.c-hero > .reel{--fh:clamp(120px,min(18vw,28vh),260px);margin-top:clamp(10px,3vh,40px);padding-bottom:24px} /* frames shrink on short screens, so the lead stays in the first screen */
+.c-hero > .reel .reel-track{padding-top:16px}
+.c-hero > .reel .reel-f figcaption{top:auto;bottom:100%;margin:0 0 4px}
+.hero.c-hero > .wave-title{margin-top:clamp(10px,.9vw,16px)}
+html[lang=ar] .c-hero > .wave-title{margin-top:calc(-1 * clamp(20px,2.8vw,44px))} /* the Arabic word sits lower in its box */
+.c-hero .lead{margin-top:clamp(-40px,-2.8vw,-12px)} /* "Content" has no descenders: the lead takes up the room kept for them */
+html[lang=ar] .c-hero .lead{margin-top:6px}
+.c-hero > .reel.is-still:focus-visible{outline:2px solid var(--deep);outline-offset:4px}
+@media (max-width:759px){.hero.c-hero > .wave-title{margin-top:0}html[lang=ar] .c-hero > .wave-title{margin-top:-14px}}
+/* reduced motion: the strip lies flat and the word holds still, so it can sit closer under the strip's straight edge */
+@media (prefers-reduced-motion:reduce) and (min-width:760px){.hero.c-hero > .wave-title{margin-top:calc(-1.6vw)}html[lang=ar] .c-hero > .wave-title{margin-top:-5.6vw}}
+
+/* crops: one frame of the brand film, cut for four screens */
+.cr{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(26px,3vw,44px);align-items:end}
+.cr-t{grid-column:8 / -1;grid-row:1;align-self:start;max-width:13ch}
+.cr-big{grid-column:1 / span 7;grid-row:1 / span 2}
+.cr-row{grid-column:8 / -1;grid-row:2;display:flex;align-items:flex-end;gap:clamp(28px,2.6vw,38px)}
+.crop{margin:0;min-width:0}
+.cr-row .crop{flex:1 1 0}
+.cr-row figcaption span:not(.data){white-space:nowrap}
+.win{position:relative;aspect-ratio:var(--ratio);background:color-mix(in srgb,var(--shore) 9%,transparent)}
+/* each window is cut by hand: its own focal point (--fx/--fy) and zoom (--z). The picture clips, so the crop marks outside stay.
+   The frame is never mirrored, so neither are the focal points. Mira (centre 35% 54% of the frame) faces the sun (50% 37%):
+   16:9 the whole scene; 1:1 Mira on the left and lower thirds, the sun whole; 4:5 the same with sky left above for a headline;
+   9:16 a close-up of Mira, the edge of the sun over her shoulder */
+.win picture{position:absolute;inset:0;display:block;overflow:hidden}
+.win img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--fx,37%) var(--fy,50%);transform:scale(var(--z,1));transform-origin:var(--fx,37%) var(--fy,50%);border-radius:0}
+/* Flare crop marks: an L on each corner, just outside the window */
+.win::after{content:"";position:absolute;inset:-9px;pointer-events:none;
+  background:linear-gradient(var(--flare),var(--flare)) 0 0/14px 2px,linear-gradient(var(--flare),var(--flare)) 0 0/2px 14px,
+    linear-gradient(var(--flare),var(--flare)) 100% 0/14px 2px,linear-gradient(var(--flare),var(--flare)) 100% 0/2px 14px,
+    linear-gradient(var(--flare),var(--flare)) 0 100%/14px 2px,linear-gradient(var(--flare),var(--flare)) 0 100%/2px 14px,
+    linear-gradient(var(--flare),var(--flare)) 100% 100%/14px 2px,linear-gradient(var(--flare),var(--flare)) 100% 100%/2px 14px;
+  background-repeat:no-repeat}
+.crop figcaption{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin-top:18px;font:var(--fs-small);color:var(--soft)}
+.crop figcaption .data{color:var(--fg)}
+/* the Next band and the footer are both Deep here: a hairline keeps them apart */
+.foot{box-shadow:inset 0 1px 0 color-mix(in srgb,var(--shore) 18%,transparent)}
+@media (max-width:900px){
+  .cr-t,.cr-big,.cr-row{grid-column:1 / -1;grid-row:auto}
+  .cr-t{max-width:16ch}
+}
+@media (max-width:520px){
+  .cr-row{gap:28px}
+  .cr-row figcaption{margin-top:14px}
+}
+/* the film stills on phones (520px and under) take the 960px WebP cut of each frame (film/t): the windows are 91 to 330px wide, so the
+   1920px AVIF is unused pixels there. Wider screens keep the AVIF. */
+/* the data labels are 13px at every width and in both languages (desktop was 11px, Arabic 12px): the reel's frame numbers and the crop ratios alike. The frame numbers clear the sprocket row (checked at 360 and 390 on phones) */
+html .data{font-size:13px}
+/* phones: the card badge is 13px too */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+</style>
+</head>
+<body data-page="content">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-foam c-hero">
+    <div class="motif reel" id="reel" data-motif="reel" data-frames="65,81,97,113,145,161,193,217,241,9,25,49" data-marks="81:loop,161:tick" aria-hidden="true" data-i18n-aria="h.reel" aria-label="Frames from our brand film"></div>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Content</h1>
+    <p class="lead" data-i18n="h.d">We film, photograph and write everything your customers see.</p>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">Made in-house.</h2><p class="lead" data-i18n="sv.lead">The people you brief are the people behind the camera.</p><figure class="svc-shot"><div class="win" style="--ratio:16/9"><picture><source media="(max-width:520px)" srcset="assets/film/t/f0161-960.webp?v=r2" type="image/webp"><source srcset="assets/film/d/f0161.avif?v=r2" type="image/avif"><img src="assets/film/d/f0161.jpg?v=r2" width="1280" height="720" loading="lazy" decoding="async" alt=""></picture></div><figcaption data-i18n="sv.fr">A frame from our brand film.</figcaption></figure></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=content-0" data-i18n="sv.0.n" aria-describedby="svA0">Video &amp; reels</a></h3><div><p class="lead" data-i18n="sv.0.d">We write, shoot and edit, then cut each film to the length its platform wants.</p><ul class="slash"><li data-i18n="sv.0.0">Video ads</li><li data-i18n="sv.0.1">Brand videos</li><li data-i18n="sv.0.2">Reels</li><li data-i18n="sv.0.3">6, 15 and 30-second cuts</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=content-1" data-i18n="sv.1.n" aria-describedby="svA1">Photography</a></h3><div><p class="lead" data-i18n="sv.1.d">Shoots lit and styled in your colours, never stock.</p><ul class="slash"><li data-i18n="sv.1.0">Art direction</li><li data-i18n="sv.1.1">Product shoots</li><li data-i18n="sv.1.2">People &amp; places</li><li data-i18n="sv.1.3">Retouching</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=content-2" data-i18n="sv.2.n" aria-describedby="svA2">Copywriting</a></h3><div><p class="lead" data-i18n="sv.2.d">Words people read to the end, in the voice your guide sets.</p><ul class="slash"><li data-i18n="sv.2.0">Ad copy</li><li data-i18n="sv.2.1">Social captions</li><li data-i18n="sv.2.2">Website copy</li><li data-i18n="sv.2.3">Video scripts</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="crops" aria-labelledby="crT">
+    <div class="wrap cr">
+      <h2 class="heading cr-t" id="crT" data-i18n="cr.t">The same shot on four screens.</h2>
+      <figure class="crop cr-big">
+        <div class="win" style="--ratio:16/9"><picture><source media="(max-width:520px)" srcset="assets/film/t/f0129-960.webp?v=r2" type="image/webp"><source srcset="assets/film/d/f0129.avif?v=r2" type="image/avif"><img src="assets/film/d/f0129.jpg?v=r2" width="1280" height="720" loading="lazy" decoding="async" alt=""></picture></div>
+        <figcaption><span class="data" dir="ltr">16:9</span> <span data-i18n="cr.0">Website</span></figcaption>
+      </figure>
+      <div class="cr-row">
+        <figure class="crop">
+          <div class="win" style="--ratio:1/1;--fx:36%;--fy:4%;--z:1.25"><picture><source media="(max-width:520px)" srcset="assets/film/t/f0129-960.webp?v=r2" type="image/webp"><source srcset="assets/film/d/f0129.avif?v=r2" type="image/avif"><img src="assets/film/d/f0129.jpg?v=r2" width="1280" height="720" loading="lazy" decoding="async" alt=""></picture></div>
+          <figcaption><span class="data" dir="ltr">1:1</span> <span data-i18n="cr.1">Feed post</span></figcaption>
+        </figure>
+        <figure class="crop">
+          <div class="win" style="--ratio:4/5;--fx:37.6%;--fy:0%;--z:1.23"><picture><source media="(max-width:520px)" srcset="assets/film/t/f0129-960.webp?v=r2" type="image/webp"><source srcset="assets/film/d/f0129.avif?v=r2" type="image/avif"><img src="assets/film/d/f0129.jpg?v=r2" width="1280" height="720" loading="lazy" decoding="async" alt=""></picture></div>
+          <figcaption><span class="data" dir="ltr">4:5</span> <span data-i18n="cr.2">Portrait ad</span></figcaption>
+        </figure>
+        <figure class="crop">
+          <div class="win" style="--ratio:9/16;--fx:30%;--fy:43%;--z:1.35"><picture><source media="(max-width:520px)" srcset="assets/film/t/f0129-960.webp?v=r2" type="image/webp"><source srcset="assets/film/d/f0129.avif?v=r2" type="image/avif"><img src="assets/film/d/f0129.jpg?v=r2" width="1280" height="720" loading="lazy" decoding="async" alt=""></picture></div>
+          <figcaption><span class="data" dir="ltr">9:16</span> <span data-i18n="cr.3">Story and reel</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Today’s catch, and a run after dark.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-deep band edge-top" href="digital.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Digital</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><canvas class="motif" data-motif="rise" data-ink="tide60" data-opts='{"mini":true}'></canvas></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Content — MIRAS", "ar": "المحتوى — ميراس"}; window.PAGE_AR = {
+"h.word": "المحتوى",
+"meta.d": "نصوّر ونكتب كل ما يراه عملاؤك.",
+"h.d": "نصوّر ونكتب كل ما يراه عملاؤك.",
+"h.reel": "لقطات من فيلم علامتنا",
+"sv.t": "ننتجه بأنفسنا.",
+"sv.lead": "الفريق الذي يستلم موجزك هو نفسه الذي يقف خلف الكاميرا.",
+"sv.fr": "لقطة من فيلم علامتنا.",
+"sv.0.n": "الفيديو والمقاطع القصيرة",
+"sv.0.d": "نكتب الفيلم ونصوّره ونحرّره، ثم نُعدّ منه نسخة بالطول الذي تريده كل منصّة.",
+"sv.0.0": "إعلانات الفيديو",
+"sv.0.1": "فيديوهات العلامة",
+"sv.0.2": "المقاطع القصيرة",
+"sv.0.3": "نسخ بطول 6 و15 و30 ثانية",
+"sv.1.n": "التصوير الفوتوغرافي",
+"sv.1.d": "جلسات تصوير نضبط إضاءتها وتنسيقها على ألوان علامتك، لا\u00a0صور جاهزة.",
+"sv.1.0": "الإخراج الفني",
+"sv.1.1": "تصوير المنتجات",
+"sv.1.2": "الأشخاص والأماكن",
+"sv.1.3": "تنقيح الصور",
+"sv.2.n": "كتابة المحتوى",
+"sv.2.d": "كلمات تُقرأ حتى آخرها، بالنبرة التي يحدّدها دليل علامتك.",
+"sv.2.0": "كتابة الإعلانات",
+"sv.2.1": "نصوص المنشورات",
+"sv.2.2": "محتوى المواقع",
+"sv.2.3": "نصوص الفيديو",
+"cr.t": "اللقطة نفسها على أربع شاشات.",
+"cr.0": "الموقع",
+"cr.1": "منشور",
+"cr.2": "إعلان عمودي",
+"cr.3": "ستوري وريلز",
+"wk.t": "صيد اليوم، وسباق بعد الغروب.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "التسويق الرقمي"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r3"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r3"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$;
+  // related work: a pair chosen for this page, set 7/5 (the heading, wk.t, names the two: the restaurant's catch, then the night run);
+  // if the admin's list no longer has one, this discipline's projects fill in, then the rest
+  const PAIR = ['bahr-kitchen', 'corniche-night-run'], SIZE = ['big', 'third'];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'content'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 2);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // with reduced motion the reel is a still strip the visitor scrolls: it becomes a labelled, focusable region
+  const reel = $('#reel'), mq = matchMedia('(prefers-reduced-motion: reduce)');
+  const still = () => {
+    if (!reel) return;
+    if (mq.matches) { reel.tabIndex = 0; reel.setAttribute('role', 'region'); reel.removeAttribute('aria-hidden'); }
+    else { reel.removeAttribute('tabindex'); reel.removeAttribute('role'); reel.setAttribute('aria-hidden', 'true'); }
+  };
+  still(); mq.addEventListener?.('change', still);
+})();
+</script>
+</body>
+</html>
