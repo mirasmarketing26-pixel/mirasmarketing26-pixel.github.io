@@ -1,0 +1,381 @@
+/* MIRAS shared components (r2): tokens, type, themes, buttons, cards and boards, every motif's container, the footer.
+   Loaded by every page BEFORE the page's own CSS (site.css on inner pages, the inline <style> on index.html).
+
+   ===================================================================================================================
+   SYSTEM RULES (keep these; later rounds must not bring the old patterns back)
+   Type   Instrument Serif 400 (roman; italic only for the film's riding words + tags, the wave titles incl. the About
+          marquee and storyboard step words, and the one <em> in the home hero j0.t) · Bricolage Grotesque 300–600 ·
+          Martian Mono 400 for real data only (live time, frame numbers, hex values, project slate, calendar weeks,
+          legal date / TOC / section numbers, crop ratios, the 404 code) · IBM Plex Sans Arabic 400/500/600, never 300.
+          No eyebrows (small uppercase labels above headlines). No numbering outside the legal TOC and legal h2s.
+          Headlines: one clause, ≤ 7 words. Leads: one sentence, ≤ 20 words. Word-by-word settle only on j0.t.
+   Layout 12 columns, gutter clamp(16px,2vw,28px), margin --m. Headers use Scale (headline ≥ 9 cols, lead in 7–12) or
+          Counterweight (headline 1–7, a real visual in 8–12). No dead right half, no equal 4-up or 2×2 card grids.
+          Every page has one grid break. border-radius ≤ 2px except the sun, Mira art, ripple ellipses, the Saffar
+          phone frame. Touch targets ≥ 44px. No horizontal page scroll.
+   Colour Tide #2B3BF0 · Deep #0D0F2E · Shore #F2EADB · Flare #FF5A23 · Foam #BFF0DD · Tide60 #8098FD. Flare shows in
+          the first two viewports of every page, beyond the nav button.
+   Motion One rAF loop (assets/motifs.js). Ambient motion only while visible, 24fps after 6s idle. UI transitions
+          250–600ms, cubic-bezier(.2,.7,.2,1). Hover = colour change, arrow moves 4px, inset photo expands, wave
+          underline draws. No hover lifts, no image zoom, no fade-up reveals. Reduced motion: composed stills.
+   Banned no backdrop blur, no grain overlay, no fixed blend layers, no sparkles/stars/emoji, no status dots with glow
+          rings, no blurred shadows on art or cards, no pill (fully rounded) radii on buttons, chips, tags, no CTA band,
+          no percentage readouts, no plain multi-line tide field more than once per page, no glassmorphism or
+          gradient meshes, no mention of how imagery was made.
+   =================================================================================================================== */
+
+/* metric-matched fallbacks: until the brand faces arrive, the local serif and sans take the same width and line box,
+   so display headlines wrap the same and nothing below them jumps (measured against "Briefs we set ourselves.":
+   Instrument Serif is 83.5% of Times New Roman's advance, Bricolage 93% of Arial's; overrides are in the adjusted em). Latin only: Arabic text keeps falling through to the system face, as before */
+@font-face{font-family:"Instrument Serif Fallback";src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Times"),local("Liberation Serif");size-adjust:83.5%;ascent-override:118.5%;descent-override:37%;line-gap-override:0%;unicode-range:U+0000-024F,U+02B0-02FF,U+1E00-1EFF,U+2010-205F,U+20A0-20CF,U+2100-214F,U+2190-21FF}
+@font-face{font-family:"Bricolage Fallback";src:local("Arial"),local("ArialMT"),local("Helvetica"),local("Liberation Sans");size-adjust:93%;ascent-override:100%;descent-override:29%;line-gap-override:0%;unicode-range:U+0000-024F,U+02B0-02FF,U+1E00-1EFF,U+2010-205F,U+20A0-20CF,U+2100-214F,U+2190-21FF}
+/* the 600 weight (the pills and the bold labels) gets a bold fallback sized to Bricolage 600: the regular face was about 16% narrower, so the pill jumped when the web font landed */
+@font-face{font-family:"Bricolage Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:600;size-adjust:103.3%;ascent-override:100%;descent-override:29%;line-gap-override:0%;unicode-range:U+0000-024F,U+02B0-02FF,U+1E00-1EFF,U+2010-205F,U+20A0-20CF,U+2100-214F,U+2190-21FF}
+/* the 500 weight (the Menu and the English labels in the header) gets its own fallback: without it they took the 400 face, about 13% narrower than Bricolage 500 ("Menu" 34.9px against 40.2px at 15px), so the header moved ~5px when the web font landed. Sized to Bricolage 500 against Arial 400 at 14px (measured in Chrome: 108%) */
+@font-face{font-family:"Bricolage Fallback";src:local("Arial"),local("ArialMT"),local("Helvetica"),local("Liberation Sans");font-weight:500;size-adjust:108%;ascent-override:100%;descent-override:29%;line-gap-override:0%;unicode-range:U+0000-024F,U+02B0-02FF,U+1E00-1EFF,U+2010-205F,U+20A0-20CF,U+2100-214F,U+2190-21FF}
+/* Arabic fallbacks sized to IBM Plex Sans Arabic (width, ascent, descent), so an Arabic line does not reflow when the web font lands.
+   Shared with index.html (which keeps its own copy): inner pages get them too, so the Arabic legal and inner text stays put on a cold load */
+@font-face{font-family:'Miras Ar Fb Geeza';src:local('Geeza Pro');font-weight:400;size-adjust:97.7%;ascent-override:111.6%;descent-override:42%;line-gap-override:0%}
+@font-face{font-family:'Miras Ar Fb Geeza';src:local('Geeza Pro Bold'),local('GeezaPro-Bold');font-weight:500 600;size-adjust:91%;ascent-override:123%;descent-override:46%;line-gap-override:0%}
+@font-face{font-family:'Miras Ar Fb Tahoma';src:local('Tahoma');font-weight:400;size-adjust:89.7%;ascent-override:132%;descent-override:49.7%;line-gap-override:0%}
+@font-face{font-family:'Miras Ar Fb Tahoma';src:local('Tahoma Bold'),local('Tahoma-Bold');font-weight:500 600;size-adjust:81.4%;ascent-override:142%;descent-override:53.5%;line-gap-override:0%}
+@font-face{font-family:'Miras Ar Fb Arial';src:local('Arial');font-weight:400;size-adjust:103.7%;ascent-override:105%;descent-override:39.5%;line-gap-override:0%}
+@font-face{font-family:'Miras Ar Fb Arial';src:local('Arial Bold'),local('Arial-BoldMT');font-weight:500 600;size-adjust:109%;ascent-override:100%;descent-override:37.6%;line-gap-override:0%}
+
+:root{
+  --tide:#2B3BF0; --deep:#0D0F2E; --shore:#F2EADB; --flare:#FF5A23; --foam:#BFF0DD; --tide60:#8098FD;
+  /* Flare as small text on Shore (4.84:1 on #F2EADB; Flare itself is 2.6:1): index numbers and other small orange type */
+  --flare-ink:#B2400F;
+  --serif:'Instrument Serif', 'Instrument Serif Fallback', Georgia, serif;
+  --sans:'Bricolage Grotesque', 'Bricolage Fallback', system-ui, sans-serif;
+  --mono:'Martian Mono', ui-monospace, monospace;
+  --ar:'IBM Plex Sans Arabic','Miras Ar Fb Geeza','Miras Ar Fb Tahoma','Miras Ar Fb Arial',system-ui,sans-serif;
+  --m:max(20px, calc(100vw / 13));
+  --gut:clamp(16px,2vw,28px);
+  --pad:clamp(96px,12vh,150px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wavemask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 300' preserveAspectRatio='none'%3E%3Cpath d='M0 100C8 92 17 92 25 100S42 108 50 100 67 92 75 100 92 108 100 100V300H0Z'/%3E%3C/svg%3E");
+  --curl:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 11.5c2.6 0 4-1.6 5-4.2S9 3.4 11.2 3.4c2.4 0 3.6 1.9 3 3.6-.5 1.4-2.2 1.8-3.1.7' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  /* type tokens: use as font: var(--fs-x); letter-spacing: var(--ls-x) — or the classes below */
+  --fs-giant:400 clamp(80px,14.5vw,250px)/.86 var(--serif);   --ls-giant:-.035em;
+  --fs-display:400 clamp(52px,8vw,140px)/.9 var(--serif);     --ls-display:-.025em;
+  --fs-head:400 clamp(36px,4.4vw,70px)/1 var(--serif);        --ls-head:-.015em;
+  --fs-sub:400 clamp(26px,2.3vw,38px)/1.1 var(--serif);       --ls-sub:-.01em;
+  --fs-lead:400 clamp(19px,1.5vw,23px)/1.45 var(--sans);
+  --fs-body:400 17px/1.6 var(--sans);
+  --fs-small:500 14px/1.45 var(--sans);
+  --fs-data:400 13px/1.5 var(--mono);                         --ls-data:.08em;
+}
+html[lang=ar]{
+  --fs-giant:600 clamp(58px,10vw,170px)/1.15 var(--ar);   --ls-giant:0;
+  --fs-display:600 clamp(42px,6.2vw,104px)/1.2 var(--ar); --ls-display:0;
+  --fs-head:600 clamp(30px,3.6vw,56px)/1.3 var(--ar);     --ls-head:0;
+  --fs-sub:600 clamp(21px,1.9vw,30px)/1.45 var(--ar);     --ls-sub:0;
+  --fs-lead:400 clamp(19px,1.6vw,24px)/1.75 var(--ar);
+  --fs-body:400 17px/1.85 var(--ar);
+  --fs-small:500 14px/1.6 var(--ar);
+  --fs-data:500 13px/1.5 'Martian Mono', 'IBM Plex Sans Arabic', sans-serif; --ls-data:0;
+}
+/* phones: the small data labels (project facts, 404 code, legal numbers) sit at the 13px floor in both languages; desktop keeps 11px / 12px */
+@media (max-width:759px){
+  :root{--fs-data:400 13px/1.5 var(--mono)}
+  html[lang=ar]{--fs-data:500 13px/1.5 'Martian Mono', 'IBM Plex Sans Arabic', sans-serif}
+}
+
+/* themes: --acc is Foam on Tide, Tide on Shore and Foam, Flare on Deep, Deep on Flare */
+.t-tide {--bg:var(--tide); --fg:var(--shore);--soft:color-mix(in srgb,var(--shore) 88%,transparent); --hair:color-mix(in srgb,var(--shore) 30%,transparent); --ring:var(--shore); --acc:var(--foam)}
+.t-shore{--bg:var(--shore);--fg:var(--deep); --soft:color-mix(in srgb,var(--deep) 72%,transparent);  --hair:color-mix(in srgb,var(--deep) 15%,transparent);  --ring:var(--tide);  --acc:var(--tide)}
+.t-deep {--bg:var(--deep); --fg:var(--shore);--soft:color-mix(in srgb,var(--shore) 74%,transparent); --hair:color-mix(in srgb,var(--shore) 16%,transparent); --ring:var(--foam);  --acc:var(--flare)}
+.t-foam {--bg:var(--foam); --fg:var(--deep); --soft:color-mix(in srgb,var(--deep) 74%,transparent);  --hair:color-mix(in srgb,var(--deep) 18%,transparent);  --ring:var(--tide);  --acc:var(--tide)}
+.t-flare{--bg:var(--flare);--fg:var(--deep); --soft:color-mix(in srgb,var(--deep) 80%,transparent);  --hair:color-mix(in srgb,var(--deep) 22%,transparent);  --ring:var(--deep);  --acc:var(--deep)}
+
+/* italic: only j0.t (index), the riding words and the wave titles. Arabic em is colour only. */
+em{font-style:italic}
+html[lang=ar] em{font-style:normal;font-weight:inherit}
+#planTitle em{font-style:normal;color:inherit}
+
+/* ---------- type ---------- */
+.giant{font:var(--fs-giant);letter-spacing:var(--ls-giant)}
+.display{font:var(--fs-display);letter-spacing:var(--ls-display);text-wrap:balance}
+.heading{font:var(--fs-head);letter-spacing:var(--ls-head);text-wrap:balance}
+.sub{font:var(--fs-sub);letter-spacing:var(--ls-sub)}
+.lead{font:var(--fs-lead);text-wrap:pretty}
+.body{font:var(--fs-body)}
+.small{font:var(--fs-small);letter-spacing:0;text-transform:none}
+.data{font:var(--fs-data);letter-spacing:var(--ls-data);text-transform:uppercase;font-variant-numeric:tabular-nums}
+.soft{color:var(--soft)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- grid ---------- */
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut)}
+
+/* ---------- buttons (.pill keeps its name; it is a 2px rectangle) and toggles (.chip) ---------- */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:2px;border:0;cursor:pointer;font:600 15px/1 var(--sans);letter-spacing:0;text-decoration:none;white-space:nowrap;transition:background-color .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
+.pill.flare{background:var(--flare);color:var(--deep)}
+.pill.flare:hover{background:var(--deep);color:var(--flare)}
+.t-deep .pill.flare:hover,.foot .pill.flare:hover{background:var(--shore);color:var(--deep)}
+.pill.tide{background:var(--tide);color:var(--shore)}
+.pill.tide:hover{background:var(--deep)}
+.pill.deep{background:var(--deep);color:var(--shore)}
+.pill.deep:hover{background:var(--tide)}
+.pill.ghost{background:transparent;color:var(--fg,currentColor);box-shadow:inset 0 0 0 1.5px currentColor}
+.pill.ghost:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:2px;border:1.5px solid var(--hair,color-mix(in srgb,currentColor 30%,transparent));background:transparent;color:inherit;cursor:pointer;font:500 15px/1.2 var(--sans);text-align:start;transition:background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.chip:hover{border-color:currentColor}
+.chip[aria-pressed=true]{background:var(--fg,currentColor);color:var(--bg,var(--shore));border-color:var(--fg,currentColor)}
+html[lang=ar] .pill,html[lang=ar] .chip{font-family:var(--ar)}
+@media (pointer:coarse){.chip{min-height:44px}}
+
+/* ---------- small utilities ---------- */
+.skip-link{position:fixed;top:12px;inset-inline-start:12px;z-index:200;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:2px;background:var(--flare);color:var(--deep);font:600 15px/1 var(--sans);text-decoration:none;transform:translateY(-200%)}
+/* focused, it drops below the fixed header (about 64px) so it never covers the wordmark */
+.skip-link:focus,.skip-link:focus-visible{top:84px;transform:none;outline:2px solid var(--deep);outline-offset:2px}
+html[lang=ar] .skip-link{font-family:var(--ar)}
+/* the sun is the only circle: a half-disc replaces status dots */
+.sunmark{display:inline-block;flex:none;width:16px;height:8px;border-radius:16px 16px 0 0;background:var(--flare);vertical-align:middle}
+.sunmark.off{background:transparent;box-shadow:inset 0 0 0 1.5px var(--tide60)}
+/* every item carries a leading slash; the list is pulled back by one slash-width and that strip is clipped, so the
+   slash at the start of each line (the first item's, and any wrap's) is hidden: no line starts or ends on a slash */
+.slash{list-style:none;display:flex;flex-wrap:wrap;margin:0;margin-inline-start:-1.6em;padding:0;font:500 17px/1.6 var(--sans);clip-path:inset(-.6em -.6em -.6em 1.6em)}
+html[dir=rtl] .slash{clip-path:inset(-.6em 1.6em -.6em -.6em)}
+.slash li::before{content:"/";display:inline-block;width:1.6em;text-align:center;color:var(--flare)}
+html[lang=ar] .slash{font-family:var(--ar)}
+.dash{list-style:none;padding:0}
+.dash li{position:relative;padding-inline-start:24px}
+.dash li::before{content:"";position:absolute;inset-inline-start:0;top:.78em;width:10px;height:1.5px;background:var(--flare)}
+/* a coloured section that follows another colour washes in over it */
+.edge-top{position:relative}
+.edge-top::before{content:"";position:absolute;inset-inline:0;bottom:calc(100% - 1px);height:64px;background:var(--bg);-webkit-mask:var(--wavemask) center/100% 100% no-repeat;mask:var(--wavemask) center/100% 100% no-repeat;pointer-events:none}
+/* ripples under Mira art: <svg class="ripple" viewBox="0 0 220 32" aria-hidden="true"></svg> (motifs.js fills the ellipses) */
+.ripple{display:block;width:220px;height:32px;overflow:visible;color:var(--tide60)}
+.ripple ellipse{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.7;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center}
+.ripple.in ellipse{animation:m-ripple 1.4s var(--ease) both}
+.ripple.in ellipse:nth-child(2){animation-delay:.12s}.ripple.in ellipse:nth-child(3){animation-delay:.24s}
+@keyframes m-ripple{from{transform:scale(.6);opacity:0}to{transform:none;opacity:.7}}
+/* the wave underline: a Flare wave that draws under a title on hover */
+.wave-underline,.card .meta h3{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 6' preserveAspectRatio='none'%3E%3Cpath d='M0 3C5 0 10 0 15 3S25 6 30 3 40 0 45 3 55 6 60 3 70 0 75 3 85 6 90 3 100 0 105 3 115 6 120 3' fill='none' stroke='%23FF5A23' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") 0 100%/0% 6px no-repeat;padding-bottom:8px;transition:background-size .5s var(--ease)}
+html[dir=rtl] .wave-underline,html[dir=rtl] .card .meta h3{background-position:100% 100%}
+a:hover .wave-underline,a.wave-underline:hover,a:focus-visible .wave-underline,a.wave-underline:focus-visible,.card:hover .meta h3,.card:focus-visible .meta h3{background-size:100% 6px}
+.arrow{display:inline-block;transition:transform .35s var(--ease)}
+a:hover .arrow,a:focus-visible .arrow{transform:translateX(4px)}
+html[dir=rtl] .arrow{transform:scaleX(-1)}
+html[dir=rtl] a:hover .arrow,html[dir=rtl] a:focus-visible .arrow{transform:scaleX(-1) translateX(4px)}
+
+/* ---------- cards and concept boards (the key-art SVG comes from work.js) ---------- */
+.cards{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--gut)}
+.card{--ratio:4/3;grid-column:span 6;display:block;text-decoration:none;color:inherit}
+.card.wide{--ratio:21/9;grid-column:span 12}
+.card.big{--ratio:5/4;grid-column:span 7}
+.card.small{--ratio:16/10;grid-column:span 5}
+.card.third{--ratio:4/5;grid-column:span 4}
+.board{position:relative;margin:0;overflow:hidden;border-radius:0;aspect-ratio:var(--ratio,4/3);background:color-mix(in srgb,var(--fg,var(--deep)) 8%,transparent)}
+.board > svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.board .inset{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;border-radius:0;clip-path:inset(46% 5% 5% 52%);transition:clip-path .5s var(--ease)}
+.board::after{content:"";position:absolute;top:46%;right:5%;bottom:5%;left:52%;box-shadow:inset 0 0 0 6px var(--shore);pointer-events:none;transition:opacity .25s var(--ease)}
+.board:not(:has(.inset))::after{display:none}
+html[dir=rtl] .board .inset{clip-path:inset(46% 52% 5% 5%)}
+html[dir=rtl] .board::after{left:5%;right:52%}
+.board.is-open .inset{clip-path:inset(0)}
+.board.is-open::after{opacity:0}
+@media (hover:hover) and (pointer:fine){
+  .card:hover .board .inset,.card:focus-visible .board .inset{clip-path:inset(0)}
+  .card:hover .board::after,.card:focus-visible .board::after{opacity:0}
+}
+.board .badge,.badge{display:inline-flex;align-items:center;border-radius:2px;padding:6px 9px;background:var(--shore);color:var(--deep);font:600 13px/1 var(--sans);letter-spacing:0;text-transform:none}
+.board .badge{position:absolute;z-index:2;top:12px;inset-inline-start:12px}
+html[lang=ar] .badge{font:600 13px/1.1 var(--ar)}
+.card .meta{display:flex;justify-content:space-between;gap:16px;align-items:baseline;margin-top:16px}
+.card .meta h3{font:var(--fs-sub);letter-spacing:var(--ls-sub)}
+.card .tags{color:var(--soft);font:var(--fs-small);text-align:end}
+.card .line{margin-top:6px;color:var(--soft);max-width:46ch;font:var(--fs-body)}
+@media (max-width:820px){.card,.card.wide,.card.big,.card.small,.card.third{--ratio:4/3;grid-column:span 12}}
+
+/* ---------- motifs ---------- */
+canvas.motif{display:block;width:100%;height:100%}
+.motif canvas{display:block}
+
+/* wavetext: a word riding a live wave; the curl replaces the full stop */
+svg.wave-title{display:block;width:100%;height:clamp(120px,24vw,380px);overflow:visible}
+.wave-title text{font:italic 400 clamp(64px,19vw,300px) var(--serif);letter-spacing:-.02em;fill:currentColor;direction:ltr;white-space:pre}
+.wave-title[data-script=ar] text{font:600 clamp(48px,13vw,210px) var(--ar);font-style:normal;letter-spacing:0}
+.wave-title .echo{fill:none;stroke:var(--acc,currentColor);stroke-width:1.2;opacity:.6}
+/* one offset layer only: a title with a paint-order halo (motifs.js adds .has-halo) drops the echo */
+.wave-title.has-halo .echo,.has-halo .wave-title .echo{opacity:0}
+@media (max-width:759px){.wave-title .echo{opacity:.35;stroke-width:1}
+  /* a page's hero word is sized to its column on a phone (motifs.js WaveText.fit); its box grows to carry it */
+  :where(.hero) > svg.wave-title:not(.is-marquee){height:clamp(130px,36vw,170px)}}
+/* the end mark (MOTIFS.endMark): an open wave crest in Flare (Deep on Flare), seated at mid x-height, shown whole
+   (a half-drawn crest beside the last letter reads as a stray character) */
+use.end{color:var(--flare);overflow:visible}
+.wave-title[data-script=ar] use.end{opacity:.8}
+.t-flare use.end{color:var(--deep)}
+svg.wave-title.is-marquee{height:clamp(110px,13vw,190px)}
+.wave-title.is-marquee text{font:italic 400 clamp(44px,6vw,92px) var(--serif);letter-spacing:-.01em}
+.wave-title.is-marquee tspan[lang=ar]{font-family:var(--ar);font-style:normal;font-weight:600;font-size:.8em;letter-spacing:0}
+.wave-title.is-marquee .sep{fill:var(--flare);font-style:normal}
+
+/* reel: a contact sheet of film frames */
+.reel{--fh:clamp(120px,18vw,260px);position:relative;display:block;width:120vw;margin-inline:calc(50% - 60vw);padding:30px 0;background:var(--deep);color:var(--shore);transform:rotate(-3deg);overflow:hidden;direction:ltr}
+.reel::before,.reel::after{content:"";position:absolute;inset-inline:0;height:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='10'%3E%3Crect x='8' y='0' width='14' height='10' rx='2' fill='%23F2EADB'/%3E%3C/svg%3E") 0 0/30px 10px repeat-x;opacity:.92;pointer-events:none}
+.reel::before{top:10px}.reel::after{bottom:4px}
+.reel{padding-top:30px}
+.reel-track{display:flex;gap:10px;width:max-content;will-change:transform;padding-top:10px}
+.reel-f{position:relative;flex:none;height:var(--fh);aspect-ratio:16/9;margin:0;background:#000}
+.reel-f img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;border-radius:0}
+.reel-f figcaption{position:absolute;inset-inline-start:2px;top:100%;margin-top:2px;color:color-mix(in srgb,var(--shore) 70%,transparent)}
+.reel-mark{position:absolute;overflow:visible;fill:none;stroke:var(--flare);stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.reel-mark path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s var(--ease)}
+.reel-mark.on path{stroke-dashoffset:0}
+.reel.mini{--fh:84px;width:100%;max-width:100%;min-width:0;contain:inline-size;margin-inline:0;transform:none;padding:20px 0 22px}
+.reel.mini::before{top:5px}.reel.mini::after{bottom:5px}
+.reel.mini .reel-track{padding-top:0}
+.reel.mini figcaption{display:none}
+.reel.is-still:not(.mini){transform:none;width:auto;margin-inline:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.reel.is-still .reel-f{scroll-snap-align:start}
+html[dir=rtl] .reel:not(.mini){transform:rotate(3deg)}
+@media (max-width:759px){.reel:not(.mini){transform:rotate(-2deg)}html[dir=rtl] .reel:not(.mini){transform:rotate(2deg)}}
+
+/* typetide: the tagline sinking into water lines (the home poster band) */
+.typetide{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(48px,6vw,96px);padding-block:clamp(30px,5vw,70px) clamp(60px,8vw,120px);overflow:hidden;color:var(--deep);direction:ltr}
+.tt-line{position:relative;z-index:0;width:max-content;margin:0;white-space:nowrap;will-change:transform}
+.tt-en{font:400 14.5vw/.9 var(--serif);letter-spacing:-.03em}
+.tt-ar{font:600 12vw/1.15 var(--ar);letter-spacing:0}
+html[lang=ar] .tt-ar{order:-1}
+.tt-cv{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}
+
+/* storyboard: four posterised film frames stepping down, the step words riding one wave */
+.storyboard{position:relative}
+.sb-list{list-style:none;margin:0;padding:64px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gut)}
+.sb-list > li:nth-child(2){margin-top:32px}.sb-list > li:nth-child(3){margin-top:64px}.sb-list > li:nth-child(4){margin-top:96px}
+.sb-list figure{margin:0;aspect-ratio:16/9;overflow:hidden;border:6px solid var(--deep);background:var(--deep)}
+.sb-list img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;filter:url(#m-poster)}
+.sb-d{margin-top:18px;padding-top:14px;border-top:1px solid var(--hair);font:var(--fs-body);max-width:34ch;text-wrap:pretty}
+.sb-wave{position:absolute;left:0;top:0;z-index:1;pointer-events:none;overflow:visible}
+.sb-wave text{font:italic 400 44px var(--serif);fill:var(--tide)}
+/* the words ride on the paper above each frame (motifs.js keeps the wave clear of the borders), so no halo */
+.sb-wave text[data-ar]{font:600 38px var(--ar);font-style:normal}
+@media (max-width:759px){
+  .storyboard{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;margin-inline:calc(-1 * var(--m));padding-inline:var(--m);scroll-padding-inline:var(--m)}
+  .sb-list{display:flex;width:max-content;gap:16px;padding-top:56px}
+  .sb-list > li{width:78vw;margin-top:0!important;scroll-snap-align:start}
+}
+
+/* brief: the poster that calms as the brief fills */
+.motif-brief{position:relative;margin:0;width:100%;max-width:380px;aspect-ratio:3/4;overflow:hidden;border-radius:0;color:var(--deep);background:linear-gradient(to bottom,var(--shore) 86%,color-mix(in srgb,var(--shore) 86%,var(--flare)) 86%)}
+.motif-brief > canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* the poster's title: the visitor's name, or "Your brief" until there is one (a title, not a faded placeholder) */
+.brief-name{position:absolute;z-index:1;top:18px;inset-inline:20px;margin:0;font:400 44px/1 var(--serif);letter-spacing:-.015em;color:var(--deep);overflow-wrap:anywhere;transition:opacity .3s var(--ease)}
+.brief-name.ar{font:600 32px/1.3 var(--ar);letter-spacing:0}
+@media (max-width:420px){.brief-name{font-size:38px}.brief-name.ar{font-size:28px}}
+.brief-mira{position:absolute;z-index:1;bottom:5%;left:20%;height:32%;width:auto;max-width:none;transform:translate(-50%,8px);opacity:0;transition:opacity .4s var(--ease),transform .4s var(--ease)}
+html[dir=rtl] .brief-mira{left:80%}
+.motif-brief.is-sent .brief-mira{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- footer: the giant ask, MIRA + Mira, the row ---------- */
+.foot{position:relative;overflow:hidden;background:var(--bg,var(--deep));color:var(--fg,var(--shore));padding:clamp(80px,11vh,130px) var(--m) 30px}
+/* the page-end ask on the 12 columns: the line in cols 1–6, the address as type across the full width, the reply and
+   the button closing the right-hand side under it */
+.foot-ask{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,24px);row-gap:clamp(14px,1.6vw,22px);align-items:end;margin-bottom:clamp(70px,9vw,120px)}
+.foot-ask > *{grid-column:1 / -1;min-width:0}
+.foot-ask-l,.foot-ask-r{font:var(--fs-lead);color:var(--soft);margin:0}
+.foot-ask-l{grid-row:1;grid-column:1 / span 6}
+.foot-ask > .foot-mail{grid-row:2;justify-self:start}
+.foot-ask-r{grid-row:3;grid-column:7 / -1;justify-self:end;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:14px 24px;text-align:end}
+@media (max-width:760px){.foot-mail{font-size:clamp(40px,13.5vw,64px)}.foot-ask-l{grid-column:1 / -1}.foot-ask-r{grid-column:1 / -1;justify-self:start;justify-content:flex-start;text-align:start}}
+.foot-mail{font:400 clamp(44px,9.5vw,170px)/1 var(--serif);letter-spacing:-.02em;color:var(--fg,var(--shore));text-decoration:none;max-width:100%;overflow-wrap:anywhere;direction:ltr;unicode-bidi:isolate}
+.foot-mail{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 6' preserveAspectRatio='none'%3E%3Cpath d='M0 3C5 0 10 0 15 3S25 6 30 3 40 0 45 3 55 6 60 3 70 0 75 3 85 6 90 3 100 0 105 3 115 6 120 3' fill='none' stroke='%23FF5A23' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");background-position:0 100%;background-size:0% 8px;background-repeat:no-repeat;padding-bottom:12px;transition:background-size .5s var(--ease)}
+.foot-mail:hover,.foot-mail:focus-visible{background-size:100% 8px}
+.foot-art{position:relative;container-type:inline-size}
+.foot-word{position:relative;width:100%;aspect-ratio:3000/901;margin-inline:0;color:var(--shore)}
+.mw{position:absolute;inset:0;background:currentColor;-webkit-mask:url(wordmark.png?v=r3) center/100% 100% no-repeat;mask:url(wordmark.png?v=r3) center/100% 100% no-repeat;will-change:transform,opacity}
+.mw-keep{clip-path:inset(0 20.12% 0 0)}
+.mw-drop{clip-path:inset(0 0 0 79.88%);transform-origin:90% 70%}
+.foot-mira{position:absolute;left:82%;bottom:-3%;height:86%!important;width:auto!important;max-width:none;opacity:0;transform-origin:50% 100%}
+html[dir=rtl] .foot-word{aspect-ratio:2400/1001;width:min(80%,900px);margin-inline:0 auto}
+html[dir=rtl] .mw{-webkit-mask-image:url(arabic.png?v=r3);mask-image:url(arabic.png?v=r3)}
+/* the Arabic word is two masks, not two clips: the wave-teeth س (the left of the word) is its own mask and the rest (ميرا) the other, cut along the letters'
+   own seams. A plain vertical clip could not do it: the tail of the ر loop runs under the end of the س, so any straight cut either left a stem of it
+   standing beside the loop (reading as an extra ر) or sliced the loop */
+html[dir=rtl] .mw-keep{clip-path:none;-webkit-mask-image:url(arabic-keep.png?v=r4);mask-image:url(arabic-keep.png?v=r4)}
+html[dir=rtl] .mw-drop{clip-path:none;-webkit-mask-image:url(arabic-drop.png?v=r4);mask-image:url(arabic-drop.png?v=r4);transform-origin:18% 70%}
+/* a phone shows the footer word at about 360 CSS px (1,000 device px at 3x): the 1200px masks cover that, and the 3000px / 2400px files stay for wider screens */
+@media (max-width:600px){
+  .mw{-webkit-mask:url(wordmark-sm.png) center/100% 100% no-repeat;mask:url(wordmark-sm.png) center/100% 100% no-repeat}
+  html[dir=rtl] .mw-keep{-webkit-mask-image:url(arabic-keep-sm.png);mask-image:url(arabic-keep-sm.png)}
+  html[dir=rtl] .mw-drop{-webkit-mask-image:url(arabic-drop-sm.png);mask-image:url(arabic-drop-sm.png)}
+}
+/* the Arabic word is capped at 900px, so its height would shrink the figure: size the figure from the footer's width like the EN one (86% of a 3000:901 box) */
+html[dir=rtl] .foot-mira{left:auto;right:82%;height:25.83cqw!important}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px 32px;margin-top:clamp(50px,7vw,90px);padding-top:22px;border-top:1px solid var(--hair,color-mix(in srgb,var(--shore) 16%,transparent));color:var(--soft,color-mix(in srgb,var(--shore) 74%,transparent))}
+.foot-row > *{margin:0}
+.foot-tag{font:400 22px/1.3 var(--serif);color:var(--fg,var(--shore))}
+.foot-tag .arx{display:inline-block;font:400 20px/1.5 var(--ar);margin-inline-start:.5em;letter-spacing:0;text-transform:none}
+.foot-tag [lang=en]{direction:ltr;unicode-bidi:isolate}.foot-tag [lang=ar]{unicode-bidi:isolate}
+/* a Flare tilde between the two lines: after the English on an English page, after the Arabic on an Arabic one */
+.foot-tag [lang=en]::after,html[dir=rtl] .foot-tag .arx::after{content:"~";display:inline-block;margin-inline-start:.5em;color:var(--flare);font-family:var(--serif);font-style:normal}
+html[dir=rtl] .foot-tag [lang=en]::after{content:none}
+/* an Arabic page reads its own line first: the two spans swap on screen only (the CMS markup stays EN, then AR) */
+html[dir=rtl] .foot-tag{display:flex;flex-wrap:wrap;flex-direction:row-reverse;justify-content:flex-end;align-items:baseline;column-gap:.5em}
+html[dir=rtl] .foot-tag .arx{margin:0}
+.foot-row nav{display:flex;flex-wrap:wrap;gap:4px 22px;font:500 16px/1.5 var(--sans)}
+.foot-row a{text-decoration:none;color:inherit;transition:color .25s var(--ease)}
+.foot-row a:hover,.foot-row a:focus-visible{color:var(--fg,var(--shore))}
+.foot-legal a[aria-current=page]{color:var(--fg,var(--shore));text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.35em}
+.foot-row > p:last-child,.foot-copy{font:var(--fs-small)}
+html[lang=ar] .foot-row nav{font-family:var(--ar)}
+@media (pointer:coarse){.foot-row nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}}
+@media (max-width:760px){
+  .foot-row{flex-direction:column;align-items:flex-start;gap:10px}
+  .foot-tag .arx{display:block;margin:6px 0 0}
+  /* stacked, the Arabic line keeps the page's edge (an English page sets both lines flush left) */
+  html:not([dir=rtl]) .foot-tag .arx{text-align:left}
+  .foot-tag [lang=en]::after,html[dir=rtl] .foot-tag .arx::after{content:none}
+  /* stacked on an Arabic page: the Arabic line on top, the English under it, both on the right edge */
+  html[dir=rtl] .foot-tag{flex-direction:column-reverse;align-items:flex-start;row-gap:6px}
+}
+
+/* wide screens: the row is a two-by-two grid. The tagline and the site links make the top line; the copyright sits under the
+   tagline and the legal links under the site links, so the copyright never stands alone and wraps as a pair */
+@media (min-width:761px){
+  .foot-row{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"tag nav" "copy legal";align-items:baseline;column-gap:32px;row-gap:14px}
+  .foot-row > .foot-tag{grid-area:tag}
+  .foot-row > nav:not(.foot-legal){grid-area:nav;justify-self:end}
+  .foot-row > .foot-legal{grid-area:legal;justify-self:end}
+  .foot-row > p:last-child{grid-area:copy;justify-self:start}
+}
+
+/* when the band above the footer is also Deep, the seam is one Tide60 tide line, not a flat rule */
+main:has(> .next.t-deep:last-child) + .foot{box-shadow:none}
+main:has(> .next.t-deep:last-child) + .foot::before{content:"";position:absolute;inset-inline:0;top:0;height:14px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 14' preserveAspectRatio='none'%3E%3Cpath d='M0 7C20 1 40 1 60 7S100 13 120 7 160 1 180 7 220 13 240 7' fill='none' stroke='%238098FD' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") 0 0/max(960px,100%) 100% repeat-x;opacity:.7}
+
+/* ---------- reduced motion: composed stills ---------- */
+/* between pages: the next page washes up over the last one behind a swell edge (the section edges' wave), while the
+   nav holds still. Browsers without cross-document view transitions, and reduced motion, keep a plain cut.
+   Chrome reads the opt-in when the parser reaches <body>, which can be before this file applies, so every page also
+   carries it inline as the first thing after <meta name="viewport"> (motifs-api.md, "Page head"); this is the backup. */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  #nav{view-transition-name:nav}
+  /* the nav snaps to the new page (its current-page underline moves at once) instead of cross-fading two underlines */
+  ::view-transition-old(nav){display:none}
+  ::view-transition-new(nav){animation:none}
+  ::view-transition-old(root){animation:none;mix-blend-mode:normal}
+  ::view-transition-new(root){mix-blend-mode:normal;animation:mwash .5s var(--ease) both;
+    -webkit-mask:var(--wavemask) 0 0/100% 300% no-repeat;mask:var(--wavemask) 0 0/100% 300% no-repeat}
+  @keyframes mwash{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 56%;mask-position:0 56%}}
+}
+@media (prefers-reduced-motion:reduce){
+  .pill,.chip,.arrow,.board .inset,.board::after,.wave-underline,.card .meta h3,.foot-mail,.brief-name,.brief-mira{transition:none}
+  .reel-mark path{transition:none}
+  .ripple.in ellipse{animation:none}
+  .reel:not(.mini),html[dir=rtl] .reel:not(.mini){transform:none}
+  /* the frame numbers sit clear of the sprocket row; in Arabic the strip starts at the right */
+  .reel.is-still:not(.mini){padding-bottom:46px}
+  html[dir=rtl] .reel.is-still:not(.mini){direction:rtl}
+  .tt-line{align-self:center;transform:none!important;text-overflow:clip}
+}
+/* the still lines wrap inside the column at every width: a phrase set on one line runs off both edges (at 1440 the Arabic
+   line was 1469px in a 1440px band), while the moving version carries each line whole. Only the still is wrapped */
+@media (prefers-reduced-motion:reduce){
+  .typetide .tt-line{white-space:normal;width:auto;align-self:stretch;padding-inline:var(--gut);text-wrap:balance}
+}
