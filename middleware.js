@@ -4,7 +4,7 @@
 export const config = { matcher: ['/admin', '/admin/:path*'] };
 
 const USER = 'miras';
-const HASH = '78b779c018b3840df0974532122721442b27129cb37eb1c0acc40d8517a18ce5';
+const HASH = '027ec8aabc2203ef9db12c77c423e807cf47605c118fec8504d03b4163c2cb4d';
 
 const same = (a, b) => {
   if (a.length !== b.length) return false;
