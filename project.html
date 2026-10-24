@@ -182,18 +182,23 @@ html[lang=ar] .pr-q{line-height:1.45}
 }
 
 .mocks{padding:clamp(40px,6vh,80px) var(--m) var(--pad)}
-.mk-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--gut);align-items:start}
-.mk-grid > h2{grid-column:1 / span 5;margin:0}
+.mk-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto 1fr;gap:clamp(28px,3vw,44px) var(--gut);align-items:start}
+.mk-grid > h2{grid-column:1 / span 5;grid-row:1;margin:0}
 #pGallery{display:contents}
-.mk{position:relative;margin:0;grid-column:6 / -1}
-.mk:nth-child(even){grid-column:1 / span 5}
-.mk:first-child{grid-row:span 2}
+/* the mock-ups run in two columns, each picture into the shorter one (see the script), so a tall picture never leaves a hole
+   beside it: the narrow column sits under the heading, the wide one stands from the top. On a phone the columns dissolve and
+   --i puts the pictures back in their own order */
+.mk-col{display:flex;flex-direction:column;gap:clamp(28px,3vw,44px);min-width:0}
+.mk-col.main{grid-column:6 / -1;grid-row:1 / span 2}
+.mk-col.side{grid-column:1 / span 5;grid-row:2}
+.mk{position:relative;margin:0}
 /* one mock-up: the heading stands on the photo's foot line, a counterweight across from it, not a label left at its top */
+.mk-grid.one{grid-template-rows:none}
 .mk-grid.one > h2{align-self:end}
-.mk-grid.one .mk{grid-row:1}
+.mk-grid.one .mk-col.main{grid-row:1}
 .mk img{display:block;width:100%;height:auto;border-radius:0}
 .mk .badge{position:absolute;top:12px;inset-inline-start:12px}
-@media (max-width:820px){.mk-grid > h2,.mk,.mk:nth-child(even){grid-column:1 / -1}.mk:first-child,.mk-grid.one .mk{grid-row:auto}}
+@media (max-width:820px){.mk-grid,.mk-grid.one{grid-template-rows:none}.mk-grid > h2{grid-column:1 / -1}.mk-col{display:contents}.mk{grid-column:1 / -1;order:var(--i,0)}}
 
 /* the next project, on Deep (§2.3): the label, its name and the Flare arrow in cols 1–7 on the foot line of its board in
    cols 8–12 (the board as a card has it: the photo inset and the Concept badge, the photo opening on hover). The band's wave
@@ -552,10 +557,15 @@ html[lang=ar] .pr-q{line-height:1.45}
     const one = M.text('p.mock1'), mk = $('#mkT'), single = (P.images || []).length === 1, mkKey = single ? 'p.mock1' : 'p.mock';
     if (mk.dataset.i18n !== mkKey) { mk.dataset.i18n = mkKey; mk.textContent = M.text(mkKey); }
     mk.parentElement.classList.toggle('one', single);
-    $('#pGallery').innerHTML = (P.images || []).map((v, i) => {
+    // each picture goes to the shorter column (heights in grid columns: the narrow one is 5 wide and starts under the heading,
+    // the wide one 7); a tie goes to the wide one, which holds the first picture
+    const cols = [[], []], colH = [2, 0], colW = [5, 7];
+    (P.images || []).forEach((v, i) => {
       const id = MW.upId(v), pic = MW.photo(MW.src(v, P.slug, i)), own = !id && pic.srcset && MW.photo(v).srcset;
-      return `<figure class="mk"><img src="${esc(pic.src)}"${own ? ` srcset="${esc(pic.srcset)}" sizes="(max-width:820px) 100vw, 50vw"` : ''} width="${pic.w}" height="${pic.h}"${id ? ` data-up="${id}"` : ''} alt="${esc(`${x.name} · ${one}`)}" loading="lazy" decoding="async" data-cms="${at('images.' + i)}">${single ? '' : `<span class="badge" data-cms="text.p.mock1">${esc(one)}</span>`}</figure>`;
-    }).join('');
+      const c = colH[0] < colH[1] ? 0 : 1; colH[c] += colW[c] * pic.h / pic.w;
+      cols[c].push(`<figure class="mk" style="--i:${i + 1}"><img src="${esc(pic.src)}"${own ? ` srcset="${esc(pic.srcset)}" sizes="(max-width:820px) 100vw, ${c ? 50 : 38}vw"` : ''} width="${pic.w}" height="${pic.h}"${id ? ` data-up="${id}"` : ''} alt="${esc(`${x.name} · ${one}`)}" loading="lazy" decoding="async" data-cms="${at('images.' + i)}">${single ? '' : `<span class="badge" data-cms="text.p.mock1">${esc(one)}</span>`}</figure>`);
+    });
+    $('#pGallery').innerHTML = [['side', 0], ['main', 1]].filter(([, c]) => cols[c].length).map(([k, c]) => `<div class="mk-col ${k}">${cols[c].join('')}</div>`).join('');
     $('#pMocks').hidden = !(P.images || []).length;
 
     // the next project: its board beside its name (without the lockup, the name is right there), with its photo and the
