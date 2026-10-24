@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIRAS · Studio admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4F0E7">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Web fonts never block the first paint or the scripts: the stylesheet loads as "print", then switches to "all".
+     Vazirmatn (Persian UI only) is added by the script below, or by core.js when Persian is chosen. -->
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Martian+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="modules/overview.css">
+<link rel="stylesheet" href="modules/inbox.css">
+<link rel="stylesheet" href="modules/analytics.css">
+<link rel="stylesheet" href="modules/pages.css">
+<link rel="stylesheet" href="modules/services.css">
+<link rel="stylesheet" href="modules/process.css">
+<link rel="stylesheet" href="modules/faq.css">
+<link rel="stylesheet" href="modules/media.css">
+<link rel="stylesheet" href="modules/brand.css">
+<link rel="stylesheet" href="modules/seo.css">
+<link rel="stylesheet" href="modules/settings.css">
+<link rel="stylesheet" href="modules/team.css">
+<link rel="stylesheet" href="modules/history.css">
+<link rel="stylesheet" href="modules/clients.css">
+<link rel="stylesheet" href="modules/clients-project.css">
+<script>
+  /* apply saved appearance before first paint (no flash of the wrong theme) */
+  try { const p = JSON.parse(localStorage.getItem('miras.admin.prefs') || '{}'), d = document.documentElement;
+    const dark = p.theme === 'dark' || ((p.theme || 'system') === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+    d.dataset.theme = dark ? 'dark' : 'light'; d.dataset.accent = p.accent || 'tide'; d.dataset.density = p.density || 'comfortable'; d.dataset.scale = p.scale || 'm';
+    d.dataset.corners = p.corners || 'soft'; d.dataset.sidebar = p.sidebar || 'expanded'; if (p.lang === 'ar' || p.lang === 'fa') { d.lang = p.lang; d.dir = 'rtl'; }
+    if (dark) document.querySelector('meta[name=theme-color]').content = '#0C0F2C';
+    if (p.lang === 'fa') { const l = document.createElement('link'); l.id = 'font-fa'; l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300..700&display=swap'; l.media = 'print'; l.onload = () => { l.media = 'all'; }; document.head.append(l); }
+  } catch (e) {}
+  /* every script below is deferred: they run in order (core → data → modules) once the page is parsed, then the admin boots */
+  document.addEventListener('DOMContentLoaded', () => window.MA && MA.boot());
+</script>
+<script defer src="core.js"></script>
+<script defer src="data.js"></script>
+<script defer src="../portal/api.js"></script>
+<script defer src="modules/overview.js"></script>
+<script defer src="modules/inbox.js"></script>
+<script defer src="modules/analytics.js"></script>
+<script defer src="modules/pages.js"></script>
+<script defer src="modules/services.js"></script>
+<script defer src="modules/process.js"></script>
+<script defer src="modules/faq.js"></script>
+<script defer src="modules/media.js"></script>
+<script defer src="modules/brand.js"></script>
+<script defer src="modules/seo.js"></script>
+<script defer src="modules/settings.js"></script>
+<script defer src="modules/team.js"></script>
+<script defer src="modules/history.js"></script>
+<script defer src="../portal/templates.js"></script>
+<script defer src="modules/clients.js"></script>
+<script defer src="modules/clients-project.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<noscript><p style="padding:40px;font:16px system-ui">The MIRAS admin needs JavaScript.</p></noscript>
+</body>
+</html>
