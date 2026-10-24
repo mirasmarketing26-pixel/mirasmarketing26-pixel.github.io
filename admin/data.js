@@ -55,10 +55,12 @@
     }
     return changed;
   };
+  /** The demo teammates are only stored while sample data is on (Customize › Sample data); turning it on adds them back. */
+  const ensureTeamSamples = () => { if (MA.prefs.get('sampleData') && !MA.team.raw().some(m => m.sample)) MA.db.set('team', MA.team.raw().concat(MA.clone(TEAM_SEED.filter(m => m.sample)))); };
   MA.team = {
     /** Stored records (the unnamed owner has name ''). */
-    raw() { let list = MA.db.get('team', null); if (!Array.isArray(list)) { list = MA.clone(TEAM_SEED); MA.db.set('team', list); } else if (migrateTeam(list)) MA.db.set('team', list); return list; },
-    all: () => MA.team.raw().filter(m => !m.sample || MA.prefs.get('sampleData')).map(view),
+    raw() { let list = MA.db.get('team', null); if (!Array.isArray(list)) { list = MA.clone(TEAM_SEED.filter(m => !m.sample || MA.prefs.get('sampleData'))); MA.db.set('team', list); } else if (migrateTeam(list)) MA.db.set('team', list); return list; },
+    all: () => { ensureTeamSamples(); return MA.team.raw().filter(m => !m.sample || MA.prefs.get('sampleData')).map(view); },
     get: id => view(MA.team.raw().find(m => m.id === id)),
     /** The current person as stored: name is '' until the owner names themselves (so emails sign as the studio). Show it with display(). */
     me: () => { const all = MA.team.raw(), m = all.find(x => x.id === MA.prefs.get('me')) || all.find(x => x.role === 'owner') || all[0]; return m && m.titleKey && !m.title ? { ...m, title: seedTitle(m.titleKey) } : m; },
@@ -157,12 +159,12 @@
     source: id => SOURCES.find(s => s.id === id) || SOURCES.at(-2),
     /** Every stored lead (a copy of the list; the lead objects are shared, so change them through update()). */
     raw() {
-      if (!leadCache) { let list = MA.db.get('leads', null); if (!Array.isArray(list)) { list = sampleLeads(); leadCache = list; MA.db.set('leads', list); } leadCache = list; }
+      if (!leadCache) { let list = MA.db.get('leads', null); if (!Array.isArray(list)) { list = MA.prefs.get('sampleData') ? sampleLeads() : []; leadCache = list; MA.db.set('leads', list); } leadCache = list; }
       return leadCache.slice();
     },
     save(list) { leadCache = list; MA.db.set('leads', list); MA.emit('leads'); MA.renderNav?.(); },
     /** All leads visible right now (samples only while sample data is on). Archived included; filter yourself. */
-    all: () => L.raw().filter(l => !l.sample || MA.prefs.get('sampleData')),
+    all: () => { if (MA.prefs.get('sampleData') && !L.raw().some(l => l.sample)) L.save(L.raw().concat(sampleLeads())); return L.raw().filter(l => !l.sample || MA.prefs.get('sampleData')); },
     get: id => L.raw().find(l => l.id === id),
     add(p) {
       const me = MA.team.me(), list = L.raw(), now = new Date().toISOString();
@@ -487,6 +489,15 @@
       ];
     },
   };
+
+  /* ---------- real numbers only: demo briefs and teammates stored by earlier versions are removed once ---------- */
+  MA.on('boot', () => {
+    if (new URLSearchParams(location.search).has('test') || MA.db.get('samplePurgedV1', false)) return;
+    MA.db.set('samplePurgedV1', true);
+    if (MA.prefs.get('sampleData')) return; // someone who switched the demo on on purpose keeps it
+    MA.db.set('leads', MA.leads.raw().filter(l => !l.sample)); MA.db.set('team', MA.team.raw().filter(m => !m.sample));
+    if (!MA.team.raw().some(m => m.id === MA.prefs.get('me'))) MA.prefs.set('me', '');
+  });
 
   /* ---------- first run: a welcome note ---------- */
   MA.on('boot', () => {
