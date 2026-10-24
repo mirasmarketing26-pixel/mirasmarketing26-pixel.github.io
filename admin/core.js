@@ -188,10 +188,13 @@
   const PREF_DEFAULTS = {
     theme: 'system', accent: 'tide', density: 'comfortable', scale: 'm', corners: 'soft', sidebar: 'expanded', motion: 'system',
     lang: 'en', home: 'overview', navOrder: [], navHidden: [], ambient: true, langLayout: 'side', previewLang: 'en', previewDevice: 'desktop',
-    sampleData: true, viewAs: '', dateRange: '30d', me: '', digits: 'auto', calendar: 'gregory',
+    sampleData: new URLSearchParams(location.search).has('test'), viewAs: '', dateRange: '30d', me: '', digits: 'auto', calendar: 'gregory', // real numbers only; the demo data (Customize › Sample data) is opt-in
     singleKeys: true, keymap: {}, previewPanes: {}, // keyboard: bare-key shortcuts on/off and remapped combos {default → yours}; previewPane open/width per page
   };
   let prefs = Object.assign({}, PREF_DEFAULTS, MA.db.get('prefs', {}));
+  // The dashboard used to open with invented traffic, briefs and team. Real numbers only now: once per browser the sample data is switched off
+  // (it can be switched back on in Customize or Analytics; the test harness, ?test=, keeps it on because its suites assume the demo data).
+  if (!new URLSearchParams(location.search).has('test') && !MA.db.get('sampleOffV1', false)) { prefs.sampleData = false; MA.db.set('prefs', prefs); MA.db.set('sampleOffV1', true); }
   // An earlier build made the ink ('deep') the default and moved saved blue prefs to it (flag 'accentInk'). Blue is the default again:
   // once, a browser that took that ink default moves back to Tide. This runs on the first load, before anything new can be picked, so
   // every colour chosen in Customize from now on stays.
