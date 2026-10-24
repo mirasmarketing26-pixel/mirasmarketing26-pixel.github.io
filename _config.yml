@@ -1,0 +1,6 @@
+# GitHub Pages (the old github.io copy) must not serve the admin or its password file.
+exclude:
+  - admin
+  - portal
+  - middleware.js
+  - README.md
