@@ -21,7 +21,7 @@
                                         opts.bare = the board without its name lockup */
 (() => {
   const DEFAULT_WORK = [
-    { slug: 'halwa-lab', discipline: 'branding', year: 2026, cover: 'assets/work/halwa-1.jpg', focal: '50% 58%', images: ['assets/work/halwa-2.jpg'],
+    { slug: 'halwa-lab', discipline: 'branding', year: 2026, cover: 'assets/work/halwa-1.jpg', focal: '50% 58%', images: ['assets/work/halwa-2.jpg', 'assets/work/halwa-4.jpg', 'assets/work/halwa-5.jpg', 'assets/work/halwa-6.jpg', 'assets/work/halwa-7.jpg'],
       motif: 'arches',
       palette: [{ hex: '#7A1E2C', en: 'Maroon', ar: 'عنّابي' }, { hex: '#E9B13A', en: 'Saffron', ar: 'زعفراني' }, { hex: '#F3E7CF', en: 'Cream', ar: 'كريمي' }, { hex: '#9DB46C', en: 'Pistachio', ar: 'فستقي' }],
       fonts: { latin: 'Fraunces', arabic: 'Reem Kufi' },
@@ -33,7 +33,7 @@
         brief: 'مطبخ حلويات عائلي أراد أن تدخل علب هداياه المتاجر الكبرى، وأن تبقى تشبه دكّان العائلة.',
         idea: 'استوحينا نقشاً من أقواس الدوحة القديمة، ومنحنا كل نكهة لونها، كدكاكين السوق.',
         made: ['الهوية البصرية', 'نظام التغليف', 'أكياس الهدايا والملصقات', 'مكتبة النقوش'] } },
-    { slug: 'corniche-night-run', discipline: 'branding', year: 2026, cover: 'assets/work/run-2.jpg', focal: '55% 60%', images: [],
+    { slug: 'corniche-night-run', discipline: 'branding', year: 2026, cover: 'assets/work/run-2.jpg', focal: '55% 60%', images: ['assets/work/run-4.jpg', 'assets/work/run-5.jpg', 'assets/work/run-6.jpg', 'assets/work/run-7.jpg'],
       motif: 'oval',
       palette: [{ hex: '#0B1033', en: 'Night', ar: 'ليلي' }, { hex: '#1F4BFF', en: 'Electric blue', ar: 'أزرق كهربائي' }, { hex: '#C6F432', en: 'Lime', ar: 'ليموني' }, { hex: '#F5F7FF', en: 'White', ar: 'أبيض' }],
       fonts: { latin: 'Anton', arabic: 'Lalezar' },
@@ -45,7 +45,7 @@
         brief: 'سباق مسائي جديد أراد أن يسجّل العدّاؤون فيه مبكراً.',
         idea: 'خطوط سرعة بالأزرق الكهربائي والأخضر الليموني، مأخوذة من ألوان الكورنيش ليلاً، على اللوحات وأرقام العدّائين والهواتف.',
         made: ['فكرة الحملة', 'الإعلانات الخارجية والرقمية', 'محتوى منصّات التواصل', 'تصميم أطقم العدّائين'] } },
-    { slug: 'bahr-kitchen', discipline: 'content', year: 2026, cover: 'assets/work/bahr-1.jpg', focal: '45% 52%', images: ['assets/work/bahr-2.jpg'],
+    { slug: 'bahr-kitchen', discipline: 'content', year: 2026, cover: 'assets/work/bahr-1.jpg', focal: '45% 52%', images: ['assets/work/bahr-2.jpg', 'assets/work/bahr-4.jpg', 'assets/work/bahr-5.jpg', 'assets/work/bahr-6.jpg', 'assets/work/bahr-7.jpg'],
       motif: 'waves',
       palette: [{ hex: '#1F8A8A', en: 'Sea teal', ar: 'فيروزي' }, { hex: '#FF7A59', en: 'Coral', ar: 'مرجاني' }, { hex: '#F2E3C6', en: 'Sand', ar: 'رملي' }, { hex: '#0E3B4A', en: 'Deep sea', ar: 'أزرق عميق' }],
       fonts: { latin: 'DM Serif Display', arabic: 'Aref Ruqaa' },
@@ -57,7 +57,7 @@
         brief: 'مطعم مأكولات بحرية جديد بلا صور ولا منشورات، وموعد افتتاحه محدّد.',
         idea: 'نصوّر صيد اليوم في ضوء النهار، ثم نصنع منه فيديو الإطلاق ومحتوى شهر كامل.',
         made: ['فيديو الإطلاق', 'تصوير الطعام', 'محتوى منصّات التواصل', 'تصميم القائمة'] } },
-    { slug: 'saffar', discipline: 'digital', year: 2026, cover: 'assets/work/saffar-1.jpg', focal: '60% 55%', images: [],
+    { slug: 'saffar', discipline: 'digital', year: 2026, cover: 'assets/work/saffar-1.jpg', focal: '60% 55%', images: ['assets/work/saffar-4.jpg', 'assets/work/saffar-5.jpg', 'assets/work/saffar-6.jpg', 'assets/work/saffar-7.jpg'],
       motif: 'dunes',
       palette: [{ hex: '#D98E4F', en: 'Dune', ar: 'لون الكثبان' }, { hex: '#B5523B', en: 'Terracotta', ar: 'طيني' }, { hex: '#F1DCC0', en: 'Sand', ar: 'رملي' }, { hex: '#2A1E3B', en: 'Desert night', ar: 'ليل الصحراء' }],
       fonts: { latin: 'Syne', arabic: 'Tajawal' },
@@ -72,7 +72,7 @@
         brief: 'شركة سفر محلية أرادت أن يحجز عملاؤها رحلاتهم من هواتفهم، بدل الاتصال بها.',
         idea: 'صور كبيرة، وألوان رملية دافئة، وسؤال واحد في كل شاشة.',
         made: ['الموقع الإلكتروني', 'تصميم التطبيق', 'مسار الحجز', 'إعلانات الإطلاق'] } },
-    { slug: 'noor-clinics', discipline: 'strategy', year: 2026, cover: 'assets/work/noor-1.jpg', focal: '68% 45%', images: ['assets/work/noor-3.jpg'],
+    { slug: 'noor-clinics', discipline: 'strategy', year: 2026, cover: 'assets/work/noor-1.jpg', focal: '68% 45%', images: ['assets/work/noor-3.jpg', 'assets/work/noor-4.jpg', 'assets/work/noor-5.jpg', 'assets/work/noor-6.jpg', 'assets/work/noor-7.jpg'],
       motif: 'rings',
       palette: [{ hex: '#9FE3C9', en: 'Mint', ar: 'نعناعي' }, { hex: '#12285A', en: 'Navy', ar: 'كحلي' }, { hex: '#FFFFFF', en: 'White', ar: 'أبيض' }, { hex: '#3BA7A0', en: 'Teal', ar: 'تركوازي' }],
       fonts: { latin: 'Nunito', arabic: 'Almarai' },
@@ -196,7 +196,12 @@
   // the photos that ship with the site: their size, and WebPs beside them (assets/work/800/ and assets/work/1600/)
   const DIMS = { 'halwa-1': [1600, 1207], 'halwa-2': [1207, 1600], 'halwa-3': [1600, 900], 'run-1': [1600, 900], 'run-2': [1207, 1600],
     'run-3': [1600, 1207], 'bahr-1': [1600, 900], 'bahr-2': [1600, 1207], 'bahr-3': [1207, 1600], 'saffar-1': [1600, 900],
-    'saffar-2': [1600, 1207], 'noor-1': [1600, 900], 'noor-2': [1600, 1207], 'noor-3': [1207, 1600] };
+    'saffar-2': [1600, 1207], 'noor-1': [1600, 900], 'noor-2': [1600, 1207], 'noor-3': [1207, 1600],
+    'halwa-4': [1600, 1207], 'halwa-5': [1207, 1600], 'halwa-6': [1600, 900], 'halwa-7': [1600, 1207],
+    'run-4': [1600, 900], 'run-5': [1207, 1600], 'run-6': [1600, 1207], 'run-7': [1600, 900],
+    'bahr-4': [1600, 1207], 'bahr-5': [1207, 1600], 'bahr-6': [1600, 900], 'bahr-7': [1600, 1207],
+    'saffar-4': [1600, 900], 'saffar-5': [1207, 1600], 'saffar-6': [1600, 1207], 'saffar-7': [1600, 900],
+    'noor-4': [1600, 900], 'noor-5': [1600, 1207], 'noor-6': [1207, 1600], 'noor-7': [1600, 1207] };
   /** { src, srcset, w, h } for a picture; srcset only for the default files. */
   function photo(path) {
     const m = /^assets\/work\/([\w-]+)\.jpg$/.exec(path || ''), d = m && DIMS[m[1]];
