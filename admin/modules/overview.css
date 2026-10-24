@@ -1,0 +1,337 @@
+/* =====================================================================
+   MIRAS admin — Overview (scoped to .m-overview)
+   Board: 4 columns → 2 under ~860px of board width (or a viewport under 1100px)
+   → 1 under ~560px of board width (or a viewport under 720px).
+   Every tile is its own inline-size container, so widget content scales with the tile.
+   Arabic-script UI (ar, fa) uses html:is([lang=ar],[lang=fa]); direction uses logical properties.
+   ===================================================================== */
+.m-overview.ov-page{--ov-row:196px;display:flex;flex-direction:column;gap:calc(var(--gap) * 1.25)}
+html[data-density=compact] .m-overview.ov-page{--ov-row:168px}
+
+/* ---------- header ---------- */
+.m-overview .ov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 28px;flex-wrap:wrap}
+.m-overview .ov-hello{min-width:0}
+.m-overview .ov-eyebrow{margin-bottom:10px}
+.m-overview .ov-hello .h1{overflow-wrap:anywhere}
+.m-overview .ov-status{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin-top:10px;color:var(--ink2);font-size:.95rem}
+.m-overview .ov-status time{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
+.m-overview .ov-dim{color:var(--ink4)}
+.m-overview .ov-pulse{width:8px;height:8px;border-radius:50%;background:var(--ink4);flex:none}
+.m-overview .ov-pulse.on{background:var(--good);box-shadow:0 0 0 4px var(--good-bg)}
+.m-overview .ov-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.m-overview .ov-actions .btn kbd{height:1.2rem;min-width:1.2rem;font-size:var(--fs-min);margin-inline-start:2px;background:var(--panel3)}
+/* phones: the header stacks, the text first and then one full-width button per row, so nothing runs past the screen */
+@media (max-width:560px){
+  .m-overview .ov-head{align-items:stretch;gap:18px}
+  .m-overview .ov-hello{flex:1 1 100%}
+  .m-overview .ov-actions{flex:1 1 100%;flex-direction:column;align-items:stretch;gap:8px}
+  .m-overview .ov-actions .btn{width:100%}
+  .m-overview .ov-actions .btn.ghost{background:var(--panel);color:var(--ink);box-shadow:inset 0 0 0 1px var(--field-line),var(--shadow1)}   /* the Layout button keeps the outline of the others */
+}
+/* the shell's top bar (admin.css) was about 75px wider than a 390px phone, so the whole page scrolled sideways. Only while the Overview
+   is on screen: the search button stays a 36px icon button (its words are hidden on a phone already) and the gaps tighten.
+   admin.css itself is not changed. */
+@media (max-width:520px){
+  html:has(.m-overview) .top{gap:6px}
+  html:has(.m-overview) .search-btn{flex:none;width:var(--ctl);min-width:0;padding-inline:0;justify-content:center}
+}
+
+/* ---------- sea band ---------- */
+.m-overview .ov-sea{position:relative;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:14px 40px;padding:calc(var(--pad) + 2px) var(--pad) 0;border-radius:var(--r3);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line),var(--shadow1);overflow:hidden}
+.m-overview .ov-sea-text{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.m-overview .ov-sea-eye{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.m-overview .ov-sea-word{font:600 .93rem/1 var(--ui);color:var(--accent-text)}
+.m-overview .ov-sea-sent{font:500 1.24rem/1.4 var(--ui);letter-spacing:-.005em;color:var(--ink);max-width:56ch;text-wrap:pretty}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-sea-sent{font-size:1.12rem;line-height:1.7}
+.m-overview .ov-sea-sent b{font-weight:700}
+.m-overview .ov-sea-basis{font-size:.93rem;color:var(--ink3)}
+.m-overview .ov-sea-basis:empty{display:none}
+.m-overview .ov-sea-stats{display:flex;gap:28px;flex:none;margin:2px 0 0}
+.m-overview .ov-sea-stats > div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.m-overview .ov-sea-stats dt{font-size:.93rem;color:var(--ink3);white-space:nowrap}
+.m-overview .ov-sea-stats dd{font:400 2.1rem/1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+.m-overview .ov-sea-stats > div:first-child dd{color:var(--accent-text)}
+.m-overview .ov-sea-cv{display:block;flex:0 0 calc(100% + var(--pad) * 2);height:112px;margin:0 calc(var(--pad) * -1);color:var(--tide);opacity:.8}
+html[data-theme=dark] .m-overview .ov-sea-cv{color:var(--tide60);opacity:.8}
+.m-overview .ov-sea[data-kind=none] .ov-sea-cv{opacity:.4}
+
+/* ---------- board ---------- */
+.m-overview .ov-boardwrap{container:ovboard/inline-size}
+.m-overview .ov-board{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(var(--ov-row),auto);grid-auto-flow:row dense;gap:var(--gap)}
+.m-overview .ov-tile,.m-overview .ov-ph{grid-column:span 1;min-width:0;border-radius:var(--r3)}
+.m-overview .ov-tile[data-size=M],.m-overview .ov-ph[data-size=M]{grid-column:span 2}
+.m-overview .ov-tile[data-size=L],.m-overview .ov-ph[data-size=L]{grid-column:span 2;grid-row:span 2}
+.m-overview .ov-tile[data-size=W],.m-overview .ov-ph[data-size=W]{grid-column:1/-1}
+@container ovboard (max-width:860px){
+  .m-overview .ov-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1100px){
+  .m-overview .ov-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* one column: every size spans the full width (L keeps its two rows) */
+@container ovboard (max-width:560px){
+  .m-overview .ov-board{grid-template-columns:minmax(0,1fr)}
+  .m-overview .ov-board > [data-size]{grid-column:1/-1}
+}
+@media (max-width:720px){
+  .m-overview .ov-board{grid-template-columns:minmax(0,1fr)}
+  .m-overview .ov-board > [data-size]{grid-column:1/-1}
+}
+.m-overview .ov-tile{position:relative;container:tile/inline-size;outline:none}
+.m-overview .ov-blank{grid-column:1/-1;border-radius:var(--r3);box-shadow:inset 0 0 0 1px var(--line);background:var(--panel)}
+
+/* the card */
+.m-overview .ov-card{height:100%;display:flex;flex-direction:column;min-width:0;background:var(--panel);border-radius:var(--r3);box-shadow:inset 0 0 0 1px var(--line),var(--shadow1);overflow:hidden;transition:box-shadow .2s,transform .2s var(--ease)}
+.m-overview .ov-th{display:flex;align-items:center;gap:8px;min-height:46px;padding-block:12px 0;padding-inline:var(--pad) 10px}
+.m-overview .ov-tt{font:600 .93rem/1.3 var(--ui);color:var(--ink);min-width:0;flex:0 1 auto}
+.m-overview .ov-badges{display:flex;align-items:center;gap:6px;flex:none}
+.m-overview .ov-badges:empty{display:none}
+.m-overview .ov-ctrls{display:flex;align-items:center;gap:2px;margin-inline-start:auto;flex:none}
+.m-overview .ov-ctrl-n{opacity:.45;transition:opacity .15s}
+.m-overview .ov-tile:hover .ov-ctrl-n,.m-overview .ov-tile:focus-within .ov-ctrl-n,.m-overview .ov-ctrl-n[aria-expanded=true]{opacity:1}
+@media (hover:none){.m-overview .ov-ctrl-n{opacity:1}}
+.m-overview .ov-ctrl-a{display:none;align-items:center;gap:4px}
+.m-overview .ov-grip{display:none;place-items:center;width:20px;height:26px;margin-inline-start:-8px;color:var(--ink3);flex:none;cursor:grab}
+.m-overview .ov-sizebtn{display:inline-flex;align-items:center;gap:3px;height:26px;padding-inline:8px 5px;border-radius:var(--r1);color:var(--ink2);box-shadow:inset 0 0 0 1px var(--line2);font-size:var(--fs-min)}
+.m-overview .ov-sizebtn:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--line3)}
+.m-overview .ov-sizeg{display:inline-grid;place-items:center}
+.m-overview .ov-szg,.ov-szg{width:21px;height:10px;flex:none;display:block}
+.ov-szg rect{fill:currentColor;opacity:.2}
+.ov-szg rect.on{opacity:1}
+html[dir=rtl] .ov-szg{transform:scaleX(-1)}
+.menu-item .meta .ov-szg{color:var(--ink3);margin-inline-end:6px;align-self:center}
+.m-overview .ov-tb{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0;padding:10px var(--pad) var(--pad)}
+.m-overview .ov-tile:focus-visible .ov-card{box-shadow:0 0 0 2px var(--accent),var(--shadow2)}
+.m-overview .ov-tile.ov-flash .ov-card{animation:ov-flash 1.6s var(--ease)}
+@keyframes ov-flash{0%,35%{box-shadow:0 0 0 3px var(--accent),var(--shadow2)}100%{box-shadow:inset 0 0 0 1px var(--line),var(--shadow1)}}
+.m-overview .ov-err{font-size:.93rem;color:var(--bad)}
+
+/* ---------- arrange mode ---------- */
+.m-overview.is-arranging .ov-grip{display:grid}
+.m-overview.is-arranging .ov-ctrl-a{display:flex}
+.m-overview.is-arranging .ov-ctrl-n,.m-overview.is-arranging .ov-badges{display:none}
+.m-overview.is-arranging .ov-tile{cursor:grab;touch-action:none;user-select:none}
+.m-overview.is-arranging .ov-card{box-shadow:inset 0 0 0 1.5px var(--accent-line),var(--shadow1)}
+.m-overview.is-arranging .ov-tb{pointer-events:none;opacity:.5;transition:opacity .2s}
+.m-overview.is-arranging .ov-tile:focus-visible .ov-card,.m-overview.is-arranging .ov-tile:focus .ov-card{box-shadow:0 0 0 2px var(--accent),var(--shadow2)}
+.m-overview.is-arranging.bob .ov-card{animation:ov-bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i,0) * -.53s)}
+@keyframes ov-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.m-overview.is-arranging:not(.bob) .ov-card{box-shadow:none;outline:1.5px dashed var(--accent-line);outline-offset:-1.5px}
+html[data-motion=reduced] .m-overview .ov-card{animation:none!important}
+@media (prefers-reduced-motion:reduce){html:not([data-motion=full]) .m-overview .ov-card{animation:none!important}}
+.m-overview .ov-tile.ov-lifted .ov-card{animation:none;transform:translateY(-3px);box-shadow:0 0 0 2px var(--accent),var(--shadow3)}
+.m-overview .ov-tile.ov-dragging{position:absolute;z-index:6;pointer-events:none;margin:0}
+.m-overview .ov-tile.ov-dragging .ov-card{animation:none;transform:scale(1.015) rotate(-.4deg);box-shadow:0 0 0 1.5px var(--accent),var(--shadow3)}
+html[dir=rtl] .m-overview .ov-tile.ov-dragging .ov-card{transform:scale(1.015) rotate(.4deg)}
+.m-overview.is-dragging,.m-overview.is-dragging *{cursor:grabbing!important}
+.m-overview .ov-ph{display:grid;place-items:center;border:1.5px dashed var(--accent-line);background:var(--accent-soft)}
+.m-overview .ov-ph svg{width:min(150px,55%);fill:none;stroke:var(--accent-text);stroke-width:1.6;stroke-linecap:round;opacity:.75}
+.m-overview .ov-bar{gap:10px;padding-block:7px;padding-inline:18px 8px}
+.m-overview .ov-bar-t{display:inline-flex;align-items:center;gap:8px;font-size:.93rem;min-width:0}
+.m-overview .ov-bar-t b{font-weight:600}
+.m-overview .ov-bar-hint{opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-overview .ov-bar .btn kbd{background:color-mix(in srgb,currentColor 14%,transparent);box-shadow:none;color:inherit;height:1.15rem;font-size:var(--fs-min)}
+.m-overview .ov-bar .btn.ov-done{background:var(--shore);color:var(--deep);box-shadow:none}
+.m-overview .ov-bar .btn.ov-done:hover{background:#fff}
+html[data-theme=dark] .m-overview .ov-bar .btn.ov-done{background:var(--deep);color:var(--shore)}
+@media (max-width:720px){.m-overview .ov-bar-hint{display:none}}
+
+/* ---------- shared widget pieces ---------- */
+.m-overview .ov-big{font:400 2.5rem/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+.m-overview .ov-big.sm{font-size:2rem}
+@container tile (min-width:440px){.m-overview .ov-big{font-size:2.9rem}.m-overview .ov-big.sm{font-size:2.2rem}}
+@container tile (max-width:200px){.m-overview .ov-big{font-size:2rem}}
+.m-overview .ov-cap{font-size:.93rem;color:var(--ink2);line-height:1.4}
+.m-overview .ov-note{font-size:.93rem;color:var(--ink3);line-height:1.45;margin-top:auto}
+.m-overview .ov-headline{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;min-width:0}
+.m-overview .ov-cmp{font-size:.93rem;color:var(--ink3);line-height:1.45}
+.m-overview .ov-delta{font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+.m-overview .ov-delta.up{color:var(--good)} .m-overview .ov-delta.down{color:var(--bad)} .m-overview .ov-delta.flat{color:var(--ink2)}
+.m-overview .ov-spark{height:40px;margin-top:auto}
+.m-overview .ov-sw{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
+.m-overview .ov-ok{display:flex;align-items:center;gap:10px;font-size:.98rem}
+.m-overview .ov-ok b{font-weight:600}
+.m-overview .ov-ok .good{color:var(--good)}
+.m-overview .ov-foot{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:2px}
+.m-overview .ov-lt{font:500 var(--fs-min)/1 var(--mono);letter-spacing:.08em;color:var(--ink3);padding:3px 5px;border-radius:4px;box-shadow:inset 0 0 0 1px var(--line2);flex:none}
+.m-overview .ov-tb .empty.ov-empty{flex:1;justify-content:center;padding:6px 8px;gap:6px}
+.m-overview .ov-tb .empty .mira{width:64px;margin-bottom:0}
+.m-overview .ov-tb .empty .h2{font-size:1.2rem}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-tb .empty .h2{font-size:1.04rem}
+.m-overview .ov-tb .empty p{font-size:.93rem;max-width:36ch}
+.m-overview .ov-tb .empty .i.lg{width:1.3rem;height:1.3rem}
+
+/* rows (briefs, activity, changes, missing Arabic) */
+.m-overview .ov-rows{display:flex;flex-direction:column;margin-inline:-10px;min-width:0}
+.m-overview .ov-row{display:flex;align-items:center;gap:12px;min-height:42px;padding:5px 10px;border-radius:var(--r2);color:inherit;text-decoration:none;min-width:0}
+.m-overview .ov-rows.tight .ov-row{min-height:34px;padding-block:3px;gap:10px}
+.m-overview a.ov-row:hover{background:var(--hover)}
+.m-overview .ov-row-main{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.m-overview .ov-row-main b{font-weight:600;font-size:.93rem}
+.m-overview .ov-row-main > span{font-size:.93rem}
+.m-overview .ov-row-main b{font-weight:600}
+.m-overview .ov-sub{font-size:.93rem!important;color:var(--ink3)}
+.m-overview .ov-col{display:none;flex:none;font-size:.93rem;color:var(--ink2);text-align:end}
+@container tile (min-width:560px){.m-overview .ov-col{display:block}.m-overview .ov-col.num{min-width:9.5ch}}
+.m-overview .ov-col.ov-swcol{display:none;flex:0 1 34%;text-align:start;color:var(--ink2)}
+@container tile (min-width:780px){.m-overview .ov-col.ov-swcol{display:block}.m-overview .ov-sw-in{display:none}.m-overview .ov-col.num{min-width:12ch}.m-overview .ov-when{min-width:13ch;text-align:end}}
+.m-overview .ov-when{flex:none;font:400 var(--fs-min)/1 var(--mono);color:var(--ink3);white-space:nowrap}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-when{font:400 .93rem/1.2 var(--ui)}
+.m-overview .ov-ud{width:7px;height:7px;border-radius:50%;flex:none}
+.m-overview .ov-ud.on{background:var(--flare)}
+.m-overview .ov-morelink{align-self:flex-start;margin-top:2px;padding:6px 10px;border-radius:var(--r1);font-size:.93rem;font-weight:500;color:var(--accent-text);text-decoration:none}
+.m-overview .ov-morelink:hover{background:var(--hover)}
+.m-overview .ov-morenote{padding:6px 10px 0;font-size:.93rem;color:var(--ink3)}
+.m-overview .ov-row .tl{margin-inline-end:-2px}
+
+/* charts keep a left-to-right time axis (SVG text-anchor flips under dir=rtl) */
+.m-overview .chart{direction:ltr}
+.m-overview .chart-tip{direction:rtl;text-align:start}
+html[dir=ltr] .m-overview .chart-tip{direction:ltr}
+
+/* pipeline */
+.m-overview .ov-stack{display:flex;gap:2px;height:10px;border-radius:999px;overflow:hidden;background:var(--panel3);flex:none}
+.m-overview .ov-stack i{flex-basis:0;min-width:4px}
+.m-overview .ov-legrows{display:flex;flex-direction:column;gap:1px}
+.m-overview .ov-legrow{display:grid;grid-template-columns:10px minmax(0,1fr) auto auto;align-items:center;gap:10px;min-height:25px;font-size:.93rem}
+.m-overview .ov-legn{color:var(--ink3);font-size:.93rem;min-width:2ch;text-align:end}
+.m-overview .ov-legv{font-weight:500;min-width:10ch;text-align:end}
+@container tile (min-width:820px){
+  .m-overview .ov-legrows{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .m-overview .ov-legrow{grid-template-columns:10px minmax(0,1fr) auto;row-gap:2px}
+  .m-overview .ov-legrow .ov-legv{grid-column:2/-1;text-align:start}
+}
+
+/* live */
+.m-overview .ov-live{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px}
+.m-overview .ov-live .ov-cap{flex:1 1 100%}
+@container tile (min-width:420px){.m-overview .ov-live .ov-cap{flex:1 1 auto}}
+.m-overview .ov-livedot{width:10px;height:10px;border-radius:50%;background:var(--ink4);flex:none}
+.m-overview .ov-livedot.on{background:var(--good);animation:ov-ping 2.2s ease-out infinite}
+@keyframes ov-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 45%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+html[data-motion=reduced] .m-overview .ov-livedot{animation:none}
+.m-overview .ov-feed{list-style:none;display:flex;flex-direction:column;gap:3px;min-width:0}
+.m-overview .ov-feed li{display:flex;align-items:center;gap:8px;min-height:22px;font-size:.93rem;color:var(--ink2);min-width:0}
+.m-overview .ov-feed li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent-text);flex:none}
+.m-overview .ov-feed li.is-sample::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--warn)}
+.m-overview .ov-feed li .truncate{flex:1}
+
+/* section reach: tide lines */
+.m-overview .ov-reach{display:flex;flex-direction:column;gap:2px}
+.m-overview .ov-rrow{display:grid;grid-template-columns:minmax(5.5rem,28%) minmax(0,1fr) 3.2em;align-items:center;gap:10px;min-height:19px;font-size:.93rem}
+.m-overview .ov-rlab{color:var(--ink2)}
+.m-overview .ov-hid{color:var(--ink4)}
+.m-overview .ov-rline{display:block;height:12px;min-width:0}
+.m-overview .ov-rline svg{display:block;overflow:visible}
+html[dir=rtl] .m-overview .ov-rline svg{transform:scaleX(-1)}
+.m-overview .ov-rtrack{stroke:var(--line2);stroke-width:1;stroke-dasharray:1.5 3.5}
+.m-overview .ov-rwave{fill:none;stroke:var(--accent-text);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.m-overview .ov-rwave.dashed{stroke:var(--ink4);stroke-dasharray:3 3}
+.m-overview .ov-rend{fill:var(--accent-text)}
+.m-overview .is-hidden .ov-rend{fill:var(--ink4)}
+.m-overview .ov-rpct{text-align:end;color:var(--ink2);font-size:.93rem}
+
+/* languages */
+.m-overview .ov-lang{display:flex;align-items:center;gap:16px;min-width:0}
+.m-overview .ov-ring{flex:none}
+.m-overview .ov-ring svg text{font-size:22px!important}
+.m-overview .ov-lang-leg{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.m-overview .ov-lang-leg > div{display:flex;align-items:center;gap:8px;font-size:.93rem}
+.m-overview .ov-lang-leg b{font-weight:600}
+@container tile (max-width:250px){.m-overview .ov-lang{gap:12px}.m-overview .ov-lang-leg > div{font-size:.93rem}}
+
+/* missing Arabic: coverage per area */
+.m-overview .ov-cov{display:grid;grid-template-columns:minmax(0,1fr);gap:4px 24px;margin-top:4px}
+.m-overview .ov-rows + .ov-cov{margin-top:auto;padding-top:8px}
+@container tile (min-width:480px){.m-overview .ov-cov{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.m-overview .ov-covrow{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:10px;row-gap:5px;padding:5px 0 6px;color:inherit;text-decoration:none;border-radius:var(--r1)}
+.m-overview a.ov-covrow:hover .ov-covlab{color:var(--ink)}
+.m-overview .ov-covlab{font-size:.93rem;color:var(--ink2)}
+.m-overview .ov-covlab{grid-row:1;grid-column:1}
+.m-overview .ov-covn{grid-row:1;grid-column:2;font:500 var(--fs-min)/1 var(--mono);color:var(--ink3);text-align:end}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-covn{font:500 .93rem/1 var(--ui)}
+.m-overview .ov-covrow.is-miss .ov-covn{color:var(--warn)}
+.m-overview .ov-covbar{grid-row:2;grid-column:1/-1;position:relative;height:2px;border-radius:2px;background:var(--line2);overflow:hidden}
+.m-overview .ov-covbar i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--good);border-radius:inherit}
+.m-overview .ov-covrow.is-miss .ov-covbar i{background:var(--accent-text)}
+
+/* clock */
+.m-overview .ov-clock{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.m-overview .ov-st{display:flex;align-items:center;gap:8px;font-size:.93rem;color:var(--ink2)}
+
+/* team */
+.m-overview .ov-avs .avatar{width:32px;height:32px}
+
+/* notes */
+.m-overview .ov-note-ta{flex:1;width:100%;min-height:72px;resize:none;border:0;background:transparent;padding:0;font:400 .95rem/1.55 var(--ui);color:var(--ink);outline:none}
+.m-overview .ov-note-ta::placeholder{color:var(--ink4)}
+.m-overview .ov-tile[data-w=notes]:focus-within .ov-card{box-shadow:inset 0 0 0 1.5px var(--accent-line),var(--shadow1)}
+
+/* quick actions */
+.m-overview .ov-qa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@container tile (min-width:720px){.m-overview .ov-qa{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@container tile (min-width:980px){.m-overview .ov-qa{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.m-overview .ov-qa > *{display:flex;align-items:center;gap:8px;min-height:36px;padding:6px 10px;border-radius:var(--r2);box-shadow:inset 0 0 0 1px var(--line);font-size:.93rem;font-weight:500;color:var(--ink);text-decoration:none;text-align:start;min-width:0;transition:background-color .15s,box-shadow .15s}
+.m-overview .ov-qa > *:hover{background:var(--hover);box-shadow:inset 0 0 0 1px var(--line2)}
+.m-overview .ov-qa .i{color:var(--ink3)}
+.m-overview .ov-qa .truncate{flex:1}
+.m-overview .ov-qa kbd{height:1.15rem;min-width:1.15rem;font-size:var(--fs-min)}
+.m-overview .ov-qn{font:600 var(--fs-min)/1 var(--mono);padding:3px 6px;border-radius:999px;background:var(--flare);color:var(--deep)}
+.m-overview .ov-qa-s{display:none}
+@container tile (max-width:330px){.m-overview .ov-qa-l{display:none}.m-overview .ov-qa-s{display:block}.m-overview .ov-qa > *{padding-inline:8px;gap:6px}.m-overview .ov-qa kbd{display:none}}
+
+/* ---------- add-widget drawer ---------- */
+.m-overview.ov-drawer{display:flex;flex-direction:column;gap:14px;padding-top:16px}
+.m-overview .ov-search{position:relative}
+.m-overview .ov-search .i{position:absolute;inset-inline-start:11px;top:50%;transform:translateY(-50%);color:var(--ink3);pointer-events:none}
+.m-overview .ov-search .input{padding-inline-start:34px}
+.m-overview .ov-chips{display:flex;flex-wrap:wrap;gap:6px}
+.m-overview .ov-cat-list{display:flex;flex-direction:column}
+.m-overview .ov-cat{display:flex;flex-direction:column;gap:10px;padding-block:16px;border-top:1px solid var(--line)}
+.m-overview .ov-cat-head{display:flex;align-items:flex-start;gap:12px}
+.m-overview .ov-cat-head .h4{display:block}
+.m-overview .ov-cat-desc{font-size:.93rem;color:var(--ink2);margin-top:2px;line-height:1.4}
+.m-overview .ov-cat-act{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;flex:none;max-width:52%}
+.m-overview .ov-prev{position:relative;height:150px;overflow:hidden;border-radius:var(--r2);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line);container:tile/inline-size;pointer-events:none;user-select:none}
+.m-overview .ov-prev .ov-tb{height:100%;padding:12px 14px;gap:8px}
+.m-overview .ov-cat-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.m-overview .ov-cat-meta{font-size:.93rem;color:var(--ink3)}
+.m-overview .ov-nomatch{padding:24px 0;text-align:center}
+
+/* ---------- Arabic-script UI ---------- */
+/* Instrument Serif has no Arabic-Indic digits: fall back glyph by glyph to the UI font (Vazirmatn / IBM Plex Sans Arabic) */
+html:is([lang=ar],[lang=fa]) .m-overview .ov-big,html:is([lang=ar],[lang=fa]) .m-overview .ov-sea-stats dd{font-family:'Instrument Serif',var(--ui);letter-spacing:0}
+html[lang=fa] .m-overview .ov-big,html[lang=fa] .m-overview .ov-sea-stats dd{font-weight:500}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-sea-word{font-size:.93rem}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-tt{font-size:.95rem}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-cap{line-height:1.6}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-note{line-height:1.6}
+
+/* ---------- audit fixes (13 Oct): table view, Not saved, where briefs come from, real visitors, backups ---------- */
+.m-overview .ov-cat[hidden]{display:none}
+/* visitors over time: every value as a table (no hover needed) */
+.m-overview .ov-tbtn{margin-inline-start:auto;align-self:center}
+.m-overview .ov-tbtn[aria-pressed=true]{background:var(--accent-soft);color:var(--accent-text)}
+.m-overview .ov-tblwrap{flex:1;min-height:0;overflow:auto;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad)}
+.m-overview .ov-table{width:100%;font-size:.93rem}
+.m-overview .ov-table th{position:sticky;top:0;background:var(--panel);z-index:1}
+.m-overview .ov-table .num-col{text-align:end;white-space:nowrap}
+/* a draft that can't be saved */
+.m-overview .ov-warn{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--r2);background:var(--bad-bg)}
+.m-overview .ov-warn b{color:var(--bad);font-weight:650}
+.m-overview .ov-warn .ov-cap{color:var(--ink);margin-top:2px}
+.m-overview .ov-warn .ov-foot{margin-top:8px}
+/* where briefs come from */
+.m-overview .ov-chrows{display:flex;flex-direction:column}
+.m-overview .ov-chrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;padding-block:7px;border-top:1px solid var(--line)}
+.m-overview .ov-chrow:first-child{border-top:0}
+.m-overview .ov-chname{display:flex;flex-direction:column;gap:5px;min-width:0;font-size:.93rem}
+.m-overview .ov-chbar{display:block;height:3px;min-inline-size:3px;border-radius:2px;background:color-mix(in srgb,var(--accent) 55%,transparent)}
+.m-overview .ov-chn{font-size:.93rem;color:var(--ink2);white-space:nowrap}
+.m-overview .ov-chw{font-size:.93rem;font-weight:600;color:var(--ink);white-space:nowrap;min-width:9ch;text-align:end}
+/* real visitors: the provider's shared dashboard */
+.m-overview .ov-tb.ov-embedbody{padding:4px 6px 6px}
+.m-overview .ov-embed{display:block;flex:1;width:100%;min-height:320px;border:0;border-radius:calc(var(--r3) - 4px);background:var(--panel2)}
+.m-overview .ov-code{font:400 .93rem/1.4 var(--mono);color:var(--ink);direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+/* backups */
+.m-overview .ov-ok.is-due .warn{color:var(--warn)}

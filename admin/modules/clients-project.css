@@ -1,0 +1,324 @@
+/* Client projects: the new-project wizard (.cp-wiz, a full-screen dialog or a page), the dialogs of this module (.cp-dlg) and the project workspace (.m-clients-project).
+   Owned by the clients-project module. Tokens only (dark mode follows admin.css and the Clients palette in clients.css). Logical properties, so Arabic and Persian lay out right.
+   Text is at least 13px on every screen, labels and eyebrows included. Placeholders are muted (about 5:1); typed text is the ink colour (about 17:1).
+   Tide: one primary button per screen, the selected tab's bar, the chosen tile, thread and toggle, progress, and the focus ring.
+   Status badges use the palette (approved green, changes red, waiting Tide, pending muted), each with its word.
+   The look is light on purpose: icons lead, words are short, optional things are folded away until asked for (.cp-tog). */
+
+/* ---------- the screens of this module: the workspace, the wizard and the dialogs it opens ---------- */
+/* (every rule below that starts with :is(.m-clients-project, .cp-dlg) applies to all of them) */
+:is(.m-clients-project, .cp-dlg) { --cp-ph: #6B6D7F; }   /* placeholder text: about 5:1 on the panel */
+html[data-theme="dark"] :is(.m-clients-project, .cp-dlg) { --cp-ph: #8E9099; }
+
+/* placeholders look like hints: muted, but still 4.5:1 or more */
+:is(.m-clients-project, .cp-dlg) :is(input, textarea)::placeholder { color: var(--cp-ph); opacity: 1; }
+
+/* ---------- text sizes (13px at least; html-prefixed where the admin's Arabic and Persian rules are more specific) ---------- */
+html :is(.m-clients-project, .cp-dlg) .label { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .badge { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .tabs .count { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .tiny { font-size: max(13px, .8rem); }
+html :is(.m-clients-project, .cp-dlg) .small { font-size: max(13px, .86rem); }
+html :is(.m-clients-project, .cp-dlg) .hint, html :is(.m-clients-project, .cp-dlg) .err { font-size: max(13px, .86rem); }
+html :is(.m-clients-project, .cp-dlg) .field > label, html :is(.m-clients-project, .cp-dlg) .field > .field-label { font-size: max(13px, .88rem); }
+html :is(.m-clients-project, .cp-dlg) th { font-size: max(13px, .86rem); }
+html :is(.m-clients-project, .cp-dlg) .table { font-size: max(13px, .92rem); }
+html :is(.m-clients-project, .cp-dlg) .seg button { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .btn { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .btn.sm { font-size: 13px; }
+html :is(.m-clients-project, .cp-dlg) .btn.lg { font-size: 1rem; }
+html :is(.m-clients-project, .cp-dlg) .input, html :is(.m-clients-project, .cp-dlg) .select, html :is(.m-clients-project, .cp-dlg) .textarea { font-size: max(13px, .95rem); }
+:is(.m-clients-project, .cp-dlg) :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- buttons: one primary per screen; every other action is an outline (secondary) button ---------- */
+:is(.m-clients-project, .cp-dlg) .btn { background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 1px var(--cl-control); }
+:is(.m-clients-project, .cp-dlg) .btn:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--ink); }
+:is(.m-clients-project, .cp-dlg) .btn.ghost { background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 1px var(--cl-control); }
+:is(.m-clients-project, .cp-dlg) .btn.ghost:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--ink); }
+:is(.m-clients-project, .cp-dlg) .btn.primary { background: var(--tide); color: #FFFFFF; box-shadow: none; }
+:is(.m-clients-project, .cp-dlg) .btn.primary:hover { background: color-mix(in srgb, var(--tide) 86%, #000); box-shadow: none; }
+
+/* done or published: a solid ink pill (the strongest neutral; Tide is kept for the action and the selection) */
+:is(.m-clients-project, .cp-dlg) .badge.accent { background: var(--ink); color: var(--bg); box-shadow: none; }
+.m-clients-project .tabs [aria-selected="true"]::after { background: var(--cl-bar); height: 3px; inset-inline: 6px; }
+
+/* a quiet text button that switches something on or off: Reorder, Preview steps, More options */
+.cp-tog { display: inline-flex; align-items: center; align-self: flex-start; gap: 6px; min-height: 32px; padding: 4px 10px; margin-inline-start: -10px; border: 0; border-radius: var(--r2); background: transparent; color: var(--ink2); font: 600 13px/1.2 var(--ui); cursor: pointer; }
+.cp-tog:hover { background: var(--hover); color: var(--ink); }
+.cp-tog[aria-pressed="true"] { background: var(--cl-tide-tint); color: var(--ink); }
+.cp-tog .i { width: 16px; height: 16px; }
+.cp-tog[aria-expanded="true"] .i { transform: rotate(180deg); }
+.cp-toolbar .cp-tog { margin-inline-start: 0; }
+
+/* ---------- the workspace ---------- */
+.m-clients-project { max-width: 1180px; min-width: 0; color: var(--ink); }
+.m-clients-project .cp-u { overflow-wrap: anywhere; }
+.m-clients-project .cp-head .page-head { margin-bottom: 14px; }
+.cp-link { color: var(--cl-tide-ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.cp-link:hover { text-decoration-thickness: 2px; }
+.cp-link.is-off { opacity: .5; pointer-events: none; }
+.cp-stack { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
+.cp-section { margin-top: 6px; min-width: 0; }
+.cp-section > h2 { margin: 0 0 10px; }
+.cp-panel { margin-top: 16px; min-width: 0; }
+.cp-alert { margin: 0; padding: 10px 12px; border-radius: var(--r2); background: var(--bad-bg); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 0 var(--bad); }
+
+/* the header facts: client, status, and priority, due and owner when they are set */
+.cp-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 22px; margin: 0 0 6px; padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.cp-meta-i { min-width: 0; }
+.cp-meta-i dt { font-size: max(13px, .8rem); color: var(--ink2); font-weight: 600; }
+.cp-meta-i dd { margin: 4px 0 0; min-width: 0; color: var(--ink); overflow-wrap: anywhere; }
+
+/* likes, dislikes and comments: an icon and a number each */
+.cp-reacts { display: inline-flex; align-items: center; gap: 4px 14px; flex-wrap: wrap; }
+.cp-react { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.cp-react-i { display: inline-flex; flex: none; color: var(--ink2); }
+.cp-react-i .i { width: 16px; height: 16px; }
+.cp-feed { margin-top: 12px; }
+
+/* what to do next */
+.cp-next { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; }
+.cp-next-row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cp-next-row:last-child { border-bottom: 0; }
+.cp-next-main { min-width: 0; flex: 1 1 260px; }
+.cp-next-row .btn-row { flex: none; }
+
+/* progress: a Tide bar on a neutral track */
+.cp-progress { display: flex; flex-direction: column; gap: 8px; max-width: 520px; }
+.cp-bar { height: 8px; border-radius: 999px; background: var(--panel3); overflow: hidden; }
+.cp-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--cl-bar); }
+.cp-progress p { margin: 0; color: var(--ink2); }
+
+/* summary text and activity */
+.cp-sumtext { margin: 0; max-width: 70ch; }
+.cp-activity { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; }
+.cp-activity li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cp-activity li:last-child { border-bottom: 0; }
+.cp-activity p { margin: 0; overflow-wrap: anywhere; }
+.cp-activity p + p { margin-top: 2px; color: var(--ink2); }
+.cp-activity .cp-said { white-space: pre-wrap; }
+.cp-act-more { margin-top: 12px; }
+
+/* ---------- steps: one plain row each (status circle, name, file count), the files under it as small tiles ---------- */
+/* the one quiet toggle above the list */
+.cp-toolbar { display: flex; gap: 12px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+.cp-toolbar .cp-tog { margin-inline-start: 0; }
+.cp-stages { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); }
+.cp-stage { min-width: 0; border-bottom: 1px solid var(--line); }
+.cp-stage-head { display: flex; gap: 4px; align-items: center; min-height: 56px; padding-block: 4px; min-width: 0; }
+.cp-stage-h { margin: 0; flex: 1 1 auto; min-width: 0; font: inherit; }
+/* the name is the button that opens and folds the step; the count and the chevron sit at its far end */
+.cp-stage-btn { display: flex; align-items: center; gap: 12px; inline-size: 100%; min-height: 44px; padding: 6px 10px; border: 0; border-radius: var(--r2); background: transparent; color: var(--ink); font: 600 1.05rem/1.3 var(--ui); text-align: start; cursor: pointer; }
+.cp-stage-btn:hover { background: var(--hover); }
+.cp-stage-title { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+html .cp-stage-btn .cp-u { font-size: inherit; }
+.cp-count { flex: none; display: inline-flex; align-items: center; gap: 5px; color: var(--ink2); font: 600 13px/1 var(--ui); font-variant-numeric: tabular-nums; }
+.cp-count .i { width: 16px; height: 16px; }
+.cp-chev { flex: none; display: inline-flex; color: var(--ink2); }
+.cp-stage-btn[aria-expanded="true"] .cp-chev { transform: rotate(180deg); }
+.cp-stage-body { padding-block: 2px 14px; padding-inline-start: 48px; min-width: 0; }
+.cp-stage-body[hidden] { display: none; }
+.cp-stage-body > * + * { margin-top: 10px; }
+
+/* the status circle: its shape says the state (empty, half, hourglass, check, undo arrow); the colour adds to it. Click it for the five statuses. */
+.cp-circle { --cp-tone: var(--ink3); flex: none; display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--cp-tone); }
+button.cp-circle { cursor: pointer; }
+button.cp-circle:hover { background: var(--hover); }
+.cp-circle .i { width: 26px; height: 26px; stroke-width: 1.8; }
+.cp-circle[data-st="in_progress"] { --cp-tone: var(--ink); }
+.cp-circle[data-st="waiting"] { --cp-tone: var(--cl-tide-ink); }
+.cp-circle[data-st="approved"] { --cp-tone: var(--cl-ok-ink); }
+.cp-circle[data-st="changes"] { --cp-tone: var(--cl-danger); }
+/* the handle, and the move and edit buttons at the row's end */
+.cp-grip { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: var(--r1); background: transparent; color: var(--ink2); cursor: grab; flex: none; }
+.cp-grip:hover { background: var(--hover); color: var(--ink); }
+.cp-row-acts { display: flex; gap: 2px; align-items: center; flex: none; margin-inline-start: auto; }
+.cp-row-acts .icon-btn { min-width: 36px; min-height: 36px; }
+.cp-stage.dragging { background: var(--hover); }
+
+/* the "+" rows: a dashed circle with a plus, then one word. One ends the list of steps, one ends each open step. */
+.cp-add { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; min-height: 44px; padding-block: 4px; padding-inline: 6px 12px; border: 0; border-radius: var(--r2); background: transparent; color: var(--cl-tide-ink); font: 600 14px/1.2 var(--ui); cursor: pointer; }
+.cp-add:hover { background: var(--cl-tide-tint); }
+.cp-add-i { display: inline-grid; place-items: center; inline-size: 32px; block-size: 32px; border: 1.5px dashed var(--cl-tide-ink); border-radius: 50%; }
+.cp-add-i .i { width: 18px; height: 18px; stroke-width: 2; }
+.cp-add.is-step { margin-inline-start: 6px; }
+
+/* a step with no files, for a viewer */
+.cp-d-none { margin: 4px 0 0; color: var(--ink2); }
+
+/* ---------- thumbnails: a fixed frame (never the file name alone) ---------- */
+/* a tile's frame fills the tile (4:3, a video's poster too); sm is 64px (tables). A file with no picture gets a plain tile with its kind's icon. */
+.cp-thumb { position: relative; display: block; flex: none; width: 96px; aspect-ratio: 4 / 3; margin: 0; padding: 0; border: 0; border-radius: var(--r2); overflow: hidden; background: var(--panel3); box-shadow: inset 0 0 0 1px var(--line2); color: var(--ink2); }
+.cp-thumb.is-video { aspect-ratio: 16 / 9; }
+.cp-thumb.sm { width: 64px; }
+.cp-thumb.tile { width: 100%; aspect-ratio: 4 / 3; }
+button.cp-thumb { cursor: zoom-in; }
+a.cp-thumb.is-link { cursor: pointer; }
+a.cp-thumb.is-link:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+button.cp-thumb:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.cp-thumb.is-empty { display: grid; place-items: center; cursor: default; }
+.cp-thumb-ph { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink2); }
+.cp-thumb-ph .i { width: 22px; height: 22px; }
+.cp-thumb.sm .cp-thumb-ph .i { width: 18px; height: 18px; }
+.cp-thumb.tile .cp-thumb-ph .i { width: 30px; height: 30px; }
+.cp-thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.cp-thumb-img:not([src]) { opacity: 0; }   /* nothing shows until the picture is resolved (the alt text does not print) */
+.cp-thumb.is-broken .cp-thumb-img { display: none; }
+/* a video's play label: a solid ink tag on the poster, so it reads on any picture */
+.cp-play { position: absolute; inset-inline-start: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding-inline: 8px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.cp-play .i { width: 12px; height: 12px; flex: none; }
+.cp-thumb.sm .cp-play { inset-inline-start: 4px; bottom: 4px; width: 22px; height: 22px; padding: 0; justify-content: center; }
+.cp-thumb.sm .cp-play .i { width: 10px; height: 10px; }
+
+/* a deliverable: the thumbnail beside its name */
+.cp-deliv { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+.cp-deliv-txt { min-width: 0; flex: 1 1 auto; }
+.cp-deliv-txt > strong { display: block; overflow-wrap: anywhere; }
+
+/* the larger view, in a dialog */
+.cp-lb { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.cp-lb-img { display: block; width: 100%; height: auto; max-height: 68vh; object-fit: contain; border-radius: var(--r2); background: var(--panel3); }
+.cp-lb figcaption { color: var(--ink2); overflow-wrap: anywhere; }
+.cp-lb-open { margin: 0; }
+
+/* the files of a step: small tiles. A picture (or the kind's icon), the name, one status chip and the Edit button. */
+.cp-dgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 12px; min-width: 0; }
+.cp-d { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 8px; border-radius: var(--r3); background: var(--panel); box-shadow: inset 0 0 0 1px var(--line2); }
+.cp-d-title { display: block; padding-inline: 2px; font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--ink); overflow-wrap: anywhere; }
+.cp-d-feel { padding-inline: 2px; }
+.cp-d-foot { display: flex; gap: 4px; align-items: center; justify-content: space-between; margin-top: auto; min-width: 0; }
+.cp-d-foot .icon-btn { flex: none; }
+/* the status chip is a button: a word with a dot, and a small chevron that says it opens a menu */
+.cp-dchip { border: 0; font-family: inherit; cursor: pointer; max-inline-size: 100%; }
+.cp-dchip:hover { filter: brightness(.97); box-shadow: inset 0 0 0 1px var(--ink3); }
+.cp-dchip .i { width: 14px; height: 14px; flex: none; }
+/* a review link's file: a flat Tide tint and ring for a moment, then it fades (reduced motion: it is simply removed) */
+.m-clients-project .cp-d { transition: background-color .6s ease-out, box-shadow .6s ease-out; }
+.m-clients-project .cp-d.is-hl { background-color: color-mix(in srgb, var(--accent) 14%, var(--panel)); box-shadow: inset 0 0 0 2px var(--cl-tide); }
+.m-clients-project .cp-table tbody tr { transition: background-color .6s ease-out; }
+.m-clients-project .cp-table tbody tr.is-hl > * { background-color: color-mix(in srgb, var(--accent) 14%, transparent); }
+.m-clients-project .select.sm { min-height: 32px; }
+.m-clients-project .empty { padding: 18px 8px; }
+
+/* approvals, files: a plain table; it scrolls inside its own box on a phone */
+.m-clients-project .table-wrap { overflow-x: auto; max-width: 100%; }
+.m-clients-project .cp-table { min-width: 640px; }
+.m-clients-project .cp-table td { vertical-align: top; height: auto; padding-block: 12px; }
+.m-clients-project .cp-table td strong { overflow-wrap: anywhere; }
+/* the client's note under the decision: plain text, wrapped and shown in full (never clipped) */
+.cp-said { margin: 8px 0 0; max-width: 60ch; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* comments: the threads on the left (or the top, on a phone), the chosen thread on the right */
+.cp-cm { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 22px; align-items: start; min-width: 0; }
+.cp-th-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cp-th { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; min-height: 44px; padding: 12px 14px; border: 0; border-radius: var(--r2); background: var(--panel); color: var(--ink); font: inherit; text-align: start; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line2); min-width: 0; }
+.cp-th:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--ink3); }
+/* the chosen thread: a Tide tint with a two-pixel Tide ring */
+.cp-th[aria-current="true"] { background: var(--cl-tide-tint); box-shadow: inset 0 0 0 2px var(--cl-tide); }
+.cp-th-title { font-weight: 600; overflow-wrap: anywhere; }
+.cp-th-meta { color: var(--ink2); font-size: max(13px, .86rem); overflow-wrap: anywhere; }
+.cp-th-count { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--ink2); font-size: max(13px, .86rem); font-weight: 500; }
+.cp-cm-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.cp-cm-title { margin: 0; overflow-wrap: anywhere; }
+.cp-cm-main > .small { margin: -8px 0 0; color: var(--ink2); }
+.cp-thread { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+/* the client's messages sit on the panel; the team's replies sit on a neutral fill with an ink bar */
+.cp-msg { padding: 14px 16px; border-radius: var(--r2); background: var(--panel); box-shadow: inset 0 0 0 1px var(--line2); border-inline-start: 3px solid var(--line3); min-width: 0; }
+.cp-msg.is-team { background: var(--panel3); border-inline-start-color: var(--ink); }
+.cp-msg-head { display: flex; gap: 6px 10px; align-items: center; flex-wrap: wrap; }
+.cp-msg-body { margin: 6px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+.cp-reply { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; max-width: 720px; }
+
+/* settings and forms */
+.cp-form { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.cp-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; min-width: 0; }
+.cp-grid2 > .field { min-width: 0; }
+.cp-wide { grid-column: 1 / -1; min-width: 0; }
+.cp-srcwrap { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cp-srcwrap[hidden] { display: none; }
+.cp-form[hidden] { display: none; }
+.cp-file { max-width: 100%; font-size: .9rem; color: var(--ink); }
+.cp-inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cp-inline > .select { flex: 1 1 200px; min-width: 0; width: auto; }
+.cp-inline > .input { flex: 1 1 200px; min-width: 0; width: auto; }
+.cp-danger { padding-top: 14px; border-top: 1px solid var(--line); }
+
+/* ---------- the wizard: a full-screen dialog (.cp-full) or the page ---------- */
+.modal.cp-full { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; }
+.modal-wrap:has(> .modal.cp-full) { padding: 0; }
+.modal.cp-full > .modal-body { padding: 0; flex: 1 1 auto; min-height: 0; overflow: auto; }
+.modal.cp-full > .modal-head { padding: 16px 24px 12px; border-bottom: 1px solid var(--line); }
+.cp-wiz { display: flex; flex-direction: column; gap: 22px; max-width: 1040px; margin: 0 auto; padding: 22px 24px 0; min-height: 100%; box-sizing: border-box; color: var(--ink); }
+.cp-wiz-page { max-width: 1040px; }
+.cp-wiz-steps { display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; margin: 0; padding: 0 0 14px; border-bottom: 1px solid var(--line); }
+.cp-wiz-steps li { display: flex; align-items: center; gap: 8px; color: var(--ink3); font-weight: 600; font-size: max(13px, .88rem); }
+.cp-wiz-steps li.is-done { color: var(--ink2); }
+.cp-wiz-steps li.is-current { color: var(--ink); }
+.cp-wiz-n { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--panel3); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line2); font: 600 13px/1 var(--ui); font-variant-numeric: tabular-nums; flex: none; }
+/* the current step: a Tide disc with a white number (7:1); a finished step: a Foam-green disc with an ink number (7:1 in both themes) */
+.cp-wiz-steps li.is-current .cp-wiz-n { background: var(--tide); color: #FFFFFF; box-shadow: none; }
+.cp-wiz-steps li.is-done .cp-wiz-n { background: var(--cl-ok-tint); color: var(--ink); box-shadow: none; }
+.cp-wiz-body { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.cp-wiz-h { margin: 0; color: var(--ink); }
+.cp-wiz-foot { position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: auto -24px 0; padding: 14px 24px; background: var(--panel); border-top: 1px solid var(--line); }
+.cp-wiz-left, .cp-wiz-right { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* step 1: the kinds of project, as a grid of big icons with one word each */
+.cp-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; max-width: 780px; }
+.cp-tiles > li { min-width: 0; display: flex; }
+.cp-tile { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 140px; padding: 22px 12px 18px; border: 0; border-radius: var(--r3); background: var(--panel); color: var(--ink); font: inherit; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line2); }
+.cp-tile:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--ink3); }
+/* the chosen kind (when coming back, or with Preview steps on): a Tide tint with a two-pixel Tide ring */
+.cp-tile[aria-pressed="true"] { background: var(--cl-tide-tint); box-shadow: inset 0 0 0 2px var(--cl-tide); }
+.cp-tile-ic { display: grid; place-items: center; color: var(--cl-tide-ink); }
+.cp-tile-ic .i { width: 44px; height: 44px; stroke-width: 1.5; }
+.cp-tile-name { font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
+.cp-prevrow { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; min-width: 0; }
+.cp-prev { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
+.cp-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cp-chip { padding: 6px 12px; border-radius: 999px; background: var(--panel3); box-shadow: inset 0 0 0 1px var(--line2); color: var(--ink); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+
+/* step 2: the client and a title; the rest is folded under More options */
+.cp-finish { display: flex; flex-direction: column; gap: 18px; max-width: 560px; min-width: 0; }
+.cp-chosen { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; max-width: 100%; padding-block: 8px; padding-inline: 12px 16px; border-radius: 999px; background: var(--cl-tide-tint); color: var(--ink); font-weight: 600; }
+.cp-chosen-i { display: inline-flex; flex: none; color: var(--cl-tide-ink); }
+.cp-chosen-i .i { width: 22px; height: 22px; }
+.cp-chosen-who { font-weight: 500; overflow-wrap: anywhere; }
+.cp-client { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.cp-qa { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cp-more { padding-top: 2px; }
+.cp-go { margin-top: 6px; }
+.cp-go .btn { min-width: 220px; justify-content: center; }
+
+/* the new client's access code, shown once */
+.cp-codebox { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.cp-codebox .input { flex: 1 1 220px; min-width: 0; }
+.cp-code { padding: 8px 14px; border-radius: var(--r2); background: var(--panel3); box-shadow: inset 0 0 0 1px var(--line2); color: var(--ink); font: 600 1.15rem/1.3 var(--mono); letter-spacing: .08em; overflow-wrap: anywhere; }
+.cp-code-who { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+
+/* ---------- phones ---------- */
+@media (max-width: 880px) {
+  .cp-cm { grid-template-columns: minmax(0, 1fr); }
+  /* on a phone the threads are a strip that scrolls on its own; the first (the one that opens) is at the start */
+  .cp-th-list { flex-direction: row; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 4px; }
+  .cp-th-list > li { flex: 0 0 auto; width: min(220px, 72vw); scroll-snap-align: start; }
+  .cp-th { width: 100%; height: 100%; }
+}
+@media (max-width: 640px) {
+  .cp-wiz { padding: 16px 16px 0; gap: 18px; }
+  .modal.cp-full > .modal-head { padding: 14px 16px 10px; }
+  .cp-wiz-foot { margin: auto -16px 0; padding: 12px 16px; }
+  .cp-grid2 { grid-template-columns: minmax(0, 1fr); }
+  .cp-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .cp-tile { min-height: 124px; }
+  .cp-go .btn { width: 100%; }
+  .cp-stage-body { padding-inline-start: 0; }
+  .cp-dgrid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .cp-stage-btn { padding-inline: 6px; gap: 8px; }
+  .cp-th { min-height: 48px; }
+}
+
+/* the step heading takes focus so a screen reader announces each step; it is not a field, so no box around it */
+.cp-wiz-h:focus, .cp-wiz-h:focus-visible { outline: none; }
+/* the project kinds sit centred under the heading */
+.cp-tiles { grid-template-columns: repeat(auto-fit, minmax(150px, 180px)); justify-content: center; margin-inline: auto; }

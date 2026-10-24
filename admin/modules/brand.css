@@ -1,0 +1,123 @@
+/* MIRAS admin — Brand colours (scoped to .m-brand) */
+.m-brand .br-ro{margin-bottom:var(--gap)}
+/* the cards stack in the editor column; the live preview is MA.ui.previewPane beside them */
+.m-brand .br-grid{display:grid;gap:var(--gap);grid-template-columns:minmax(0,1fr);align-items:start;min-width:0}
+.m-brand .card-head{align-items:flex-start;padding-bottom:4px}
+.m-brand .card-head .sub{max-width:68ch}
+.m-brand .card-head > .badge,.m-brand .card-head > .br-status{margin-top:3px}
+
+/* ---- palette bands ---- */
+.m-brand .br-status{display:inline-flex;align-items:center;gap:7px;font-size:.93rem;font-weight:500;color:var(--ink2);white-space:nowrap}
+.m-brand .br-bands{container-type:inline-size;margin-top:14px;border-top:1px solid var(--line);border-radius:0 0 var(--r3) var(--r3);overflow:hidden}
+.m-brand .br-band{display:grid;grid-template-columns:minmax(0,1fr) minmax(282px,44%);border-bottom:1px solid var(--line);outline:none;position:relative}
+.m-brand .br-band:last-child{border-bottom:0}
+.m-brand .br-band:focus-visible{box-shadow:inset 0 0 0 2px var(--focus)}
+.m-brand .br-band:focus-visible .br-chip{box-shadow:inset 4px 0 0 var(--focus)}
+html[dir=rtl] .m-brand .br-band:focus-visible .br-chip{box-shadow:inset -4px 0 0 var(--focus)}
+/* a swatch as dark (or light) as the panel gets an edge, so Deep never melts into the dark theme */
+.m-brand .br-chip.is-near{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-band:focus-visible .br-chip.is-near{box-shadow:inset 4px 0 0 var(--focus),inset 0 0 0 1px var(--line3)}
+html[dir=rtl] .m-brand .br-band:focus-visible .br-chip.is-near{box-shadow:inset -4px 0 0 var(--focus),inset 0 0 0 1px var(--line3)}
+.m-brand .br-chip{position:relative;display:flex;align-items:stretch;gap:12px;min-height:104px;padding:16px 20px;background:var(--c);color:var(--on);transition:background-color .2s var(--ease)}
+.m-brand .br-chip-text{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-width:0;flex:1}
+.m-brand .br-name{font:600 1.08rem/1.2 var(--ui)}
+.m-brand .br-role{font-size:.93rem;line-height:1.4;opacity:.84;max-width:42ch}
+.m-brand .br-orig{flex:none;align-self:stretch;width:30px;margin-block:-16px;margin-inline-end:-20px;background:var(--o);border-inline-start:1px solid color-mix(in srgb,var(--on) 22%,transparent);cursor:pointer}
+.m-brand .br-orig[data-tip]:hover::after{bottom:auto;top:50%;left:auto;right:calc(100% + 8px);transform:translateY(-50%)}
+html[dir=rtl] .m-brand .br-orig[data-tip]:hover::after{right:auto;left:calc(100% + 8px)}
+.m-brand .br-ctl{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:12px 16px;background:var(--panel);min-width:0}
+.m-brand .br-ctl-row{display:flex;align-items:center;gap:8px;min-width:0}
+.m-brand .br-pick{display:inline-flex;flex:none}
+.m-brand .br-pick input[type=color]{width:34px;height:34px}
+.m-brand .br-pick.is-near input[type=color]::-webkit-color-swatch{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-pick.is-near input[type=color]::-moz-color-swatch{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-hex{width:112px;flex:none;font-size:.93rem;letter-spacing:.02em;text-transform:uppercase;text-align:left}
+.m-brand .br-nudge{display:inline-flex;gap:2px;padding:2px;border-radius:var(--r2);box-shadow:inset 0 0 0 1px var(--line)}
+.m-brand .br-reset[hidden]{display:none}
+.m-brand .br-err{font-size:.93rem;color:var(--bad);font-weight:500}
+.m-brand .br-ctl-meta{display:flex;align-items:center;flex-wrap:wrap;gap:4px 14px;min-width:0}
+.m-brand .br-ok{font-size:var(--fs-min);color:var(--ink3);white-space:nowrap}
+.m-brand .br-state{display:inline-flex;align-items:center;gap:6px;font-size:.93rem;color:var(--ink3);white-space:nowrap}
+.m-brand .br-band.custom .br-state{color:var(--ink2)}
+@container (max-width:540px){
+  .m-brand .br-band{grid-template-columns:1fr}
+  .m-brand .br-chip{min-height:84px}
+}
+
+/* ---- contrast ---- */
+.m-brand .br-contrast{padding:6px var(--pad) var(--pad)}
+.m-brand .br-table-scroll{overflow-x:auto;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad)}
+.m-brand .br-table{min-width:560px}
+.m-brand .br-table th{background:transparent;position:static}
+.m-brand .br-table td{height:auto;padding-block:11px}
+.m-brand .br-table tbody tr:hover{background:transparent}
+.m-brand .br-aa{display:inline-grid;place-items:center;width:52px;height:38px;border-radius:var(--r1);font:600 1.05rem/1 var(--sans);box-shadow:inset 0 0 0 1px var(--line)}
+.m-brand .br-aa.is-near{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-aa.serif{font:italic 400 1.45rem/1 var(--serif)}
+.m-brand .br-aa svg{width:34px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.m-brand .br-pairname{font-weight:600}
+.m-brand .br-note{margin-top:2px}
+.m-brand .br-ratio{font:500 .93rem/1 var(--mono);color:var(--ink)}
+html:is([lang=ar],[lang=fa]) .m-brand .br-ratio{font-family:var(--ui);font-size:.98rem}
+.m-brand .br-table td.br-off .badge{opacity:.5}
+.m-brand .br-table td .badge .i{width:.85rem;height:.85rem}
+.m-brand .br-table tr.fails td{border-bottom-color:transparent}
+.m-brand .br-table tr.br-sug td{padding-top:0}
+.m-brand .br-sugbox{align-items:center;flex-wrap:wrap}
+.m-brand .br-sugbox .grow{min-width:220px}
+.m-brand .br-sugsw{width:22px;height:22px;border-radius:6px;flex:none;box-shadow:inset 0 0 0 1px var(--line2)}
+.m-brand .br-sugbox b.mono{font-size:max(12px,.9em)}
+
+/* ---- section themes ---- */
+.m-brand .br-themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:12px}
+.m-brand .br-theme{display:flex;flex-direction:column;gap:10px;min-height:184px;padding:16px 18px 14px;border-radius:var(--r2);background:var(--tb);color:var(--tf);text-align:start;box-shadow:inset 0 0 0 1px var(--line);transition:transform .15s var(--ease),box-shadow .15s}
+.m-brand .br-theme:hover{box-shadow:inset 0 0 0 1px var(--line3),var(--shadow2)}
+.m-brand .br-theme.is-near{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-theme.is-off .br-th-h,.m-brand .br-theme.is-off .br-th-p{opacity:.72}
+.m-brand .br-th-off{display:inline-block;margin-inline-start:8px;padding:1px 7px;border-radius:999px;box-shadow:inset 0 0 0 1px currentColor;font:600 var(--fs-min)/1.5 var(--ui);letter-spacing:0;text-transform:none}
+.m-brand .br-theme:active{transform:translateY(1px)}
+.m-brand .br-th-label{font:400 var(--fs-min)/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+html:is([lang=ar],[lang=fa]) .m-brand .br-th-label{font-family:var(--ui);letter-spacing:0;text-transform:none;font-size:.93rem}
+.m-brand .br-th-h{font:400 1.7rem/1.02 var(--serif);letter-spacing:-.01em;text-wrap:balance}
+.m-brand .br-th-h em{font-style:italic;color:var(--te)}
+.m-brand .br-th-h[dir=rtl]{font:500 1.3rem/1.35 var(--ar);letter-spacing:0}
+.m-brand .br-th-h[dir=rtl] em{font-style:normal;font-weight:300}
+.m-brand .br-th-p{font-size:.93rem;line-height:1.45;color:color-mix(in srgb,var(--tf) 76%,transparent);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.m-brand .br-th-p[dir=rtl]{font-family:var(--ar)}
+.m-brand .br-th-rule{display:flex;align-items:center;gap:7px;padding-top:9px;border-top:1px solid color-mix(in srgb,var(--tf) 18%,transparent);font-size:.93rem;font-weight:500;color:color-mix(in srgb,var(--tf) 82%,transparent)}
+.m-brand .br-th-rule i{width:10px;height:10px;border-radius:50%;background:var(--te);box-shadow:0 0 0 1px color-mix(in srgb,var(--tf) 30%,transparent);flex:none}
+
+/* ---- typography specimen ---- */
+.m-brand .br-type{padding:6px var(--pad) 8px}
+.m-brand .br-type-row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.m-brand .br-type-row:last-child{border-bottom:0}
+.m-brand .br-type-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.m-brand .br-type-meta b{font-weight:600;font-size:.93rem;text-align:start}
+.m-brand .br-type-sample{min-width:0;overflow-wrap:anywhere;color:var(--ink)}
+.m-brand .br-type-sample.f-serif{font:400 2.3rem/1.02 var(--serif);letter-spacing:-.015em}
+.m-brand .br-type-sample.f-serif em{font-style:italic;color:var(--accent-text)}
+.m-brand .br-type-sample.f-sans{font:400 1.12rem/1.45 var(--sans);max-width:52ch}
+.m-brand .br-type-sample.f-mono{font:400 .93rem/1.5 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.m-brand .br-type-sample.f-ar{font:500 1.6rem/1.35 var(--ar)}
+.m-brand .br-type-sample.f-ar em{font-style:normal;font-weight:300;color:var(--accent-text)}
+@container (max-width:560px){.m-brand .br-type-row{grid-template-columns:1fr;gap:8px}}
+.m-brand .br-type-card{container-type:inline-size}
+
+/* ---- logos ---- */
+.m-brand .br-onbg{gap:8px;flex:none}
+.m-brand .br-logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.m-brand .br-logo{display:flex;flex-direction:column;gap:10px;min-width:0}
+.m-brand .br-logo-stage{display:flex;height:132px;padding:24px;border-radius:var(--r2);background:var(--lb);box-shadow:inset 0 0 0 1px var(--line);transition:background-color .2s}
+.m-brand .br-logos.is-near .br-logo-stage{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-brand .br-logo-art{flex:1;min-width:0;background:var(--li);-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+.m-brand .br-logo figcaption{display:flex;flex-direction:column;gap:6px;min-width:0}
+.m-brand .br-logo-top{display:flex;align-items:center;gap:6px;min-width:0}
+.m-brand .br-logo-name{display:block;font-weight:600;font-size:.93rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-brand .br-logo-meta{display:block;font-size:var(--fs-min);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:start}
+html[dir=rtl] .m-brand .br-logo-meta{text-align:right}
+
+/* compact density */
+html[data-density=compact] .m-brand .br-chip{min-height:88px;padding:12px 16px}
+html[data-density=compact] .m-brand .br-orig{margin-block:-12px;margin-inline-end:-16px}
+html[data-density=compact] .m-brand .br-ctl{padding:8px 14px;gap:6px}
+html[data-density=compact] .m-brand .br-theme{min-height:184px}

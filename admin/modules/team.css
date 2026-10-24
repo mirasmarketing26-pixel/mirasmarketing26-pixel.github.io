@@ -1,0 +1,123 @@
+/* MIRAS admin — Team (scoped to .m-team; modals use .tm-form) */
+.m-team{max-width:1180px}
+.m-team > .callout{margin-bottom:var(--gap)}
+.m-team .tm-using{align-items:center;background:var(--accent-soft)}
+.m-team .tm-using .i{color:var(--accent-text)}
+.m-team .card + .card{margin-top:var(--gap)}
+.m-team .card-head{align-items:flex-start}
+.m-team .card-head .sub{max-width:66ch}
+.m-team .tm-count{margin-inline-start:auto;margin-top:2px}
+.m-team .tm-scroll{overflow-x:auto}
+
+/* members table */
+.m-team .tm-members .tm-scroll{padding:6px 0 4px}
+.m-team .tm-table{min-width:640px}
+.m-team .tm-table th{background:transparent;position:static}
+.m-team .tm-table th:first-child,.m-team .tm-table td:first-child{padding-inline-start:var(--pad)}
+.m-team .tm-table th:last-child,.m-team .tm-table td:last-child{padding-inline-end:calc(var(--pad) - 8px)}
+.m-team .tm-table td{height:calc(var(--row) + 18px)}
+.m-team .tm-table tbody tr{cursor:pointer}
+.m-team .tm-table tbody tr.sel{background:var(--accent-soft)}
+.m-team .tm-table tbody tr.is-me .tm-name{font-weight:650}
+.m-team .tm-person{display:flex;align-items:center;gap:12px;min-width:0}
+.m-team .tm-person .avatar{width:34px;height:34px;box-shadow:0 0 0 1px var(--line2)}
+.m-team .tm-who{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.m-team .tm-name{font-weight:600;text-decoration:none;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-team .tm-name:hover{text-decoration:underline;text-underline-offset:3px}
+.m-team .tm-email{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start}
+.m-team .tm-role .select{width:auto;min-width:118px}
+.m-team .tm-rolename{font-weight:500}
+.m-team .tm-lock{display:inline-grid;place-items:center;vertical-align:middle;margin-inline-start:6px;color:var(--ink3);width:22px;height:22px;border-radius:6px}
+.m-team .tm-lock[data-tip]:hover::after{white-space:normal;width:240px;text-align:start}
+.m-team .tm-c-title{color:var(--ink2)}
+.m-team .tm-status{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.m-team .tm-members .empty{border-top:1px solid var(--line)}
+@media (max-width:980px){.m-team .tm-c-title{display:none}.m-team .tm-table{min-width:520px}}
+
+/* roles matrix */
+.m-team .tm-viewas{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;padding-bottom:16px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.m-team .tm-viewas .hint{flex-basis:100%}
+.m-team .tm-matrix{width:100%;min-width:600px;border-collapse:separate;border-spacing:0;font-size:max(12px,.9rem)}
+.m-team .tm-matrix th,.m-team .tm-matrix td{padding:10px 10px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.m-team .tm-matrix thead th{vertical-align:bottom;padding-top:14px}
+.m-team .tm-matrix tbody th{text-align:start;font-weight:400;width:34%}
+.m-team .tm-matrix tbody tr:last-child > *{border-bottom:0}
+.m-team .tm-rn{display:block;font-weight:600;color:var(--ink)}
+.m-team .tm-rcount{display:block;font-size:max(13px,.74rem);color:var(--ink3);font-weight:400;margin-top:2px}
+.m-team .tm-pn{display:block;font-weight:600}
+.m-team .tm-pd{display:block;font-size:max(13px,.8rem);color:var(--ink3);margin-top:1px}
+.m-team .tm-desc td{font-size:max(13px,.76rem);line-height:1.35;color:var(--ink2);vertical-align:top;padding-top:4px}
+.m-team .tm-matrix .cur{background:var(--accent-soft)}
+.m-team .tm-matrix thead .cur{border-start-start-radius:var(--r2);border-start-end-radius:var(--r2)}
+.m-team .tm-matrix tbody tr:last-child .cur{border-end-start-radius:var(--r2);border-end-end-radius:var(--r2)}
+.m-team .tm-matrix thead .cur .tm-rn{color:var(--accent-text)}
+.m-team .tm-cell span:first-child{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;color:var(--ink4)}
+.m-team .tm-cell.on span:first-child{color:var(--good);background:var(--good-bg)}
+.m-team .tm-dash{display:block;width:10px;height:1.5px;border-radius:2px;background:currentColor}
+
+/* profile */
+.m-team .tm-phead{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:calc(var(--gap) * 1.5)}
+.m-team .tm-phead .avatar.xl{width:76px;height:76px;font-size:1.5rem}
+.m-team .tm-pname{overflow-wrap:anywhere}
+.m-team .tm-pline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:8px;color:var(--ink2)}
+.m-team .tm-pmail{display:inline-block;margin-top:4px;color:var(--accent-text);text-decoration:none}
+.m-team .tm-pmail:hover{text-decoration:underline}
+.m-team .tm-pgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:var(--gap);align-items:start}
+.m-team .tm-pgrid .card + .card{margin-top:0}
+@media (max-width:1100px){.m-team .tm-pgrid{grid-template-columns:minmax(0,1fr)}}
+.m-team .tm-saved{font-size:max(13px,.8rem);color:var(--good);font-weight:500;opacity:0;transition:opacity .2s;margin-top:3px}
+.m-team .tm-saved.on{opacity:1}
+.m-team .tm-swatches{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.m-team .tm-swatches button{width:30px;height:30px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px var(--line3)}
+.m-team .tm-swatches button[aria-checked=true]{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--sw)}
+.m-team .tm-swatches button[disabled]{cursor:default;opacity:.6}
+.m-team .tm-custom{display:inline-grid;margin-inline-start:4px}
+.m-team .tm-custom input[type=color]{width:30px;height:30px;border-radius:50%;outline:1.5px dashed var(--line3);outline-offset:2px}
+.m-team .tm-custom input[type=color]::-webkit-color-swatch{border-radius:50%}
+.m-team .tm-photo{display:flex;align-items:center;gap:16px}
+.m-team .tm-photo .hint{margin-top:6px}
+.m-team .tm-access-role{display:flex;flex-direction:column;gap:6px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.m-team .tm-access-role .select{max-width:220px}
+.m-team .tm-perms{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;padding:14px 0}
+.m-team .tm-perms li{display:flex;align-items:center;gap:8px;font-size:max(13px,.88rem);color:var(--ink3)}
+.m-team .tm-perms li.on{color:var(--ink)}
+.m-team .tm-perms li > span:first-child{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;flex:none}
+.m-team .tm-perms li.on > span:first-child{color:var(--good);background:var(--good-bg)}
+.m-team .tm-owns{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line);font-size:max(13px,.9rem)}
+.m-team .tm-owns a{color:var(--accent-text);font-weight:500;text-decoration:none}
+.m-team .tm-acts{list-style:none;display:flex;flex-direction:column}
+.m-team .tm-acts li{display:flex;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:max(12px,.9rem);min-width:0}
+.m-team .tm-acts li:last-child{border-bottom:0}
+.m-team .tm-act-i{color:var(--ink3);align-self:center;display:inline-grid}
+.m-team .tm-act-t{font-weight:500;color:var(--ink);text-decoration:none}
+a.tm-act-t:hover{text-decoration:underline}
+.m-team .tm-acts time{white-space:nowrap}
+
+/* keeping the admin private (no sign-in of its own) */
+.m-team .tm-honest .grow{min-width:0}
+.m-team .tm-inline{color:var(--accent-text);font-weight:500;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.m-team .tm-access-card h2:focus{outline:none}
+.m-team .tm-access-card h2:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+.m-team .tm-here{color:var(--ink2);font-size:max(13px,.92rem);max-width:72ch}
+.m-team .tm-steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin:14px 0 16px;padding:0}
+.m-team .tm-steps li{display:flex;gap:12px;align-items:flex-start;font-size:max(13px,.92rem);color:var(--ink);max-width:72ch;line-height:1.5}
+.m-team .tm-steps li > span:first-child{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;flex:none;color:var(--accent-text);box-shadow:inset 0 0 0 1.5px var(--accent-line);margin-top:-1px}
+.m-team code.ltr,.m-team .tm-here code{font:400 max(12px,.84em)/1.4 var(--mono);direction:ltr;unicode-bidi:isolate;color:var(--ink);background:var(--panel3);padding:1px 5px;border-radius:5px}
+.m-team .tm-guide{display:inline-flex;align-items:center;gap:6px;color:var(--accent-text);font-weight:500;text-decoration:none;font-size:max(12px,.9rem)}
+.m-team .tm-guide:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* forms (also inside modals, which live outside .m-team) */
+.tm-form{display:flex;flex-direction:column;gap:14px}
+.tm-form .tm-local{font-size:max(13px,.9rem);max-width:56ch;margin-top:-2px}
+.tm-form-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:620px){.tm-form-2{grid-template-columns:1fr}.m-team .tm-perms{grid-template-columns:1fr}}
+
+html[data-density=compact] .m-team .tm-table td{height:calc(var(--row) + 10px)}
+html[data-density=compact] .m-team .tm-matrix th,html[data-density=compact] .m-team .tm-matrix td{padding-block:7px}
+
+/* phones: the roles table scrolls inside its own box instead of widening the page */
+@media (max-width:720px){
+  .m-team .tm-members, .m-team .tm-scroll, .m-team .tm-roles{min-width:0;max-width:100%}
+  .m-team .tm-scroll{overflow-x:auto}
+}
+@media (max-width:720px){ .m-team{overflow-x:clip} }

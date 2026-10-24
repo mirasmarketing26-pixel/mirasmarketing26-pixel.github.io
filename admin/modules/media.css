@@ -1,0 +1,189 @@
+/* MIRAS admin — Media
+   Page styles live under .m-media. The drawer, modals (compress, picker) and the drop overlay are appended to <body>,
+   so they carry their own md- classes (.md-drawer, .md-modal, .md-drop). */
+
+/* ---------- layout ---------- */
+.m-media .md-layout{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:calc(var(--gap) * 1.5);align-items:start}
+.m-media .md-lib{min-width:0}
+.m-media .md-side{position:sticky;top:calc(var(--top-h) + 12px);max-height:calc(100vh - var(--top-h) - 24px);overflow:auto;border-radius:var(--r3);scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.m-media .md-ro{margin-bottom:var(--gap)}
+.m-media .md-tabs .tabs{margin-bottom:12px}
+.m-media .md-toolbar{margin-bottom:var(--gap)}
+.m-media .md-toolbar .select.sm{width:auto}
+.m-media .md-foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:0 4px}
+@media (max-width:1180px){
+  .m-media .md-layout{grid-template-columns:minmax(0,1fr)}
+  .m-media .md-side{position:static;max-height:none;overflow:visible;order:-1}
+  .m-media .md-slot-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:8px}
+}
+
+/* ---------- tiles (also used inside the picker modal) ---------- */
+:is(.m-media,.md-modal) .md-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(156px,1fr));gap:14px}
+html[data-density=compact] :is(.m-media,.md-modal) .md-grid{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+:is(.m-media,.md-modal) .md-tile{position:relative;display:flex;flex-direction:column;min-width:0;padding:0;border-radius:var(--r3);background:var(--panel);text-align:start;overflow:hidden;
+  box-shadow:inset 0 0 0 1px var(--line),var(--shadow1);transition:box-shadow .15s,transform .15s}
+:is(.m-media,.md-modal) .md-tile:hover{box-shadow:inset 0 0 0 1px var(--line3),var(--shadow2)}
+:is(.m-media,.md-modal) .md-tile:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+:is(.m-media,.md-modal) .md-tile.is-cursor{box-shadow:inset 0 0 0 2px var(--accent),var(--shadow1)}
+:is(.m-media,.md-modal) .md-tile[aria-selected=true]{box-shadow:inset 0 0 0 2px var(--accent),0 0 0 3px var(--accent-soft)}
+:is(.m-media,.md-modal) .md-tile.is-missing .md-thumb{opacity:.45}
+:is(.m-media,.md-modal,.md-drawer) .md-thumb{position:relative;display:block;width:100%;aspect-ratio:1;background:var(--panel3);overflow:hidden;border-bottom:1px solid var(--line)}
+:is(.m-media,.md-modal,.md-drawer) .md-thumb img{width:100%;height:100%;object-fit:cover}
+:is(.m-media,.md-modal,.md-drawer) .md-thumb img.contain{object-fit:contain;padding:14%}
+:is(.m-media,.md-modal,.md-drawer) .md-thumb-ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink4)}
+:is(.m-media,.md-modal,.md-drawer) .matte-light{background:#F2EADB}
+:is(.m-media,.md-modal,.md-drawer) .matte-dark{background:#0D0F2E}
+html[data-theme=dark] :is(.m-media,.md-modal,.md-drawer) .md-thumb.matte-dark{background:#070920}
+:is(.m-media,.md-modal,.md-drawer) .matte-checker{background-color:var(--panel);background-image:conic-gradient(var(--panel3) 25%,transparent 0 50%,var(--panel3) 0 75%,transparent 0);background-size:16px 16px}
+:is(.m-media,.md-modal) .md-cap{display:flex;flex-direction:column;gap:2px;padding:9px 11px 11px;min-width:0}
+:is(.m-media,.md-modal) .md-name{font-weight:600;font-size:max(var(--fs-min),.88rem);color:var(--ink)}
+:is(.m-media,.md-modal) .md-meta{min-height:1.2em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:is(.m-media,.md-modal) .md-meta .warn{color:var(--warn)}
+:is(.m-media,.md-modal) .md-use-line{display:flex;align-items:center;gap:6px;min-width:0;margin-top:4px;padding-top:7px;border-top:1px solid var(--line);color:var(--ink2);font-weight:500}
+:is(.m-media,.md-modal) .md-use-line .tl{width:14px}
+:is(.m-media,.md-modal) .md-use-line.is-unused{color:var(--ink3);font-weight:400}
+:is(.m-media,.md-modal) .md-use-line .md-more{flex:none;color:var(--ink3)}
+:is(.m-media,.md-modal) .md-flags{position:absolute;top:8px;inset-inline:8px;display:flex;gap:4px;pointer-events:none}
+:is(.m-media,.md-modal) .md-flag{display:inline-flex;align-items:center;gap:5px;height:21px;padding-inline:7px;border-radius:999px;background:var(--panel);box-shadow:var(--shadow1),inset 0 0 0 1px var(--line);font-size:var(--fs-min);font-weight:600;color:var(--ink2);pointer-events:auto}
+:is(.m-media,.md-modal) .md-flag .tl{width:14px}
+:is(.m-media,.md-modal) .md-flag.noalt{margin-inline-start:auto;color:var(--warn)}
+:is(.m-media,.md-modal) .md-flag.noalt .i{width:.85rem;height:.85rem}
+.m-media .md-scrub{position:absolute;inset-inline-start:0;bottom:0;height:3px;width:calc(var(--p,0) * 100%);background:var(--flare);pointer-events:none}
+.m-media .md-tile.is-film .md-thumb{cursor:ew-resize}
+
+/* ---------- list view ---------- */
+.m-media .md-table .md-c-name{display:flex;align-items:center;gap:12px;min-width:0;padding-block:6px}
+.m-media .md-table .md-thumb.sm{width:44px;height:44px;flex:none;border-radius:var(--r1);border:0;box-shadow:inset 0 0 0 1px var(--line)}
+.m-media .md-table .md-name{font-weight:600}
+.m-media .md-table .md-c-uses{max-width:280px}
+.m-media .md-table .md-c-uses span{display:block}
+.m-media .md-table tr.is-cursor{background:var(--accent-soft)}
+.m-media .md-table td:first-child{min-width:220px;max-width:360px}
+
+/* ---------- image slots ---------- */
+.m-media .md-slots{overflow:hidden}
+.m-media .md-slots-head{display:flex;flex-direction:column;gap:4px;padding:calc(var(--pad) - 2px) var(--pad) 10px}
+.m-media .md-slot-group{display:flex;flex-direction:column;gap:2px;padding:14px var(--pad) 4px;border-top:1px solid var(--line)}
+.m-media .md-slot-list{display:flex;flex-direction:column;padding:2px 8px 10px}
+.m-media .md-slot{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px;border-radius:var(--r2)}
+.m-media .md-slot:hover{background:var(--hover)}
+.m-media .md-slot.flash{animation:cfflash 1.4s var(--ease)}
+.m-media .md-slot-pic{display:block;width:52px;height:52px;border-radius:var(--r2);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.m-media button.md-slot-pic:hover{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-media .md-slot .md-thumb.sm{width:52px;height:52px;aspect-ratio:auto;border:0}
+.m-media .md-slot .md-thumb.is-empty{display:grid;place-items:center;color:var(--ink4);background:var(--panel2)}
+.m-media .md-slot .md-thumb img.contain{padding:8%}
+.m-media .md-slot-main{min-width:0;display:flex;flex-direction:column;gap:1px}
+.m-media .md-slot-name{display:block;font-weight:600;font-size:max(var(--fs-min),.9rem);min-width:0}
+.m-media .md-slot-state{flex:none;display:inline-flex;align-items:center;gap:5px;color:var(--ink3)}
+.m-media .md-slot-state.changed{color:var(--ink2)}
+.m-media .md-slot-state .tl{width:14px}
+.m-media .md-slot-state.is-bad{color:var(--bad);font-weight:600}
+.m-media .md-slot.is-gone .md-thumb.is-gone{color:var(--bad);background:var(--bad-bg)}
+.m-media .md-slot-off{display:flex;align-items:center;gap:5px;margin-top:3px;color:var(--warn);font-weight:500}
+.m-media .md-slot-off .i{flex:none}
+.m-media .md-gone{margin:0 var(--pad) 8px;align-items:flex-start}
+.m-media .md-gone p{margin-top:2px}
+.m-media .md-slot-desc{line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.m-media .md-slot-file{display:flex;align-items:center;gap:8px;min-width:0;margin-top:3px}
+.m-media .md-slot-file .truncate{min-width:0}
+.m-media .md-slot-tools{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:2px;width:86px}
+.m-media .md-slot-tools .btn{flex:1 0 100%}
+
+/* ---------- drop anywhere ---------- */
+.md-drop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px;background:color-mix(in srgb,var(--bg) 80%,transparent);pointer-events:none;animation:fadein .12s ease both}
+.md-drop-in{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:440px;padding:44px 56px;border-radius:var(--r4);border:2px dashed var(--accent);background:var(--panel);color:var(--ink);text-align:center;box-shadow:var(--shadow3)}
+.md-drop-in .i{color:var(--accent-text)}
+.md-drop-in .small{color:var(--ink2)}
+
+/* ---------- detail drawer ---------- */
+.md-drawer .md-dr{display:flex;flex-direction:column;gap:14px}
+.md-drawer .md-dr > .section-title{margin:10px 0 -2px}
+.md-drawer .md-pv{height:300px;border-radius:var(--r3);overflow:hidden;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}
+.md-drawer .md-pv img{max-width:100%;max-height:100%;object-fit:contain}
+/* the focal point sits in image coordinates (left/top from JS), so it is not mirrored in RTL */
+.md-drawer .md-pv-img{position:relative;display:block;max-width:100%;max-height:100%;line-height:0}
+.md-drawer .md-pv-img img{display:block;max-height:300px}
+.md-drawer .md-pv-img img.is-focal{cursor:crosshair}
+.md-drawer .md-focal{position:absolute;width:24px;height:24px;padding:0;translate:-50% -50%;border-radius:50%;background:transparent;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(13,15,46,.55),inset 0 0 0 2px rgba(13,15,46,.55);cursor:grab}
+.md-drawer .md-focal-dot{position:absolute;inset:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(13,15,46,.55);pointer-events:none}
+.md-drawer .md-focal:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
+.md-drawer .md-focal:disabled{cursor:default}
+.md-drawer .md-focal-hint{min-width:0;flex:1 1 160px;line-height:1.35}
+.md-drawer .md-pv.matte-none{background:#0D0F2E}
+.md-drawer .md-pv-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px 8px;margin-top:8px}
+.md-drawer .md-film{display:flex;flex-direction:column;gap:6px;margin-top:-4px}
+.md-drawer .md-film .row{gap:10px}
+.md-drawer .md-film input[type=range]{flex:1}
+.md-drawer .md-film-lbl{min-width:8.5em;text-align:end;white-space:nowrap}
+.md-drawer .md-dr-head{display:flex;flex-direction:column;gap:10px}
+.md-drawer .md-dr-badges{gap:6px}
+.md-drawer .md-actions{gap:6px}
+.md-drawer .md-blocked .callout{align-items:flex-start}
+.md-drawer .md-blocked-list{list-style:none;display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.md-drawer .md-blocked-list li{display:flex;align-items:center;gap:8px;font-size:max(var(--fs-min),.9rem);font-weight:500}
+.md-drawer .md-uses-list{display:flex;flex-direction:column;gap:2px}
+.md-drawer .md-use{display:flex;align-items:center;gap:10px;min-height:38px;padding:4px 6px 4px 10px;border-radius:var(--r2)}
+html[dir=rtl] .md-drawer .md-use{padding:4px 10px 4px 6px}
+.md-drawer .md-use:hover{background:var(--hover)}
+.md-drawer .md-use-ic{color:var(--ink3);display:grid;place-items:center}
+.md-drawer .md-use-tools{display:flex;align-items:center;gap:4px}
+.md-drawer .md-alt .cf-langs{margin-top:10px}
+.md-drawer .md-alt .cf{padding-top:4px}
+.md-drawer .md-alt-inp{min-height:62px}
+.md-drawer .md-deco{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.md-drawer .md-alt-note{display:flex;gap:6px;align-items:flex-start;margin-top:10px}
+.md-drawer .md-alt-note .i{flex:none;margin-top:1px}
+.md-drawer .md-kv{font-size:max(var(--fs-min),.9rem)}
+.md-drawer .md-path{font-size:max(var(--fs-min),.93rem);background:var(--panel3);padding:2px 6px;border-radius:5px;overflow-wrap:anywhere}
+.md-drawer .md-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.md-drawer .md-tag-inp{flex:1;min-width:180px;width:auto}
+.md-drawer .md-dr-foot{justify-content:flex-start;align-items:center;gap:6px}
+.md-drawer .md-heavy,.md-drawer .md-ogratio{align-items:center}
+.md-drawer .md-held{display:flex;align-items:center;gap:8px;min-height:38px;padding:4px 6px 4px 10px;margin-top:4px;border-top:1px solid var(--line);color:var(--ink3)}
+.md-drawer .md-held .grow{color:var(--ink2)}
+.md-drawer .md-blocked .md-held-title{display:block;margin-top:12px}
+.md-drawer .md-blocked .btn-row{margin-top:8px}
+
+/* ---------- compress + picker modals ---------- */
+.md-modal .md-cz-fmt{margin-top:14px;gap:12px}
+.md-modal .md-cz-alpha{margin-top:8px;color:var(--warn)}
+.md-modal .md-cz-rows{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.md-modal .md-cz-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--r2);box-shadow:inset 0 0 0 1px var(--line)}
+.md-modal .md-cz-thumb{width:48px;height:48px;flex:none;border-radius:var(--r1);overflow:hidden;background:var(--panel3)}
+.md-modal .md-cz-thumb img{width:100%;height:100%;object-fit:cover}
+.md-modal .md-cz-out{flex:none;max-width:46%;text-align:end;line-height:1.45}
+.md-modal .md-cz-out b{color:var(--ink)}
+.md-picker .md-pick{display:flex;flex-direction:column;gap:12px}
+.md-picker .md-pick-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.md-picker .md-pick-search{position:relative;flex:1;min-width:200px;max-width:340px}
+.md-picker .md-pick-search .i{position:absolute;inset-inline-start:10px;top:50%;transform:translateY(-50%);color:var(--ink3);pointer-events:none}
+.md-picker .md-pick-search .input{padding-inline-start:32px}
+.md-picker .md-pick-grid{grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:12px;max-height:min(56vh,560px);overflow:auto;padding:4px;margin:0 -4px;align-content:start}
+.md-picker .md-pick-empty{grid-column:1/-1;padding:28px 0;text-align:center}
+.md-picker.is-over{box-shadow:0 0 0 3px var(--accent),var(--shadow3)}
+
+/* ---------- crop ---------- */
+.md-cropper .md-crop{display:flex;flex-direction:column;gap:12px}
+.md-cropper .md-crop-bar{gap:10px}
+.md-cropper .md-crop-stage{display:grid;place-items:center;padding:14px;border-radius:var(--r3);background:var(--panel3);box-shadow:inset 0 0 0 1px var(--line)}
+.md-cropper .md-crop-box{position:relative;max-width:100%;overflow:hidden;user-select:none;touch-action:none;background-color:var(--panel);background-image:conic-gradient(var(--panel3) 25%,transparent 0 50%,var(--panel3) 0 75%,transparent 0);background-size:16px 16px}
+.md-cropper .md-crop-box img{display:block;width:100%;height:100%;pointer-events:none}
+/* the crop area: image coordinates (left/top/width/height from JS); the dim outside is its spread shadow, clipped by the box */
+.md-cropper .md-crop-rect{position:absolute;cursor:move;box-shadow:0 0 0 100vmax rgba(13,15,46,.58);outline:2px solid #fff;outline-offset:-1px}
+.md-cropper .md-crop-rect::before,.md-cropper .md-crop-rect::after{content:"";position:absolute;pointer-events:none;border:0 solid rgba(255,255,255,.55)}
+.md-cropper .md-crop-rect::before{inset-block:0;inset-inline:33.333%;border-inline-width:1px}
+.md-cropper .md-crop-rect::after{inset-inline:0;inset-block:33.333%;border-block-width:1px}
+.md-cropper .md-crop-rect:focus-visible{outline:3px solid var(--focus);outline-offset:-2px}
+.md-cropper .md-crop-rect.is-drag{cursor:grabbing}
+.md-cropper .md-crop-focal{position:absolute;width:12px;height:12px;translate:-50% -50%;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(13,15,46,.6);pointer-events:none;z-index:1}
+.md-cropper .md-crop-size .field{max-width:360px}
+.md-cropper .md-crop-range{width:100%}
+.md-cropper .md-crop-out{margin:0}
+
+@media (max-width:720px){
+  :is(.m-media,.md-modal) .md-grid{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+  .m-media .md-toolbar .search{max-width:none;flex-basis:100%}
+  .md-drawer .md-pv{height:220px}
+  .md-drawer .md-alt .cf-langs{grid-template-columns:1fr}
+}

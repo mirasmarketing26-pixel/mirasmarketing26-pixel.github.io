@@ -1,0 +1,101 @@
+/* MIRAS admin — Process (#/process). Everything is scoped under .m-process. */
+.m-process .pr-main{min-width:0;container-type:inline-size;container-name:prmain}
+/* the live preview is the shared MA.ui.previewPane (admin.css .pvp-*); the matrix tab parks it and takes the full width */
+
+.m-process .pr-callout{margin-bottom:var(--gap);align-items:center}
+.m-process .callout > .btn{margin-inline-start:auto;flex:none}
+.m-process .tabs{margin-bottom:calc(var(--gap) * 1.2)}
+
+/* ---------- the four stages, on one tide line ---------- */
+.m-process .pr-voyage-card{padding:14px var(--pad) 18px;margin-bottom:var(--gap)}
+.m-process .pr-voyage-head{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;margin-bottom:12px}
+.m-process .pr-voyage{position:relative}
+.m-process .pr-water{position:absolute;inset-inline:0;top:2px;width:100%;height:24px;pointer-events:none;overflow:visible}
+.m-process .pr-water path{fill:none;stroke:var(--accent);stroke-width:1.3;vector-effect:non-scaling-stroke;opacity:.55}
+.m-process .pr-water path + path{opacity:.25}
+html[dir=rtl] .m-process .pr-water{transform:scaleX(-1)}
+.m-process .pr-stops{position:relative;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.m-process .pr-stop{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;padding:0 6px 6px;border-radius:var(--r2);text-align:start;transition:background-color .12s}
+.m-process .pr-stop-top{display:flex;align-items:center;gap:8px}
+/* the one stage numbering on this page: 01–04 in mono, echoing the site's own "01 / 04" label */
+.m-process .pr-idx{font:500 max(12px,.74rem)/1 var(--mono);letter-spacing:.04em;color:var(--ink3);direction:ltr;unicode-bidi:isolate}
+.m-process .pr-mark{display:inline-flex;align-items:center}
+.m-process .pr-stop:hover{background:var(--hover)}
+.m-process .pr-dot{width:14px;height:14px;border-radius:50%;background:var(--panel);box-shadow:inset 0 0 0 2px var(--accent);margin:7px 0 6px}
+.m-process .pr-stop:hover .pr-dot{background:var(--accent)}
+.m-process .pr-stop-name{font-weight:600;font-size:.98rem;line-height:1.3;max-width:100%;overflow-wrap:anywhere}
+
+/* ---------- stage cards ---------- */
+.m-process .pr-cards{display:flex;flex-direction:column;gap:var(--gap)}
+.m-process .pr-card{scroll-margin-top:calc(var(--top-h) + 12px)}
+.m-process .pr-card .card-head{align-items:flex-start;padding-top:calc(var(--pad) - 2px)}
+.m-process .pr-card .card-head .pr-card-idx{flex:none;min-width:2ch;padding-top:.52rem}
+.m-process .pr-cardmark{display:inline-flex;align-items:center;flex:none;padding-top:.5rem}
+.m-process .pr-card-title{overflow-wrap:anywhere}
+.m-process .pr-card .card-body > .cf:first-child{padding-top:4px}
+.m-process .pr-list-wrap{margin-top:12px;padding-top:14px;border-top:1px solid var(--line)}
+.m-process .pr-list-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.m-process .pr-list-head .h4{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+.m-process .pr-list-head .hint{margin-top:2px;max-width:66ch}
+/* site copy quoted inside an admin sentence stays in one piece */
+.m-process .pr-list-head .hint span[dir=auto],.m-process .pr-mtools span[dir=auto]{white-space:nowrap}
+.m-process .pr-warn:not(:empty){margin:8px 0}
+.m-process .pr-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:6px;border-bottom:1px solid var(--line)}
+.m-process .pr-item:last-child{border-bottom:0}
+.m-process .pr-item .cf{border-bottom:0;padding-block:10px}
+.m-process .pr-item > .drag-handle,.m-process .pr-item > .icon-btn{margin-top:38px}
+.m-process .pr-item.dragging{opacity:1;background:var(--panel2);box-shadow:var(--shadow2);border-radius:var(--r2);z-index:2;position:relative}
+.m-process .pr-noitems{padding:12px 0}
+/* tags are short: tighter rows */
+.m-process .pr-items.is-tags .pr-item .cf{padding-block:8px}
+.m-process .pr-items.is-tags .pr-item > .drag-handle,.m-process .pr-items.is-tags .pr-item > .icon-btn{margin-top:36px}
+.m-process .pr-stop-meta{margin-top:2px}
+
+/* ---------- plan order labels ---------- */
+.m-process .pr-labels{margin-top:var(--gap)}
+.m-process .pr-labels-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 calc(var(--gap) * 1.4)}
+.m-process .pr-labels-grid .cf:nth-last-child(-n+2){border-bottom:0}
+.m-process .pr-labels-grid .cf-langs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.m-process .pr-usedby{font-size:max(13px,.8rem);color:var(--ink3)}
+@container prmain (max-width:620px){
+  .m-process .pr-labels-grid{grid-template-columns:minmax(0,1fr)}
+  .m-process .pr-labels-grid .cf:nth-last-child(2){border-bottom:1px solid var(--line)}
+  .m-process .pr-stops{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}
+  .m-process .pr-water{display:none}
+}
+
+/* ---------- personal steps matrix ---------- */
+.m-process .pr-mtools{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;margin-bottom:12px}
+.m-process .pr-mtools .grow{min-width:260px;max-width:72ch}
+.m-process .pr-matrix-wrap{max-height:none}
+.m-process .pr-matrix{table-layout:fixed;min-width:860px}
+.m-process .pr-matrix th{vertical-align:bottom;white-space:normal}
+.m-process .pr-matrix thead th{padding-block:12px 10px}
+.m-process .pr-corner{width:220px}
+.m-process .pr-th-n{display:block}
+.m-process .pr-th-n .pr-idx{font-size:max(12px,.72rem)}
+.m-process .pr-th-t{display:block;margin-top:4px;font:600 max(12px,.92rem)/1.3 var(--ui);letter-spacing:0;text-transform:none;color:var(--ink)}
+.m-process .pr-matrix[lang=ar] .pr-th-t{font-family:var(--ar)}
+.m-process .pr-matrix td,.m-process .pr-matrix tbody th{height:auto;padding:8px;vertical-align:top;border-bottom:1px solid var(--line)}
+.m-process .pr-matrix td + td{border-inline-start:1px solid var(--line)}
+.m-process .pr-matrix tbody tr:hover{background:transparent}
+.m-process .pr-rowh{position:sticky;inset-inline-start:0;z-index:1;background:var(--panel);text-align:start;font:inherit;letter-spacing:0;text-transform:none;color:var(--ink);border-inline-end:1px solid var(--line)}
+.m-process .pr-swell{display:flex;align-items:center;gap:10px;padding:4px;border-radius:var(--r2);text-decoration:none;color:inherit;min-width:0}
+.m-process .pr-swell:hover{background:var(--hover)}
+.m-process .pr-swell-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.m-process .pr-swell-t b{font-weight:600;font-size:max(12px,.92rem);line-height:1.3;overflow-wrap:anywhere}
+.m-process .pr-swell-t .mono{direction:ltr;unicode-bidi:isolate;text-align:start}
+.m-process .pr-cell .textarea{min-height:60px;resize:none;font-size:max(12px,.9rem);line-height:1.4;background:transparent;box-shadow:none;padding:6px 8px}
+.m-process .pr-cell .textarea:hover{background:var(--hover)}
+.m-process .pr-cell .textarea:focus{background:var(--panel);box-shadow:inset 0 0 0 1.5px var(--focus)}
+.m-process .pr-cell .textarea[dir=rtl]{font-family:var(--ar)}
+.m-process .pr-cell.is-empty .textarea{background:var(--warn-bg);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--warn) 40%,transparent)}
+.m-process .pr-cell.is-empty .textarea::placeholder{color:var(--warn)}
+
+/* ---------- swell tile (same look as Swells) ---------- */
+.m-process .pr-tile{--tb:var(--st-tide);--tf:var(--st-shore);display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:var(--r2);background:var(--tb);color:var(--tf);box-shadow:inset 0 0 0 1px var(--line)}
+/* a tile whose colour is close to the surface (Deep on a dark card, Shore or Foam on a light one) keeps a visible edge */
+.m-process .pr-tile.near{box-shadow:inset 0 0 0 1px var(--line3)}
+.m-process .pr-tile svg{width:64%;height:64%}
+html[dir=rtl] .m-process .pr-card-title{text-align:right}
+.m-process .pr-stop:focus-visible{outline:2px solid var(--focus);outline-offset:2px}

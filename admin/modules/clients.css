@@ -1,0 +1,366 @@
+/* MIRAS admin — Clients (category). Page rules are scoped to .m-clients. Classes used inside dialogs (they sit in body)
+   keep a cl- name and are not scoped.
+   Light by design: few words, an icon on every tab, primary action and empty state, extra details folded away.
+   Look (owner feedback: one flat dull colour, hard to see which is which, hard to navigate):
+   - Tide #2B3BF0 is the one accent: the primary button, the selected tab's bar, links, the focus ring and checked controls.
+     Text in Tide uses the Tide ink (a deeper Tide that reaches 7:1), because Tide itself is 6.9:1 on the panel.
+   - Status has its own colour and always a word: approved = Foam green on a Foam tint; changes and overdue = Flare-red;
+     waiting, in review and due soon = Tide ink on a Tide tint; pending and draft = muted ink with an outline; done = a solid ink pill.
+   - Destructive actions are red, with a red outline (solid red only for the confirm step).
+   - Sizes: body 14px, secondary text and field hints 13px, eyebrow labels 12px. Nothing under 12px.
+   - Contrast: body text and headings are the ink colour (7:1 or more on panels). Secondary text is --ink2 or --ink3 (4.5:1 or more).
+   - Cards: a border, a panel surface and a hairline shadow. Control borders use --cl-control (3:1 or more). */
+:root { --cl-control: rgba(13, 15, 46, .5); }
+:root[data-theme="dark"] { --cl-control: rgba(242, 234, 219, .5); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --cl-control: rgba(242, 234, 219, .5); } }
+
+/* ---------- palette: the admin's palette plus what the Clients screens need. Set on <html> while a Clients page is on screen,
+   so drawers and dialogs (which sit in body) inherit them too. Every text pair here is at least 7:1 (solid text) or 4.5:1 (secondary). */
+html:has(.m-clients), html:has(.m-clients-project) {
+  --ink2: rgba(13, 15, 46, .76);
+  --ink3: rgba(13, 15, 46, .68);
+  --accent-soft: rgba(13, 15, 46, .07);
+  --info: var(--ink);
+  --info-bg: rgba(13, 15, 46, .07);
+  --cl-danger: #741808;                       /* red text: 9:1 on the panel, still over 7:1 on a red-tinted badge */
+  --cl-tide: var(--tide);                     /* #2B3BF0: primary fills, focus, the solid parts */
+  --cl-tide-ink: #1A24AD;                     /* Tide-family text: 9.5:1 on the panel, 8.1:1 on the darkest panel with a Tide wash */
+  --cl-tide-tint: rgba(43, 59, 240, .10);     /* a selected row, chip, thread or template */
+  --cl-tide-wash: rgba(43, 59, 240, .08);     /* the fill of a Tide status badge (lighter, so a badge can sit on a selected row) */
+  --cl-bar: var(--tide);                      /* selected tab bars, progress, switches, checked boxes */
+  --cl-rule: rgba(13, 15, 46, .5);            /* table header rule and other strong rules */
+  --cl-ok-ink: #064A33;                       /* approved: Foam green text, 8.9:1 on a Foam tint */
+  --cl-ok-tint: rgba(191, 240, 221, .6);
+}
+html[data-theme="dark"]:has(.m-clients), html[data-theme="dark"]:has(.m-clients-project) {
+  --ink2: rgba(242, 234, 219, .8); --ink3: rgba(242, 234, 219, .68);
+  --accent-soft: rgba(242, 234, 219, .09);
+  --info: var(--ink); --info-bg: rgba(242, 234, 219, .09);
+  --cl-danger: #FFCDBE;                       /* lighter, so the red status words hold 7:1 even on a tinted badge */
+  --cl-tide-ink: #B4C0FF;                     /* 9.0:1 on the dark panel, 7.6:1 on the darkest panel with a Tide tint */
+  --cl-tide-tint: rgba(43, 59, 240, .14);
+  --cl-tide-wash: rgba(43, 59, 240, .12);
+  --cl-bar: var(--tide60);                    /* Tide60 is the Tide that shows on Deep (Tide itself is 2.6:1 there) */
+  --cl-rule: rgba(242, 234, 219, .5);
+  --cl-ok-ink: #7FE3BC;
+  --cl-ok-tint: rgba(191, 240, 221, .14);
+}
+
+/* ---------- page column (the sidebar's Clients category is the only menu) ---------- */
+.m-clients { max-width: 1200px; font-size: 14px; color: var(--ink); }
+.m-clients .cl-main { min-width: 0; display: grid; gap: 22px; }
+.m-clients .cl-project-host { min-width: 0; }
+.m-clients .cl-project-host > * + * { margin-top: var(--gap, 16px); }
+
+/* ---------- text ---------- */
+.m-clients .cl-muted { font-size: 13px; color: var(--ink2); }
+.m-clients .cl-count { margin: 0; font-size: 13px; color: var(--ink2); }
+/* links and "open" actions: Tide ink, underlined (the underline also keeps them apart from body text without colour) */
+.m-clients .cl-link { color: var(--cl-tide-ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.m-clients .cl-link:hover { text-decoration-thickness: 2px; }
+.m-clients .cl-mono { font-family: var(--mono); font-size: 13px; color: var(--ink2); }
+.m-clients .small, .cl-form .small { font-size: 13px; }
+.m-clients [role="tab"] .count, .m-clients .tabs .count { font-size: 13px; }
+/* admin sets field labels, segmented buttons, small inputs and table heads below 13px: raised here */
+.m-clients .field > label, .m-clients .field > .field-label, .cl-form .field > label, .cl-form .field > .field-label,
+.m-clients-project .field > label, .m-clients-project .field > .field-label, .cp-wiz .field > label, .cp-form .field > label,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .field > label { font-size: 14px; }
+.m-clients .seg button, .m-clients-project .seg button, .cp-form .seg button, .cp-wiz .seg button,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .seg button { font-size: 13px; }
+.m-clients .input.sm, .m-clients .select.sm, .m-clients-project .select.sm, .cl-form .select.sm, .cp-form .select.sm, .cp-wiz .select.sm,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .select.sm { font-size: 13px; }
+.m-clients th, .m-clients-project th, .cl-form th, .cp-wiz th { font-size: 13px; }
+.m-clients .table, .m-clients-project .table, .cp-wiz .table { font-size: 14px; }   /* admin sets tables to .92rem (12.9px) */
+.m-clients .btn, .cl-form .btn, .modal .btn, .drawer .btn { font-size: 14px; }
+.m-clients .btn.sm, .modal .btn.sm, .drawer .btn.sm { font-size: 13px; }
+/* Field help lines: admin.css sets them to .8rem (11.2px here). Nothing on the Clients pages goes below 13px. */
+.m-clients .field .hint, .cl-form .field .hint, .drawer .field .hint, .modal .field .hint { font-size: 13px; }
+.m-clients .cl-none { text-align: center; color: var(--ink2); padding: 24px 12px; }
+/* project pages: table cells, the step and file figures, the URLs and the wizard's step names are body size (14px) */
+html .cp-wiz-n, html .cp-wiz-name, html .cp-num, html .cp-u, .m-clients-project td, .cp-wiz td, .m-clients-project .cp-table td { font-size: 14px; }
+.cl-warn { margin: 0; padding: 10px 12px; border-radius: var(--r1); background: var(--warn-bg); color: var(--warn); font-size: 14px; line-height: 1.5; }
+
+/* ---------- toolbar, search, chips ---------- */
+.m-clients .cl-toolbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.m-clients .cl-toolbar > .field { flex: 1 1 220px; min-width: min(100%, 200px); margin: 0; }
+.m-clients .cl-toolbar-end { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-inline-start: auto; }
+.m-clients .cl-toolbar-end:empty, .m-clients .cl-count:empty { display: none; }
+.m-clients .cl-search { position: relative; flex: 1 1 260px; max-width: 420px; min-width: min(100%, 220px); }
+.m-clients .cl-search .i { position: absolute; inset-inline-start: 11px; top: 50%; transform: translateY(-50%); color: var(--ink2); pointer-events: none; }
+.m-clients .cl-search .input { padding-inline-start: 36px; width: 100%; }
+.m-clients .cl-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.m-clients .cl-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--cl-control); background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; }
+.m-clients .cl-chip:hover { background: var(--hover); border-color: var(--ink); }
+/* a pressed filter: a Tide tint, a Tide ring and the ink label, so the chosen filter reads at a glance */
+.m-clients .cl-chip[aria-pressed="true"] { background: var(--cl-tide-tint); border-color: var(--cl-tide); box-shadow: inset 0 0 0 1px var(--cl-tide); color: var(--ink); font-weight: 700; }
+.m-clients .cl-chip-n { font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.m-clients .cl-chip[aria-pressed="true"] .cl-chip-n { color: var(--ink); }
+
+/* ---------- small pieces: icons, one-line text, folded sections ---------- */
+.cl-ico { display: inline-grid; place-items: center; flex: none; color: var(--ink2); }
+.cl-line { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink); }
+/* "More details": a quiet toggle with a chevron that turns when the section is open */
+.cl-more { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: 6px; align-self: start; min-height: 36px; padding-inline: 8px; margin-inline-start: -8px;
+  border-radius: var(--r1); cursor: pointer; font-size: 14px; font-weight: 600; color: var(--ink2); }
+.cl-more:hover { color: var(--ink); background: var(--hover); }
+.cl-more:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.cl-more .i { transition: transform .15s; }
+.cl-more[aria-expanded="true"] .i { transform: rotate(180deg); }
+.cl-fold-body { display: grid; gap: 14px; }
+.cl-fold-body[hidden] { display: none; }
+.cl-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; min-width: 0; }
+.cl-grid2 > .field { margin: 0; min-width: 0; }
+@media (max-width: 520px) { .cl-grid2 { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- the empty directory: one big button ---------- */
+.m-clients .cl-start { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 34vh; padding: 32px 16px; }
+.m-clients .cl-start .btn.lg { height: 64px; padding-inline: 32px; font-size: 17px; border-radius: var(--r3); gap: 12px; }
+.m-clients .cl-start .btn.lg .i { width: 24px; height: 24px; }
+
+/* ---------- section headings: bold, in the ink colour, with room above (a label, not a second title) ---------- */
+.m-clients h2.h3, .m-clients .cl-sec > h2, .m-clients-project h2.h3, .m-clients-project .cp-section > h2 {
+  font: 700 14px/1.35 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); margin: 0;
+}
+html:is([lang=ar], [lang=fa]) :is(.m-clients h2.h3, .m-clients .cl-sec > h2, .m-clients-project h2.h3, .m-clients-project .cp-section > h2) {
+  font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; line-height: 1.5;
+}
+
+/* ---------- tables ---------- */
+.m-clients .table-wrap { overflow-x: auto; background: transparent; box-shadow: none; border-radius: 0; }
+.m-clients .table th { background: var(--bg); border-bottom: 2px solid var(--cl-rule); }   /* a visible rule under every header */
+.m-clients .cl-table th { font-size: 13px; font-weight: 700; color: var(--ink); vertical-align: bottom; white-space: normal; }   /* the core keeps headings on one line, which widens the table */
+.m-clients .cl-main > .stack { min-width: 0; }   /* a wide table scrolls inside its own wrapper instead of pushing the page sideways */
+.m-clients .cl-table td { font-size: 14px; vertical-align: top; color: var(--ink); }
+.m-clients .cl-table .cl-num { text-align: end; font-variant-numeric: tabular-nums; }
+.m-clients .cl-table th.cl-num { text-align: end; }
+.m-clients .cl-table tbody tr:hover { background: var(--hover); }
+.m-clients .cl-table tr.sel td { background: var(--cl-tide-tint); }
+.m-clients .cl-table .shrink { width: 1%; white-space: nowrap; }
+.m-clients .cl-metrics th, .m-clients .cl-metrics td { padding-inline: 10px; }   /* eight columns, with the two row buttons, fit a 1440 screen */
+/* a row's screenshot: a fixed 16:10 thumbnail (64px wide), so every row keeps one height; the picture is cropped to its top edge */
+.m-clients .cl-metrics .cl-thumb { position: relative; display: block; flex: none; width: 64px; height: 40px; margin: 0; padding: 0; border: 0; border-radius: var(--r1); overflow: hidden; background: var(--panel3); box-shadow: inset 0 0 0 1px var(--cl-control); color: var(--ink2); cursor: zoom-in; }
+.m-clients .cl-metrics .cl-thumb:hover { box-shadow: inset 0 0 0 2px var(--ink); }
+.m-clients .cl-metrics .cl-thumb:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.m-clients .cl-metrics .cl-thumb-ph { position: absolute; inset: 0; display: grid; place-items: center; }
+.m-clients .cl-metrics .cl-thumb-ph .i { width: 18px; height: 18px; }
+.m-clients .cl-metrics .cl-thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.m-clients .cl-metrics .cl-thumb-img:not([src]) { opacity: 0; }   /* nothing shows until the picture is resolved (the alt text does not print) */
+.m-clients .cl-metrics .cl-thumb-img[hidden] { display: none; }   /* a missing file: the icon shows instead (display:block above would win over the hidden attribute) */
+.m-clients .cl-sort { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; min-height: 24px; font-size: 13px; font-weight: 700; color: var(--ink2); border-radius: 4px; }
+.m-clients th[aria-sort="ascending"] .cl-sort, .m-clients th[aria-sort="descending"] .cl-sort { color: var(--ink); }
+.m-clients .cl-arrow { font-size: 13px; color: var(--cl-tide-ink); min-width: 10px; }
+/* row actions sit side by side; the word shows on wide screens, the icon alone (with its aria-label) on narrow ones */
+.m-clients .cl-row-act { display: flex; gap: 6px; flex-wrap: nowrap; align-items: center; }
+.m-clients .cl-act { white-space: nowrap; }
+/* open and edit actions in a row are Tide ink, underlined on hover; the destructive one is red */
+.m-clients .cl-act:not(.danger) { color: var(--cl-tide-ink); font-weight: 600; }
+.m-clients .cl-act:not(.danger):hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+@media (max-width: 1099px) { .m-clients .cl-act-txt { display: none; } }
+/* names and companies keep a readable width, so they wrap less (the table scrolls sideways before they squeeze) */
+.m-clients .cl-dir td.cl-name { min-width: 12rem; }
+.m-clients .cl-dir td.cl-co { min-width: 10rem; }
+.m-clients .cl-table .table-wrap, .m-clients .table-wrap :focus-visible { outline-offset: -2px; }
+
+/* ---------- pages: sections, key figures, the list of what needs you ---------- */
+.m-clients .cl-sec { display: grid; gap: 14px; padding-block: 22px; border-block-start: 1px solid var(--line); min-width: 0; }
+.m-clients .cl-sec:first-child { border-block-start: 0; padding-block-start: 0; }
+.m-clients .cl-sec h2, .m-clients .cl-sec h3 { margin: 0; color: var(--ink); }
+.m-clients .cl-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.m-clients .cl-head.end { justify-content: flex-end; }
+.m-clients .cl-status { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.m-clients .cl-line-label { display: flex; align-items: center; gap: 8px; }
+.m-clients .cl-row-act.wrap { flex-wrap: wrap; }
+/* four figures: an icon, the number, one word. The icon sits in a plain neutral circle. */
+.m-clients .cl-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.m-clients .cl-kpi { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "i n" "i l"; column-gap: 12px; align-items: center;
+  border: 1px solid var(--line2); border-radius: var(--r2); padding: 12px 14px; background: var(--panel); box-shadow: var(--shadow1); }
+.m-clients .cl-kpi .cl-ico { grid-area: i; width: 38px; height: 38px; border-radius: 50%; background: var(--panel3); color: var(--ink); }
+.m-clients .cl-kpi-n { grid-area: n; font-family: var(--ui); font-weight: 700; font-size: 26px; line-height: 1.15; color: var(--ink); font-variant-numeric: tabular-nums; }
+.m-clients .cl-kpi-l { grid-area: l; font-size: 13px; color: var(--ink2); font-weight: 600; }
+.m-clients .cl-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.m-clients .cl-list > li { padding-block: 12px; border-block-end: 1px solid var(--line); }
+.m-clients .cl-list > li > .cl-muted { margin-top: 2px; }
+.m-clients .cl-rows > li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
+.m-clients .cl-rows > li > .cl-ico { padding-block-start: 2px; }
+.m-clients .cl-row-main > .cl-muted { margin-top: 2px; }
+.m-clients .cl-clear { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; color: var(--ink); }
+.m-clients .cl-clear .cl-ico { color: var(--cl-ok-ink); }
+.m-clients .cl-dl { display: grid; grid-template-columns: minmax(110px, max-content) minmax(0, 1fr); gap: 10px 20px; margin: 0; min-width: 0; flex: 1 1 320px; }
+.m-clients .cl-dl dt { font-size: 13px; color: var(--ink2); font-weight: 600; padding-block-start: 2px; }
+.m-clients .cl-dl dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.m-clients .cl-activity { list-style: none; margin: 0; padding: 0; display: grid; }
+.m-clients .cl-activity li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding-block: 12px; border-block-end: 1px solid var(--line); }
+.m-clients .cl-activity strong { font-weight: 600; color: var(--ink); }
+.m-clients .cl-act-ico { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--panel3); color: var(--ink); }
+.m-clients .cl-note-body { margin: 6px 0 0; font-size: 14px; color: var(--ink2); }
+.m-clients .cl-notes-box .field { margin: 0; }
+.m-clients .cl-notes-wrap { min-width: 0; }
+/* the stages approved: a thin bar and the words */
+.m-clients .cl-prog { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.m-clients .cl-meter { display: block; width: 64px; height: 6px; border-radius: 999px; background: var(--panel3); box-shadow: inset 0 0 0 1px var(--line2); overflow: hidden; flex: none; }
+.m-clients .cl-meter > i { display: block; height: 100%; border-radius: inherit; background: var(--cl-bar); }
+/* Details: a folded section. The summary is a plain row with a chevron that turns when it opens. */
+.m-clients .cl-details { border-block-start: 1px solid var(--line); padding-block-start: 6px; }
+.m-clients .cl-details > summary { list-style: none; display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; font: 700 14px/1.35 var(--ui); color: var(--ink); border-radius: var(--r1); }
+.m-clients .cl-details > summary::-webkit-details-marker { display: none; }
+.m-clients .cl-details > summary:hover { background: var(--hover); }
+.m-clients .cl-details > summary .i { transition: transform .15s; }
+.m-clients .cl-details[open] > summary .i { transform: rotate(180deg); }
+.m-clients .cl-details-body { display: grid; gap: 20px; padding-block: 8px 12px; }
+.m-clients .cl-head.cl-info { align-items: flex-start; }
+.m-clients .cl-sub { display: grid; gap: 12px; min-width: 0; }
+.m-clients .cl-sub h3 { margin: 0; font: 700 14px/1.35 var(--ui); color: var(--ink); }
+
+/* ---------- board ---------- */
+.m-clients .cl-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; align-items: start; }
+.m-clients .cl-col { border: 1px solid var(--line2); border-radius: var(--r2); padding: 12px; background: var(--panel); box-shadow: var(--shadow1); min-width: 0; }
+.m-clients .cl-col h2 { font-size: 14px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; color: var(--ink); }
+
+/* ---------- inbox and notes ---------- */
+.m-clients .cl-notes { list-style: none; margin: 0; padding: 0; display: grid; border-block-start: 1px solid var(--line); }
+.m-clients .cl-note { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 12px; align-items: start; padding-block: 14px; border-block-end: 1px solid var(--line); }
+.m-clients .cl-note-ico { color: var(--ink2); padding-block-start: 2px; }
+.m-clients .cl-note-link { color: var(--ink); text-decoration: none; }
+.m-clients .cl-note-link:hover strong { color: var(--cl-tide-ink); text-decoration: underline; }
+.m-clients .cl-note.is-new .cl-note-link strong { font-weight: 700; }
+.m-clients .cl-new { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink2); font-weight: 600; padding-block-start: 2px; }
+.m-clients .cl-new .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--flare); }
+
+/* ---------- dialogs (not scoped: they sit in body) ---------- */
+.cl-form { display: grid; gap: 14px; min-width: 0; }
+.cl-form .field { margin: 0; }
+.modal.cl-modal-sm { width: min(460px, 100%); }
+/* a contact card: a bordered card with a panel surface */
+.cl-contact { border: 1px solid var(--line2); border-radius: var(--r2); padding: 12px 14px; display: grid; gap: 12px; margin: 0; min-width: 0; background: var(--panel); box-shadow: var(--shadow1); }
+.cl-contact legend { font-weight: 700; font-size: 13px; color: var(--ink); padding: 0 4px; }
+.cl-codebox { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border: 1px solid var(--line3); border-radius: var(--r2); background: transparent; }
+.cl-code { font-family: var(--mono); font-size: 20px; letter-spacing: .08em; color: var(--ink); }
+.cl-copyrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cl-copyrow .input { flex: 1 1 220px; }
+.cl-fields { display: grid; gap: 14px; min-width: 0; }
+.cl-shot { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+/* the larger view of a numbers row's screenshot (a dialog, so these classes are not scoped) */
+.cl-lb { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.cl-lb-img { display: block; width: 100%; height: auto; max-height: 68vh; object-fit: contain; border-radius: var(--r2); background: var(--panel3); }
+.cl-lb-img:not([src]) { min-height: 160px; opacity: 0; }
+.cl-lb-img[hidden] { display: none; }
+.cl-lb figcaption { color: var(--ink2); overflow-wrap: anywhere; }
+.cl-lb p { margin: 0; }
+/* control borders: 3:1 or more. Admin draws input borders as a box-shadow, so this replaces that shadow (not the focus ring). */
+.m-clients .input:not(:focus), .m-clients .textarea:not(:focus), .m-clients .select:not(:focus),
+.cl-form .input:not(:focus), .cl-form .textarea:not(:focus), .cl-form .select:not(:focus),
+.cp-wiz .input:not(:focus), .cp-wiz .textarea:not(:focus), .cp-wiz .select:not(:focus),
+.cp-form .input:not(:focus), .cp-form .textarea:not(:focus), .cp-form .select:not(:focus),
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .input:not(:focus),
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .textarea:not(:focus),
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .select:not(:focus) { box-shadow: inset 0 0 0 1px var(--cl-control); }
+.m-clients ::placeholder, .cl-form ::placeholder, .cp-wiz ::placeholder, .cp-form ::placeholder,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) ::placeholder { color: var(--ink3); opacity: 1; }
+.cl-form .err, .modal .err, .drawer .err, .m-clients .err { color: var(--bad); font-size: 14px; margin: 0; }
+.cl-form .cl-row-act { justify-content: flex-start; }
+.m-clients :focus-visible, .cl-form :focus-visible, .modal :focus-visible, .drawer :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- buttons: one Tide primary per screen; secondary is an ink outline; destructive is red ---------- */
+.m-clients .btn, .cl-form .btn, .cp-wiz .btn, .cp-form .btn, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn {
+  color: var(--ink); background: var(--panel); box-shadow: inset 0 0 0 1px var(--cl-control);
+}
+.m-clients .btn:hover, .cl-form .btn:hover, .cp-wiz .btn:hover, .cp-form .btn:hover, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn:hover {
+  background: var(--hover); box-shadow: inset 0 0 0 1px var(--ink);
+}
+/* the primary action: a solid Tide fill with white text (7.0:1) */
+.m-clients .btn.primary, .cl-form .btn.primary, .cp-wiz .btn.primary, .cp-form .btn.primary,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.primary {
+  background: var(--tide); color: #FFFFFF; box-shadow: none;
+}
+.m-clients .btn.primary:hover, .cl-form .btn.primary:hover, .cp-wiz .btn.primary:hover, .cp-form .btn.primary:hover,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.primary:hover {
+  background: color-mix(in srgb, var(--tide) 86%, #000); box-shadow: none;
+}
+/* a page header holds the screen's one primary action; a primary-looking button lower down becomes an ink outline */
+.m-clients .cl-main:has(.page-head .btn.primary) .btn.primary:not(.page-head .btn.primary),
+.m-clients .cl-main:has(.page-head .btn.primary) .btn.primary:not(.page-head .btn.primary):hover {
+  background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+.m-clients .btn.ghost, .cl-form .btn.ghost, .cp-wiz .btn.ghost, .cp-form .btn.ghost, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.ghost {
+  background: transparent; box-shadow: none; color: var(--ink2);
+}
+.m-clients .btn.ghost:hover, .cl-form .btn.ghost:hover, .cp-wiz .btn.ghost:hover, .cp-form .btn.ghost:hover, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.ghost:hover {
+  background: var(--hover); color: var(--ink); box-shadow: none;
+}
+/* destructive: red text and a red outline, so it reads as a warning before it is pressed */
+.m-clients .btn.danger, .cl-form .btn.danger, .cp-wiz .btn.danger, .cp-form .btn.danger, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.danger {
+  color: var(--cl-danger); box-shadow: inset 0 0 0 1px var(--cl-danger);
+}
+.m-clients .btn.danger:hover, .cl-form .btn.danger:hover, .cp-wiz .btn.danger:hover, .cp-form .btn.danger:hover, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.danger:hover {
+  background: var(--hover); box-shadow: inset 0 0 0 1.5px var(--cl-danger);
+}
+.m-clients .btn.danger.solid, .cl-form .btn.danger.solid, .cp-wiz .btn.danger.solid, .cp-form .btn.danger.solid,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .btn.danger.solid { background: #9B2410; color: #fff; box-shadow: none; }
+.m-clients .icon-btn[aria-pressed="true"], .m-clients .icon-btn.on, .m-clients .pvp-toggle[aria-pressed="true"] { background: var(--cl-tide-tint); color: var(--ink); box-shadow: inset 0 0 0 1px var(--cl-tide); }
+.m-clients .meter > i, .m-clients-project .meter > i, .cp-wiz .meter > i { background: var(--cl-bar); }
+
+/* ---------- tabs: the selected tab is bold ink with a thick Tide bar ---------- */
+.m-clients .tabs [aria-selected="true"], .m-clients-project .tabs [aria-selected="true"], .m-clients [role="tab"][aria-selected="true"] { color: var(--ink); font-weight: 700; }
+.m-clients .tabs [aria-selected="true"]::after, .m-clients-project .tabs [aria-selected="true"]::after { background: var(--cl-bar); height: 3px; inset-inline: 6px; }
+.m-clients .tabs button, .m-clients .tabs a, .m-clients-project .tabs button, .m-clients-project .tabs a { color: var(--ink2); }
+.m-clients .tabs button:hover, .m-clients .tabs a:hover, .m-clients-project .tabs button:hover, .m-clients-project .tabs a:hover { color: var(--ink); }
+
+/* ---------- badges: a word and a small dot. Each status has its own colour; every pair is 7:1 or more ---------- */
+.m-clients .badge, .m-clients-project .badge, .cl-form .badge, .cp-wiz .badge, .cp-form .badge,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge {
+  font-size: 13px; height: auto; min-height: 24px; padding: 2px 10px 2px 8px; gap: 6px; line-height: 1.3; background: var(--panel3); color: var(--ink2);
+}
+.m-clients .badge::before, .m-clients-project .badge::before, .cl-form .badge::before, .cp-wiz .badge::before, .cp-form .badge::before,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; flex: none; background: currentColor;
+}
+/* approved, live, used: Foam green text on a Foam tint */
+.m-clients .badge.good, .m-clients-project .badge.good, .cl-form .badge.good, .cp-wiz .badge.good, .cp-form .badge.good,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.good { background: var(--cl-ok-tint); color: var(--cl-ok-ink); }
+/* waiting, in review, review, due soon, needs a reply: Tide ink on a Tide tint */
+.m-clients .badge.warn, .m-clients-project .badge.warn, .cl-form .badge.warn, .cp-wiz .badge.warn, .cp-form .badge.warn,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.warn { background: var(--cl-tide-wash); color: var(--cl-tide-ink); }
+/* changes, overdue: red text on a red tint */
+.m-clients .badge.bad, .m-clients-project .badge.bad, .cl-form .badge.bad, .cp-wiz .badge.bad, .cp-form .badge.bad,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.bad { background: rgba(255, 90, 35, .16); color: var(--cl-danger); }
+/* in progress: ink on a neutral tint */
+.m-clients .badge.info, .cl-form .badge.info, .cp-wiz .badge.info, .cp-form .badge.info, .m-clients-project .badge.info,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.info { background: var(--accent-soft); color: var(--ink); }
+/* done, published, a team member: a solid ink pill (the strongest neutral) */
+.m-clients .badge.accent, .m-clients-project .badge.accent, .cl-form .badge.accent, .cp-wiz .badge.accent, .cp-form .badge.accent,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.accent { background: var(--ink); color: var(--bg); box-shadow: none; }
+/* outline: pending, draft, planning and not sent (muted ink) */
+.m-clients .badge.outline, .m-clients-project .badge.outline, .cl-form .badge.outline, .cp-wiz .badge.outline, .cp-form .badge.outline,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.outline { background: transparent; color: var(--ink2); box-shadow: inset 0 0 0 1px var(--cl-control); }
+.m-clients .badge.outline::before, .m-clients-project .badge.outline::before, .cl-form .badge.outline::before, .cp-wiz .badge.outline::before, .cp-form .badge.outline::before,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.outline::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+/* high priority: a Flare tint with the ink label */
+.m-clients .badge.flare, .m-clients-project .badge.flare, .cl-form .badge.flare, .cp-wiz .badge.flare, .cp-form .badge.flare,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.flare { background: rgba(255, 90, 35, .22); color: var(--ink); }
+.m-clients .badge.flare::before, .m-clients-project .badge.flare::before, .cl-form .badge.flare::before, .cp-wiz .badge.flare::before, .cp-form .badge.flare::before,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.flare::before { background: var(--flare); }
+.m-clients .badge.sample, .m-clients-project .badge.sample, .cl-form .badge.sample, .cp-wiz .badge.sample, .cp-form .badge.sample,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.sample { background: transparent; color: var(--warn); box-shadow: inset 0 0 0 1px currentColor; }
+.m-clients .badge.sample::before, .m-clients-project .badge.sample::before, :is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .badge.sample::before { display: none; }
+
+/* ---------- selection controls: Tide when on ---------- */
+.m-clients .switch input:checked + .track, .cl-form .switch input:checked + .track, .cp-form .switch input:checked + .track,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .switch input:checked + .track { background: var(--cl-bar); }
+.m-clients .switch input:checked + .track::after, .cl-form .switch input:checked + .track::after, .cp-form .switch input:checked + .track::after,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) .switch input:checked + .track::after { background: #FFFFFF; }
+.m-clients input[type=checkbox].check:checked, .cl-form input[type=checkbox].check:checked, .cp-form input[type=checkbox].check:checked,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) input[type=checkbox].check:checked { background: var(--cl-bar); }
+.m-clients input[type=checkbox].check:checked::after, .cl-form input[type=checkbox].check:checked::after, .cp-form input[type=checkbox].check:checked::after,
+:is(.drawer, .modal):has(.cl-form, .cl-codebox, .cp-wiz, .cp-form) input[type=checkbox].check:checked::after { border-color: #FFFFFF; }
+.m-clients input[type=range], .cl-form input[type=range], .cp-form input[type=range] { accent-color: var(--cl-bar); }
+
+/* ---------- phones ---------- */
+@media (max-width: 640px) {
+  .m-clients .cl-start { padding: 20px 16px; }
+  .m-clients .cl-note { grid-template-columns: minmax(0, 1fr); }
+  .m-clients .cl-note > .cl-note-ico { display: none; }
+  .m-clients .cl-dl { grid-template-columns: minmax(0, 1fr); gap: 2px 0; }
+  .m-clients .cl-dl dd { margin-block-end: 10px; }
+  .m-clients .cl-toolbar-end { margin-inline-start: 0; }
+}

@@ -1,0 +1,91 @@
+/* MIRAS admin — Questions (scoped to .m-faq) */
+/* the editor column sits beside the shared preview pane (MA.ui.previewPane.split) */
+.m-faq .fq-main{min-width:0;display:flex;flex-direction:column}
+.m-faq .fq-pvbadge{display:inline-flex}
+.m-faq .fq-tm{flex:none;display:inline-grid;place-items:center;inline-size:14px;margin-inline-start:-6px}
+
+/* header switch */
+.m-faq .fq-show{font-size:.93rem;color:var(--ink2);margin-inline-end:6px}
+
+/* notices + headline */
+.m-faq .callout{margin-bottom:var(--gap)}
+.m-faq .callout .btn{margin-inline-start:auto;flex:none}
+.m-faq .fq-headline{padding:2px var(--pad) 4px}
+.m-faq .fq-headline .cf{border-bottom:0}
+
+/* opens strip: flat, never a card in a card */
+.m-faq .fq-stats{display:flex;flex-direction:column;gap:10px;margin-top:var(--gap);padding:14px 18px;border-radius:var(--r3);box-shadow:inset 0 0 0 1px var(--line);background-color:var(--panel2)}
+.m-faq .fq-stats-head{display:flex;align-items:center;gap:8px}
+.m-faq .fq-stats-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;min-width:0}
+.m-faq .fq-total{display:inline-flex;align-items:baseline;gap:8px;color:var(--ink2)}
+.m-faq .fq-total b{font:400 2.1rem/1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+html:is([lang=ar],[lang=fa]) .m-faq .fq-total b{font-family:var(--serif)}
+.m-faq .fq-stat{color:var(--ink2);font-size:.93rem}
+.m-faq .fq-toplink{display:inline-flex;align-items:baseline;gap:8px;min-width:0;max-width:100%;padding:0;text-align:start;border-radius:var(--r1)}
+.m-faq .fq-toplink b{font-weight:600;color:var(--ink);min-width:0}
+.m-faq .fq-toplink:hover b{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line3)}
+
+/* toolbar */
+.m-faq .fq-toolbar{margin:var(--gap) 0 10px}
+.m-faq .fq-toolbar .search{max-width:340px}
+.m-faq .fq-toolbar .search .input{min-height:calc(var(--ctl) - 2px)}
+.m-faq .fq-count{white-space:nowrap}
+.m-faq .fq-note{margin:-2px 0 10px}
+
+/* rows */
+.m-faq .fq-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.m-faq .fq-row{background:var(--panel);border-radius:var(--r3);box-shadow:inset 0 0 0 1px var(--line),var(--shadow1);transition:box-shadow .18s}
+.m-faq .fq-row:hover{box-shadow:inset 0 0 0 1px var(--line2),var(--shadow1)}
+.m-faq .fq-row.open{box-shadow:inset 0 0 0 1px var(--line2),var(--shadow2)}
+.m-faq .fq-row.dragging{opacity:.65;box-shadow:inset 0 0 0 1.5px var(--accent),var(--shadow2)}
+.m-faq .fq-head{display:flex;align-items:center;gap:10px;min-height:calc(var(--row) + 16px);padding-inline:8px 12px;cursor:pointer}
+.m-faq .fq-head .drag-handle{margin-inline-end:-4px}
+.m-faq.no-drag .fq-head .drag-handle{visibility:hidden}
+.m-faq .fq-toggle{flex:1;min-width:0;display:flex;align-items:center;gap:14px;padding-block:11px;text-align:start;border-radius:var(--r1)}
+.m-faq .fq-toggle:focus-visible{outline-offset:4px}
+.m-faq .fq-num{flex:none;inline-size:1.9em;font:500 var(--fs-min)/1 var(--mono);color:var(--ink3);letter-spacing:.04em}
+.m-faq .fq-row.open .fq-num{color:var(--accent-text)}
+.m-faq .fq-titles{display:flex;flex-direction:column;gap:3px;min-width:0}
+.m-faq .fq-q{font-weight:600;font-size:1rem;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-faq .fq-q.untitled{color:var(--ink3);font-weight:500}
+.m-faq .fq-q2{font-size:.93rem;line-height:1.4;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-faq .fq-q2:lang(ar){font-family:var(--ar)}
+html[dir=ltr] .m-faq .fq-titles > span{text-align:left} html[dir=rtl] .m-faq .fq-titles > span{text-align:right}
+.m-faq .fq-flags{display:flex;gap:6px;flex:none}
+.m-faq .fq-flags:empty{display:none}
+.m-faq .fq-opens{flex:none;display:flex;align-items:center;gap:8px;inline-size:118px}
+.m-faq .fq-bar{flex:1;height:6px;border-radius:999px;background-color:var(--panel3);overflow:hidden}
+.m-faq .fq-bar i{display:block;height:100%;border-radius:inherit;background:var(--accent);transition:inline-size .5s var(--ease)}
+.m-faq .fq-opens.is-sample .fq-bar i{background:color-mix(in srgb,var(--accent) 55%,transparent)}
+.m-faq .fq-n{min-inline-size:2.6em;text-align:end;font-size:.93rem;font-weight:600;line-height:1;color:var(--ink2);font-variant-numeric:tabular-nums}
+.m-faq .fq-acts{display:flex;gap:2px;flex:none;opacity:0;transition:opacity .12s}
+.m-faq .fq-row:hover .fq-acts,.m-faq .fq-row:focus-within .fq-acts{opacity:1}
+@media (hover:none){.m-faq .fq-acts{opacity:1}}
+.m-faq .fq-chev{flex:none;display:grid;place-items:center;color:var(--ink3);transition:transform .2s var(--ease)}
+.m-faq .fq-row.open .fq-chev{transform:rotate(180deg)}
+.m-faq .fq-body{padding:2px 18px 8px;padding-inline-start:44px;border-top:1px solid var(--line)}
+.m-faq .fq-body .cf:last-child{border-bottom:0}
+.m-faq .fq-body .rich{min-height:68px}
+
+/* add row, empty, no match, foot */
+.m-faq .fq-addrow{display:flex;align-items:center;gap:10px;inline-size:100%;margin-top:8px;height:calc(var(--row) + 4px);padding-inline:16px;border-radius:var(--r3);border:1.5px dashed var(--line3);color:var(--ink2);font-weight:500;transition:background-color .15s,border-color .15s,color .15s}
+.m-faq .fq-addrow:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.m-faq .fq-addrow kbd{margin-inline-start:auto}
+.m-faq .fq-empty{margin-top:var(--gap)}
+.m-faq .fq-nomatch{display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 16px;color:var(--ink3);text-align:center;border-radius:var(--r3);box-shadow:inset 0 0 0 1px var(--line)}
+.m-faq .fq-nomatch p{color:var(--ink2)}
+.m-faq .fq-foot{display:flex;align-items:flex-start;gap:7px;margin-top:16px;max-width:70ch}
+.m-faq .fq-foot .i{margin-top:2px}
+
+html[data-density=compact] .m-faq .fq-head{min-height:calc(var(--row) + 8px)}
+html[data-density=compact] .m-faq .fq-toggle{padding-block:7px}
+html[data-density=compact] .m-faq .fq-list{gap:6px}
+
+@media (max-width:720px){
+  .m-faq .fq-opens{inline-size:auto}
+  .m-faq .fq-bar{display:none}
+  .m-faq .fq-acts .icon-btn:not(:last-child){display:none}
+  .m-faq .fq-flags{display:none}
+  .m-faq .fq-body{padding-inline:12px}
+  .m-faq .fq-toolbar .search{max-width:none}
+}
