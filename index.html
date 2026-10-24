@@ -146,8 +146,8 @@ html[lang=ar] .lang{font-family:var(--sans)}
 .sea-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep)}
 /* the film's first frame paints before any script runs (this background; the frame loader reuses it from the memory cache, so it downloads once); the canvas draws over it once frames
    decode. Portrait screens get the 9:16 cut, as seaSetFor() does; Arabic mirrors it, as fDraw() does */
-.sea-pin::before{content:"";position:absolute;inset:0;background:var(--deep) url(assets/film/d/f0001.jpg?v=r2) center/cover no-repeat;background-image:image-set(url(assets/film/d/f0001.avif?v=r2) type("image/avif"),url(assets/film/d/f0001.jpg?v=r2) type("image/jpeg"))}
-@media (max-aspect-ratio:4/5){.sea-pin::before{background-image:url(assets/film/m/f0001.jpg?v=r2);background-image:image-set(url(assets/film/m/f0001.avif?v=r2) type("image/avif"),url(assets/film/m/f0001.jpg?v=r2) type("image/jpeg"))}}
+.sea-pin::before{content:"";position:absolute;inset:0;background:var(--deep) url(assets/film/d/f0001.jpg?v=r4) center/cover no-repeat;background-image:image-set(url(assets/film/d/f0001.avif?v=r4) type("image/avif"),url(assets/film/d/f0001.jpg?v=r4) type("image/jpeg"))}
+@media (max-aspect-ratio:4/5){.sea-pin::before{background-image:url(assets/film/m/f0001.jpg?v=r4);background-image:image-set(url(assets/film/m/f0001.avif?v=r4) type("image/avif"),url(assets/film/m/f0001.jpg?v=r4) type("image/jpeg"))}}
 html[dir=rtl] .sea-pin::before{transform:scaleX(-1)}
 /* the poster is the opening only: it is gone by 4% into the film (--p is the film position), so it never sits under
    Plan, Create or Launch while their frames decode */
@@ -1112,7 +1112,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   beats.forEach(b => b.style.setProperty('--at', b.dataset.at)); // (also in the markup, so the first paint has the headline in place)
   let jImgs = [], jLoaded = 0, jSet = '', jGen = 0, jPos = 0, jW = 0, jH = 0, jLast = performance.now(), jDrawn = '';
   const seaSetFor = () => innerWidth / innerHeight < .8 ? 'm' : 'd'; // portrait screens get the 9:16 crop that follows Mira
-  const FILM_SRC = { d: [1280, 720], m: [540, 960] }; // the frames' own size: the canvas never holds more pixels than they have
+  const FILM_SRC = { d: [1920, 1080], m: [810, 1440] }; // the frames' own size: the canvas never holds more pixels than they have
   let jD = 1;
   function jResize() {
     jW = jCv.clientWidth; jH = jCv.clientHeight;
@@ -1146,7 +1146,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     const coarse = (() => { const u = new Set(); for (const st of steps.slice(0, 3)) for (let i = 0; i < FILM_N; i += st) u.add(i); u.add(FILM_N - 1); return u.size; })(), fineAt = saveData || light ? Infinity : (k => k < 0 ? Infinity : k)(order.findIndex(i => i % 2));
     let k = 0, inflight = 0; const retry = new Set();
     const next = () => { while (gen === jGen && inflight < 6 && k < order.length && loopOn && (k < fineAt || filmDeep) && (k < coarse ? cmsMode !== 'preview' || seaNear : seaNear && filmUsed)) { const i = order[k++]; inflight++;
-      const src = `assets/film/${set}/f${String(i + 1).padStart(4, '0')}.${ext}?v=r2`;
+      const src = `assets/film/${set}/f${String(i + 1).padStart(4, '0')}.${ext}?v=r4`;
       const done = fr => { if (gen !== jGen) return;
         if (!swapped && i === 0) { swapped = true; jImgs = fresh; jLoaded = 0; seaBM.clear(); dropKeys(); KEYS = fk; } // new orientation: keep the old film until the new one can show
         fresh[i] = fr; if (FILM_BLOBS) keyFrame(i, fr, fk); if (swapped) { jLoaded++; jDrawn = ''; if (seaNear && wantFrame(i)) poke(); } inflight--; next(); };
