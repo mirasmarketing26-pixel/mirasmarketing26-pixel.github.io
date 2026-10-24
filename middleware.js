@@ -19,6 +19,9 @@ const sha256 = async text => {
 };
 
 export default async function middleware(request) {
+  // The admin's files are linked relative to /admin/, so /admin on its own must go to /admin/ (otherwise the page opens blank).
+  const url = new URL(request.url);
+  if (url.pathname === '/admin') { url.pathname = '/admin/'; return Response.redirect(url.toString(), 308); }
   const [scheme, token] = (request.headers.get('authorization') || '').split(' ');
   if (scheme === 'Basic' && token) {
     let given = '';
