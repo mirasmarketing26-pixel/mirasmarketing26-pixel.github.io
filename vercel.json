@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/webmail", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false },
+    { "source": "/webmail/:path*", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false }
+  ]
+}
