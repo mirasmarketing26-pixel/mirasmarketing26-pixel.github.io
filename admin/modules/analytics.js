@@ -19,7 +19,7 @@
   MA.i18n.add({
     en: {
       'analytics.title': 'Analytics',
-      'analytics.sub': 'Who came to miras.qa, what they tapped, and where they drifted off.',
+      'analytics.sub': 'Who came to mirasmarketing.com, what they tapped, and where they drifted off.',
       'analytics.metricsLabel': 'Metrics',
       'analytics.range.prev': 'Previous period', 'analytics.range.next': 'Next period', 'analytics.range.pick': 'Change the date range',
       'analytics.range.custom': 'Custom range', 'analytics.range.from': 'From', 'analytics.range.to': 'To', 'analytics.range.apply': 'Show this range',
@@ -94,7 +94,7 @@
     },
     ar: {
       'analytics.title': 'التحليلات',
-      'analytics.sub': 'من زار miras.qa، وماذا اختار، وأين توقّف.',
+      'analytics.sub': 'من زار mirasmarketing.com، وماذا اختار، وأين توقّف.',
       'analytics.metricsLabel': 'المقاييس',
       'analytics.range.prev': 'الفترة السابقة', 'analytics.range.next': 'الفترة التالية', 'analytics.range.pick': 'تغيير الفترة',
       'analytics.range.custom': 'فترة مخصّصة', 'analytics.range.from': 'من', 'analytics.range.to': 'إلى', 'analytics.range.apply': 'اعرض هذه الفترة',
@@ -169,7 +169,7 @@
     },
     fa: {
       'analytics.title': 'آمار',
-      'analytics.sub': 'چه کسانی به miras.qa آمدند، روی چه چیزی زدند و کجا صفحه را رها کردند.',
+      'analytics.sub': 'چه کسانی به mirasmarketing.com آمدند، روی چه چیزی زدند و کجا صفحه را رها کردند.',
       'analytics.metricsLabel': 'شاخص‌ها',
       'analytics.range.prev': 'بازهٔ قبلی', 'analytics.range.next': 'بازهٔ بعدی', 'analytics.range.pick': 'تغییر بازهٔ زمانی',
       'analytics.range.custom': 'بازهٔ دلخواه', 'analytics.range.from': 'از', 'analytics.range.to': 'تا', 'analytics.range.apply': 'نمایش این بازه',

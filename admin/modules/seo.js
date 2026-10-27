@@ -37,7 +37,7 @@
       'seo.s.theme': 'Theme colour', 'seo.s.themeSub': 'Tints the browser bar on phones while someone is on the site.', 'seo.themeLabel': 'Theme colour', 'seo.useBrand': 'Use a brand colour',
       'seo.c.tide': 'Tide', 'seo.c.deep': 'Deep', 'seo.c.shore': 'Shore', 'seo.c.flare': 'Flare', 'seo.c.foam': 'Foam',
       'seo.s.head': 'Head tags for index.html', 'seo.s.headSub': 'Title, description, Open Graph, X card, language alternates and theme colour, ready to paste.',
-      'seo.site': 'Site address', 'seo.siteHint': 'Used in every link below.', 'seo.siteErr': 'Use a full address, like https://miras.qa',
+      'seo.site': 'Site address', 'seo.siteHint': 'Used in every link below.', 'seo.siteErr': 'Use a full address, like https://www.mirasmarketing.com',
       'seo.arUrl': 'Arabic address', 'seo.arUrlHint': 'The site opens in Arabic at {url}. Leave this empty to use that, or type another address if Arabic lives somewhere else.',
       'seo.urlErr': 'Use a full https:// address.',
       'seo.shareLang': 'Language of link previews', 'seo.shareLangHint': 'Apps read the head of index.html without running the site, so both addresses preview in this language.',
@@ -52,10 +52,10 @@
       'seo.ldType': 'Type', 'seo.ldPro': 'Professional service', 'seo.ldLocal': 'Local business',
       'seo.sameAs': 'Profiles elsewhere', 'seo.sameAsHint': 'Instagram, LinkedIn, X, Behance… Google uses these to connect the brand.',
       'seo.addLink': 'Add link', 'seo.linkErr': 'That doesn’t look like a web address.', 'seo.linkDup': 'That link is already in the list.', 'seo.linkRemoved': 'Link removed.', 'seo.linkRemove': 'Remove link', 'seo.noLinks': 'No profiles yet.',
-      'seo.noPhone': 'No phone number yet. Add a WhatsApp number in Settings to include one.', 'seo.noAddr': 'No address yet. Add it in Pages & copy, under Studio.',
+      'seo.noPhone': 'No phone number is published, so the structured data leaves it out.', 'seo.noAddr': 'No address yet. Add it in Pages & copy, under Studio.',
       'seo.noDays': 'No opening days set, so hours are left out.', 'seo.fromContent': 'Name, address, email and hours come from the site’s content, so they stay in step with it.',
       'seo.openSettings': 'Open Settings', 'seo.test': 'Test with Google', 'seo.copiedLd': 'Structured data copied.',
-      'seo.s.files': 'robots.txt and sitemap.xml', 'seo.s.filesSub': 'Upload both to the site’s root folder, next to index.html. robots.txt also keeps search engines out of /admin/.',
+      'seo.s.files': 'robots.txt and sitemap.xml', 'seo.s.filesSub': 'The site already has a full sitemap.xml that lists every page; this one lists only the home page. Upload these only if robots.txt or sitemap.xml is missing from the site’s root folder. robots.txt also keeps search engines out of /admin/.',
       'seo.download': 'Download', 'seo.copy': 'Copy', 'seo.downloaded': '{file} downloaded. Upload it next to index.html.',
       'seo.audit': 'Audit', 'seo.auditSub': 'Updates as you type',
       'seo.score.good': 'In good shape', 'seo.score.ok': 'A few fixes left', 'seo.score.bad': 'Needs work', 'seo.passN': { one: '{p} of 1 check passes', other: '{p} of {t} checks pass' },
@@ -98,7 +98,7 @@
       'seo.s.theme': 'لون السمة', 'seo.s.themeSub': 'يلوّن شريط المتصفح على الجوال أثناء تصفّح الموقع.', 'seo.themeLabel': 'لون السمة', 'seo.useBrand': 'استخدم لوناً من الهوية',
       'seo.c.tide': 'المدّ', 'seo.c.deep': 'العمق', 'seo.c.shore': 'الشاطئ', 'seo.c.flare': 'الوهج', 'seo.c.foam': 'الزبد',
       'seo.s.head': 'وسوم الرأس لملف index.html', 'seo.s.headSub': 'العنوان والوصف ووسوم Open Graph وبطاقة X وبدائل اللغة ولون السمة، جاهزة للّصق.',
-      'seo.site': 'رابط الموقع', 'seo.siteHint': 'يُستخدم في كل الروابط أدناه.', 'seo.siteErr': 'اكتب الرابط كاملاً، مثل https://miras.qa',
+      'seo.site': 'رابط الموقع', 'seo.siteHint': 'يُستخدم في كل الروابط أدناه.', 'seo.siteErr': 'اكتب الرابط كاملاً، مثل https://www.mirasmarketing.com',
       'seo.arUrl': 'رابط النسخة العربية', 'seo.arUrlHint': 'يُفتح الموقع بالعربية على {url}. اترك الحقل فارغاً لاستخدامه، أو اكتب رابطاً آخر إن كانت النسخة العربية في مكان آخر.',
       'seo.urlErr': 'اكتب رابطاً كاملاً يبدأ بـ https://',
       'seo.shareLang': 'لغة معاينة الروابط', 'seo.shareLangHint': 'تقرأ التطبيقات رأس ملف index.html دون تشغيل الموقع، لذلك تظهر معاينة الرابطين بهذه اللغة.',
@@ -113,10 +113,10 @@
       'seo.ldType': 'النوع', 'seo.ldPro': 'خدمة مهنية', 'seo.ldLocal': 'نشاط تجاري محلي',
       'seo.sameAs': 'الحسابات في مواقع أخرى', 'seo.sameAsHint': 'إنستغرام، لينكدإن، X، بيهانس… يستخدمها Google لربط العلامة بحساباتها.',
       'seo.addLink': 'أضف رابطاً', 'seo.linkErr': 'لا يبدو هذا رابطاً صالحاً.', 'seo.linkDup': 'هذا الرابط موجود في القائمة.', 'seo.linkRemoved': 'أُزيل الرابط.', 'seo.linkRemove': 'أزل الرابط', 'seo.noLinks': 'لا حسابات بعد.',
-      'seo.noPhone': 'لا رقم هاتف بعد. أضف رقم واتساب من الإعدادات ليظهر هنا.', 'seo.noAddr': 'لا عنوان بعد. أضفه من «الصفحات والنصوص» في قسم الاستوديو.',
+      'seo.noPhone': 'لا يُنشر رقم هاتف، لذلك لا تتضمّنه البيانات المنظّمة.', 'seo.noAddr': 'لا عنوان بعد. أضفه من «الصفحات والنصوص» في قسم الاستوديو.',
       'seo.noDays': 'لم تُحدَّد أيام عمل، لذلك أُغفلت الساعات.', 'seo.fromContent': 'الاسم والعنوان والبريد والساعات مأخوذة من محتوى الموقع، فتبقى متوافقة معه.',
       'seo.openSettings': 'افتح الإعدادات', 'seo.test': 'اختبرها في Google', 'seo.copiedLd': 'نُسخت البيانات المنظّمة.',
-      'seo.s.files': 'ملفا robots.txt و sitemap.xml', 'seo.s.filesSub': 'ارفع الملفين إلى المجلد الرئيسي للموقع بجانب index.html. ويُبقي robots.txt محركات البحث بعيداً عن ‎/admin/‎ أيضاً.',
+      'seo.s.files': 'ملفا robots.txt و sitemap.xml', 'seo.s.filesSub': 'في الموقع ملف sitemap.xml كامل يضم كل الصفحات، أما هذا فيضم الصفحة الرئيسية وحدها. فلا ترفع الملفين إلا إذا كان robots.txt أو sitemap.xml غير موجود في المجلد الرئيسي للموقع. ويُبقي robots.txt محركات البحث بعيداً عن ‎/admin/‎ أيضاً.',
       'seo.download': 'تنزيل', 'seo.copy': 'نسخ', 'seo.downloaded': 'نُزّل {file}. ارفعه بجانب index.html.',
       'seo.audit': 'التدقيق', 'seo.auditSub': 'يتحدّث أثناء الكتابة',
       'seo.score.good': 'في حالة جيدة', 'seo.score.ok': 'بقيت إصلاحات قليلة', 'seo.score.bad': 'يحتاج إلى عمل',
@@ -161,7 +161,7 @@
       'seo.s.theme': 'رنگ پوسته', 'seo.s.themeSub': 'نوار مرورگر را روی موبایل، وقتی کسی در سایت است، رنگی می‌کند.', 'seo.themeLabel': 'رنگ پوسته', 'seo.useBrand': 'استفاده از رنگ برند',
       'seo.c.tide': 'مد', 'seo.c.deep': 'ژرفا', 'seo.c.shore': 'ساحل', 'seo.c.flare': 'شعله', 'seo.c.foam': 'کف',
       'seo.s.head': 'تگ‌های head برای index.html', 'seo.s.headSub': 'عنوان، توضیح، Open Graph، کارت ایکس، جایگزین‌های زبانی و رنگ پوسته، آمادهٔ چسباندن.',
-      'seo.site': 'نشانی سایت', 'seo.siteHint': 'در همهٔ پیوندهای زیر به کار می‌رود.', 'seo.siteErr': 'نشانی کامل بنویسید، مثل https://miras.qa',
+      'seo.site': 'نشانی سایت', 'seo.siteHint': 'در همهٔ پیوندهای زیر به کار می‌رود.', 'seo.siteErr': 'نشانی کامل بنویسید، مثل https://www.mirasmarketing.com',
       'seo.arUrl': 'نشانی نسخهٔ عربی', 'seo.arUrlHint': 'سایت در {url} به عربی باز می‌شود. برای استفاده از همین نشانی خالی‌اش بگذارید، یا اگر نسخهٔ عربی جای دیگری است نشانی‌اش را بنویسید.',
       'seo.urlErr': 'نشانی کاملی بنویسید که با https://‎ شروع شود.',
       'seo.shareLang': 'زبان پیش‌نمایش پیوند', 'seo.shareLangHint': 'برنامه‌ها head فایل index.html را بدون اجرای سایت می‌خوانند، پس پیش‌نمایش هر دو نشانی به همین زبان است.',
@@ -176,10 +176,10 @@
       'seo.ldType': 'نوع', 'seo.ldPro': 'خدمات حرفه‌ای', 'seo.ldLocal': 'کسب‌وکار محلی',
       'seo.sameAs': 'حساب‌ها در جاهای دیگر', 'seo.sameAsHint': 'اینستاگرام، لینکدین، ایکس، بیهنس… گوگل از این‌ها برای پیوند دادن برند استفاده می‌کند.',
       'seo.addLink': 'افزودن پیوند', 'seo.linkErr': 'این به نشانی وب شبیه نیست.', 'seo.linkDup': 'این پیوند در فهرست هست.', 'seo.linkRemoved': 'پیوند برداشته شد.', 'seo.linkRemove': 'برداشتن پیوند', 'seo.noLinks': 'هنوز حسابی نیست.',
-      'seo.noPhone': 'هنوز شماره تلفنی نیست. برای افزودنش شمارهٔ واتس‌اپ را در «تنظیمات» وارد کنید.', 'seo.noAddr': 'هنوز نشانی‌ای نیست. آن را در «صفحه‌ها و متن‌ها» بخش استودیو بیفزایید.',
+      'seo.noPhone': 'شماره تلفنی منتشر نمی‌شود، بنابراین داده‌های ساختاریافته آن را شامل نمی‌شود.', 'seo.noAddr': 'هنوز نشانی‌ای نیست. آن را در «صفحه‌ها و متن‌ها» بخش استودیو بیفزایید.',
       'seo.noDays': 'روز کاری تعیین نشده، پس ساعت‌ها حذف شده‌اند.', 'seo.fromContent': 'نام، نشانی، ایمیل و ساعت‌ها از محتوای سایت می‌آیند، پس با آن هماهنگ می‌مانند.',
       'seo.openSettings': 'باز کردن تنظیمات', 'seo.test': 'آزمون با گوگل', 'seo.copiedLd': 'دادهٔ ساختاریافته کپی شد.',
-      'seo.s.files': 'robots.txt و sitemap.xml', 'seo.s.filesSub': 'هر دو را در پوشهٔ اصلی سایت، کنار index.html، بارگذاری کنید. robots.txt موتورهای جست‌وجو را از ‎/admin/‎ هم دور نگه می‌دارد.',
+      'seo.s.files': 'robots.txt و sitemap.xml', 'seo.s.filesSub': 'سایت از قبل یک sitemap.xml کامل با همهٔ صفحه‌ها دارد و این یکی فقط صفحهٔ اصلی را دارد. این دو فایل را فقط وقتی بارگذاری کنید که robots.txt یا sitemap.xml در پوشهٔ اصلی سایت نباشد. robots.txt موتورهای جست‌وجو را از ‎/admin/‎ هم دور نگه می‌دارد.',
       'seo.download': 'دانلود', 'seo.copy': 'کپی', 'seo.downloaded': '{file} دانلود شد. آن را کنار index.html بارگذاری کنید.',
       'seo.audit': 'بازبینی', 'seo.auditSub': 'هم‌زمان با نوشتن به‌روز می‌شود',
       'seo.score.good': 'در وضعیت خوب', 'seo.score.ok': 'چند اصلاح مانده', 'seo.score.bad': 'کار لازم دارد', 'seo.passN': '{p} از {t} بررسی قبول شد',
@@ -199,7 +199,7 @@
 
   /* ================= settings that live in the admin (not on the site) ================= */
   const CFG_KEY = 'seo.cfg';
-  const CFG_DEF = { site: 'https://miras.qa', arUrl: '', shareLang: 'en', ldType: 'ProfessionalService', headLd: true, sameAs: [] };
+  const CFG_DEF = { site: 'https://www.mirasmarketing.com', arUrl: '', shareLang: 'en', ldType: 'ProfessionalService', headLd: true, sameAs: [] };
   const cfg = () => ({ ...CFG_DEF, ...(MA.db.get(CFG_KEY, {}) || {}) });
   const setCfg = patch => MA.db.set(CFG_KEY, { ...cfg(), ...patch });
 
@@ -214,7 +214,7 @@
   const normSite = s => { s = String(s || '').trim(); if (!s) return ''; if (!/^https?:\/\//i.test(s)) s = 'https://' + s; return s.replace(/\/+$/, ''); };
   const validUrl = s => { try { const u = new URL(s); return /^https?:$/.test(u.protocol) && u.hostname.includes('.') && !/\s/.test(s); } catch (e) { return false; } };
   const base = (c = cfg()) => { const s = normSite(c.site); return validUrl(s) ? s : CFG_DEF.site; };
-  const host = (c = cfg()) => { try { return new URL(base(c)).host; } catch (e) { return 'miras.qa'; } };
+  const host = (c = cfg()) => { try { return new URL(base(c)).host; } catch (e) { return 'mirasmarketing.com'; } };
   const home = (c = cfg()) => base(c) + '/';
   /** The site opens in Arabic at ?lang=ar (SITE-CONTRACT §6), so that is the Arabic address unless another one is set. */
   const arAuto = (c = cfg()) => home(c) + '?lang=ar';
@@ -355,6 +355,14 @@
     return adr;
   }
   const phone = v => { const d = String(v || '').replace(/\D/g, ''); return d.length >= 7 ? '+' + d : ''; };
+  /* The services and their pages, in the site's order (websites and SEO first). The same list as the JSON-LD block written
+     into index.html by hand (its hasOfferCatalog): a page added or renamed on the site is changed in both. */
+  const OFFERS = [['Website design', 'websites.html'], ['SEO', 'seo.html'], ['Social media management', 'social-media.html'], ['Paid ads management', 'advertising.html'],
+    ['Marketing strategy and research', 'strategy.html'], ['Branding and brand identity', 'branding.html'], ['Video, photography and copywriting', 'content.html'], ['Monthly digital marketing', 'digital.html']];
+  /* The same fields, in the same order, as the block in index.html's head, so publishing the head tags swaps one for the
+     other and nothing changes for Google. Opening hours go in only while the site shows them (the Studio section is on);
+     with it off the site says visits are by appointment, so the structured data claims no hours either. */
+  const hoursShown = () => (get('sections') || {}).studio === true;
   function ld() {
     const p = pack(), st = get('studio') || {};
     const o = { '@context': 'https://schema.org', '@type': p.c.ldType === 'LocalBusiness' ? 'LocalBusiness' : 'ProfessionalService', name: siteName('en') };
@@ -362,12 +370,16 @@
     o.url = p.home;
     const d = plain(get('seo/en/description')); if (d) o.description = d;
     if (p.img) o.image = p.img;
+    o.logo = base(p.c) + '/assets/apple-touch-icon.png';
     if (st.email) o.email = st.email;
     const tel = phone(st.whatsapp); if (tel) o.telephone = tel;
     const adr = address(); if (adr) o.address = adr;
     const days = [...new Set((st.days || []).map(Number).filter(n => n >= 0 && n <= 6))].sort((a, b) => a - b);
-    if (days.length && st.open && st.close) o.openingHoursSpecification = [{ '@type': 'OpeningHoursSpecification', dayOfWeek: days.map(n => DAYS[n]), opens: st.open, closes: st.close }];
+    if (hoursShown() && days.length && st.open && st.close) o.openingHoursSpecification = [{ '@type': 'OpeningHoursSpecification', dayOfWeek: days.map(n => DAYS[n]), opens: st.open, closes: st.close }];
+    o.areaServed = { '@type': 'Country', name: 'Qatar' };
     o.knowsLanguage = ['en', 'ar'];
+    o.hasOfferCatalog = { '@type': 'OfferCatalog', name: 'Marketing services', url: p.home + 'services.html',
+      itemListElement: OFFERS.map(([name, page]) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name, url: p.home + page } })) };
     const same = (p.c.sameAs || []).filter(validUrl); if (same.length) o.sameAs = same;
     return o;
   }
@@ -576,7 +588,7 @@
 
   function secHead() {
     const c = cfg();
-    const site = cfgInput('site', { label: MA.t('seo.site'), hint: MA.t('seo.siteHint'), placeholder: 'https://miras.qa', validate: v => (validUrl(normSite(v)) ? '' : MA.t('seo.siteErr')) });
+    const site = cfgInput('site', { label: MA.t('seo.site'), hint: MA.t('seo.siteHint'), placeholder: 'https://www.mirasmarketing.com', validate: v => (validUrl(normSite(v)) ? '' : MA.t('seo.siteErr')) });
     const ar = cfgInput('arUrl', { label: MA.t('seo.arUrl'), hint: '', placeholder: arAuto(c), validate: v => (!v || validUrl(v) ? '' : MA.t('seo.urlErr')) });
     V.arField = ar;
     const langSeg = MA.ui.seg([{ value: 'en', label: MA.t('seo.lang.en') }, { value: 'ar', label: MA.t('seo.lang.ar') }], c.shareLang, v => setCfg({ shareLang: v }), { size: 'sm', label: MA.t('seo.shareLang') });
@@ -714,9 +726,10 @@
     V.ldNotes.innerHTML = '';
     const note = (icon, text, action) => MA.h('p.se-note', MA.frag(MA.icon(icon, 'sm')), MA.h('span', text), action || null);
     V.ldNotes.append(note('info', MA.t('seo.fromContent')));
-    if (!phone(st.whatsapp)) V.ldNotes.append(note('warn', MA.t('seo.noPhone'), MA.h('a.se-inline', { href: '#/settings' }, MA.t('seo.openSettings'))));
+    // phone and WhatsApp are off on the site, so no number is a plain fact here, not a task
+    if (!phone(st.whatsapp)) V.ldNotes.append(note('info', MA.t('seo.noPhone')));
     if (!address()) V.ldNotes.append(note('warn', MA.t('seo.noAddr')));
-    if (!(st.days || []).length) V.ldNotes.append(note('warn', MA.t('seo.noDays')));
+    if (hoursShown() && !(st.days || []).length) V.ldNotes.append(note('warn', MA.t('seo.noDays')));
     V.ldCode.textContent = ldText();
   }
   function drawFiles() { for (const k of Object.keys(FILES)) V.files[k].textContent = FILES[k].make(); }

@@ -77,7 +77,7 @@
       'settings.p.ga4D': 'Google’s free analytics. It sets cookies.', 'settings.p.umamiD': 'Open source. Use Umami Cloud or your own server.',
       'settings.id.plausible': 'Site domain', 'settings.id.ga4': 'Measurement ID', 'settings.id.umami': 'Website ID', 'settings.i.aid': 'Analytics ID',
       'settings.idHint.plausible': 'The domain exactly as you added it in Plausible, without https://.', 'settings.idHint.ga4': 'Starts with G-. Find it in Google Analytics under Admin → Data streams.', 'settings.idHint.umami': 'From the website’s settings in Umami: {n} characters with dashes.',
-      'settings.idBad.plausible': 'Use the domain only, like miras.qa: no https:// and no path.', 'settings.idBad.ga4': 'A GA4 measurement ID looks like G-AB12CD34EF.',
+      'settings.idBad.plausible': 'Use the domain only, like mirasmarketing.com: no https:// and no path.', 'settings.idBad.ga4': 'A GA4 measurement ID looks like G-AB12CD34EF.',
       'settings.idUA': 'UA- IDs belong to Universal Analytics, which stopped collecting data in {y}. Use the G- ID instead.', 'settings.idBad.umami': 'An Umami website ID has {n} characters with dashes, like 4f9c2a1e-….',
       'settings.idOk': 'Format looks right.', 'settings.idMissing': 'Add the ID to start sending events. Until then the site loads nothing.',
       'settings.src': 'Script address (optional)', 'settings.srcHint': 'Only if you host {name} yourself. Left empty, the site loads {def}.',
@@ -255,7 +255,7 @@
       'settings.p.ga4D': 'تحليلات Google المجانية، وتستخدم ملفات تعريف الارتباط.', 'settings.p.umamiD': 'مفتوحة المصدر. استخدم Umami Cloud أو خادمك الخاص.',
       'settings.id.plausible': 'نطاق الموقع', 'settings.id.ga4': 'معرّف القياس', 'settings.id.umami': 'معرّف الموقع', 'settings.i.aid': 'معرّف التحليلات',
       'settings.idHint.plausible': 'النطاق كما أضفته في Plausible تماماً، دون ‎https://‎.', 'settings.idHint.ga4': 'يبدأ بـ G-. تجده في Google Analytics ضمن ⁦Admin → Data streams⁩.', 'settings.idHint.umami': 'من إعدادات الموقع في Umami: {n} حرفاً مع شرطات.',
-      'settings.idBad.plausible': 'استخدم النطاق وحده، مثل miras.qa، دون ‎https://‎ ودون مسار.', 'settings.idBad.ga4': 'معرّف القياس في GA4 يشبه G-AB12CD34EF.',
+      'settings.idBad.plausible': 'استخدم النطاق وحده، مثل mirasmarketing.com، دون ‎https://‎ ودون مسار.', 'settings.idBad.ga4': 'معرّف القياس في GA4 يشبه G-AB12CD34EF.',
       'settings.idUA': 'معرّفات UA- تخص Universal Analytics التي توقفت عن جمع البيانات عام {y}. استخدم معرّف G- بدلاً منها.', 'settings.idBad.umami': 'معرّف الموقع في Umami من {n} حرفاً مع شرطات، مثل ‎4f9c2a1e-…‎.',
       'settings.idOk': 'الصيغة تبدو صحيحة.', 'settings.idMissing': 'أضف المعرّف لبدء إرسال الأحداث. وحتى ذلك الحين لا يحمّل الموقع شيئاً.',
       'settings.src': 'عنوان السكربت (اختياري)', 'settings.srcHint': 'فقط إذا كنت تستضيف {name} بنفسك. إن تركته فارغاً يحمّل الموقع {def}.',
@@ -421,7 +421,7 @@
       'settings.p.ga4D': 'آمار رایگان Google که کوکی ذخیره می‌کند.', 'settings.p.umamiD': 'متن‌باز است. از Umami Cloud یا سرور خودتان استفاده کنید.',
       'settings.id.plausible': 'دامنهٔ سایت', 'settings.id.ga4': 'شناسهٔ اندازه‌گیری', 'settings.id.umami': 'شناسهٔ وب‌سایت', 'settings.i.aid': 'شناسهٔ سرویس آمار',
       'settings.idHint.plausible': 'دامنه دقیقاً همان‌طور که در Plausible اضافه کرده‌اید، بدون ‎https://‎.', 'settings.idHint.ga4': 'با G- شروع می‌شود. در Google Analytics از مسیر ⁦Admin → Data streams⁩ پیدایش کنید.', 'settings.idHint.umami': 'از تنظیمات وب‌سایت در Umami: {n} نویسه با خط تیره.',
-      'settings.idBad.plausible': 'فقط دامنه را بنویسید، مثل miras.qa، بدون ‎https://‎ و بدون مسیر.', 'settings.idBad.ga4': 'شناسهٔ اندازه‌گیری GA4 شبیه G-AB12CD34EF است.',
+      'settings.idBad.plausible': 'فقط دامنه را بنویسید، مثل mirasmarketing.com، بدون ‎https://‎ و بدون مسیر.', 'settings.idBad.ga4': 'شناسهٔ اندازه‌گیری GA4 شبیه G-AB12CD34EF است.',
       'settings.idUA': 'شناسه‌های UA- مال Universal Analytics است که از {y} دیگر داده جمع نمی‌کند. به‌جایش شناسهٔ G- را وارد کنید.', 'settings.idBad.umami': 'شناسهٔ وب‌سایت Umami {n} نویسه با خط تیره دارد، مثل ‎4f9c2a1e-…‎.',
       'settings.idOk': 'قالبش درست به نظر می‌رسد.', 'settings.idMissing': 'شناسه را وارد کنید تا ارسال رویدادها شروع شود. تا آن موقع سایت چیزی بارگذاری نمی‌کند.',
       'settings.src': 'نشانی اسکریپت (اختیاری)', 'settings.srcHint': 'فقط اگر {name} را خودتان میزبانی می‌کنید. اگر خالی بماند، سایت {def} را بارگذاری می‌کند.',
@@ -564,7 +564,7 @@
   const DOMAIN = /^(?=.{3,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
   const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const AN = {
-    plausible: { name: 'Plausible', ph: 'miras.qa', def: 'https://plausible.io/js/script.js', src: true },
+    plausible: { name: 'Plausible', ph: 'mirasmarketing.com', def: 'https://plausible.io/js/script.js', src: true },
     ga4: { name: 'Google Analytics 4', ph: 'G-AB12CD34EF', src: false },
     umami: { name: 'Umami', ph: '4f9c2a1e-0b7d-4c55-9a3e-2d1f6b8c7e90', def: 'https://cloud.umami.is/script.js', src: true },
   };
@@ -730,7 +730,7 @@
   const BUILD = {};
   BUILD.studio = body => {
     // email
-    const em = one('studio/email', { label: t('email'), kind: 'email', hint: esc(t('emailHint')), placeholder: 'hello@miras.qa', ltr: true });
+    const em = one('studio/email', { label: t('email'), kind: 'email', hint: esc(t('emailHint')), placeholder: 'hello@mirasmarketing.com', ltr: true });
     const emErr = h('p.err.st-err', { hidden: true });
     const emTest = h('a.btn.sm.ghost', { target: '_blank', rel: 'noopener', html: MA.icon('mail', 'sm') + `<span>${esc(t('emailTest'))}</span>` });
     em.append(emErr, h('div.st-acts', emTest));
@@ -1154,7 +1154,7 @@
     const sw = (C().get('swells') || []).slice(0, 2), sv = (C().get('services') || []).slice(0, 2), mk = (C().get('make')?.[0] || []).slice(0, 1);
     return {
       id: forDisplay ? 'site-…' : 'test-' + Date.now().toString(36), at: forDisplay ? '2026-10-12T09:30:00.000Z' : new Date().toISOString(),
-      name: forDisplay ? 'Noor Al-Kuwari' : 'MIRAS test brief', email: forDisplay ? 'noor@example.qa' : (studio().email || 'hello@miras.qa'), company: forDisplay ? 'Dar Lusail' : 'MIRAS (test)',
+      name: forDisplay ? 'Noor Al-Kuwari' : 'MIRAS test brief', email: forDisplay ? 'noor@example.qa' : (studio().email || 'hello@mirasmarketing.com'), company: forDisplay ? 'Dar Lusail' : 'MIRAS (test)',
       phone: studio().formFields?.phone ? (forDisplay ? '+974 5555 1234' : '') : '', budget: studio().formFields?.budget ? (budgetsOf('en')[1] || budgetsOf('en')[0] || '') : '',
       waves: sw.map(s => s.id), services: sv.map(x => x.id), words: mk.map(w => MA.strip(w.en || '')).filter(Boolean), message: forDisplay ? '…' : 'A test brief sent from the MIRAS admin to check form delivery. You can delete it.', lang: 'en', source: forDisplay ? 'site' : 'admin-test',
       ref: forDisplay ? 'instagram.com' : '', utm: { source: forDisplay ? 'instagram' : '', medium: forDisplay ? 'social' : '', campaign: '' }, landing: forDisplay ? '/?utm_source=instagram' : '',
@@ -1298,7 +1298,7 @@
   /** A provider's shared dashboard link, kept in this browser (MA.db 'analytics.shareUrl') for the Analytics page to embed. Never published. */
   function shareBox(p) {
     const can = canData(), id = MA.uid('share'), msg = h('p.st-check', { id: id + '-m' });
-    const inp = h('input.input', { id, type: 'url', dir: 'ltr', spellcheck: false, autocomplete: 'off', placeholder: p === 'plausible' ? 'https://plausible.io/share/miras.qa?auth=…' : p === 'umami' ? 'https://cloud.umami.is/share/…' : 'https://lookerstudio.google.com/embed/reporting/…', readOnly: !can, 'aria-describedby': id + '-h ' + id + '-m' });
+    const inp = h('input.input', { id, type: 'url', dir: 'ltr', spellcheck: false, autocomplete: 'off', placeholder: p === 'plausible' ? 'https://plausible.io/share/mirasmarketing.com?auth=…' : p === 'umami' ? 'https://cloud.umami.is/share/…' : 'https://lookerstudio.google.com/embed/reporting/…', readOnly: !can, 'aria-describedby': id + '-h ' + id + '-m' });
     inp.value = MA.db.get(SHARE_KEY, '') || '';
     const check = () => { const v = inp.value.trim(); msg.hidden = !v; msg.dataset.tone = shareOk(v) ? 'good' : 'bad'; msg.innerHTML = v ? MA.icon(shareOk(v) ? 'check' : 'warn', 'sm') + `<span>${esc(shareOk(v) ? t('an.shareOk') : t('an.shareBad'))}</span>` : ''; };
     inp.addEventListener('input', check);

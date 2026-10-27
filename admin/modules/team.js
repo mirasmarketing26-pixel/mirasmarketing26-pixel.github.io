@@ -25,7 +25,7 @@
       'team.usingAs': 'You’re now using the admin as {name}.', 'team.switchBack': 'Switch back to {name}', 'team.usingNote': 'You’re using the admin as {name}, to see what they see.',
       'team.empty': 'Just you so far', 'team.emptyText': 'Add the people who write the site, answer briefs or keep an eye on the numbers on this computer.', 'team.emptyRO': 'No one else is on the team yet.',
       'team.inv.title': 'Add a teammate to this browser', 'team.inv.name': 'Name', 'team.inv.email': 'Email', 'team.inv.role': 'Role', 'team.inv.jobTitle': 'Title', 'team.inv.jobHint': 'Optional. Shown next to their name, like “Producer”.',
-      'team.inv.send': 'Add to the team', 'team.inv.nameErr': 'Add their name.', 'team.inv.emailErr': 'Use a full email address, like noor@miras.qa.', 'team.inv.dupErr': '{name} already uses this email.',
+      'team.inv.send': 'Add to the team', 'team.inv.nameErr': 'Add their name.', 'team.inv.emailErr': 'Use a full email address, like noor@mirasmarketing.com.', 'team.inv.dupErr': '{name} already uses this email.',
       'team.inv.done': '{name} is on the team as {role}.', 'team.inv.phName': 'Noor Al-Kuwari', 'team.inv.phTitle': 'Producer',
       'team.inv.subject': 'You’re on the MIRAS studio admin', 'team.inv.body': 'Hi {name},\n\nI’ve added you to the MIRAS studio admin as {role}.\nFor now the admin keeps everything in one browser, so there’s no sign-in and no link: use it on the studio computer where I added you.\n\n{me}',
       'team.rm.title': 'Remove {name}?', 'team.rm.text': 'They’re taken off the team in this browser. Their past activity stays in the history.', 'team.rm.type': 'Type <b>{name}</b> to confirm',
@@ -36,7 +36,7 @@
       'team.yes': 'Allowed', 'team.no': 'Not allowed', 'team.nRole': '{n} people', 'team.oneRole': '1 person', 'team.noneRole': 'Nobody',
       'team.r.owner': 'Everything, including the team. Can’t be locked out.', 'team.r.admin': 'Everything an owner can do, day to day.', 'team.r.editor': 'Writes the site and manages images, but can’t publish.', 'team.r.sales': 'Works the briefs and reads the numbers.', 'team.r.viewer': 'Reads briefs and numbers. Changes nothing.',
       'team.p.content.edit': 'Edit the site', 'team.pd.content.edit': 'Copy, swells, questions, colours and images in the draft.',
-      'team.p.content.publish': 'Publish', 'team.pd.content.publish': 'Put the draft live on miras.qa.',
+      'team.p.content.publish': 'Publish', 'team.pd.content.publish': 'Put the draft live on mirasmarketing.com.',
       'team.p.leads.view': 'See briefs', 'team.pd.leads.view': 'Open the inbox and read what clients sent.',
       'team.p.leads.edit': 'Work on briefs', 'team.pd.leads.edit': 'Reply, move stages, assign and archive.',
       'team.p.analytics.view': 'See analytics', 'team.pd.analytics.view': 'Visitors, sources and what people tapped.',
@@ -77,7 +77,7 @@
       'team.usingAs': 'تستخدم لوحة الإدارة الآن بصفة {name}.', 'team.switchBack': 'عُد إلى {name}', 'team.usingNote': 'تستخدم لوحة الإدارة بصفة {name}، لترى ما يراه.',
       'team.empty': 'أنت وحدك حتى الآن', 'team.emptyText': 'أضف من يكتب نصوص الموقع أو يردّ على الطلبات أو يتابع الأرقام على هذا الجهاز.', 'team.emptyRO': 'لا يوجد أحد آخر في الفريق بعد.',
       'team.inv.title': 'أضف زميلاً إلى هذا المتصفح', 'team.inv.name': 'الاسم', 'team.inv.email': 'البريد الإلكتروني', 'team.inv.role': 'الدور', 'team.inv.jobTitle': 'المسمّى', 'team.inv.jobHint': 'اختياري. يظهر بجانب الاسم، مثل «منتِجة».',
-      'team.inv.send': 'أضفه إلى الفريق', 'team.inv.nameErr': 'أضف الاسم.', 'team.inv.emailErr': 'اكتب بريداً كاملاً، مثل noor@miras.qa.', 'team.inv.dupErr': 'هذا البريد مستخدم لدى {name}.',
+      'team.inv.send': 'أضفه إلى الفريق', 'team.inv.nameErr': 'أضف الاسم.', 'team.inv.emailErr': 'اكتب بريداً كاملاً، مثل noor@mirasmarketing.com.', 'team.inv.dupErr': 'هذا البريد مستخدم لدى {name}.',
       'team.inv.done': 'انضم {name} إلى الفريق بدور {role}.', 'team.inv.phName': 'نور الكواري', 'team.inv.phTitle': 'منتِجة',
       'team.inv.subject': 'أُضفت إلى لوحة إدارة استوديو ميراس', 'team.inv.body': 'مرحباً {name}،\n\nأضفتك إلى لوحة إدارة استوديو ميراس بدور {role}.\nتحفظ اللوحة كل شيء في متصفح واحد حالياً، فلا يوجد تسجيل دخول ولا رابط: استخدمها على جهاز الاستوديو الذي أضفتك عليه.\n\n{me}',
       'team.rm.title': 'إزالة {name}؟', 'team.rm.text': 'سيُزال من الفريق في هذا المتصفح، ويبقى نشاطه السابق في السجل.', 'team.rm.type': 'اكتب <b>{name}</b> للتأكيد',
@@ -88,7 +88,7 @@
       'team.yes': 'مسموح', 'team.no': 'غير مسموح', 'team.nRole': 'عددهم {n}', 'team.oneRole': 'شخص واحد', 'team.noneRole': 'لا أحد',
       'team.r.owner': 'كل شيء، بما فيه الفريق. لا يمكن إقفال اللوحة عليه.', 'team.r.admin': 'كل ما يفعله المالك في العمل اليومي.', 'team.r.editor': 'يكتب الموقع ويدير الصور، دون النشر.', 'team.r.sales': 'يتابع الطلبات ويطّلع على الأرقام.', 'team.r.viewer': 'يقرأ الطلبات والأرقام ولا يغيّر شيئاً.',
       'team.p.content.edit': 'تعديل الموقع', 'team.pd.content.edit': 'النصوص والموجات والأسئلة والألوان والصور في المسودة.',
-      'team.p.content.publish': 'النشر', 'team.pd.content.publish': 'نشر المسودة على miras.qa.',
+      'team.p.content.publish': 'النشر', 'team.pd.content.publish': 'نشر المسودة على mirasmarketing.com.',
       'team.p.leads.view': 'رؤية الطلبات', 'team.pd.leads.view': 'فتح صندوق الوارد وقراءة ما أرسله العملاء.',
       'team.p.leads.edit': 'العمل على الطلبات', 'team.pd.leads.edit': 'الرد ونقل المراحل والإسناد والأرشفة.',
       'team.p.analytics.view': 'رؤية التحليلات', 'team.pd.analytics.view': 'الزوّار والمصادر وما نقر عليه الناس.',
@@ -129,7 +129,7 @@
       'team.usingAs': 'اکنون پنل را به‌جای {name} استفاده می‌کنید.', 'team.switchBack': 'بازگشت به {name}', 'team.usingNote': 'پنل را به‌جای {name} استفاده می‌کنید تا ببینید او چه می‌بیند.',
       'team.empty': 'فعلاً فقط شما', 'team.emptyText': 'کسانی را که متن سایت را می‌نویسند، به درخواست‌ها پاسخ می‌دهند یا عددها را دنبال می‌کنند، روی همین رایانه اضافه کنید.', 'team.emptyRO': 'هنوز کس دیگری در تیم نیست.',
       'team.inv.title': 'افزودن هم‌تیمی به این مرورگر', 'team.inv.name': 'نام', 'team.inv.email': 'ایمیل', 'team.inv.role': 'نقش', 'team.inv.jobTitle': 'عنوان شغلی', 'team.inv.jobHint': 'اختیاری. کنار نامش نمایش داده می‌شود، مثل «تهیه‌کننده».',
-      'team.inv.send': 'افزودن به تیم', 'team.inv.nameErr': 'نامش را بنویسید.', 'team.inv.emailErr': 'یک ایمیل کامل بنویسید، مثل noor@miras.qa.', 'team.inv.dupErr': 'این ایمیل را {name} استفاده می‌کند.',
+      'team.inv.send': 'افزودن به تیم', 'team.inv.nameErr': 'نامش را بنویسید.', 'team.inv.emailErr': 'یک ایمیل کامل بنویسید، مثل noor@mirasmarketing.com.', 'team.inv.dupErr': 'این ایمیل را {name} استفاده می‌کند.',
       'team.inv.done': '{name} با نقش {role} به تیم اضافه شد.', 'team.inv.phName': 'نور الکواری', 'team.inv.phTitle': 'تهیه‌کننده',
       'team.inv.subject': 'شما به پنل استودیو میراس اضافه شدید', 'team.inv.body': 'سلام {name}،\n\nشما را با نقش {role} به پنل استودیو میراس اضافه کردم.\nفعلاً پنل همه‌چیز را در یک مرورگر نگه می‌دارد، پس ورود یا پیوندی در کار نیست: روی رایانهٔ استودیو که شما را در آن اضافه کردم از آن استفاده کنید.\n\n{me}',
       'team.rm.title': '{name} حذف شود؟', 'team.rm.text': 'از تیم در این مرورگر برداشته می‌شود. فعالیت‌های گذشته‌اش در تاریخچه می‌ماند.', 'team.rm.type': 'برای تأیید <b>{name}</b> را بنویسید',
@@ -140,7 +140,7 @@
       'team.yes': 'مجاز', 'team.no': 'غیرمجاز', 'team.nRole': '{n} نفر', 'team.oneRole': 'یک نفر', 'team.noneRole': 'هیچ‌کس',
       'team.r.owner': 'همه‌چیز، از جمله تیم. هرگز از پنل بیرون نمی‌ماند.', 'team.r.admin': 'هر کاری که مالک در کار روزانه می‌کند.', 'team.r.editor': 'سایت را می‌نویسد و تصویرها را مدیریت می‌کند، ولی منتشر نمی‌کند.', 'team.r.sales': 'روی درخواست‌ها کار می‌کند و عددها را می‌بیند.', 'team.r.viewer': 'درخواست‌ها و عددها را می‌خواند و چیزی را تغییر نمی‌دهد.',
       'team.p.content.edit': 'ویرایش سایت', 'team.pd.content.edit': 'متن‌ها، موج‌ها، پرسش‌ها، رنگ‌ها و تصویرها در پیش‌نویس.',
-      'team.p.content.publish': 'انتشار', 'team.pd.content.publish': 'منتشر کردن پیش‌نویس روی miras.qa.',
+      'team.p.content.publish': 'انتشار', 'team.pd.content.publish': 'منتشر کردن پیش‌نویس روی mirasmarketing.com.',
       'team.p.leads.view': 'دیدن درخواست‌ها', 'team.pd.leads.view': 'باز کردن صندوق ورودی و خواندن پیام مشتری‌ها.',
       'team.p.leads.edit': 'کار روی درخواست‌ها', 'team.pd.leads.edit': 'پاسخ دادن، تغییر مرحله، واگذاری و بایگانی.',
       'team.p.analytics.view': 'دیدن آمار', 'team.pd.analytics.view': 'بازدیدکنندگان، منبع‌ها و این‌که روی چه چیزهایی زدند.',
@@ -232,7 +232,7 @@
   }
   function invite() {
     if (!manage()) return;
-    const f = { name: h('input.input', { placeholder: t('inv.phName'), autocomplete: 'off', autofocus: true }), email: h('input.input', { type: 'email', placeholder: 'name@miras.qa', dir: 'ltr', autocomplete: 'off' }),
+    const f = { name: h('input.input', { placeholder: t('inv.phName'), autocomplete: 'off', autofocus: true }), email: h('input.input', { type: 'email', placeholder: 'name@mirasmarketing.com', dir: 'ltr', autocomplete: 'off' }),
       role: MA.ui.select(ROLES().filter(r => r !== 'owner' || MA.role() === 'owner').map(r => ({ value: r, label: roleName(r) })), 'editor', () => {}, { label: t('inv.role') }), title: h('input.input', { placeholder: t('inv.phTitle') }) };
     const err = { name: h('p.err', { hidden: true }), email: h('p.err', { hidden: true }) };
     const roleHint = h('p.hint', t('r.editor'));
