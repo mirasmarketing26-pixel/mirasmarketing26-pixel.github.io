@@ -30,10 +30,10 @@
   /* ================= team ================= */
   // The owner starts unnamed (shown as a localized "You" until they add their name); seed titles follow the admin language until edited.
   const TEAM_SEED = [
-    { id: 'u-owner', name: '', unnamed: true, email: 'hello@miras.qa', role: 'owner', title: '', titleKey: 'founder', color: '#2B3BF0', status: 'active' },
-    { id: 'u-noor', name: 'Noor Al-Kuwari', email: 'noor@miras.qa', role: 'editor', title: '', titleKey: 'producer', color: '#FF5A23', status: 'active', sample: true },
-    { id: 'u-rami', name: 'Rami Haddad', email: 'rami@miras.qa', role: 'sales', title: '', titleKey: 'partner', color: '#1E9E6E', status: 'active', sample: true },
-    { id: 'u-lina', name: 'Lina Saeed', email: 'lina@miras.qa', role: 'editor', title: '', titleKey: 'designer', color: '#0D0F2E', status: 'invited', sample: true },
+    { id: 'u-owner', name: '', unnamed: true, email: 'hello@mirasmarketing.com', role: 'owner', title: '', titleKey: 'founder', color: '#2B3BF0', status: 'active' },
+    { id: 'u-noor', name: 'Noor Al-Kuwari', email: 'noor@mirasmarketing.com', role: 'editor', title: '', titleKey: 'producer', color: '#FF5A23', status: 'active', sample: true },
+    { id: 'u-rami', name: 'Rami Haddad', email: 'rami@mirasmarketing.com', role: 'sales', title: '', titleKey: 'partner', color: '#1E9E6E', status: 'active', sample: true },
+    { id: 'u-lina', name: 'Lina Saeed', email: 'lina@mirasmarketing.com', role: 'editor', title: '', titleKey: 'designer', color: '#0D0F2E', status: 'invited', sample: true },
   ];
   const SEED_TITLES = { 'u-owner': ['Founder', 'founder'], 'u-noor': ['Producer', 'producer'], 'u-rami': ['Client partner', 'partner'], 'u-lina': ['Designer', 'designer'] };
   const youName = () => MA.t('core.you'), seedTitle = k => MA.t('core.title.' + k);

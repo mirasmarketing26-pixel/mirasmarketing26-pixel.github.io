@@ -1232,7 +1232,7 @@
         segDev = ui.seg([{ value: 'desktop', icon: 'monitor', title: MA.t('desktop') }, { value: 'tablet', icon: 'tablet', title: MA.t('tablet') }, { value: 'mobile', icon: 'mobile', title: MA.t('mobile') }], st.device, v => api.set({ device: v }), { size: 'sm', label: MA.t('preview') });
         segLang = ui.seg([{ value: 'en', label: 'EN', title: 'English' }, { value: 'ar', label: 'ع', title: 'العربية' }], st.lang, v => api.set({ lang: v }), { size: 'sm', label: MA.L({ en: 'Preview language', ar: 'لغة المعاينة', fa: 'زبان پیش‌نمایش' }) });
         inspBtn = ui.iconBtn('cursor', { tip: MA.t('inspectTip'), pressed: st.inspect, size: 'sm', tipPos: 'bottom', onclick: () => api.set({ inspect: !st.inspect }) });
-        bar = MA.h('div.pv-bar', segDev, MA.h('div.url', { html: `<span>miras.qa</span><b>/${st.lang === 'ar' ? 'ar' : ''}</b>` }), segLang, inspBtn,
+        bar = MA.h('div.pv-bar', segDev, MA.h('div.url', { html: `<span>mirasmarketing.com</span><b>/${st.lang === 'ar' ? 'ar' : ''}</b>` }), segLang, inspBtn,
           ui.iconBtn('refresh', { tip: MA.t('reload'), size: 'sm', tipPos: 'bottom', onclick: () => api.reload() }),
           ui.iconBtn('external', { tip: MA.t('openNewTab'), size: 'sm', tipPos: 'bottom', onclick: () => open(SITE_URL + '?cms=preview', '_blank') }));
         el.append(bar);
@@ -1850,7 +1850,8 @@
     sectionOf: g => ({ nav: 'top', aria: 'top', tag: 'top', top: 'top', cons: 'top', consent: 'top', swells: 'swells', plan: 'plan', work: 'work', process: 'how', make: 'make', why: 'why', studio: 'studio', faq: 'faq', contact: 'contact', foot: 'foot' })[g] || g,
     /** Labels for known keys: [en, ar, fa] or a plain English string. */
     KEY_LABELS: {
-      'nav.services': ['Menu: Services', 'القائمة: الخدمات', 'منو: خدمات'], 'nav.studio': ['Menu: Studio', 'القائمة: الاستوديو', 'منو: استودیو'], 'nav.contact': ['Menu: Contact', 'القائمة: التواصل', 'منو: تماس'],
+      'nav.services': ['Menu: Services', 'القائمة: الخدمات', 'منو: خدمات'], 'nav.websites': ['Menu: Website design', 'القائمة: تصميم المواقع', 'منو: طراحی وب‌سایت'], 'nav.seo': ['Menu: SEO', 'القائمة: تحسين محركات البحث', 'منو: سئو'],
+      'nav.social': ['Menu: Social media', 'القائمة: السوشيال ميديا', 'منو: شبکه‌های اجتماعی'], 'nav.ads': ['Menu: Paid ads', 'القائمة: الإعلانات الممولة', 'منو: تبلیغات پولی'], 'nav.studio': ['Menu: Studio', 'القائمة: الاستوديو', 'منو: استودیو'], 'nav.contact': ['Menu: Contact', 'القائمة: التواصل', 'منو: تماس'],
       'nav.why': ['Menu: Why MIRAS', 'القائمة: لماذا ميراس', 'منو: چرا میراس'], 'nav.how': ['Menu: How we work', 'القائمة: طريقة عملنا', 'منو: روش کار ما'],
       'nav.work': ['Menu: Work', 'القائمة: أعمالنا', 'منو: نمونه‌کارها'], 'nav.about': ['Menu: About', 'القائمة: من نحن', 'منو: درباره'], 'nav.menu': ['Menu button', 'زر القائمة', 'دکمهٔ منو'],
       'plan.go': ['Explore button', 'زر الاستكشاف', 'دکمهٔ کاوش'], 'wk.all': ['All work link', 'رابط كل الأعمال', 'پیوند همهٔ کارها'], 'wk.note': ['Note', 'ملاحظة', 'یادداشت'],
