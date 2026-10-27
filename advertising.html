@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Paid ads management in Qatar — MIRAS</title>
+<meta name="description" content="Paid ads management in Qatar on Google, YouTube, Instagram, Facebook, TikTok and Snapchat: tracking, a budget you set and a monthly report.">
+<meta name="theme-color" content="#0D0F2E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. The hreflang pair below is the
+     same for both; the canonical and og:url differ, so the page script writes them for the language shown. -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/advertising.html">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/advertising.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/advertising.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Paid ads management in Qatar — MIRAS">
+<meta property="og:description" content="Paid ads management in Qatar on Google, YouTube, Instagram, Facebook, TikTok and Snapchat: tracking, a budget you set and a monthly report.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r4">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* advertising.html (r2): the swell hero (on Deep), the campaigns by platform, when ads make sense, the route from goal to
+   report, what we need, questions, the services it pairs with, two concepts.
+   Shared rules: motifs.css, site.css. */
+
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* services header, the scale move: the headline across cols 1–11 (it wraps, balanced), the lead under its far end (the diagonal) */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(20px,2.6vw,36px);margin-bottom:clamp(40px,5.5vw,76px)}
+.svc-head .display{grid-column:1 / span 11;margin:0;text-wrap:balance}
+.svc-head .lead{grid-column:6 / -1;margin:0;max-width:34ch;color:var(--soft);text-wrap:balance}
+@media (max-width:820px){.svc-head .display{grid-column:1 / -1}.svc-head .lead{grid-column:3 / -1}}
+@media (max-width:520px){.svc-head .lead{grid-column:2 / -1}}
+/* service rows: the name is the link and the whole row is its target; the row's call ("Ask about this", or "See the service"
+   where the row opens a page) is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* steps: the same rows without links (a name, then one line), under a header whose lead answers from the far side */
+.steps .svc-row > h3{font:var(--fs-sub);font-size:clamp(28px,2.8vw,44px);letter-spacing:var(--ls-sub)}
+html[lang=ar] .steps .svc-row > h3{font:var(--fs-sub)}
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 (as on contact.html) */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance}
+.k-faq .faq-list{grid-column:6 / -1}
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+.k-faq .ans a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+@media (max-width:959px){.k-faq-t,.k-faq .faq-list{grid-column:1 / -1}.k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+.related{padding-top:clamp(40px,7vh,80px)}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+/* here the related pair follows a Deep band, so it keeps the full section padding under the wave edge */
+.related.edge-top{padding-top:var(--pad)}
+/* what we'll need: the rows, then the page's one call to ask (a plain link, not a band) */
+.steps .more{margin-top:clamp(32px,4.5vw,56px)}
+
+/* when ads make sense: the headline in cols 1–6, the moments set large in a Flare-slashed line in 7–12 (the platforms band's layout) */
+.pl{row-gap:clamp(22px,3vw,36px);align-items:end}
+.pl-t{grid-column:1 / span 6;margin:0}
+.pl-b{grid-column:7 / -1;overflow-x:clip} /* the slash list's hidden first slash sits in the margin: kept inside the column */
+.pl-b .lead{margin:0;max-width:34ch;color:var(--soft)}
+.pl-b .pl-list{margin-top:clamp(18px,2.4vw,30px);font:var(--fs-sub);letter-spacing:var(--ls-sub)}
+@media (max-width:900px){.pl-t,.pl-b{grid-column:1 / -1}}
+
+/* hero: the swell rolls across the upper part of the hero, behind the nav and above the word (the hero's one tide field);
+   a pointer passing over it raises a wave */
+.hero.ad-hero > canvas.motif{bottom:auto;height:62%}
+@media (max-width:759px){.hero.ad-hero > canvas.motif{height:54%}}
+</style>
+</head>
+<body data-page="advertising">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="./"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="./" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-deep ad-hero" data-nav-dark>
+    <canvas class="motif" data-motif="tide" data-ink="tide60" data-opts='{"lines":12,"tide":30,"alpha":.7,"interactive":true}' aria-hidden="true"></canvas>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Paid ads</h1>
+    <p class="lead" data-i18n="h.d">Paid ads in Qatar on Google, Instagram, TikTok and Snapchat, with a budget you set.</p>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">Every campaign starts with a goal.</h2><p class="lead" data-i18n="sv.lead">You set the budget; we plan, test and adjust the ads, and report every month.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=advertising" data-i18n="sv.0.n" aria-describedby="svA0">Google Ads</a></h3><div><p class="lead" data-i18n="sv.0.d">Search ads that appear when people in Qatar look for what you offer, and video ads on YouTube.</p><ul class="slash"><li data-i18n="sv.0.0">Google Search</li><li data-i18n="sv.0.1">YouTube</li><li data-i18n="sv.0.2">Keywords</li><li data-i18n="sv.0.3">Ad copy in both languages</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=advertising" data-i18n="sv.1.n" aria-describedby="svA1">Instagram &amp; Facebook ads</a></h3><div><p class="lead" data-i18n="sv.1.d">Ads in feeds, stories and reels, shown to the people you want to reach.</p><ul class="slash"><li data-i18n="sv.1.0">Feed</li><li data-i18n="sv.1.1">Stories &amp; reels</li><li data-i18n="sv.1.2">Audiences</li><li data-i18n="sv.1.3">Ad design</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=advertising" data-i18n="sv.2.n" aria-describedby="svA2">TikTok &amp; Snapchat ads</a></h3><div><p class="lead" data-i18n="sv.2.d">Short vertical videos made for each app, so they feel at home in the feed.</p><ul class="slash"><li data-i18n="sv.2.0">TikTok</li><li data-i18n="sv.2.1">Snapchat</li><li data-i18n="sv.2.2">Vertical video</li><li data-i18n="sv.2.3">Creative tests</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv3"><a class="wave-underline" href="contact.html?service=advertising" data-i18n="sv.3.n" aria-describedby="svA3">Seasonal campaigns</a></h3><div><p class="lead" data-i18n="sv.3.d">Campaigns for Ramadan, Eid and Qatar National Day, planned early and ready before the rush.</p><ul class="slash"><li data-i18n="sv.3.0">Ramadan</li><li data-i18n="sv.3.1">Eid</li><li data-i18n="sv.3.2">Qatar National Day</li><li data-i18n="sv.3.3">Launches &amp; offers</li></ul><span class="svc-ask" id="svA3" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv4"><a class="wave-underline" href="contact.html?service=advertising" data-i18n="sv.4.n" aria-describedby="svA4">Tracking &amp; reports</a></h3><div><p class="lead" data-i18n="sv.4.d">Tracking is set up before launch, so results can be measured and reported each month.</p><ul class="slash"><li data-i18n="sv.4.0">Conversion tracking</li><li data-i18n="sv.4.1">Budget split</li><li data-i18n="sv.4.2">A/B tests</li><li data-i18n="sv.4.3">Monthly report</li></ul><span class="svc-ask" id="svA4" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-tide edge-top" id="fit" aria-labelledby="gfT">
+    <div class="wrap g12 pl">
+      <h2 class="heading pl-t" id="gfT" data-i18n="gf.t">When paid ads make sense.</h2>
+      <div class="pl-b"><p class="lead" data-i18n="gf.lead">Ads bring people to you now, while search and social build over time.</p><ul class="slash pl-list"><li data-i18n="gf.0">An opening</li><li data-i18n="gf.1">A new product</li><li data-i18n="gf.2">A seasonal offer</li><li data-i18n="gf.3">An event</li><li data-i18n="gf.4">A quiet month</li></ul></div>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top steps" id="process" aria-labelledby="prT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="prT" data-i18n="pr.t">From goal to monthly report.</h2><p class="lead" data-i18n="pr.lead">Tracking goes in before launch, so results can be measured from the first day.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="pr.0">Goal &amp; audience</h3><div><p class="lead" data-i18n="pr.0d">We agree what success looks like, and who we need to reach.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.1">Creative</h3><div><p class="lead" data-i18n="pr.1d">We write, design and edit the ads in Arabic and English, and you review them.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.2">Tracking</h3><div><p class="lead" data-i18n="pr.2d">We set up tracking on your website and ad accounts before anything goes live.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.3">Launch &amp; adjust</h3><div><p class="lead" data-i18n="pr.3d">The ads go live, and we check them regularly, move budget to what works and test new versions.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.4">Monthly report</h3><div><p class="lead" data-i18n="pr.4d">What was spent, what it brought in and what changes next month.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top steps" id="need" aria-labelledby="ndT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="ndT" data-i18n="nd.t">What we’ll need from you.</h2><p class="lead" data-i18n="nd.lead">A clear goal, a budget you set and your sign-off on the ads.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="nd.0">Your goal</h3><div><p class="lead" data-i18n="nd.0d">What you want more of: enquiries, bookings, visits or sales.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.1">A monthly budget</h3><div><p class="lead" data-i18n="nd.1d">You decide what to spend; we suggest how to split it across the platforms.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.2">Access</h3><div><p class="lead" data-i18n="nd.2d">Access to your ad accounts and website, or your go-ahead to open new accounts.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.3">One person to approve</h3><div><p class="lead" data-i18n="nd.3d">Someone on your side who signs off the ads before they go live.</p></div></li>
+      </ol>
+      <a class="more" href="contact.html?service=advertising"><span data-i18n="nd.go">Plan your first campaign</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="sec t-shore k-faq" id="questions" aria-labelledby="qT">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" id="qT" data-i18n="q.t">Questions about paid ads.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Which platforms do you run ads on?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">Google Search, YouTube, Instagram, Facebook, TikTok and Snapchat. We use the ones that fit your goal and your customers.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">Do you guarantee results?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">No. We agree a goal with you before launch, track it from the first day and report on it every month.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Who makes the ads?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">We do: the idea, the design, the video and the copy, in Arabic and English. You review them before they go live.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span data-i18n="q.3">What budget do we need?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p data-i18n="a.3">It depends on your goal and the platforms. We suggest a budget in your plan, and you decide what to spend.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span data-i18n="q.4">Do you plan Ramadan and National Day campaigns?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p data-i18n="a.4">Yes. We plan them early, so the ads are made, approved and ready before the season starts.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa5" id="qq5"><span data-i18n="q.5">When will we see results?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa5" role="region" aria-labelledby="qq5"><div><p data-i18n="a.5">Ads start reaching people once they go live. Finding what works takes testing, so we adjust as results come in and report every month.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa6" id="qq6"><span data-i18n="q.6">Can the ads send people to our website?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa6" role="region" aria-labelledby="qq6"><div><p data-i18n="a.6">Yes. A <a href="websites.html">landing page</a> made for the offer gives every click a clear next step.</p></div></div></li></ul>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="paired" aria-labelledby="pwT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="pwT" data-i18n="pw.t">Pairs well with paid ads.</h2><p class="lead" data-i18n="pw.lead">Ads bring the visit; your website and search do the rest.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="pw0"><a class="wave-underline" href="websites.html" data-i18n="s.websites" aria-describedby="pwA0">Website design</a></h3><div><p class="lead" data-i18n="pw.0.d">Landing pages built for each campaign, in Arabic and English.</p><span class="svc-ask" id="pwA0" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pw1"><a class="wave-underline" href="seo.html" data-i18n="s.seo" aria-describedby="pwA1">SEO</a></h3><div><p class="lead" data-i18n="pw.1.d">Visits from Google search that you don’t pay for per click, built month by month.</p><span class="svc-ask" id="pwA1" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pw2"><a class="wave-underline" href="social-media.html" data-i18n="s.social" aria-describedby="pwA2">Social media</a></h3><div><p class="lead" data-i18n="pw.2.d">Accounts worth a visit when an ad brings someone to your profile.</p><span class="svc-ask" id="pwA2" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top related" id="work" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Concepts: a night race, a booking site.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-deep band edge-top" href="digital.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Digital</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><canvas class="motif" data-motif="rise" data-ink="tide60" data-opts='{"mini":true}'></canvas></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@mirasmarketing.com" dir="ltr" data-cms="studio.email">hello@mirasmarketing.com</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="websites.html" data-i18n="s.websites">Website design</a><a href="seo.html" data-i18n="s.seo">SEO</a><a href="social-media.html" data-i18n="s.social">Social media</a><a href="advertising.html" data-i18n="s.ads">Paid ads</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · mirasmarketing.com</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Paid ads management in Qatar — MIRAS", "ar": "إدارة الإعلانات الممولة في قطر — ميراس"}; window.PAGE_AR = {
+"meta.d": "إدارة الإعلانات الممولة في قطر على بحث جوجل ويوتيوب وإنستقرام وفيسبوك وتيك توك وسناب شات: تتبّع قبل الإطلاق، وميزانية تحدّدها أنت، وتقرير كل شهر.",
+"h.word": "الإعلانات",
+"h.d": "إعلانات ممولة في قطر على جوجل وإنستقرام وتيك توك وسناب شات، بميزانية تحدّدها أنت.",
+"sv.t": "كل حملة تبدأ بهدف.",
+"sv.lead": "أنت تحدّد الميزانية، ونحن نخطّط للإعلانات ونختبرها ونعدّلها، ونرفع إليك تقريراً كل شهر.",
+"sv.0.n": "إعلانات جوجل",
+"sv.0.d": "إعلانات بحث تظهر حين يبحث الناس في قطر عمّا تقدّمه، وإعلانات فيديو على يوتيوب.",
+"sv.0.0": "بحث جوجل",
+"sv.0.1": "يوتيوب",
+"sv.0.2": "الكلمات المفتاحية",
+"sv.0.3": "نصوص إعلانية باللغتين",
+"sv.1.n": "إعلانات إنستقرام وفيسبوك",
+"sv.1.d": "إعلانات في الصفحة الرئيسية والستوري والريلز، تصل إلى الجمهور الذي تريده.",
+"sv.1.0": "الصفحة الرئيسية",
+"sv.1.1": "الستوري والريلز",
+"sv.1.2": "الجمهور المستهدف",
+"sv.1.3": "تصميم الإعلانات",
+"sv.2.n": "إعلانات تيك توك وسناب شات",
+"sv.2.d": "فيديوهات عمودية قصيرة نصنعها لكل تطبيق، لتبدو جزءاً طبيعياً مما يتصفّحه الناس.",
+"sv.2.0": "تيك توك",
+"sv.2.1": "سناب شات",
+"sv.2.2": "الفيديو العمودي",
+"sv.2.3": "اختبار الإعلانات",
+"sv.3.n": "الحملات الموسمية",
+"sv.3.d": "حملات لرمضان والعيد واليوم الوطني، نخطّط لها مبكراً لتكون جاهزة قبل ذروة الموسم.",
+"sv.3.0": "رمضان",
+"sv.3.1": "العيد",
+"sv.3.2": "اليوم الوطني",
+"sv.3.3": "إطلاق المنتجات والعروض",
+"sv.4.n": "التتبّع والتقارير",
+"sv.4.d": "نجهّز التتبّع قبل الإطلاق، لنقيس النتائج ونعرضها عليك في تقرير كل شهر.",
+"sv.4.0": "تتبّع التحويلات",
+"sv.4.1": "توزيع الميزانية",
+"sv.4.2": "اختبارات A/B",
+"sv.4.3": "التقرير الشهري",
+"gf.t": "متى تناسبك الإعلانات الممولة؟",
+"gf.lead": "الإعلانات تأتيك بالناس الآن، بينما يُبنى حضورك في البحث والسوشيال ميديا مع الوقت.",
+"gf.0": "افتتاح جديد",
+"gf.1": "منتج جديد",
+"gf.2": "عرض موسمي",
+"gf.3": "فعالية",
+"gf.4": "شهر هادئ",
+"pr.t": "من الهدف إلى التقرير الشهري.",
+"pr.lead": "نجهّز التتبّع قبل الإطلاق، لنقيس النتائج من اليوم الأول.",
+"pr.0": "الهدف والجمهور",
+"pr.0d": "نتّفق معك على النتيجة التي نسعى إليها، ومن نحتاج أن نصل إليه.",
+"pr.1": "صناعة الإعلانات",
+"pr.1d": "نكتب الإعلانات ونصمّمها ونحرّرها بالعربية والإنجليزية، ثم تراجعها أنت.",
+"pr.2": "التتبّع",
+"pr.2d": "نجهّز التتبّع على موقعك وحساباتك الإعلانية قبل إطلاق أي إعلان.",
+"pr.3": "الإطلاق والتعديل",
+"pr.3d": "تنطلق الإعلانات، ونتابعها بانتظام، فننقل الميزانية إلى ما ينجح ونختبر نسخاً جديدة.",
+"pr.4": "التقرير الشهري",
+"pr.4d": "ما أُنفق، وما حقّقه، وما الذي سنغيّره الشهر القادم.",
+"nd.t": "ما نحتاجه منك.",
+"nd.lead": "هدف واضح، وميزانية تحدّدها أنت، وموافقتك على الإعلانات.",
+"nd.0": "هدفك",
+"nd.0d": "ما الذي تريد المزيد منه: استفسارات أو حجوزات أو زيارات أو مبيعات.",
+"nd.1": "ميزانية شهرية",
+"nd.1d": "أنت تقرّر حجم الإنفاق، ونحن نقترح طريقة توزيعه على المنصات.",
+"nd.2": "صلاحيات الوصول",
+"nd.2d": "الوصول إلى حساباتك الإعلانية وموقعك، أو موافقتك على إنشاء حسابات جديدة.",
+"nd.3": "شخص واحد للموافقة",
+"nd.3d": "شخص من فريقك يوافق على الإعلانات قبل إطلاقها.",
+"nd.go": "خطّط لحملتك الأولى",
+"q.t": "أسئلة عن الإعلانات الممولة.",
+"q.0": "على أي المنصات تديرون الإعلانات؟",
+"a.0": "بحث جوجل ويوتيوب وإنستقرام وفيسبوك وتيك توك وسناب شات، ونختار منها ما يناسب هدفك وعملاءك.",
+"q.1": "هل تضمنون النتائج؟",
+"a.1": "لا. نتّفق معك على هدف قبل الإطلاق، ونتتبّعه من اليوم الأول، ونرفع إليك تقريراً عنه كل شهر.",
+"q.2": "من يصنع الإعلانات؟",
+"a.2": "نحن: الفكرة والتصميم والفيديو والنصوص، بالعربية والإنجليزية، وتراجعها أنت قبل إطلاقها.",
+"q.3": "ما الميزانية التي نحتاجها؟",
+"a.3": "تعتمد على هدفك والمنصات. نقترح ميزانية ضمن خطتك، وأنت من يقرّر حجم الإنفاق.",
+"q.4": "هل تخطّطون لحملات رمضان واليوم الوطني؟",
+"a.4": "نعم. نخطّط لها مبكراً، لتكون الإعلانات جاهزة ومعتمدة قبل أن يبدأ الموسم.",
+"q.5": "متى نرى النتائج؟",
+"a.5": "تبدأ الإعلانات بالوصول إلى الناس بعد إطلاقها، أما معرفة ما ينجح فتحتاج إلى اختبار، لذلك نعدّل كلما وصلت النتائج، ونرفع إليك تقريراً كل شهر.",
+"q.6": "هل يمكن أن توجّه الإعلانات الناس إلى موقعنا؟",
+"a.6": "نعم. [صفحة هبوط](websites.html) مصمّمة للعرض تمنح كل نقرة خطوة تالية واضحة.",
+"pw.t": "خدمات تكمّل إعلاناتك.",
+"pw.lead": "الإعلانات تأتي بالزيارة، وموقعك وظهورك في البحث يكملان الباقي.",
+"pw.0.d": "صفحات هبوط مصمّمة لكل حملة، بالعربية والإنجليزية.",
+"pw.1.d": "زيارات من بحث جوجل لا تدفع مقابل كل نقرة فيها، وتتراكم شهراً بعد شهر.",
+"pw.2.d": "حسابات تستحق الزيارة حين يصل أحدهم إلى ملفك عبر إعلان.",
+"sv.go": "تفاصيل الخدمة",
+"wk.t": "مشاريع مفاهيمية: سباق ليلي وموقع حجز.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "التسويق الرقمي"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r4"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r4"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$;
+  // related work: a pair chosen for this page, set 7/5 (the race’s phone-first ads, then the booking site’s launch ads); if the admin's list no longer has one, this
+  // discipline's projects fill in, then the rest. Every card carries the Concept badge (workCard)
+  const PAIR = ["corniche-night-run", "saffar"], SIZE = ["big", "third"];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'digital'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 2);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // the questions open and close in place (the answers stay in the page for search and for readers without script)
+  $('#faq')?.addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+})();
+</script>
+</body>
+</html>

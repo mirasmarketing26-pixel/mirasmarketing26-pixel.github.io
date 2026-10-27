@@ -4,39 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
-<title>Strategy — MIRAS</title>
-<meta name="description" content="We do the research and write the plan before anyone opens a design file.">
+<title>Marketing strategy &amp; research in Qatar — MIRAS</title>
+<meta name="description" content="Marketing strategy for businesses in Qatar: customer and competitor research, positioning, and a channel and budget plan, before any design.">
 <meta name="theme-color" content="#2B3BF0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<!-- PLACEHOLDER: miras.qa is a placeholder domain (as in sitemap.xml and robots.txt). Confirm the real domain with MIRAS and update the canonical, hreflang and og: URLs below. -->
-<link rel="canonical" href="https://miras.qa/strategy.html">
-<link rel="alternate" hreflang="en" href="https://miras.qa/strategy.html">
-<link rel="alternate" hreflang="ar" href="https://miras.qa/strategy.html?lang=ar">
-<link rel="alternate" hreflang="x-default" href="https://miras.qa/strategy.html">
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. The hreflang pair below is the
+     same for both; the canonical and og:url differ, so the page script writes them for the language shown. -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/strategy.html">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/strategy.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/strategy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MIRAS">
-<meta property="og:title" content="Strategy — MIRAS">
-<meta property="og:description" content="We do the research and write the plan before anyone opens a design file.">
-<meta property="og:url" content="https://miras.qa/strategy.html">
-<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:title" content="Marketing strategy &amp; research in Qatar — MIRAS">
+<meta property="og:description" content="Marketing strategy for businesses in Qatar: customer and competitor research, positioning, and a channel and budget plan, before any design.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
 <meta property="og:locale" content="en_GB">
-<meta property="og:locale:alternate" content="ar_QA">
+<meta property="og:locale:alternate" content="ar_AR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="assets/motifs.css?v=r3">
-<link rel="stylesheet" href="assets/site.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r4">
 <script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
 <style>
-/* strategy.html (r2): the depth chart hero, the five questions, the service rows. Shared rules: motifs.css, site.css. */
+/* strategy.html (r3): the depth chart hero, the five questions, the service rows, who it fits, what we need, the paired
+   questions, the paired services (the same order as the other service pages). Shared rules: motifs.css, site.css. */
 .hero > .sr-only{position:absolute}
 .hero > .lead{text-wrap:pretty} /* no one-word last line */
 /* services header, the scale move: the page's one giant line, set to the full measure (--hs fits it to the wrap, never past
@@ -52,12 +53,12 @@ html[lang=ar] .svc-head{--hs:min(clamp(58px,10vw,170px),13.4cqi)}
 #services > .wrap{position:relative}
 #services > .wrap::before{content:"";position:absolute;top:calc(-1 * var(--pad));bottom:0;inset-inline-start:calc(var(--m) / 2 - 2px);width:4px;pointer-events:none;
   background:radial-gradient(circle,var(--flare) 1.3px,transparent 1.8px) 50% 0/4px 11px repeat-y}
-.svc-head::before,.svc-row::before{content:"";position:absolute;inset-inline-start:calc(var(--m) / -2 - 5px);width:10px;height:10px;background:var(--flare);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);pointer-events:none}
-.svc-head::before{top:calc(var(--hs) * .5 - 5px)}
-.svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(30px,3.4vw,56px) * .54 - 5px)}
-html[lang=ar] .svc-head::before{top:calc(var(--hs) * .66 - 5px)}
-html[lang=ar] .svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(24px,2.4vw,38px) * .74 - 5px)}
-@media (max-width:759px){.svc-head::before,.svc-row::before{width:8px;height:8px;inset-inline-start:calc(var(--m) / -2 - 4px)}}
+#services .svc-head::before,#services .svc-row::before{content:"";position:absolute;inset-inline-start:calc(var(--m) / -2 - 5px);width:10px;height:10px;background:var(--flare);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);pointer-events:none}
+#services .svc-head::before{top:calc(var(--hs) * .5 - 5px)}
+#services .svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(30px,3.4vw,56px) * .54 - 5px)}
+html[lang=ar] #services .svc-head::before{top:calc(var(--hs) * .66 - 5px)}
+html[lang=ar] #services .svc-row::before{top:calc(clamp(30px,5vh,56px) + clamp(24px,2.4vw,38px) * .74 - 5px)}
+@media (max-width:759px){#services .svc-head::before,#services .svc-row::before{width:8px;height:8px;inset-inline-start:calc(var(--m) / -2 - 4px)}}
 /* service rows: the name is the link and the whole row is its target; "Ask about this" is always shown, full strength on hover or focus */
 .svc-row{position:relative}
 .svc-row .lead{text-wrap:pretty} /* no one-word last line */
@@ -77,6 +78,8 @@ html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within
 .next-art > canvas{-webkit-mask:linear-gradient(90deg,transparent,#000 10%);mask:linear-gradient(90deg,transparent,#000 10%)}
 html[dir=rtl] .next-art > canvas{-webkit-mask-image:linear-gradient(270deg,transparent,#000 10%);mask-image:linear-gradient(270deg,transparent,#000 10%)}
 .related{padding-top:clamp(40px,7vh,80px)}
+/* here the related pair follows a Deep band, so it keeps the full section padding under the wave edge */
+.related.edge-top{padding-top:var(--pad)}
 #wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
 
 /* the questions we answer first: a route of soundings that steps one column deeper with each question */
@@ -116,25 +119,46 @@ html[lang=ar] .qs .qd{margin-top:.55em}
 }
 /* phones: the card badge is 13px in both languages (Arabic already was) */
 @media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+
+/* who it fits: the heading in cols 1–6, the lead and the list in 7–12 (the platforms band on social-media.html) */
+.pl{row-gap:clamp(22px,3vw,36px);align-items:end}
+.pl-t{grid-column:1 / span 6;margin:0}
+.pl-b{grid-column:7 / -1;overflow-x:clip} /* the slash list's hidden first slash sits in the margin: kept inside the column */
+.pl-b .lead{margin:0;max-width:34ch;color:var(--soft)}
+.pl-b .pl-list{margin-top:clamp(18px,2.4vw,30px);row-gap:.3em;font:var(--fs-sub);letter-spacing:var(--ls-sub)} /* the situations are phrases, not names: a little air between wrapped lines */
+/* a phrase that wraps carries on under its own first word, not back under the hidden slash in the margin */
+.pl-b .pl-list li{padding-inline-start:1.6em;text-indent:-1.6em}.pl-b .pl-list li::before{text-indent:0} /* the slash box does not inherit the indent */
+@media (max-width:900px){.pl-t,.pl-b{grid-column:1 / -1}}
+/* steps (what we need): the same rows without links (a name, then one line), under a header whose lead answers from the far side */
+.steps .svc-row > h3{font:var(--fs-sub);font-size:clamp(28px,2.8vw,44px);letter-spacing:var(--ls-sub)}
+html[lang=ar] .steps .svc-row > h3{font:var(--fs-sub)}
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 (as on contact.html) */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance}
+.k-faq .faq-list{grid-column:6 / -1}
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+.k-faq .ans a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+@media (max-width:959px){.k-faq-t,.k-faq .faq-list{grid-column:1 / -1}.k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}}
 </style>
 </head>
 <body data-page="strategy">
 <a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
 <header class="nav" id="nav">
-  <a class="brand" href="index.html"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
-  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
-  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="brand" href="./"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
   <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
   <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
 </header>
-<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="index.html" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="index.html#plan" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="./" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
 <main id="main">
   <section class="hero t-tide" data-nav-dark>
     <canvas class="motif" data-motif="chart" data-ink="shore" data-labels="[data-i18n='sv.0.n'],[data-i18n='sv.1.n'],[data-i18n='sv.2.n']" data-here="#chHere" data-goal="#chGoal" data-opts='{"route":[[.068,.14],[.23,.25],[.40,.29],[.57,.38]]}' aria-hidden="true"></canvas>
     <span id="chHere" class="sr-only" data-i18n="ch.here">Today</span>
     <span id="chGoal" class="sr-only" data-i18n="ch.goal">Next year</span>
     <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Strategy</h1>
-    <p class="lead" data-i18n="h.d">We do the research and write the plan before anyone opens a design file.</p>
+    <p class="lead" data-i18n="h.d">We research your market and write your marketing plan before anyone opens a design file.</p>
   </section>
 
   <section class="sec t-deep edge-top" id="questions" aria-labelledby="qsT">
@@ -161,7 +185,45 @@ html[lang=ar] .qs .qd{margin-top:.55em}
     </div>
   </section>
 
-  <section class="sec t-shore related" aria-labelledby="wkT">
+  <section class="sec t-deep edge-top" id="fit" aria-labelledby="gfT">
+    <div class="wrap g12 pl">
+      <h2 class="heading pl-t" id="gfT" data-i18n="gf.t">When you need a marketing strategy.</h2>
+      <div class="pl-b"><p class="lead" data-i18n="gf.lead">Start here if one of these sounds like you.</p><ul class="slash pl-list"><li data-i18n="gf.0">Opening a new business</li><li data-i18n="gf.1">Launching a new product</li><li data-i18n="gf.2">Entering the Qatar market</li><li data-i18n="gf.3">Spending without clear results</li></ul></div>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top steps" id="needs" aria-labelledby="ndT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="ndT" data-i18n="nd.t">What we’ll need from you.</h2><p class="lead" data-i18n="nd.lead">Most of it you already have, and we’ll ask for the rest.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="nd.0">Your goals</h3><div><p class="lead" data-i18n="nd.0d">Where you want the business to be, in your own words.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.1">Your numbers</h3><div><p class="lead" data-i18n="nd.1d">Sales, enquiries and what you spend on marketing now, as far as you can share them.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.2">Customers to talk to</h3><div><p class="lead" data-i18n="nd.2d">Introductions to a few of your customers, so we hear it from the people who buy.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.3">One person who decides</h3><div><p class="lead" data-i18n="nd.3d">Someone who can sign off the plan, and is in the room when we present it.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore k-faq" id="faqs" aria-labelledby="qT">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" id="qT" data-i18n="q.t">Questions about strategy.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Do we need a strategy before a logo or a website?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">Not always. If you already know who you’re for and what to say, we start with the work itself, and tell you if we think something is missing.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">What do we get at the end?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">A written plan: who you’re for, what to tell them, which channels get your budget and how we’ll know it worked. Your team can work from it without us.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Can you carry out the plan too?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">Yes, or your own team can. We can build your <a href="websites.html">website</a> and run your social media and <a href="advertising.html">paid ads</a>, measured against the targets in the plan.</p></div></div></li></ul>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="paired" aria-labelledby="paT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="paT" data-i18n="pa.t">Where the plan goes next.</h2><p class="lead" data-i18n="pa.lead">Each is its own service, run by the same team that wrote the plan.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="pa0"><a class="wave-underline" href="websites.html" data-i18n="s.websites" aria-describedby="paA0">Website design</a></h3><div><p class="lead" data-i18n="pa.0.d">The plan decides what your site says first, and who it says it to.</p><span class="svc-ask" id="paA0" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pa1"><a class="wave-underline" href="seo.html" data-i18n="s.seo" aria-describedby="paA1">SEO</a></h3><div><p class="lead" data-i18n="pa.1.d">The market research shows the words your customers search with, in Arabic and English.</p><span class="svc-ask" id="paA1" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pa2"><a class="wave-underline" href="social-media.html" data-i18n="s.social" aria-describedby="paA2">Social media</a></h3><div><p class="lead" data-i18n="pa.2.d">The plan sets what you post, where and for whom.</p><span class="svc-ask" id="paA2" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pa3"><a class="wave-underline" href="advertising.html" data-i18n="s.ads" aria-describedby="paA3">Paid ads</a></h3><div><p class="lead" data-i18n="pa.3.d">The budget split in the plan becomes your campaigns.</p><span class="svc-ask" id="paA3" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top related" aria-labelledby="wkT">
     <div class="wrap">
       <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Concepts that began with a plan.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
       <div class="cards" id="related"></div>
@@ -173,7 +235,7 @@ html[lang=ar] .qs .qd{margin-top:.55em}
 <footer class="foot t-deep" id="foot">
   <div class="foot-ask">
     <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
-    <a class="foot-mail" href="mailto:hello@miras.qa" dir="ltr" data-cms="studio.email">hello@miras.qa</a>
+    <a class="foot-mail" href="mailto:hello@mirasmarketing.com" dir="ltr" data-cms="studio.email">hello@mirasmarketing.com</a>
     <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
   </div>
   <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
@@ -182,15 +244,15 @@ html[lang=ar] .qs .qd{margin-top:.55em}
   </div>
   <div class="foot-row">
     <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
-    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="websites.html" data-i18n="s.websites">Website design</a><a href="seo.html" data-i18n="s.seo">SEO</a><a href="social-media.html" data-i18n="s.social">Social media</a><a href="advertising.html" data-i18n="s.ads">Paid ads</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
     <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
-    <p data-i18n="f.copy">© 2026 MIRAS · miras.qa</p>
+    <p data-i18n="f.copy">© 2026 MIRAS · mirasmarketing.com</p>
   </div>
 </footer>
-<script>window.PAGE_TITLE = {"en": "Strategy — MIRAS", "ar": "الاستراتيجية — ميراس"}; window.PAGE_AR = {
+<script>window.PAGE_TITLE = {"en": "Marketing strategy & research in Qatar — MIRAS", "ar": "استراتيجية التسويق وأبحاث السوق في قطر — ميراس"}; window.PAGE_AR = {
 "h.word": "الاستراتيجية",
-"meta.d": "نُجري الأبحاث ونكتب الخطة قبل أن يفتح أحد ملف تصميم.",
-"h.d": "نُجري الأبحاث ونكتب الخطة قبل أن يفتح أحد ملف تصميم.",
+"meta.d": "استراتيجية التسويق للشركات في قطر: أبحاث العملاء والمنافسين، والتموضع، وخطة القنوات والميزانية، قبل أي تصميم.",
+"h.d": "ندرس سوقك ونكتب خطتك التسويقية قبل أن يفتح أحد ملف تصميم.",
 "ch.here": "اليوم",
 "ch.goal": "العام المقبل",
 "qs.t": "أسئلة نجيب عنها أولاً.",
@@ -199,12 +261,12 @@ html[lang=ar] .qs .qd{margin-top:.55em}
 "qs.2": "وكيف تريدهم أن يروك؟",
 "qs.3": "أين سيسمعون رسالتك؟",
 "qs.4": "كيف سنعرف أنها نجحت؟",
-"sv.t": "مكتوبة، وتبقى لك.",
-"sv.lead": "يعمل بها فريقك من دوننا.",
+"sv.t": "خطتك بين يديك.",
+"sv.lead": "يستطيع فريقك العمل بها دون الرجوع إلينا.",
 "sv.0.n": "الأبحاث والرؤى",
 "sv.0.d": "نتحدّث إلى عملائك وندرس منافسيك، ثم نضع أمامك ما وجدناه.",
 "sv.0.0": "خريطة السوق",
-"sv.0.1": "ملفات الجمهور",
+"sv.0.1": "ملفات تعريف الجمهور",
 "sv.0.2": "مراجعة المنافسين",
 "sv.0.3": "تقرير الرؤى",
 "sv.1.n": "استراتيجية العلامة",
@@ -214,11 +276,41 @@ html[lang=ar] .qs .qd{margin-top:.55em}
 "sv.1.2": "الرسائل",
 "sv.1.3": "قصة العلامة",
 "sv.2.n": "خطط التسويق",
-"sv.2.d": "أيّ القنوات تستحق ميزانيتك ومتى، للربع والعام القادمين.",
+"sv.2.d": "نحدّد أيّ القنوات تستحق ميزانيتك ومتى، للربع والعام القادمين.",
 "sv.2.0": "مزيج القنوات",
 "sv.2.1": "توزيع الميزانية",
 "sv.2.2": "تقويم الحملات",
 "sv.2.3": "لوحة المؤشرات",
+"gf.t": "متى تحتاج إلى استراتيجية تسويق؟",
+"gf.lead": "ابدأ من هنا إن كنت في إحدى هذه المراحل.",
+"gf.0": "افتتاح نشاط تجاري جديد",
+"gf.1": "إطلاق منتج جديد",
+"gf.2": "دخول السوق القطري",
+"gf.3": "إنفاق تسويقي بلا نتائج واضحة",
+"nd.t": "ما نحتاجه منك.",
+"nd.lead": "معظمه متوفّر لديك، وسنطلب منك ما تبقّى.",
+"nd.0": "أهدافك",
+"nd.0d": "أين تريد أن يصل نشاطك، بكلماتك أنت.",
+"nd.1": "أرقامك",
+"nd.1d": "المبيعات والاستفسارات وما تنفقه على التسويق اليوم، بالقدر الذي يمكنك مشاركته.",
+"nd.2": "عملاء نتحدّث إليهم",
+"nd.2d": "تعريفنا ببعض عملائك، لنسمع عنك ممّن يشترون منك.",
+"nd.3": "شخص يتّخذ القرار",
+"nd.3d": "شخص يملك صلاحية اعتماد الخطة، ويحضر حين نعرضها.",
+"pa.t": "من الخطة إلى التنفيذ.",
+"pa.lead": "كلٌّ منها خدمة مستقلة، يتولّاها الفريق نفسه الذي كتب الخطة.",
+"sv.go": "تفاصيل الخدمة",
+"pa.0.d": "الخطة تحدّد ما يقوله موقعك أولاً، ولمن يقوله.",
+"pa.1.d": "أبحاث السوق تكشف الكلمات التي يبحث بها عملاؤك، بالعربية والإنجليزية.",
+"pa.2.d": "الخطة تحدّد ماذا تنشر، وأين، ولمن.",
+"pa.3.d": "توزيع الميزانية في الخطة يتحوّل إلى حملات إعلانية.",
+"q.t": "أسئلة عن الاستراتيجية.",
+"q.0": "هل نحتاج إلى استراتيجية قبل الشعار أو الموقع؟",
+"a.0": "ليس دائماً. إن كنت تعرف جمهورك وما تريد أن تقوله له، نبدأ بالعمل نفسه، وسنخبرك إن رأينا أن شيئاً ما ينقص.",
+"q.1": "ماذا نستلم في النهاية؟",
+"a.1": "خطة مكتوبة: لمن تتوجّه، وماذا تقول له، وأيّ القنوات تستحق ميزانيتك، وكيف سنعرف أنها نجحت. يستطيع فريقك العمل بها دون الرجوع إلينا.",
+"q.2": "هل يمكنكم تنفيذ الخطة أيضاً؟",
+"a.2": "نعم، أو يتولّاها فريقك. يمكننا بناء [موقعك](websites.html)، وإدارة حسابات التواصل الاجتماعي و[الإعلانات الممولة](advertising.html)، ونقيس ذلك كله بالأهداف المكتوبة في الخطة.",
 "wk.t": "مشاريع مفاهيمية بدأت بخطة.",
 "wk.all": "كل الأعمال",
 "nx.l": "التالي",
@@ -226,9 +318,9 @@ html[lang=ar] .qs .qd{margin-top:.55em}
 };</script>
 <!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
 <script src="assets/content.js"></script>
-<script src="assets/work.js?v=r3"></script>
+<script src="assets/work.js?v=r4"></script>
 <script src="assets/motifs.js?v=r3"></script>
-<script src="assets/site.js?v=r3"></script>
+<script src="assets/site.js?v=r4"></script>
 <script>
 (() => {
   const M = window.MIRAS, $ = M.$, $$ = M.$$;
@@ -248,6 +340,8 @@ html[lang=ar] .qs .qd{margin-top:.55em}
     nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
     nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
   }
+  // the FAQ opens and closes in place (the answers stay in the page for search and for readers without script)
+  $('#faq')?.addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
   // the questions: each rule draws across once as its row arrives; a dashed route links the diamonds
   const qs = $('.qs'); if (!qs) return;
   const rows = $$(':scope > li', qs), NS = 'http://www.w3.org/2000/svg';

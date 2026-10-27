@@ -4,30 +4,136 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
-<title>MIRAS — Creative marketing agency in Lusail</title>
-<meta name="description" content="MIRAS is a creative marketing agency in Lusail, Qatar: strategy, branding, content and digital marketing, in Arabic and English.">
+<title>MIRAS — Marketing agency in Lusail, Qatar</title>
+<meta name="description" content="MIRAS is a marketing agency in Lusail, Qatar: website design, SEO, social media, ads, strategy, branding and content, in Arabic and English.">
 <meta name="theme-color" content="#2B3BF0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<!-- share previews (WhatsApp, LinkedIn, X) and the two language addresses; crawlers read these without running scripts.
-     PLACEHOLDER until the client confirms the domain: miras.qa -->
-<link rel="canonical" href="https://miras.qa/">
-<link rel="alternate" hreflang="en" href="https://miras.qa/">
-<link rel="alternate" hreflang="ar" href="https://miras.qa/?lang=ar">
-<link rel="alternate" hreflang="x-default" href="https://miras.qa/">
+<!-- the film's first frame (the .sea-pin::before background) starts with the page, not after the stylesheet. Same URLs and
+     breakpoint as that CSS (portrait screens, 4:5 and narrower, get m/), so the background and the frame loader take this
+     one download. AVIF only: a browser without it skips these and gets the JPEG from the CSS, as before -->
+<link rel="preload" as="image" type="image/avif" href="assets/film/m/f0001.avif?v=r4" media="(max-aspect-ratio:4/5)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" href="assets/film/d/f0001.avif?v=r4" media="not all and (max-aspect-ratio:4/5)" fetchpriority="high">
+<!-- share previews (WhatsApp, LinkedIn, X) and the two language addresses. One file serves both languages (English at
+     the plain address, Arabic at ?lang=ar): the hreflang pair is the same for both, and the page script writes the canonical
+     and og:url for the language shown -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MIRAS">
-<meta property="og:url" content="https://miras.qa/">
-<meta property="og:title" content="MIRAS — Creative marketing agency in Lusail">
-<meta property="og:description" content="Strategy, branding, content and digital marketing for companies across Qatar, in Arabic and English.">
-<meta property="og:image" content="https://miras.qa/assets/og.jpg">
+<meta property="og:title" content="MIRAS — Marketing agency in Lusail, Qatar">
+<meta property="og:description" content="Website design, SEO, social media and ads for businesses across Qatar, plus strategy, branding and content, in Arabic and English.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
 <meta property="og:locale" content="en_GB">
-<meta property="og:locale:alternate" content="ar_QA">
+<meta property="og:locale:alternate" content="ar_AR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://miras.qa/assets/og.jpg">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<!-- structured data: the business and its services, one block. The admin (SEO & sharing, "Write the SEO tags into index.html")
+     replaces it with its own, built the same way (admin/modules/seo.js ld()); keep the two in step -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "MIRAS",
+  "alternateName": "ميراس",
+  "url": "https://www.mirasmarketing.com/",
+  "description": "MIRAS is a marketing agency in Lusail, Qatar: website design, SEO, social media, ads, strategy, branding and content, in Arabic and English.",
+  "image": "https://www.mirasmarketing.com/assets/og.jpg",
+  "logo": "https://www.mirasmarketing.com/assets/apple-touch-icon.png",
+  "email": "hello@mirasmarketing.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Burj Alfardan",
+    "addressLocality": "Lusail",
+    "addressCountry": "QA"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Qatar"
+  },
+  "knowsLanguage": [
+    "en",
+    "ar"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Marketing services",
+    "url": "https://www.mirasmarketing.com/services.html",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Website design",
+          "url": "https://www.mirasmarketing.com/websites.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "SEO",
+          "url": "https://www.mirasmarketing.com/seo.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Social media management",
+          "url": "https://www.mirasmarketing.com/social-media.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Paid ads management",
+          "url": "https://www.mirasmarketing.com/advertising.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Marketing strategy and research",
+          "url": "https://www.mirasmarketing.com/strategy.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Branding and brand identity",
+          "url": "https://www.mirasmarketing.com/branding.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Video, photography and copywriting",
+          "url": "https://www.mirasmarketing.com/content.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Monthly digital marketing",
+          "url": "https://www.mirasmarketing.com/digital.html"
+        }
+      }
+    ]
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- the faces load without blocking the first paint (the page script re-measures when they land) -->
@@ -128,13 +234,18 @@ html[lang=ar] .nav-links{font-family:var(--ar)}
 .nav-svc.shut .nav-fly,.nav-svc.shut:hover .nav-fly,.nav-svc.shut:focus-within .nav-fly{opacity:0;visibility:hidden}
 .nav-links .nav-fly a{display:flex;align-items:center;min-height:44px;padding:0;opacity:.85;font:500 15px/1.2 var(--sans);white-space:nowrap}
 .nav-links .nav-fly a:hover,.nav-links .nav-fly a:focus-visible{opacity:1}
+/* the single-service pages (.nav-p) come first; a hairline sets them off from the four disciplines (.nav-g), as on the inner pages */
+.nav-fly .nav-p + .nav-g,.mnav-sub .nav-p + .nav-g{border-top:1px solid color-mix(in srgb,var(--shore) 20%,transparent)}
+.mnav-sub .nav-p + .nav-g{margin-top:4px}
 html[lang=ar] .nav-links .nav-fly a{font-family:var(--ar)}
 .mnav-sub{display:flex;flex-direction:column;padding-inline-start:clamp(18px,5vw,32px);margin:2px 0 8px;border-inline-start:1.5px solid var(--flare)}
 .mnav .mnav-sub a{display:flex;align-items:center;min-height:44px;font:500 22px/1.2 var(--sans);color:color-mix(in srgb,var(--shore) 80%,transparent)}
 .mnav .mnav-sub a:hover,.mnav .mnav-sub a:focus-visible{color:var(--shore)}
 html[lang=ar] .mnav .mnav-sub a{font:500 21px/1.4 var(--ar)}
 @media (prefers-reduced-motion:reduce){.nav-fly{transition:none!important;transform:none}}
-.lang{background:none;border:0;cursor:pointer;font:500 15px/1 var(--ar);min-height:44px;padding:0 4px}
+/* the language switch (as assets/site.css) is a link to this page in the other language (the page script switches in
+   place on a click); it is drawn as the button it was: its word centred in a 44px target, no underline until hover */
+.lang{display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;font:500 15px/1 var(--ar);min-height:44px;padding:0 4px;color:inherit;text-decoration:none}
 .lang:hover{text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.3em}
 html[lang=ar] .lang{font-family:var(--sans)}
 .nav .pill{min-height:44px;padding:0 20px;font-size:14px}
@@ -144,8 +255,8 @@ html[lang=ar] .lang{font-family:var(--sans)}
 .sea{position:relative;height:640vh;background:var(--deep);color:var(--shore);--ring:var(--shore)}
 .sea .beat.ink{--ring:var(--tide)}
 .sea-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep)}
-/* the film's first frame paints before any script runs (this background; the frame loader reuses it from the memory cache, so it downloads once); the canvas draws over it once frames
-   decode. Portrait screens get the 9:16 cut, as seaSetFor() does; Arabic mirrors it, as fDraw() does */
+/* the film's first frame paints before any script runs (this background, preloaded in the head; the frame loader reuses it from the memory cache, so it downloads once); the canvas draws over it once frames
+   decode. The head's two preload links copy these URLs and the 4/5 breakpoint: change them together. Portrait screens get the 9:16 cut, as seaSetFor() does; Arabic mirrors it, as fDraw() does */
 .sea-pin::before{content:"";position:absolute;inset:0;background:var(--deep) url(assets/film/d/f0001.jpg?v=r4) center/cover no-repeat;background-image:image-set(url(assets/film/d/f0001.avif?v=r4) type("image/avif"),url(assets/film/d/f0001.jpg?v=r4) type("image/jpeg"))}
 @media (max-aspect-ratio:4/5){.sea-pin::before{background-image:url(assets/film/m/f0001.jpg?v=r4);background-image:image-set(url(assets/film/m/f0001.avif?v=r4) type("image/avif"),url(assets/film/m/f0001.jpg?v=r4) type("image/jpeg"))}}
 html[dir=rtl] .sea-pin::before{transform:scaleX(-1)}
@@ -302,7 +413,7 @@ html[dir=rtl] .sea-hud .bar i,html[dir=rtl] .ride-cap::after{transform-origin:ri
 .rider.at-rest .ripple{opacity:0}
 .rider .ripple ellipse{stroke-width:3;opacity:1}
 /* four prints hung from one line, each its own width and drop (3 / 3 / 3 / 3 columns, the last one running past the margin, hanging 0 / 90 / 40 / 150px).
-   Digital is the narrow one that hangs lowest and runs off the page edge (the board's grid break) */
+   Digital (websites and SEO) hangs first; the last block (.sg-tail) hangs lowest and runs off the page edge (the board's grid break) */
 .sg-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);align-items:start}
 .sg{--off:0px;--pad:clamp(20px,1.8vw,30px);position:relative;display:flex;flex-direction:column;margin-top:var(--off);padding:calc(var(--pad) + 4px) var(--pad) var(--pad);background:var(--bg);color:var(--fg)}
 .sg:nth-child(1){grid-column:1/4}
@@ -311,6 +422,9 @@ html[dir=rtl] .sea-hud .bar i,html[dir=rtl] .ride-cap::after{transform-origin:ri
 .sg-tail{grid-column:10/13;--off:150px;margin-inline-end:calc(-1 * var(--m));padding-inline-end:calc(var(--m) + var(--pad))}
 /* the card bleeds to the viewport edge, so its chart strip bleeds with it (the canvas re-fits on resize) */
 .sg-tail .sg-sea{margin-inline-end:calc(-1 * (var(--pad) + var(--m)))}
+/* the contact strip runs left to right in both languages; in Arabic the tail bleeds off the left edge, so the strip is set from
+   its right end and the cut frame falls at the page edge, not against the block's inner side */
+html[dir=rtl] .sg-tail .reel.mini{display:flex;justify-content:flex-end}
 .sg::before{content:"";position:absolute;inset-inline-start:calc(var(--pad) + 10px);bottom:100%;width:1px;height:calc(var(--off) + 40px);background:var(--deep);opacity:.6}
 .sg::after{content:"";position:absolute;inset-inline:0;bottom:calc(100% - 1px);height:54px;background:var(--bg);-webkit-mask:var(--wavemask) center/100% 100% no-repeat;mask:var(--wavemask) center/100% 100% no-repeat;pointer-events:none}
 .sg-name{font:400 44px/1 var(--serif);letter-spacing:-.015em;text-wrap:balance}
@@ -328,6 +442,13 @@ html[dir=rtl] .sea-hud .bar i,html[dir=rtl] .ride-cap::after{transform-origin:ri
 .sv-h{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
 .sv-name{font:400 clamp(21px,1.6vw,26px)/1.12 var(--serif);text-wrap:balance}
 .sv-d{margin-top:6px;font-size:14.5px;line-height:1.5;color:var(--soft);text-wrap:balance}
+/* a Digital service with its own page links to it under its description (websites, social media; SEO and paid ads) */
+.sv-go{display:flex;flex-wrap:wrap;gap:0 18px;margin-top:2px}
+.sv-go a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:var(--fs-small);text-decoration:none}
+.sv-go a > span:first-child{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.32em;text-decoration-color:var(--flare);transition:text-decoration-thickness .3s var(--ease)}
+.sv-go a:hover > span:first-child,.sv-go a:focus-visible > span:first-child{text-decoration-thickness:2px}
+.t-flare .sv-go a > span:first-child{text-decoration-color:var(--deep)}
+html[lang=ar] .sv-go a{font-family:var(--ar)}
 .sv-for{display:none;margin-top:8px;font:var(--fs-small);align-items:baseline;gap:10px}
 .sv-for::before{content:"";width:10px;height:1.5px;background:var(--flare);flex:none;transform:translateY(-.3em)}
 .t-flare .sv-for::before{background:var(--deep)}
@@ -604,6 +725,28 @@ html[lang=ar] .toast{font-family:var(--ar)}
 html[lang=ar] .consent{font-family:var(--ar)}
 body:has(.consent:not([hidden])) .toast{bottom:auto;top:84px}
 html:has(.consent:not([hidden])){scroll-padding-bottom:200px}
+/* ---------- The Arabic hint (offered by the page script, as on the inner pages) ----------
+   Only for a browser set to Arabic that lands on the English site.
+   A thin Deep bar held to the foot of the screen, after everything else in the page: at the very end it sits under the
+   footer rather than over it, and it takes no room above it, so nothing on the page moves. It steps aside while the
+   consent bar asks. dir=rtl and lang=ar are on the bar itself (the page around it is English). */
+.ar-hint{--ring:var(--foam);position:sticky;bottom:0;z-index:38;display:flex;flex-wrap:wrap;align-items:center;column-gap:clamp(14px,2vw,24px);padding:4px var(--m) calc(4px + env(safe-area-inset-bottom,0px));background:var(--deep);color:var(--shore);box-shadow:0 -1px 0 color-mix(in srgb,var(--shore) 16%,transparent);font:400 15px/1.5 var(--ar)}
+.ar-hint p{margin-inline-end:auto;padding-block:10px}
+.ar-hint a,.ar-hint button{display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 var(--ar);color:var(--shore)}
+.ar-hint a{text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.5em}
+.ar-hint button{justify-content:center;min-width:44px;padding:0 4px;background:none;border:0;cursor:pointer;color:color-mix(in srgb,var(--shore) 78%,transparent)}
+.ar-hint button:hover,.ar-hint button:focus-visible{color:var(--shore)}
+body:has(.consent:not([hidden])) .ar-hint{display:none}
+html:has(.ar-hint){scroll-padding-bottom:64px}
+@media (max-width:520px){.ar-hint{padding-inline:16px;column-gap:14px}.ar-hint,.ar-hint a,.ar-hint button{font-size:14px}}
+body:has(.ar-hint) .toast{bottom:auto;top:84px}
+/* while the hint shows, what the film keeps on its bottom edge (the stage line, its caption, the phone bands with
+   "Our services" and the end card) rises by the hint's height, so nothing sits under it */
+body:has(.ar-hint){--hint:calc(52px + env(safe-area-inset-bottom,0px))}
+body:has(.ar-hint) .sea-hud{bottom:calc(24px + var(--hint))}
+body:has(.ar-hint) .ride-cap{bottom:calc(clamp(70px,11vh,110px) + var(--hint))}
+@media (max-width:760px),(max-aspect-ratio:4/5){body:has(.ar-hint) .sea .beat.hero,body:has(.ar-hint) .sea .beat.fin{padding-bottom:calc(28px + var(--hint))}}
+@media (max-width:760px){body:has(.ar-hint) .sea-hud,body:has(.ar-hint) .ride-cap{bottom:var(--hint)}}
 .form-privacy{grid-column:1/-1;margin-top:-10px;font-size:15px}
 .form-privacy a{text-underline-offset:.2em;text-decoration-thickness:1px;display:inline-block;padding:12px 0;min-height:44px}
 .field select{font:400 20px/1.4 var(--sans);color:var(--shore);background:transparent;border:0;border-bottom:1.5px solid color-mix(in srgb,var(--shore) 65%,transparent);padding-block:8px;padding-inline:0 28px;border-radius:0;-webkit-appearance:none;appearance:none;cursor:pointer;transition:border-color .3s}
@@ -611,7 +754,8 @@ html:has(.consent:not([hidden])){scroll-padding-bottom:200px}
 .field select option{color:var(--deep);background:var(--shore)}
 .field.sel{position:relative}
 .field.sel::after{content:"";position:absolute;inset-inline-end:6px;bottom:22px;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);pointer-events:none;opacity:.8}
-html[dir=rtl] .field input[type=tel],html[dir=rtl] .field input[type=email]{text-align:right}
+/* the free-text fields take the direction of what is typed (dir=auto); on the Arabic page they keep to its right edge, empty or in English */
+html[dir=rtl] .field input[type=tel],html[dir=rtl] .field input[type=email],html[dir=rtl] .field [dir=auto]{text-align:right}
 html[lang=ar] .field select{font-family:var(--ar)}
 .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
@@ -650,15 +794,15 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   <a class="brand" href="#top"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
   <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main">
     <a href="work.html" data-i18n="nav.work">Work</a>
-    <span class="nav-svc" id="navSvc"><a href="#plan" data-i18n="nav.services">Services</a><span class="nav-fly"><a href="strategy.html" class="nav-g">Strategy</a><a href="branding.html" class="nav-g">Branding</a><a href="content.html" class="nav-g">Content</a><a href="digital.html" class="nav-g">Digital</a></span></span>
+    <span class="nav-svc" id="navSvc"><a href="services.html" data-i18n="nav.services">Services</a><span class="nav-fly"><a href="websites.html" class="nav-p" data-i18n="nav.websites">Website design</a><a href="seo.html" class="nav-p" data-i18n="nav.seo">SEO</a><a href="social-media.html" class="nav-p" data-i18n="nav.social">Social media</a><a href="advertising.html" class="nav-p" data-i18n="nav.ads">Paid ads</a><a href="strategy.html" class="nav-g">Strategy</a><a href="branding.html" class="nav-g">Branding</a><a href="content.html" class="nav-g">Content</a><a href="digital.html" class="nav-g">Digital</a></span></span>
     <a href="about.html" data-i18n="nav.about">About</a>
     <a href="contact.html" data-i18n="nav.contact">Contact</a>
   </nav>
-  <button class="lang" id="langBtn" lang="ar">العربية</button>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
   <a class="pill flare brief-pill" href="#contact"><span data-i18n="cta.start">Start a project</span><span class="cnt" id="navCnt" hidden></span></a>
   <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav" data-i18n="nav.menu">Menu</button>
 </header>
-<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="nav.menu"><a href="work.html" data-i18n="nav.work">Work</a><a href="#plan" data-i18n="nav.services">Services</a><div class="mnav-sub"><a href="strategy.html" class="nav-g">Strategy</a><a href="branding.html" class="nav-g">Branding</a><a href="content.html" class="nav-g">Content</a><a href="digital.html" class="nav-g">Digital</a></div><a href="about.html" data-i18n="nav.about">About</a><a href="contact.html" data-i18n="nav.contact">Contact</a><div class="mnav-foot"><p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p><a data-cms="studio.email" dir="ltr" href="mailto:hello@miras.qa">hello@miras.qa</a></div></nav>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="nav.menu"><a href="work.html" data-i18n="nav.work">Work</a><a href="services.html" data-i18n="nav.services">Services</a><div class="mnav-sub"><a href="websites.html" class="nav-p" data-i18n="nav.websites">Website design</a><a href="seo.html" class="nav-p" data-i18n="nav.seo">SEO</a><a href="social-media.html" class="nav-p" data-i18n="nav.social">Social media</a><a href="advertising.html" class="nav-p" data-i18n="nav.ads">Paid ads</a><a href="strategy.html" class="nav-g">Strategy</a><a href="branding.html" class="nav-g">Branding</a><a href="content.html" class="nav-g">Content</a><a href="digital.html" class="nav-g">Digital</a></div><a href="about.html" data-i18n="nav.about">About</a><a href="contact.html" data-i18n="nav.contact">Contact</a><div class="mnav-foot"><p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p><a data-cms="studio.email" dir="ltr" href="mailto:hello@mirasmarketing.com">hello@mirasmarketing.com</a></div></nav>
 
 <main>
   <!-- ===== The film: Mira rides from open water to the shore while the four stages of a MIRAS project scroll past ===== -->
@@ -673,7 +817,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     </div>
     <div class="beat hero" data-at="0" style="--at:0;--y:28svh">
       <h1 class="display" data-i18n="j0.t" data-settle>Brands that <em>make waves.</em></h1>
-      <p class="lead" data-i18n="j0.d">Strategy, branding, content and digital marketing for companies across Qatar.</p>
+      <p class="lead" data-i18n="j0.d">Website design and SEO, plus social media and paid ads, for businesses in Qatar.</p>
       <p class="hero-skip"><a class="fin-link" href="#plan" data-i18n="j0.b">Our services ↓</a></p>
     </div>
     <div class="beat stage" data-at=".3" data-stage="0" id="how" style="--at:.3"></div>
@@ -682,12 +826,12 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     <div class="beat stage" data-at=".85" data-stage="3" style="--at:.85"></div>
     <div class="beat fin ink" data-at="1" style="--at:1;--y:16svh">
       <h2 class="display" data-i18n="j4.t">What are you launching next?</h2>
-      <p class="lead" data-i18n="j4.d">Send us your brief. We reply within one working day.</p>
+      <p class="lead" data-i18n="j4.d">Tell us what you’re opening or growing, and we’ll reply within one working day.</p>
       <div class="actions"><a class="pill flare" href="#contact" data-i18n="cta.start">Start a project</a><a class="fin-link" href="#plan" data-i18n="j4.b">Build your plan ↓</a></div>
     </div>
   </section>
 
-  <!-- ===== Services: the visitor's answers on the right; twelve services in four discipline blocks, moored to one line ===== -->
+  <!-- ===== Services: the visitor's answers on the right; the services in four discipline blocks, moored to one line ===== -->
   <section class="plan t-shore" id="plan" data-nav="shore" tabindex="-1">
     <div class="wrap g12 svc-head">
       <div class="svc-main">
@@ -704,11 +848,12 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       <div class="moor" aria-hidden="true"><canvas id="moorLine" data-motif="tide" data-ink="deep" data-opts='{"lines":1,"tide":14,"width":1.5,"alpha":.8}' aria-hidden="true"></canvas></div>
       <div class="rider at-rest" id="rider" aria-hidden="true"><svg class="ripple" viewBox="0 0 220 32"></svg><img src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async"></div>
       <div class="sg-grid">
+        <!-- Digital (websites, SEO, social media, paid ads) comes first; the last block hangs lowest and runs off the page edge.
+             data-g is the discipline (SGROUPS index), whatever the block's place on the line -->
+        <article class="sg t-deep" data-g="3"><h3 class="sg-name"><a class="sg-link" href="digital.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><canvas class="motif" data-motif="rise" data-ink="tide60" data-opts='{"mini":true}' aria-hidden="true"></canvas></div><ul class="sg-list"></ul></article>
         <article class="sg t-tide" data-g="0"><h3 class="sg-name"><a class="sg-link" href="strategy.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><canvas class="motif" data-motif="chart" data-ink="shore" data-opts='{"mini":true}' aria-hidden="true"></canvas></div><ul class="sg-list"></ul></article>
         <article class="sg t-flare" data-g="1"><h3 class="sg-name"><a class="sg-link" href="branding.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><canvas class="motif" data-motif="mark" data-ink="deep" data-opts='{"mini":true}' aria-hidden="true"></canvas></div><ul class="sg-list"></ul></article>
-        <article class="sg t-foam" data-g="2"><h3 class="sg-name"><a class="sg-link" href="content.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><div class="motif reel" data-motif="reel" data-opts='{"mini":true}' data-frames="49,105,217" aria-hidden="true"></div></div><ul class="sg-list"></ul></article>
-        <!-- Digital hangs lowest and runs off the page edge -->
-        <article class="sg t-deep sg-tail" data-g="3"><h3 class="sg-name"><a class="sg-link" href="digital.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><canvas class="motif" data-motif="rise" data-ink="tide60" data-opts='{"mini":true}' aria-hidden="true"></canvas></div><ul class="sg-list"></ul></article>
+        <article class="sg t-foam sg-tail" data-g="2"><h3 class="sg-name"><a class="sg-link" href="content.html"><span class="sr-only" data-i18n="plan.go">More on</span> <span class="sg-n wave-underline"></span><span class="arrow" aria-hidden="true">→</span></a></h3><p class="sg-line"></p><div class="sg-sea" aria-hidden="true"><div class="motif reel" data-motif="reel" data-opts='{"mini":true}' data-frames="49,105,217" aria-hidden="true"></div></div><ul class="sg-list"></ul></article>
       </div>
     </div>
   </section>
@@ -728,7 +873,9 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   </section>
 
   <!-- ===== Poster band: the tagline, sinking into the water ===== -->
-  <section class="poster t-flare" id="poster" data-nav="flare" aria-label="MIRAS" data-i18n-aria="aria.brand">
+  <!-- no aria-label: a named section is a landmark, and "MIRAS" is already the film's (#top). The band only carries the
+       tagline, which it reads out as it is -->
+  <section class="poster t-flare" id="poster" data-nav="flare">
     <div class="motif typetide" data-motif="typetide">
       <p class="tt-line tt-en" lang="en" data-cms="tagline.en">From the swell to the shore.</p>
       <p class="tt-line tt-ar" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</p>
@@ -764,7 +911,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
         <li><canvas class="emb-m" data-motif="emblem" data-opts='{"state":0}' aria-hidden="true"></canvas><h3 data-i18n="hr.1">Tested where it will be seen.</h3><p class="lead" data-i18n="hr.1d">On a billboard in the midday sun and a phone at midnight. If it doesn’t read there, we fix it before launch.</p></li>
         <li><canvas class="emb-m" data-motif="emblem" data-opts='{"state":1}' aria-hidden="true"></canvas><h3 data-i18n="hr.2">One agency instead of four.</h3><p class="lead" data-i18n="hr.2d">Your ads, posts and website are planned at one table and say the same thing.</p></li>
         <li><canvas class="emb-m" data-motif="emblem" data-opts='{"state":2}' aria-hidden="true"></canvas><h3 data-i18n="hr.3">Targets agreed before we start.</h3><p class="lead" data-i18n="hr.3d">Written down on day one. Every monthly report measures us against them.</p></li>
-        <li><canvas class="emb-m" data-motif="emblem" data-opts='{"state":3}' aria-hidden="true"></canvas><h3 data-i18n="hr.4">Based in Lusail.</h3><p class="lead" data-i18n="hr.4d">Al Fardan Tower. Meet us there, or we’ll come to you.</p></li>
+        <li><canvas class="emb-m" data-motif="emblem" data-opts='{"state":3}' aria-hidden="true"></canvas><h3 data-i18n="hr.4">Based in Lusail.</h3><p class="lead" data-i18n="hr.4d">Burj Alfardan. Meet us there, or we’ll come to you.</p></li>
       </ol>
     </div>
   </section>
@@ -775,8 +922,8 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       <div>
         <h2 class="clock-head"><span class="sr-only" data-i18n="st.now">Time in Lusail now:</span> <span class="time" id="clockTime">16:00</span></h2>
         <p class="status lead"><span class="sunmark" id="clockDot" aria-hidden="true"></span><span id="clockStatus"></span></p>
-        <p class="lead soft" data-i18n="st.text">Visit during opening hours, or email us first.</p>
-        <div class="address"><span class="small soft" data-i18n="st.where">Find us</span><p class="lead" data-i18n="st.addr">Al Fardan Tower, Lusail, Qatar</p></div>
+        <p class="lead soft" data-i18n="st.text">Email us first and we’ll set a time.</p>
+        <div class="address"><span class="small soft" data-i18n="st.where">Find us</span><p class="lead" data-i18n="st.addr">Burj Alfardan, Lusail, Qatar</p></div>
       </div>
       <img class="mira-wave" src="assets/mira-arrive.png?v=r2" width="512" height="680" alt="" loading="lazy" decoding="async">
     </div>
@@ -788,9 +935,9 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       <h2 class="heading" data-i18n="q.title">Before you ask.</h2>
       <ul class="faq-list" id="faqList">
         <li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span>Do you work in Arabic?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p>Yes. Everything we make can be done in Arabic, English or both, and each language is written on its own terms, not translated word for word.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span>Can we hire you for just one thing?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p>Of course. Pick one service or all twelve. If something else needs fixing first, we’ll say so.</p></div></div></li>
+        <li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span>Can we hire you for just one thing?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p>Of course. Pick one service or all of them. If something else needs fixing first, we’ll say so.</p></div></div></li>
         <li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span>Do you also run the ads and the social accounts?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p>Yes. We plan and buy media and run your social accounts.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span>Where are you based?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p>In Al Fardan Tower, Lusail, Qatar. Come and see us, or we’ll come to you.</p></div></div></li>
+        <li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span>Where are you based?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p>In Burj Alfardan, Lusail, Qatar. Visit us by appointment, or we’ll come to you.</p></div></div></li>
         <li><button type="button" aria-expanded="false" aria-controls="qa5" id="qq5"><span>How do we start?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa5" role="region" aria-labelledby="qq5"><div><p>Send a brief from this page or email us. We reply within one working day with a few questions.</p></div></div></li>
       </ul>
     </div>
@@ -802,7 +949,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       <div class="contact-side">
         <h2 data-i18n="c.title">Start with a few lines.</h2>
         <p class="lead" data-i18n="c.lead">Tell us what you’re working on. We reply within one working day.</p>
-        <div class="direct" id="direct"><a href="mailto:hello@miras.qa">hello@miras.qa</a></div>
+        <div class="direct" id="direct"><a href="mailto:hello@mirasmarketing.com">hello@mirasmarketing.com</a></div>
         <figure class="motif-brief" aria-hidden="true">
           <canvas data-motif="brief" id="briefPoster"></canvas>
           <p class="brief-name"></p>
@@ -811,23 +958,23 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
         </figure>
       </div>
       <form id="brief" novalidate>
-        <div class="field"><label for="fName" data-i18n="f.name">Your name</label><input id="fName" name="name" autocomplete="name" required><p class="err" id="fNameErr" hidden data-i18n="f.nameErr">Please add your name.</p></div>
+        <div class="field"><label for="fName" data-i18n="f.name">Your name</label><input id="fName" name="name" autocomplete="name" required dir="auto"><p class="err" id="fNameErr" hidden data-i18n="f.nameErr">Please add your name.</p></div>
         <div class="field"><label for="fEmail" data-i18n="f.email">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required dir="ltr"><p class="err" id="fEmailErr" hidden data-i18n="f.emailErr">That email address doesn’t look right.</p><p class="err" id="fEmailMissing" hidden data-i18n="f.emailMissing">Please add your email.</p></div>
-        <div class="field full"><label for="fCo" data-i18n="f.co">Company (optional)</label><input id="fCo" name="company" autocomplete="organization"></div>
+        <div class="field full"><label for="fCo" data-i18n="f.co">Company (optional)</label><input id="fCo" name="company" autocomplete="organization" dir="auto"></div>
         <div class="field" id="fPhoneRow" hidden><label for="fPhone" data-i18n="f.phone">Phone or WhatsApp (optional)</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" dir="ltr"></div>
         <div class="field sel" id="fBudgetRow" hidden><label for="fBudget" data-i18n="f.budget">Budget (optional)</label><select id="fBudget" name="budget"><option value="">—</option></select></div>
         <div class="hp" aria-hidden="true"><label for="fWeb">Leave this empty</label><input id="fWeb" name="website" tabindex="-1" autocomplete="off"></div>
         <fieldset class="field full"><legend data-i18n="f.waves">Which of these sounds like you?</legend><div class="picks" id="picks"></div></fieldset>
         <div class="field full brief-plan" id="briefPlanRow" hidden><p class="bp-label" id="bpLabel" tabindex="-1" data-i18n="f.plan">Your plan</p><ul id="briefPlan" aria-labelledby="bpLabel"></ul></div>
-        <div class="field full"><label for="fMsg" data-i18n="f.msg">Tell us more</label><textarea id="fMsg" name="message" rows="3"></textarea></div>
-        <div class="send"><button class="pill flare" type="submit" data-i18n="f.send">Send brief</button><span class="soft" data-i18n="f.note">Opens your email app with all of this filled in.</span><span class="soft" data-i18n="f.noteDirect" hidden>Goes straight to the studio. We reply within one working day.</span></div>
+        <div class="field full"><label for="fMsg" data-i18n="f.msg">Tell us more</label><textarea id="fMsg" name="message" rows="3" dir="auto"></textarea></div>
+        <div class="send"><button class="pill flare" type="submit" data-i18n="f.send">Send</button><span class="soft" data-i18n="f.note">Opens your email app with all of this filled in.</span><span class="soft" data-i18n="f.noteDirect" hidden>Goes straight to the studio. We reply within one working day.</span></div>
         <p class="form-privacy soft" id="privacyRow" hidden><a id="privacyLink" href="#" target="_blank" rel="noopener" data-i18n="f.privacy">How we handle your details</a></p>
         <div class="done" id="briefDone" hidden tabindex="-1">
           <img src="assets/mira-arrive-shore.png?v=r2" width="408" height="496" alt="" loading="lazy" decoding="async">
           <div>
             <p class="lead" data-i18n="f.done">Your email app should open with the brief filled in. Press send and we’ll reply within one working day.</p>
             <p class="lead" data-i18n="f.sent">Got it. Your brief is with us. We reply within one working day.</p>
-            <p class="soft" data-i18n="f.fallback">Nothing opened? Copy the brief and email it to <span dir="ltr">hello@miras.qa</span>.</p>
+            <p class="soft" data-i18n="f.fallback">Nothing opened? Copy the brief and email it to <span dir="ltr">hello@mirasmarketing.com</span>.</p>
             <button type="button" class="pill ghost" id="copyBrief" data-i18n="f.copy">Copy the brief</button>
           </div>
         </div>
@@ -847,9 +994,9 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   </div>
   <div class="foot-row">
     <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
-    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="nav.work">Work</a><a href="strategy.html" class="ft-g">Strategy</a><a href="branding.html" class="ft-g">Branding</a><a href="content.html" class="ft-g">Content</a><a href="digital.html" class="ft-g">Digital</a><a href="about.html" data-i18n="nav.about">About</a><a href="contact.html" data-i18n="nav.contact">Contact</a><a href="#top" class="top-link" data-i18n="ft.back">Back to top ↑</a></nav>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="nav.work">Work</a><a href="websites.html" class="ft-p" data-i18n="nav.websites">Website design</a><a href="seo.html" class="ft-p" data-i18n="nav.seo">SEO</a><a href="social-media.html" class="ft-p" data-i18n="nav.social">Social media</a><a href="advertising.html" class="ft-p" data-i18n="nav.ads">Paid ads</a><a href="strategy.html" class="ft-g">Strategy</a><a href="branding.html" class="ft-g">Branding</a><a href="content.html" class="ft-g">Content</a><a href="digital.html" class="ft-g">Digital</a><a href="about.html" data-i18n="nav.about">About</a><a href="contact.html" data-i18n="nav.contact">Contact</a><a href="#top" class="top-link" data-i18n="ft.back">Back to top ↑</a></nav>
     <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="ft.privacy">Privacy policy</a><a href="terms.html" data-i18n="ft.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="ft.cookies">Cookie policy</a></nav>
-    <p data-i18n="ft.copy">© 2026 MIRAS · miras.qa</p>
+    <p data-i18n="ft.copy">© 2026 MIRAS · mirasmarketing.com</p>
   </div>
 </footer>
 <p class="toast" id="toast" role="status"></p>
@@ -862,7 +1009,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
 <!-- Published content from the admin (admin/). It holds only what differs from the defaults below; null means defaults. -->
 <script>window.MOTIFS_MANUAL = true;</script>
 <script src="assets/content.js"></script>
-<script src="assets/work.js?v=r3"></script>
+<script src="assets/work.js?v=r4"></script>
 <script src="assets/motifs.js?v=r3"></script>
 <script>
 (() => {
@@ -876,18 +1023,20 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   let reduce = mq.matches; mq.addEventListener?.('change', e => reduce = e.matches);
   const html = document.documentElement, rtl = () => html.dir === 'rtl';
   const C = { tide: '#2B3BF0', deep: '#0D0F2E', shore: '#F2EADB', flare: '#FF5A23', foam: '#BFF0DD', tide60: '#8098FD' };
-  // PLACEHOLDER until the client confirms: the miras.qa domain (also in the footer copy, 'ft.copy'), studio email, WhatsApp (digits only, country code first) and how to show it,
+  // PLACEHOLDER until the client confirms: studio email, WhatsApp (digits only, country code first) and how to show it,
   // and the hours (Sunday–Thursday, 9:00–18:00 Qatar time; days count from 0 = Sunday)
-  const STUDIO = { email: 'hello@miras.qa', whatsapp: '', phoneLabel: '', timezone: 'Asia/Qatar', open: '09:00', close: '18:00', days: [0, 1, 2, 3, 4],
+  const STUDIO = { email: 'hello@mirasmarketing.com', whatsapp: '', phoneLabel: '', timezone: 'Asia/Qatar', open: '09:00', close: '18:00', days: [0, 1, 2, 3, 4],
                    formEndpoint: '', analytics: { provider: '', id: '', src: '' },
                    // special days (Ramadan hours, Eid, National Day…): [{ id, from: 'YYYY-MM-DD', to, label: { en, ar }, closed, open, close }]
                    exceptions: [], consent: false, privacyUrl: 'privacy.html', formFields: { phone: false, budget: false } };
   const SECTIONS = { plan: true, work: true, poster: true, make: false, why: true, studio: false, faq: false, contact: true };
-  const seoArDesc = 'ميراس وكالة تسويق إبداعية في لوسيل، قطر: الاستراتيجية والهوية والمحتوى والتسويق الرقمي، بالعربية والإنجليزية.';
+  // the share image's alt text in each language (English from the static tag), written by setLang
+  const SHARE_ALT = { en: $('meta[property="og:image:alt"]')?.content || '', ar: 'شعار ميراس، وبجانبه ميرا تركب موجة أمام شمس برتقالية.' };
+  const seoArDesc = 'ميراس شركة تسويق في لوسيل، قطر: تصميم المواقع وتحسين محركات البحث (SEO) والسوشيال ميديا والإعلانات الممولة، إلى جانب الاستراتيجية والهوية البصرية والمحتوى، بالعربية والإنجليزية.';
   const SEO = {
-    en: { title: 'MIRAS — Creative marketing agency in Lusail', description: $('meta[name=description]').content, ogDescription: $('meta[property="og:description"]').content },
-    ar: { title: 'ميراس — وكالة تسويق إبداعية في لوسيل', description: seoArDesc, ogDescription: seoArDesc },
-    themeColor: '#2B3BF0', ogImage: '',
+    en: { title: 'MIRAS — Marketing agency in Lusail, Qatar', description: $('meta[name=description]').content, ogDescription: $('meta[property="og:description"]').content },
+    ar: { title: 'ميراس — وكالة تسويق في لوسيل، قطر', description: seoArDesc, ogDescription: 'تصميم المواقع وتحسين محركات البحث (SEO) والسوشيال ميديا والإعلانات الممولة للشركات في أنحاء قطر، إلى جانب الاستراتيجية والهوية البصرية والمحتوى، بالعربية والإنجليزية.' },
+    themeColor: '#2B3BF0', ogImage: 'assets/og.jpg',
   };
   // image slots the admin can swap (paths relative to the site root)
   const SLOTS = { studioMira: '.mira-wave', doneMira: '.done img', footMira: '#footMira' };
@@ -929,9 +1078,10 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     { id: 'scattered', icon: 'brand',
       en: ['Our brand feels scattered', 'Identity system', 'Your logo, colours, type and tone, rebuilt as one kit your whole team can use without asking.'],
       ar: ['هويتنا مشتّتة', 'نظام هوية متكامل', 'شعارك وألوانك وخطوطك ونبرة صوتك، في دليل واحد يستخدمه فريقك كله دون الحاجة إلى السؤال.'] },
+    // its answer is the campaigns service's name, so the brief shows the two as one line (renderBriefPlan matches by name)
     { id: 'film', icon: 'campaign',
-      en: ["Our ads aren’t working", 'Campaigns & advertising', 'A clear idea, made for every screen and street, placed where your customers look.'],
-      ar: ['إعلاناتنا لا تُجدي', 'الحملات والإعلانات', 'فكرة واضحة، مصمّمة لكل شاشة وشارع، وتُعرض حيث ينظر عملاؤك.'] },
+      en: ["Our ads aren’t working", 'Campaign ideas', 'A clear idea, made for every screen and street, placed where your customers look.'],
+      ar: ['إعلاناتنا بلا نتيجة', 'أفكار الحملات', 'فكرة واضحة تناسب كل شاشة وكل شارع، وتُعرض حيث يراها عملاؤك.'] },
     { id: 'social', icon: 'social',
       en: ['Our posts get no replies', 'Posting plan', 'A posting rhythm your team can keep, in a voice that sounds like you every time.'],
       ar: ['منشوراتنا بلا تفاعل', 'خطة النشر', 'إيقاع نشر يستطيع فريقك مواكبته، بصوت يشبهك في كل منشور.'] },
@@ -946,15 +1096,15 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   const STAGES = {
     en: [
       ['Listen', 'We study your market and customers before we make anything.', ['A clear picture of where you are now', 'A goal your whole team agrees on'], ['Research', 'Audience', 'Brand audit', 'Competitors']],
-      ['Plan', 'One written plan, with targets you sign off.', ['Positioning and messaging', 'A 90-day marketing plan'], ['Positioning', 'Messaging', 'Marketing plan', 'KPIs']],
+      ['Plan', 'One written plan, with targets you sign off.', ['Positioning and messaging', 'A marketing plan'], ['Positioning', 'Messaging', 'Marketing plan', 'KPIs']],
       ['Create', 'We make the work, and nothing goes out until you approve it.', ['Your identity and campaign', 'Content and a new website'], ['Identity', 'Campaigns', 'Content', 'Web']],
       ['Launch', 'We book the media and go live on every channel.', ['A launch plan for every channel', 'Ads booked and running'], ['Media buying', 'Social', 'Performance', 'Analytics']],
     ],
     ar: [
       ['نُصغي', 'ندرس سوقك وعملاءك قبل أن نصنع أي شيء.', ['صورة واضحة لوضعك الحالي', 'هدف يتّفق عليه فريقك كله'], ['الأبحاث', 'الجمهور', 'تدقيق العلامة', 'المنافسون']],
-      ['نخطّط', 'خطة مكتوبة واحدة، بأهداف توافق عليها.', ['التموضع والرسائل', 'خطة تسويق لتسعين يوماً'], ['التموضع', 'الرسائل', 'خطة التسويق', 'مؤشرات الأداء']],
+      ['نخطّط', 'خطة مكتوبة واحدة، بأهداف توافق عليها.', ['التموضع والرسائل', 'خطة تسويقية'], ['التموضع', 'الرسائل', 'خطة التسويق', 'مؤشرات الأداء']],
       ['نصنع', 'نصنع العمل، ولا يُنشر شيء قبل موافقتك.', ['هويتك وحملتك', 'المحتوى وموقع إلكتروني جديد'], ['الهوية', 'الحملات', 'المحتوى', 'المواقع']],
-      ['نُطلق', 'نحجز المساحات الإعلانية، ونُطلق حملتك على كل القنوات.', ['خطة إطلاق لكل القنوات', 'إعلانات محجوزة وتعمل'], ['شراء الإعلانات', 'السوشيال ميديا', 'تحسين الحملات', 'التحليلات']],
+      ['نُطلق', 'نحجز المساحات الإعلانية، ونُطلق حملتك على كل القنوات.', ['خطة إطلاق لكل القنوات', 'إعلانات محجوزة وبدأ عرضها'], ['شراء الإعلانات', 'السوشيال ميديا', 'تحسين الحملات', 'التحليلات']],
     ],
   };
   // what each stage means for each pick
@@ -974,7 +1124,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   };
   const MAKE = {
     en: [['Logos', 'Naming', 'Packaging', 'Brand guidelines', 'Tone of voice'], ['Ads', 'Reels', 'Brand videos', 'Copywriting', 'Photography'], ['Websites', 'Landing pages', 'Launch days', 'Campaign plans', 'Monthly content']],
-    ar: [['شعارات', 'تسمية', 'تغليف', 'أدلة الهوية', 'نبرة الصوت'], ['إعلانات', 'مقاطع قصيرة', 'فيديوهات للعلامة', 'كتابة المحتوى', 'تصوير فوتوغرافي'], ['مواقع إلكترونية', 'صفحات هبوط', 'أيام الإطلاق', 'خطط الحملات', 'محتوى شهري']],
+    ar: [['شعارات', 'تسمية', 'تغليف', 'أدلة الهوية', 'نبرة الصوت'], ['إعلانات', 'ريلز', 'فيديوهات للعلامة', 'كتابة المحتوى', 'تصوير فوتوغرافي'], ['مواقع إلكترونية', 'صفحات هبوط', 'أيام الإطلاق', 'خطط الحملات', 'محتوى شهري']],
   };
   const MAKE_IDS = [['scattered', 'scattered', 'scattered', 'scattered', 'scattered'], ['film', 'social', 'remember', 'remember', 'social'], ['web', 'web', 'launch', 'launch', 'social']];
   const TINT = { launch: ['var(--flare)', 'var(--deep)'], scattered: ['var(--tide)', 'var(--shore)'], film: ['var(--deep)', 'var(--flare)'],
@@ -982,7 +1132,7 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   const PHASE = { scattered: 0, remember: 1, film: 2, social: 2, web: 2, launch: 3 };
   const NOUN = { en: { scattered: 'your brand', remember: 'your campaign idea', film: 'your ads', social: 'your posts', web: 'your website', launch: 'your launch' },
                  ar: { scattered: 'هويتك', remember: 'فكرة حملتك', film: 'إعلاناتك', social: 'منشوراتك', web: 'موقعك', launch: 'إطلاقك' } };
-  // twelve services in four disciplines; `for` lists the swells (problems) each one answers
+  // the services in four disciplines; `for` lists the swells (problems) each one answers
   const SGROUPS = {
     en: [['Strategy', "Who you’re for, and what to tell them."], ['Branding', 'A name, a look and a voice people recognise.'], ['Content', 'Every frame and every word comes from our own team.'], ['Digital', 'Your site and ads, run by us after launch.']],
     ar: [['الاستراتيجية', 'لمن تتوجّه، وماذا تقول له.'], ['العلامة التجارية', 'اسم وشكل ونبرة يعرفها الناس.'], ['المحتوى', 'كل لقطة وكل كلمة يصنعها فريقنا.'], ['التسويق الرقمي', 'موقعك وإعلاناتك، نديرها نحن بعد الإطلاق.']],
@@ -990,47 +1140,55 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   const SERVICES = [
     { id: 'research', group: 0, for: ['scattered', 'remember', 'social'], en: ['Research & insights', 'We talk to your customers and study your competitors, then show you what we found.'], ar: ['الأبحاث والرؤى', 'نتحدّث إلى عملائك وندرس منافسيك، ثم نضع أمامك ما وجدناه.'] },
     { id: 'strategy', group: 0, for: ['scattered', 'launch'], en: ['Brand strategy', 'We decide what you stand for and write the lines your staff will repeat.'], ar: ['استراتيجية العلامة', 'نحدّد ما تمثّله علامتك، ونكتب العبارات التي سيردّدها فريقك.'] },
-    { id: 'plans', group: 0, for: ['launch', 'social'], en: ['Marketing plans', 'Which channels get your budget, and when, for the next quarter and year.'], ar: ['خطط التسويق', 'أيّ القنوات تستحق ميزانيتك ومتى، للربع والعام القادمين.'] },
+    { id: 'plans', group: 0, for: ['launch', 'social'], en: ['Marketing plans', 'Which channels get your budget, and when, for the next quarter and year.'], ar: ['خطط التسويق', 'نحدّد أيّ القنوات تستحق ميزانيتك ومتى، للربع والعام القادمين.'] },
     { id: 'identity', group: 1, for: ['scattered', 'remember'], en: ['Brand identity', 'A logo and visual kit that works on a pin badge and a tower wrap.'], ar: ['الهوية البصرية', 'شعار ونظام بصري يعمل على دبّوس صغير كما يعمل على واجهة برج.'] },
     { id: 'naming', group: 1, for: ['scattered', 'remember'], en: ['Naming & tone of voice', 'Names that sound right in Arabic and English, and rules for how you speak.'], ar: ['التسمية ونبرة الصوت', 'أسماء تُنطق بسلاسة بالعربية والإنجليزية، وقواعد لطريقة كلامك.'] },
-    { id: 'campaigns', group: 1, for: ['launch', 'remember', 'film'], en: ['Campaigns & advertising', 'One idea, sized for a bus shelter and a six‑second ad.'], ar: ['الحملات والإعلانات', 'فكرة واحدة تصلح لمظلّة حافلات ولإعلان من ست ثوانٍ.'] },
-    { id: 'film', group: 2, for: ['film', 'launch'], en: ['Video & reels', 'We write, shoot and edit, then cut each film to the length its platform wants.'], ar: ['الفيديو والمقاطع القصيرة', 'نكتب ونصوّر ونمنتج، ثم نقصّ كل فيلم بالطول الذي يناسب منصّته.'] },
+    { id: 'campaigns', group: 1, for: ['launch', 'remember', 'film'], en: ['Campaign ideas', 'One idea, sized for a bus shelter and a six‑second ad.'], ar: ['أفكار الحملات', 'فكرة واحدة تصلح لمظلّة حافلات ولإعلان من ست ثوانٍ.'] },
+    { id: 'film', group: 2, for: ['film', 'launch'], en: ['Video & reels', 'We write, shoot and edit, then cut each film to the length its platform wants.'], ar: ['الفيديو والريلز', 'نكتب ونصوّر ونمنتج، ثم نقصّ كل فيلم بالطول الذي يناسب منصّته.'] },
     { id: 'photo', group: 2, for: ['film', 'social'], en: ['Photography', 'Shoots lit and styled in your colours, never stock.'], ar: ['التصوير الفوتوغرافي', 'جلسات تصوير نضبط إضاءتها وتنسيقها على ألوان علامتك، لا\u00a0صور جاهزة.'] },
     { id: 'copy', group: 2, for: ['remember', 'film'], en: ['Copywriting', 'Words people read to the end, in the voice your guide sets.'], ar: ['كتابة المحتوى', 'كلمات تُقرأ حتى آخرها، بالنبرة التي يحدّدها دليل علامتك.'] },
-    { id: 'web', group: 3, for: ['web'], en: ['Websites & landing pages', 'Fast, bilingual sites that turn visits into calls.'], ar: ['المواقع وصفحات الهبوط', 'مواقع سريعة باللغتين، تحوّل الزيارة إلى اتصال.'] },
-    { id: 'smm', group: 3, for: ['social'], en: ['Social media', 'We plan the posts, publish them and answer the comments.'], ar: ['منصّات التواصل', 'نخطّط للمنشورات وننشرها ونردّ على التعليقات.'] },
-    { id: 'growth', group: 3, for: ['launch', 'web', 'social', 'film'], en: ['Performance & SEO', 'Paid campaigns and search, adjusted as results come in.'], ar: ['الإعلانات المدفوعة والبحث', 'حملات مدفوعة وظهور في البحث، نعدّلها كلما وصلت النتائج.'] },
+    { id: 'web', group: 3, for: ['web'], en: ['Websites & landing pages', 'Fast, bilingual sites that turn visits into calls.'], ar: ['تصميم المواقع وصفحات الهبوط', 'مواقع سريعة باللغتين، تحوّل الزيارة إلى اتصال.'] },
+    { id: 'smm', group: 3, for: ['social'], en: ['Social media setup & management', 'We set up your accounts, plan the posts, publish them and answer the comments.'], ar: ['إدارة حسابات التواصل الاجتماعي', 'ننشئ حساباتك، ونخطّط للمنشورات وننشرها، ونردّ على التعليقات.'] },
+    { id: 'growth', group: 3, for: ['launch', 'web', 'social', 'film'], en: ['Paid ads & SEO', 'Paid campaigns and search, adjusted as results come in.'], ar: ['الإعلانات الممولة وتحسين محركات البحث', 'حملات ممولة وظهور أعلى في البحث، نعدّلها كلما وصلت النتائج.'] },
   ];
+  // the Digital services that have their own page, keyed by service id (so the admin's order and edits never move a link):
+  // each row gets a line of page links under its description, named by the nav's page names (text nav.*), SEO before ads
+  const SV_PAGES = { web: [['websites.html', 'nav.websites']], smm: [['social-media.html', 'nav.social']], growth: [['seo.html', 'nav.seo'], ['advertising.html', 'nav.ads']] };
+  // in the plan, websites, then paid ads & SEO, lead their block wherever the list puts them; the other services keep the list's order
+  // (n, the service's index, stays its key for the admin, the brief and the contact chips)
+  const SV_FIRST = ['web', 'growth'];
+  const svRank = id => { const i = SV_FIRST.indexOf(id); return i < 0 ? SV_FIRST.length : i; };
+  const svFirst = (a, b) => svRank(a.sv.id) - svRank(b.sv.id) || a.n - b.n;
   const STEP = { en: ['First', 'Then', 'Alongside that', 'On launch day'], ar: ['أولاً', 'ثم', 'وبالتوازي', 'ويوم الإطلاق'] };
   const AR = {
-    'nav.services': 'خدماتنا', 'nav.work': 'أعمالنا', 'nav.about': 'من نحن', 'nav.menu': 'القائمة', 'nav.close': 'إغلاق', 'plan.go': 'المزيد عن', 'wk.t': 'مشاريع مفاهيمية.', 'wk.all': 'كل الأعمال', 'wk.note': 'موجزات كتبناها بأنفسنا، وليست أعمالاً لعملاء.', 'nav.contact': 'تواصل معنا', 'cta.start': 'ابدأ مشروعك',
+    'nav.services': 'خدماتنا', 'nav.websites': 'تصميم المواقع', 'nav.seo': 'تحسين محركات البحث', 'nav.social': 'السوشيال ميديا', 'nav.ads': 'الإعلانات الممولة', 'nav.work': 'أعمالنا', 'nav.about': 'من نحن', 'nav.menu': 'القائمة', 'nav.close': 'إغلاق', 'plan.go': 'المزيد عن', 'wk.t': 'مشاريع مفاهيمية.', 'wk.all': 'كل الأعمال', 'wk.note': 'كتبنا طلباتها بأنفسنا، وليست أعمالاً لعملاء.', 'nav.contact': 'تواصل معنا', 'cta.start': 'ابدأ مشروعك',
     'a11y.skip': 'انتقل إلى الخدمات',
     'j0.t': 'علامات <em>تصنع الموجة.</em>',
-    'j0.d': 'استراتيجية وهوية ومحتوى وتسويق رقمي، للشركات في قطر.', 'j0.b': 'خدماتنا ↓',
+    'j0.d': 'تصميم المواقع وتحسين محركات البحث (SEO)، إلى جانب السوشيال ميديا والإعلانات الممولة، للشركات في قطر.', 'j0.b': 'خدماتنا ↓',
     'j1.t': 'أين تقف علامتك الآن؟',
-    'j4.t': 'ما الذي ستُطلقه قريباً؟', 'j4.d': 'أرسل لنا طلبك، ونردّ خلال يوم عمل واحد.', 'j4.b': 'ابنِ خطتك ↓',
+    'j4.t': 'ما الذي ستُطلقه قريباً؟', 'j4.d': 'أخبرنا بما تستعدّ لافتتاحه أو توسيعه، وسنردّ خلال يوم عمل واحد.', 'j4.b': 'ابنِ خطتك ↓',
     'plan.add': 'أضف هذه الخطة إلى طلبك',
     'mk.title': 'اختر ما تريد أن نصنعه.', 'mk.lead': 'المس أي كلمة وهي تمرّ، أو اختر من القائمة، فتُضاف مباشرة إلى طلبك.',
     'st.now': 'الساعة الآن في لوسيل:',
-    'st.text': 'زُرنا خلال ساعات الدوام، أو راسلنا أولاً.',
+    'st.text': 'راسلنا أولاً، ونحدّد معك موعداً.',
     'st.where': 'تجدنا في', 'st.addr': 'برج الفردان، لوسيل، قطر',
     'c.title': 'ابدأ ببضعة أسطر.', 'c.lead': 'أخبرنا بما تعمل عليه، وسنردّ خلال يوم عمل واحد.',
     'bp.empty': 'طلبك',
     'f.plan': 'خطتك', 'f.name': 'اسمك', 'f.email': 'بريدك الإلكتروني', 'f.co': 'الشركة (اختياري)', 'f.waves': 'أيٌّ من هذه يصف وضعك؟', 'f.msg': 'حدّثنا أكثر',
-    'f.nameErr': 'أضف اسمك من فضلك.', 'f.emailErr': 'يبدو أن البريد الإلكتروني غير صحيح.', 'f.emailMissing': 'أضف بريدك الإلكتروني من فضلك.',
-    'f.send': 'أرسل الطلب', 'f.note': 'سيُفتح بريدك ورسالتك جاهزة.',
-    'f.done': 'سيُفتح تطبيق البريد والطلب جاهز. اضغط «إرسال» وسنردّ خلال يوم عمل واحد.',
+    'f.nameErr': 'اكتب اسمك من فضلك.', 'f.emailErr': 'يبدو أن البريد الإلكتروني غير صحيح.', 'f.emailMissing': 'اكتب بريدك الإلكتروني من فضلك.',
+    'f.send': 'أرسل الطلب', 'f.note': 'سيُفتح تطبيق البريد لديك والرسالة جاهزة للإرسال.',
+    'f.done': 'سيُفتح تطبيق البريد لديك والطلب جاهز للإرسال. اضغط «إرسال»، وسنردّ خلال يوم عمل واحد.',
     'f.fallback': 'لم يُفتح شيء؟ انسخ الطلب وأرسله إلى <span dir="ltr">{email}</span>.',
     'f.sent': 'وصلنا طلبك، ونردّ خلال يوم عمل واحد.', 'f.noteDirect': 'يصل الطلب مباشرة إلى الاستوديو، ونردّ خلال يوم عمل واحد.',
     'f.copy': 'انسخ الطلب',
-    'ft.back': 'إلى الأعلى ↑', 'ft.copy': '© 2026 ميراس · miras.qa',
+    'ft.back': 'إلى الأعلى ↑', 'ft.copy': '© 2026 ميراس · mirasmarketing.com',
     'ft.privacy': 'سياسة الخصوصية', 'ft.terms': 'الشروط والأحكام', 'ft.cookies': 'سياسة ملفات تعريف الارتباط', 'aria.legal': 'روابط قانونية',
     'q.title': 'قبل أن تسأل.',
     'hr.h': 'ما نلتزم به أمامك.',
-    'hr.1': 'نختبر التصميم حيث سيُرى.', 'hr.1d': 'على لوحة طريق تحت شمس الظهيرة، وعلى شاشة هاتف في منتصف الليل. وإن لم يُقرأ بوضوح، نعدّله قبل الإطلاق.',
-    'hr.2': 'وكالة واحدة بدل أربع.', 'hr.2d': 'تُخطَّط إعلاناتك ومنشوراتك وموقعك على طاولة واحدة، وتقول كلها الشيء نفسه.',
-    'hr.3': 'أهداف متّفق عليها قبل أن نبدأ.', 'hr.3d': 'نكتبها في اليوم الأول، ويقيسنا بها كل تقرير شهري.',
-    'hr.4': 'مقرّنا في لوسيل.', 'hr.4d': 'برج الفردان. تفضّل بزيارتنا، أو نأتي إليك.',
+    'hr.1': 'نختبر التصميم حيث سيُرى.', 'hr.1d': 'على لوحة إعلانية تحت شمس الظهيرة، وعلى شاشة هاتف في منتصف الليل. وإن لم يُقرأ بوضوح، نعدّله قبل الإطلاق.',
+    'hr.2': 'وكالة واحدة بدل أربع.', 'hr.2d': 'نخطّط لإعلاناتك ومنشوراتك وموقعك معاً، فتحمل كلها الرسالة نفسها.',
+    'hr.3': 'أهداف متّفق عليها قبل أن نبدأ.', 'hr.3d': 'نكتبها في اليوم الأول، ونُحاسَب عليها في كل تقرير شهري.',
+    'hr.4': 'مقرّنا في لوسيل.', 'hr.4d': 'برج الفردان. نلتقي بك هناك، أو نأتي نحن إليك.',
     'aria.main': 'القائمة الرئيسية', 'aria.footer': 'روابط التذييل', 'aria.chips': 'أين تقف علامتك', 'aria.brand': 'ميراس', 'brand.name': 'ميراس',
     'cons.text': 'هل تسمح لنا بقياس زيارتك؟ تساعدنا التحليلات على تحسين الموقع.', 'cons.ok': 'السماح بالتحليلات', 'cons.no': 'لا، شكراً',
     'f.phone': 'الهاتف أو واتساب (اختياري)', 'f.budget': 'الميزانية (اختياري)', 'f.privacy': 'كيف نتعامل مع بياناتك',
@@ -1039,12 +1197,12 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   const FAQ = [
     { en: { q: "Do you work in Arabic?", a: "Yes. Everything we make can be done in Arabic, English or both, and each language is written on its own terms, not translated word for word." },
       ar: { q: "هل تعملون بالعربية؟", a: "نعم. كل ما نصنعه يمكن أن يكون بالعربية أو الإنجليزية أو باللغتين، وكل لغة تُكتب بروحها الخاصة، لا بترجمة حرفية." } },
-    { en: { q: "Can we hire you for just one thing?", a: "Of course. Pick one service or all twelve. If something else needs fixing first, we’ll say so." },
-      ar: { q: "هل يمكننا التعاون معكم في شيء واحد فقط؟", a: "بالتأكيد. اختر خدمة واحدة أو الاثنتي عشرة كلها، وإن رأينا أن شيئاً آخر يحتاج إلى إصلاح أولاً، فسنخبرك." } },
+    { en: { q: "Can we hire you for just one thing?", a: "Of course. Pick one service or all of them. If something else needs fixing first, we’ll say so." },
+      ar: { q: "هل يمكننا التعاون معكم في شيء واحد فقط؟", a: "بالتأكيد. اختر خدمة واحدة أو خدماتنا كلها، وإن رأينا أن شيئاً آخر يحتاج إلى إصلاح أولاً، فسنخبرك." } },
     { en: { q: "Do you also run the ads and the social accounts?", a: "Yes. We plan and buy media and run your social accounts." },
-      ar: { q: "هل تديرون الإعلانات وحسابات التواصل أيضاً؟", a: "نعم. نخطّط للإعلانات ونشتري مساحاتها، وندير حساباتك على منصّات التواصل." } },
-    { en: { q: "Where are you based?", a: "In Al Fardan Tower, Lusail, Qatar. Come and see us, or we’ll come to you." },
-      ar: { q: "أين مقرّكم؟", a: "في برج الفردان، لوسيل، قطر. تفضّل بزيارتنا، أو نأتي نحن إليك." } },
+      ar: { q: "هل تديرون الإعلانات وحسابات التواصل الاجتماعي أيضاً؟", a: "نعم. نخطّط للإعلانات ونشتري مساحاتها، ونتولّى إدارة حسابات التواصل الاجتماعي لعلامتك." } },
+    { en: { q: "Where are you based?", a: "In Burj Alfardan, Lusail, Qatar. Visit us by appointment, or we’ll come to you." },
+      ar: { q: "أين مقرّكم؟", a: "في برج الفردان، لوسيل، قطر. زُرنا بموعد مسبق، أو نأتي نحن إليك." } },
     { en: { q: "Can we see past work?", a: "We’re new and have no client case study yet. Our concept projects show how we work, and we’re happy to start with a small project so you can judge the work itself." },
       ar: { q: "هل يمكننا رؤية أعمال سابقة؟", a: "نحن جدد، ولا توجد دراسة حالة لعميل بعد. مشاريعنا المفاهيمية تُظهر طريقة عملنا، ويسعدنا أن نبدأ بمشروع صغير لتحكم على العمل بنفسك." } },
     // PLACEHOLDER: confirm the pricing answer with the studio
@@ -1054,11 +1212,14 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       ar: { q: "كيف نبدأ؟", a: "أرسل طلباً من هذه الصفحة أو راسلنا بالبريد، وسنردّ خلال يوم عمل واحد ببعض الأسئلة." } },
   ];
   const T = {
-    en: { none: "Twelve services in four disciplines, in Arabic and English. Add any of them to your brief.", some: "Each service below shows which of your picks it fixes. Add the ones you want to your brief.", quoted: "Each service below shows which of your picks it fixes.", get: 'You get', getMine: 'For you',
+    en: { none: "Our services in four disciplines, in Arabic and English. Add any of them to your brief.", some: "Each service below shows which of your picks it fixes. Add the ones you want to your brief.", quoted: "Each service below shows which of your picks it fixes.", get: 'You get', getMine: 'For you',
       allTitle: 'Pick what you need.',
       addBrief: 'Add', inBrief: 'Added',
       away: '',
-      open: 'Open now. Visitors welcome.', today: 'Closed right now. We open at {open} today.', tomorrow: 'Closed for the night. Back tomorrow at {open}.', weekend: 'Closed for the weekend. Back {day} at {open}.',
+      // the studio's hours are a PLACEHOLDER until the client confirms them, so no line claims open hours; once they are real,
+      // these can say it again: 'Open now. Visitors welcome.' · 'Closed right now. We open at {open} today.' ·
+      // 'Closed for the night. Back tomorrow at {open}.' · 'Closed for the weekend. Back {day} at {open}.'
+      open: 'Visits by appointment.', today: 'Visits by appointment.', tomorrow: 'Visits by appointment.', weekend: 'Visits by appointment.',
       subject: 'New project brief for MIRAS', bodyName: 'Name', bodyEmail: 'Email', bodyCo: 'Company', bodyWaves: 'Picked on the site', bodySvc: 'Services', bodyWords: 'Words picked',
       stage: 'Stage {n} of 4', wave: 'Stage {n}', sending: 'Sending your brief…',
       opening: 'Opening your email app with the brief filled in.', copied: 'Copied. Paste it into an email to {email}.', copyFail: "Couldn’t copy. Email us at {email}.",
@@ -1068,14 +1229,16 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
       planOne: "Let’s start with {x}.", planFirst: '{x} first.', planThen: 'Then {x}.', planComma: ', ', planAnd: ' and ',
       closedFor: 'Closed today for {label}. Back {day} at {open}.', hoursFor: '{label} hours today: {open}–{close}.',
       budgets: 'Not sure yet|Under QAR 20,000|QAR 20,000–50,000|QAR 50,000–150,000|Over QAR 150,000', bodyPhone: 'Phone', bodyBudget: 'Budget' },
-    ar: { none: 'اثنتا عشرة خدمة في أربعة تخصصات، بالعربية والإنجليزية. أضف أيّاً منها إلى طلبك.', some: 'تحت كل خدمة ستجد ما تعالجه من اختياراتك. أضف ما تريده منها إلى طلبك.', quoted: 'تحت كل خدمة ستجد ما تعالجه من اختياراتك.', get: 'ما تحصل عليه', getMine: 'لك خصيصاً',
+    ar: { none: 'خدماتنا في أربعة تخصصات، بالعربية والإنجليزية. أضف أيّاً منها إلى طلبك.', some: 'تحت كل خدمة ستجد ما تعالجه من اختياراتك. أضف ما تريده منها إلى طلبك.', quoted: 'تحت كل خدمة ستجد ما تعالجه من اختياراتك.', get: 'ما تحصل عليه', getMine: 'لك خصيصاً',
       allTitle: 'اختر ما تحتاجه.',
       addBrief: 'أضِف', inBrief: 'أُضيفت',
       away: '',
-      open: 'مفتوحون الآن، ونرحّب بزيارتك.', today: 'مغلق الآن، ونفتح اليوم الساعة {open}.', tomorrow: 'أغلقنا لهذا اليوم، ونعود غداً الساعة {open}.', weekend: 'مغلق في عطلة نهاية الأسبوع، ونعود يوم {day} الساعة {open}.',
+      // (real hours: 'مفتوحون الآن، ونرحّب بزيارتك.' · 'مغلق الآن، ونفتح اليوم الساعة {open}.' · 'أغلقنا لهذا اليوم، ونعود غداً الساعة {open}.' ·
+      // 'مغلق في عطلة نهاية الأسبوع، ونعود يوم {day} الساعة {open}.')
+      open: 'الزيارة بموعد مسبق.', today: 'الزيارة بموعد مسبق.', tomorrow: 'الزيارة بموعد مسبق.', weekend: 'الزيارة بموعد مسبق.',
       subject: 'طلب مشروع جديد لميراس', bodyName: 'الاسم', bodyEmail: 'البريد الإلكتروني', bodyCo: 'الشركة', bodyWaves: 'الاختيارات من الموقع', bodySvc: 'الخدمات', bodyWords: 'الكلمات المختارة',
       stage: 'المرحلة {n} من 4', wave: 'المرحلة {n}', sending: 'جارٍ إرسال طلبك…',
-      opening: 'جارٍ فتح تطبيق البريد والرسالة جاهزة.', copied: 'نُسخ الطلب. الصقه في رسالة إلى {email}.', copyFail: 'تعذّر النسخ. راسلنا على {email}.',
+      opening: 'جارٍ فتح تطبيق البريد لديك، والطلب جاهز للإرسال.', copied: 'نُسخ الطلب. الصقه في رسالة إلى {email}.', copyFail: 'تعذّر النسخ. راسلنا على {email}.',
       added: 'أضفنا «{w}» إلى طلبك.', planAdded: 'أضفنا خطتك إلى الطلب في الأسفل.', remove: 'إزالة',
       planOne: 'لنبدأ ب{x}.', planFirst: 'أولاً {x}.', planThen: 'ثم {x}.', planComma: ' و', planAnd: ' و',
       closedFor: 'مغلق اليوم بمناسبة {label}، ونعود يوم {day} الساعة {open}.', hoursFor: 'دوام {label} اليوم من {open} إلى {close}.',
@@ -1618,22 +1781,28 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   }
   function renderPlan() {
     planHead();
-    sgEls.forEach((g, k) => {
-      const grp = SGROUPS[lang][k] || ['', ''];
+    sgEls.forEach(g => {
+      // a block's discipline is its data-g (Digital hangs first on the line, but it is still group 3)
+      const k = +g.dataset.g, grp = SGROUPS[lang][k] || ['', ''];
       // the block's name is its link to the discipline page (screen readers hear "More on Strategy", plan.go)
       const nm = $('.sg-n', g); nm.innerHTML = safe(grp[0]); nm.dataset.cms = `sgroups.${k}.name`;
       $('.sg-line', g).innerHTML = `<span data-cms="sgroups.${k}.line">${safe(grp[1])}</span>`;
-      $('.sg-list', g).innerHTML = SERVICES.map((sv, n) => ({ sv, n })).filter(x => x.sv.group === k).map(({ sv, n }) => {
+      $('.sg-list', g).innerHTML = SERVICES.map((sv, n) => ({ sv, n })).filter(x => x.sv.group === k).sort(svFirst).map(({ sv, n }) => {
         const hit = SWELLS.filter(sw => picked.has(sw.id) && (sv.for || []).includes(sw.id)), on = svcWant.has(sv.id);
         return `<li class="sv${hit.length ? ' match' : ''}"><div class="sv-h"><h4 class="sv-name" data-cms="services.${n}.name">${safe(sv[lang][0])}</h4>
           <button type="button" class="sv-add" data-svc="${plain(sv.id)}" aria-pressed="${on}" aria-label="${esc(svAddName(sv, on))}">${svAddInner(on)}</button></div>
-          <p class="sv-d" data-cms="services.${n}.desc">${safe(sv[lang][1])}</p>
+          <p class="sv-d" data-cms="services.${n}.desc">${safe(sv[lang][1])}</p>${svGo(sv.id)}
           ${hit.length ? `<p class="sv-for">${hit.map(sw => lang === 'ar' ? `«${safe(sw.ar[0])}»` : `“${safe(sw.en[0])}”`).join(lang === 'ar' ? '، ' : ', ')}</p>` : ''}</li>`;
       }).join('');
     });
     // the footer and the nav (Services flyout, phone menu) list the four disciplines by the same names
     ['#foot .ft-g', '.nav-fly .nav-g', '.mnav-sub .nav-g'].forEach(sel => $$(sel).forEach((a, k) => { const n = SGROUPS[lang][k]?.[0]; if (n != null) { a.textContent = String(n).replace(/<[^>]*>/g, ''); a.dataset.cms = `sgroups.${k}.name`; } }));
     aimRider();
+  }
+  // a service's own pages (SV_PAGES): "Websites →", "SEO →  Paid ads →"; the words are the nav's (text nav.*), so they translate and edit with it
+  function svGo(id) {
+    const list = SV_PAGES[id]; if (!list) return '';
+    return `<p class="sv-go">${list.map(([href, k]) => `<a href="${href}"><span data-cms="text.${k}">${safe((lang === 'ar' ? AR : EN)[k] ?? EN[k] ?? '')}</span><span class="arrow" aria-hidden="true">→</span></a>`).join('')}</p>`;
   }
   // the toggle's words: "Add", then a dash and "Added" (ui.addBrief / ui.inBrief); its name is "Add: <service>" or "Added: <service>"
   // to match, and aria-pressed carries the state
@@ -2068,8 +2237,67 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   M?.footer(foot);
 
   /* ================= Language ================= */
+  /* ---- the address: one file serves both languages (as assets/site.js, which has the full notes). The head holds the
+     hreflang pair both addresses share; the canonical and og:url are written here for the language shown, the address bar
+     follows the language (lang=ar; lang=en or none for English), and so do the links to the site's own pages ---- */
+  const OWN_HOSTS = new Set([location.host, 'www.mirasmarketing.com', 'mirasmarketing.com']);
+  const saveLang = l => { if (!cmsMode) try { localStorage.setItem('miras-lang', l); } catch (e) {} };
+  function inLang(href, l, named) {
+    const m = /^([^?#]*)(?:\?([^#]*))?(#.*)?$/.exec(href), q = new URLSearchParams(m[2] || ''), want = l === 'ar' ? 'ar' : named ? 'en' : null;
+    if (want ? q.get('lang') === want : !q.has('lang')) return href;
+    if (want) q.set('lang', want); else q.delete('lang');
+    const s = String(q);
+    return m[1] + (s ? '?' + s : '') + (m[3] || '');
+  }
+  // the switch's English address names its language (lang=en), so a new tab opens English even after Arabic was saved
+  const pageIn = l => inLang(location.pathname + location.search, l, true);
+  // English keeps lang=en when the address already had a lang (SITE-CONTRACT §6), else it has none
+  function syncUrl(l) {
+    if (cmsMode) return;
+    try { const now = location.pathname + location.search, to = inLang(now, l, new URLSearchParams(location.search).has('lang')); if (to !== now) history.replaceState(history.state, '', to + location.hash); } catch (e) {}
+  }
+  function syncHead(l) {
+    const head = document.head, alt = head.querySelector(`link[rel="alternate"][hreflang="${l === 'ar' ? 'ar' : 'en'}"]`);
+    let can = head.querySelector('link[rel="canonical"]'), og = head.querySelector('meta[property="og:url"]');
+    if (!alt) { can?.remove(); og?.remove(); return; }
+    const url = alt.getAttribute('href');
+    if (!can) { can = document.createElement('link'); can.rel = 'canonical'; head.querySelector('link[rel="alternate"][hreflang]').before(can); }
+    if (can.getAttribute('href') !== url) can.setAttribute('href', url);
+    if (!og) {
+      og = document.createElement('meta'); og.setAttribute('property', 'og:url');
+      const at = head.querySelector('meta[property="og:site_name"], meta[property="og:type"]'); if (at) at.after(og); else head.append(og);
+    }
+    if (og.getAttribute('content') !== url) og.setAttribute('content', url);
+  }
+  function ownPage(a) {
+    const h = a.getAttribute('href');
+    if (!h || h[0] === '#' || a.id === 'langBtn' || a.hasAttribute('download') || a.hasAttribute('data-lang-keep')) return null;
+    let u; try { u = new URL(h, location.href); } catch (e) { return null; }
+    if ((u.protocol !== 'https:' && u.protocol !== 'http:') || !OWN_HOSTS.has(u.host)) return null;
+    const seg = u.pathname.split('/'), last = seg[seg.length - 1];
+    if (seg.includes('admin') || seg[1] === 'webmail' || seg[1] === 'assets' || (/\.\w+$/.test(last) && !/\.html?$/i.test(last))) return null;
+    return h;
+  }
+  function linkLang(a) { const h = ownPage(a); if (h == null) return; const to = inLang(h, lang); if (to !== h) a.setAttribute('href', to); }
+  const linksLang = () => { if (!cmsMode) $$('a[href]').forEach(linkLang); };
+  const linkWatch = !cmsMode && 'MutationObserver' in window ? new MutationObserver(rs => {
+    for (const r of rs) {
+      if (r.type === 'attributes') { if (r.target.matches('a')) linkLang(r.target); }
+      else for (const n of r.addedNodes) if (n.nodeType === 1) { if (n.matches('a[href]')) linkLang(n); n.querySelectorAll('a[href]').forEach(linkLang); }
+    }
+  }) : null;
+  function watchLinks(on) {
+    if (!linkWatch) return;
+    linkWatch.disconnect();
+    if (on) linkWatch.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
+  }
+  function paintSwitch(l) {
+    const b = $('#langBtn'), to = l === 'ar' ? 'en' : 'ar'; if (!b) return;
+    b.textContent = to === 'ar' ? 'العربية' : 'English'; b.lang = to;
+    if (b.tagName === 'A') { b.setAttribute('hreflang', to); b.setAttribute('href', pageIn(to)); }
+  }
   const EN = {};
-  $$('[data-i18n]').forEach(el => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML.replaceAll('hello@miras.qa', '{email}'); });
+  $$('[data-i18n]').forEach(el => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML.replaceAll('hello@mirasmarketing.com', '{email}'); });
   $$('[data-i18n-aria]').forEach(el => { if (!(el.dataset.i18nAria in EN)) EN[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
   if (!('nav.close' in EN)) EN['nav.close'] = 'Close'; // the menu button's word while the menu is open (not in the markup)
   $$('[data-i18n-alt]').forEach(el => { if (!(el.dataset.i18nAlt in EN)) EN[el.dataset.i18nAlt] = el.getAttribute('alt'); });
@@ -2079,16 +2307,16 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     $$('[data-i18n]').forEach(el => { const v = dict[el.dataset.i18n] ?? EN[el.dataset.i18n]; if (v == null) return; const h = tok(safe(v)); if (el.innerHTML !== h) el.innerHTML = h; }); // words already showing are left alone (no node churn on the first English render)
     $$('[data-i18n-aria]').forEach(el => { const v = dict[el.dataset.i18nAria] ?? EN[el.dataset.i18nAria]; if (v != null) el.setAttribute('aria-label', v); });
     $$('[data-i18n-alt]').forEach(el => { const v = dict[el.dataset.i18nAlt] ?? EN[el.dataset.i18nAlt]; if (v != null) el.setAttribute('alt', v); });
-    const btn = $('#langBtn'); btn.textContent = l === 'ar' ? 'English' : 'العربية'; btn.lang = l === 'ar' ? 'en' : 'ar';
+    paintSwitch(l);
     document.title = SEO[l]?.title || SEO.en.title; $('meta[name=description]').content = SEO[l]?.description || SEO.en.description;
     $('meta[property="og:title"]').content = document.title; $('meta[property="og:description"]').content = SEO[l]?.ogDescription || SEO.en.ogDescription;
-    $('meta[property="og:locale"]').content = l === 'ar' ? 'ar_QA' : 'en_GB'; $('meta[property="og:locale:alternate"]').content = l === 'ar' ? 'en_GB' : 'ar_QA'; // as assets/site.js syncShare
-    if (!cmsMode) {
-      try { localStorage.setItem('miras-lang', l); } catch (e) {}
-      // ?lang=ar is the Arabic site's shareable address, so the URL follows the switch
-      try { const u = new URL(location.href); if (u.searchParams.get('lang') !== l && (u.searchParams.has('lang') || l !== 'en')) { u.searchParams.set('lang', l); history.replaceState(history.state, '', u); } } catch (e) {}
-    }
+    $('meta[property="og:locale"]').content = l === 'ar' ? 'ar_AR' : 'en_GB'; $('meta[property="og:locale:alternate"]').content = l === 'ar' ? 'en_GB' : 'ar_AR'; // as assets/site.js syncShare
+    $$('meta[property="og:image:alt"], meta[name="twitter:image:alt"]').forEach(m => { m.content = SHARE_ALT[l] || SHARE_ALT.en; });
+    // ?lang=ar is the Arabic site's shareable address, so the address bar follows the language shown (see syncUrl)
+    syncUrl(l);
     buildChips(); renderPlan(); renderWork(); buildStages(); buildMake(); buildFaq(); tickClock(); renderFormExtras(); settleHeads(); briefPoster(); renderBriefPlan(); setBriefStatus(briefStatusKey);
+    // after everything above is drawn: the canonical and og:url for this language, and lang=ar on the links in Arabic
+    syncHead(l); linksLang(); watchLinks(l === 'ar');
     M?.refresh(); // the motifs re-read the direction and their words
     relayout();
     html.classList.remove('pre-lang');
@@ -2121,7 +2349,44 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
     requestAnimationFrame(tick);
     document.fonts?.ready?.then(() => { if (on) keep(); }, () => {});
   }
-  $('#langBtn').addEventListener('click', () => { const keep = keepPlace(); setLang(lang === 'ar' ? 'en' : 'ar'); keep(); holdPlace(keep); track('lang', { to: lang }); });
+  // the visitor picks a language (the switch, the Arabic hint): remembered ('miras-lang'), redrawn in place
+  function chooseLang(l, via) { const keep = keepPlace(); saveLang(l); setLang(l); keep(); holdPlace(keep); dropHint(); track('lang', via ? { to: l, via } : { to: l }); }
+  // a plain click switches in place; with a modifier key (or the middle button) the browser opens the link's address
+  function switchLink(a, to, via) {
+    const link = a.tagName === 'A', fresh = () => { if (link) a.setAttribute('href', pageIn(to())); };
+    a.addEventListener('pointerdown', fresh);
+    a.addEventListener('click', e => {
+      fresh();
+      if (link && (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+      e.preventDefault(); chooseLang(to(), via);
+    });
+  }
+  switchLink($('#langBtn'), () => lang === 'ar' ? 'en' : 'ar');
+  // the Arabic hint (as assets/site.js): a browser set to Arabic, on the English site, with no language in the address
+  // and none chosen before, is offered the Arabic site in a thin bar. It never switches by itself; «إخفاء» hides it for good.
+  let arHint = null;
+  function dropHint() {
+    if (!arHint) return;
+    const m = $('main');
+    if (m && arHint.contains(document.activeElement)) { if (!m.hasAttribute('tabindex')) m.tabIndex = -1; m.focus({ preventScroll: true }); }
+    arHint.remove(); arHint = null;
+  }
+  function offerArabic(saved, asked) {
+    if (cmsMode || arHint || lang !== 'en' || asked != null || saved === 'ar' || saved === 'en') return;
+    let first = '', off = null;
+    try { first = String((navigator.languages && navigator.languages[0]) || navigator.language || ''); } catch (e) {}
+    if (!/^ar(?:-|_|$)/i.test(first)) return;
+    try { off = localStorage.getItem('miras-ar-hint'); } catch (e) {}
+    if (off) return;
+    const bar = arHint = document.createElement('div');
+    bar.className = 'ar-hint'; bar.id = 'arHint'; bar.lang = 'ar'; bar.dir = 'rtl';
+    bar.setAttribute('role', 'region'); bar.setAttribute('aria-labelledby', 'arHintText');
+    bar.innerHTML = '<p id="arHintText">هذا الموقع متوفّر بالعربية.</p><a hreflang="ar" data-lang-keep>تصفّح بالعربية</a><button type="button">إخفاء</button>';
+    const a = bar.querySelector('a'); a.setAttribute('href', pageIn('ar'));
+    switchLink(a, () => 'ar', 'hint');
+    bar.querySelector('button').addEventListener('click', () => { try { localStorage.setItem('miras-ar-hint', '1'); } catch (e) {} dropHint(); });
+    document.body.append(bar);
+  }
 
   /* ================= Content layer: what the admin can change ================= */
   // The admin (admin/) edits this shape. assets/content.js publishes only what differs from DEFAULTS;
@@ -2440,8 +2705,12 @@ html[lang=ar] .clock-head .time{font-family:var(--serif)}
   // language: ?lang=ar|en (a shareable address), else the visitor's last choice, else English
   let saved = null; try { saved = localStorage.getItem('miras-lang'); } catch (e) {}
   const asked = new URLSearchParams(location.search).get('lang');
+  // an address that names its language is the visitor's choice, so it is remembered; English shown only because nothing
+  // was chosen is not (as assets/site.js), so the Arabic hint can still be offered on a later page
+  if (asked === 'ar' || asked === 'en') saveLang(asked);
   // a content problem never stops the page: rendering falls back to the defaults, and the admin always hears 'miras:ready'
   try { render(asked === 'ar' || asked === 'en' ? asked : saved === 'ar' ? 'ar' : 'en'); } finally { announce(); }
+  try { offerArabic(saved, asked); } catch (e) {}
   // the faces arrive after this script may have run (the stylesheet doesn't block the first paint), so the words are measured
   // again whenever a face finishes loading
   const fontsSettled = () => { buildMake(); rideK = -1; relayout(); };

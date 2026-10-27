@@ -1,20 +1,298 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- PLACEHOLDER: miras.qa is a placeholder domain. Confirm the real domain with MIRAS and update every URL below (and robots.txt). -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://miras.qa/</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/work.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/strategy.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/branding.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/content.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/digital.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/project.html?p=halwa-lab</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/project.html?p=corniche-night-run</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/project.html?p=bahr-kitchen</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/project.html?p=saffar</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/project.html?p=noor-clinics</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/about.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/contact.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/privacy.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/terms.html</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://miras.qa/cookies.html</loc><lastmod>2026-10-13</lastmod></url>
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. Every entry lists both addresses, plus x-default (English). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.mirasmarketing.com/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/work.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/work.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/work.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/work.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/work.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/work.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/strategy.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/strategy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/strategy.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/strategy.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/strategy.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/strategy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/strategy.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/strategy.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/branding.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/branding.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/branding.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/branding.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/branding.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/branding.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/branding.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/branding.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/content.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/content.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/content.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/content.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/content.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/content.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/content.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/content.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/digital.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/digital.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/digital.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/digital.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/digital.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/digital.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/digital.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/digital.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/services.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/services.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/services.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/services.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/services.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/services.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/websites.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/websites.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/websites.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/websites.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/websites.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/websites.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/websites.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/seo.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/seo.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/seo.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/seo.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/seo.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/seo.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/seo.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/seo.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/social-media.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/social-media.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/social-media.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/social-media.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/social-media.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/social-media.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/social-media.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/social-media.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/advertising.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/advertising.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/advertising.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/advertising.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/advertising.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/advertising.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/advertising.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/advertising.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=halwa-lab</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=halwa-lab"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=halwa-lab&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=halwa-lab"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=halwa-lab&amp;lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=halwa-lab"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=halwa-lab&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=halwa-lab"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=corniche-night-run</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=corniche-night-run&amp;lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=corniche-night-run"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=bahr-kitchen</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=bahr-kitchen&amp;lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=bahr-kitchen"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=saffar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=saffar"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=saffar&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=saffar"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=saffar&amp;lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=saffar"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=saffar&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=saffar"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=noor-clinics</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=noor-clinics"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=noor-clinics&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=noor-clinics"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/project.html?p=noor-clinics&amp;lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/project.html?p=noor-clinics"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/project.html?p=noor-clinics&amp;lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/project.html?p=noor-clinics"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/about.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/about.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/about.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/about.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/about.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/about.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/contact.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/contact.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/contact.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/contact.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/contact.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/contact.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/privacy.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/privacy.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/privacy.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/privacy.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/terms.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/terms.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/terms.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/terms.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/terms.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/terms.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/cookies.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/cookies.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/cookies.html"/>
+  </url>
+  <url>
+    <loc>https://www.mirasmarketing.com/cookies.html?lang=ar</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/cookies.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/cookies.html"/>
+  </url>
 </urlset>

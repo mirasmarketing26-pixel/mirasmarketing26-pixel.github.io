@@ -2,6 +2,41 @@
   "redirects": [
     { "source": "/webmail", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false },
     { "source": "/webmail/", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false },
-    { "source": "/webmail/(.*)", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false }
+    { "source": "/webmail/(.*)", "destination": "https://mail.mirasmarketing.com:2096", "permanent": false },
+    { "source": "/contact", "destination": "/contact.html", "permanent": true },
+    { "source": "/contact/", "destination": "/contact.html", "permanent": true },
+    { "source": "/about", "destination": "/about.html", "permanent": true },
+    { "source": "/about/", "destination": "/about.html", "permanent": true },
+    { "source": "/work", "destination": "/work.html", "permanent": true },
+    { "source": "/work/", "destination": "/work.html", "permanent": true },
+    { "source": "/strategy", "destination": "/strategy.html", "permanent": true },
+    { "source": "/strategy/", "destination": "/strategy.html", "permanent": true },
+    { "source": "/branding", "destination": "/branding.html", "permanent": true },
+    { "source": "/branding/", "destination": "/branding.html", "permanent": true },
+    { "source": "/content", "destination": "/content.html", "permanent": true },
+    { "source": "/content/", "destination": "/content.html", "permanent": true },
+    { "source": "/digital", "destination": "/digital.html", "permanent": true },
+    { "source": "/digital/", "destination": "/digital.html", "permanent": true },
+    { "source": "/services", "destination": "/services.html", "permanent": true },
+    { "source": "/services/", "destination": "/services.html", "permanent": true },
+    { "source": "/websites", "destination": "/websites.html", "permanent": true },
+    { "source": "/websites/", "destination": "/websites.html", "permanent": true },
+    { "source": "/seo", "destination": "/seo.html", "permanent": true },
+    { "source": "/seo/", "destination": "/seo.html", "permanent": true },
+    { "source": "/social-media", "destination": "/social-media.html", "permanent": true },
+    { "source": "/social-media/", "destination": "/social-media.html", "permanent": true },
+    { "source": "/advertising", "destination": "/advertising.html", "permanent": true },
+    { "source": "/advertising/", "destination": "/advertising.html", "permanent": true },
+    { "source": "/privacy", "destination": "/privacy.html", "permanent": true },
+    { "source": "/privacy/", "destination": "/privacy.html", "permanent": true },
+    { "source": "/terms", "destination": "/terms.html", "permanent": true },
+    { "source": "/terms/", "destination": "/terms.html", "permanent": true },
+    { "source": "/cookies", "destination": "/cookies.html", "permanent": true },
+    { "source": "/cookies/", "destination": "/cookies.html", "permanent": true },
+    { "source": "/index.html", "missing": [{ "type": "query", "key": "cms" }], "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    { "source": "/assets/film/(.*)", "has": [{ "type": "query", "key": "v" }], "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/assets/work/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
   ]
 }

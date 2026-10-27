@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Website design in Qatar, in Arabic and English — MIRAS</title>
+<meta name="description" content="Website design in Doha and across Qatar: company websites and landing pages in Arabic and English, built phone first and ready for Google.">
+<meta name="theme-color" content="#2B3BF0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. The hreflang pair below is the
+     same for both; the canonical and og:url differ, so the page script writes them for the language shown. -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/websites.html">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/websites.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/websites.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Website design in Qatar, in Arabic and English — MIRAS">
+<meta property="og:description" content="Website design in Doha and across Qatar: company websites and landing pages in Arabic and English, built phone first and ready for Google.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r4">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* websites.html (r2): the rising route hero (on Tide) with the page's ask, what we build, where you might be starting,
+   from sitemap to launch, what we need from you, questions, what pairs with a site, one concept site.
+   Shared rules: motifs.css, site.css. */
+
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* the page's ask: a plain underlined link under the lead (the header keeps the one Flare button); it sits at its own width */
+.hero > .more{align-self:flex-start;margin-top:clamp(18px,2.6vh,30px)}
+.nd-ask{margin-top:clamp(30px,4vw,48px)}
+/* services header, the scale move: the headline across cols 1–11 (it wraps, balanced), the lead under its far end (the diagonal) */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(20px,2.6vw,36px);margin-bottom:clamp(40px,5.5vw,76px)}
+.svc-head .display{grid-column:1 / span 11;margin:0;text-wrap:balance}
+.svc-head .lead{grid-column:6 / -1;margin:0;max-width:34ch;color:var(--soft);text-wrap:balance}
+@media (max-width:820px){.svc-head .display{grid-column:1 / -1}.svc-head .lead{grid-column:3 / -1}}
+@media (max-width:520px){.svc-head .lead{grid-column:2 / -1}}
+/* service rows: the name is the link and the whole row is its target; the row's call ("Ask about this", or "See the service"
+   where the row opens a page) is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* steps: the same rows without links (a name, then one line), under a header whose lead answers from the far side */
+.steps .svc-row > h3{font:var(--fs-sub);font-size:clamp(28px,2.8vw,44px);letter-spacing:var(--ls-sub)}
+html[lang=ar] .steps .svc-row > h3{font:var(--fs-sub)}
+/* a link inside a step's line (these rows have no row link, so it is clickable): underlined in Flare, as in the answers */
+.steps .svc-row .lead a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+/* where you might be starting: the headline in cols 1–6, the starting points set large in a Flare-slashed line in 7–12
+   (the platforms band of social-media.html and advertising.html) */
+.pl{row-gap:clamp(22px,3vw,36px);align-items:end}
+.pl-t{grid-column:1 / span 6;margin:0}
+.pl-b{grid-column:7 / -1;overflow-x:clip} /* the slash list's hidden first slash sits in the margin: kept inside the column */
+.pl-b .lead{margin:0;max-width:34ch;color:var(--soft)}
+.pl-b .pl-list{margin-top:clamp(18px,2.4vw,30px);font:var(--fs-sub);letter-spacing:var(--ls-sub)}
+@media (max-width:900px){.pl-t,.pl-b{grid-column:1 / -1}}
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 (as on contact.html) */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance}
+.k-faq .faq-list{grid-column:6 / -1}
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+.k-faq .ans a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+@media (max-width:959px){.k-faq-t,.k-faq .faq-list{grid-column:1 / -1}.k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+</style>
+</head>
+<body data-page="websites">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="./"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="./" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-tide" data-nav-dark>
+    <canvas class="motif" data-motif="rise" data-ink="shore" data-labels="#rm0,#rm1,#rm2" data-opts='{"intro":1}' aria-hidden="true"></canvas>
+    <span id="rm0" class="sr-only" data-i18n="rm.0">Sitemap</span>
+    <span id="rm1" class="sr-only" data-i18n="rm.1">Design</span>
+    <span id="rm2" class="sr-only" data-i18n="rm.2">Launch</span>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Websites</h1>
+    <p class="lead" data-i18n="h.d">We design and build fast, bilingual websites for businesses in Qatar, starting with the phone.</p>
+    <a class="more" href="contact.html?service=websites"><span data-i18n="h.ask">Ask about your website</span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">Website design for businesses in Qatar.</h2><p class="lead" data-i18n="sv.lead">Every site is planned around one thing a visitor should do next: call, book or buy.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=websites" data-i18n="sv.0.n" aria-describedby="svA0">Company websites</a></h3><div><p class="lead" data-i18n="sv.0.d">A clear site that says who you are, what you offer and how to reach you.</p><ul class="slash"><li data-i18n="sv.0.0">Sitemap &amp; UX</li><li data-i18n="sv.0.1">Service pages</li><li data-i18n="sv.0.2">Address &amp; map</li><li data-i18n="sv.0.3">Analytics</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=websites" data-i18n="sv.1.n" aria-describedby="svA1">Landing pages</a></h3><div><p class="lead" data-i18n="sv.1.d">One page per offer, built to turn ad clicks into enquiries, and a good first project to judge us on.</p><ul class="slash"><li data-i18n="sv.1.0">Campaign pages</li><li data-i18n="sv.1.1">Enquiry forms</li><li data-i18n="sv.1.2">Tracking</li><li data-i18n="sv.1.3">A/B tests</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=websites" data-i18n="sv.2.n" aria-describedby="svA2">Online stores</a></h3><div><p class="lead" data-i18n="sv.2.d">A shop in both languages, made for buying on a phone, from the product page to payment.</p><ul class="slash"><li data-i18n="sv.2.0">Product pages</li><li data-i18n="sv.2.1">Cart &amp; checkout</li><li data-i18n="sv.2.2">Online payment</li><li data-i18n="sv.2.3">Delivery options</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv3"><a class="wave-underline" href="contact.html?service=websites" data-i18n="sv.3.n" aria-describedby="svA3">Arabic &amp; English</a></h3><div><p class="lead" data-i18n="sv.3.d">Every page reads right to left in Arabic, and each language is written on its own terms.</p><ul class="slash"><li data-i18n="sv.3.0">Right-to-left layout</li><li data-i18n="sv.3.1">Arabic type</li><li data-i18n="sv.3.2">Copy in both languages</li><li data-i18n="sv.3.3">Language switch</li></ul><span class="svc-ask" id="svA3" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="fit" aria-labelledby="fitT">
+    <div class="wrap g12 pl">
+      <h2 class="heading pl-t" id="fitT" data-i18n="fit.t">Whatever you’re starting from.</h2>
+      <div class="pl-b"><p class="lead" data-i18n="fit.lead">Tell us where you are now, and we’ll suggest the first step.</p><ul class="slash pl-list"><li data-i18n="fit.0">No website yet</li><li data-i18n="fit.1">An old or slow site</li><li data-i18n="fit.2">A site in English only</li><li data-i18n="fit.3">Ads with nowhere to land</li><li data-i18n="fit.4">Ready to sell online</li></ul></div>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top steps" id="process" aria-labelledby="prT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="prT" data-i18n="pr.t">From sitemap to launch.</h2><p class="lead" data-i18n="pr.lead">You review every page before anything goes live.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="pr.0">Sitemap</h3><div><p class="lead" data-i18n="pr.0d">We plan the pages around what your customers search for, which is where <a href="seo.html">SEO</a> starts.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.1">Design</h3><div><p class="lead" data-i18n="pr.1d">You see the key pages in Arabic and English, on a phone first, then on a laptop.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.2">Build</h3><div><p class="lead" data-i18n="pr.2d">We keep every page light, then test it on real phones over mobile data.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.3">Launch</h3><div><p class="lead" data-i18n="pr.3d">It goes live with analytics and Search Console set up, linked to your Google Business Profile if you have one.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top steps" id="needs" aria-labelledby="ndT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="ndT" data-i18n="nd.t">What we’ll need from you.</h2><p class="lead" data-i18n="nd.lead">Most of it you already have, and we can help with the rest.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="nd.0">Your brand</h3><div><p class="lead" data-i18n="nd.0d">Your logo, colours and fonts, and if you have no brand yet, we can <a href="branding.html">design one</a> first.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.1">The facts</h3><div><p class="lead" data-i18n="nd.1d">What you sell, who buys it, where you are and the questions customers ask most.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.2">Words and photos</h3><div><p class="lead" data-i18n="nd.2d">Send whatever you have, and our own <a href="content.html">content team</a> can write the pages and shoot the rest.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.3">Access</h3><div><p class="lead" data-i18n="nd.3d">If you already have a domain or a website, we’ll need the logins for them.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.4">One person</h3><div><p class="lead" data-i18n="nd.4d">Someone on your side who can answer our questions and review each page.</p></div></li>
+      </ol>
+      <a class="more nd-ask" href="contact.html?service=websites"><span data-i18n="h.ask">Ask about your website</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top k-faq" id="questions" aria-labelledby="qT">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" id="qT" data-i18n="q.t">Questions about websites.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Can you redesign our current site?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">Yes. We keep what works, rebuild the rest, and point the old page addresses to the new ones, so no saved link or search result lands on a missing page.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">Arabic only, English only, or both?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">Whichever your customers read. If you start with one, we plan the layout so the other can be added later.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Can we update the site ourselves?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">Yes. Tell us at the start, and we’ll set it up so your team can change the text and photos. Or we can <a href="digital.html">keep it updated</a> for you every month.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span data-i18n="q.3">Will our site rank first on Google?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p data-i18n="a.3">No one can honestly promise that. We build the site so Google can read it from the first day. Rankings build over months, and our <a href="seo.html">SEO service</a> works on them after launch.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span data-i18n="q.4">How much does a website cost?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p data-i18n="a.4">It depends on the pages and what they need to do. We quote after a first call: one fixed price, in writing, before any work starts.</p></div></div></li></ul>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="paired" aria-labelledby="pdT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="pdT" data-i18n="pd.t">Pairs well with a website.</h2><p class="lead" data-i18n="pd.lead">Hire us for the site alone, or for what keeps it working after launch.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="pd0"><a class="wave-underline" href="seo.html" data-i18n="s.seo" aria-describedby="pdA0">SEO</a></h3><div><p class="lead" data-i18n="pd.0.d">After launch, we keep working on how you show up on Google, month after month.</p><ul class="slash"><li data-i18n="pd.0.0">Keyword research</li><li data-i18n="pd.0.1">Local search</li><li data-i18n="pd.0.2">Monthly report</li></ul><span class="svc-ask" id="pdA0" aria-hidden="true"><span data-i18n="pd.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pd1"><a class="wave-underline" href="advertising.html" data-i18n="s.ads" aria-describedby="pdA1">Paid ads</a></h3><div><p class="lead" data-i18n="pd.1.d">Campaigns on Google, Instagram and TikTok that send people to a page built for them.</p><ul class="slash"><li data-i18n="pd.1.0">Search ads</li><li data-i18n="pd.1.1">Social ads</li><li data-i18n="pd.1.2">Tracking</li></ul><span class="svc-ask" id="pdA1" aria-hidden="true"><span data-i18n="pd.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pd2"><a class="wave-underline" href="content.html" data-i18n="s.content" aria-describedby="pdA2">Content</a></h3><div><p class="lead" data-i18n="pd.2.d">Words and photos for every page, from our own team, never stock.</p><ul class="slash"><li data-i18n="pd.2.0">Website copy</li><li data-i18n="pd.2.1">Photography</li><li data-i18n="pd.2.2">Video</li></ul><span class="svc-ask" id="pdA2" aria-hidden="true"><span data-i18n="pd.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pd3"><a class="wave-underline" href="digital.html" data-i18n="s.digital" aria-describedby="pdA3">Digital</a></h3><div><p class="lead" data-i18n="pd.3.d">We can keep the site updated every month, along with your posts and ads.</p><ul class="slash"><li data-i18n="pd.3.0">Site updates</li><li data-i18n="pd.3.1">Posts &amp; ads</li><li data-i18n="pd.3.2">Monthly report</li></ul><span class="svc-ask" id="pdA3" aria-hidden="true"><span data-i18n="pd.go">See the service</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top" id="work" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">A concept site, built phone first.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-deep band edge-top" href="seo.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">SEO</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><canvas class="motif" data-motif="chart" data-ink="tide60" data-opts='{"mini":true}'></canvas></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@mirasmarketing.com" dir="ltr" data-cms="studio.email">hello@mirasmarketing.com</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="websites.html" data-i18n="s.websites">Website design</a><a href="seo.html" data-i18n="s.seo">SEO</a><a href="social-media.html" data-i18n="s.social">Social media</a><a href="advertising.html" data-i18n="s.ads">Paid ads</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · mirasmarketing.com</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Website design in Qatar, in Arabic and English — MIRAS", "ar": "تصميم المواقع في قطر بالعربية والإنجليزية — ميراس"}; window.PAGE_AR = {
+"meta.d": "تصميم المواقع في الدوحة وكل أنحاء قطر: مواقع الشركات وصفحات الهبوط بالعربية والإنجليزية، مصمّمة للهاتف أولاً وجاهزة للظهور على جوجل.",
+"h.word": "تصميم المواقع",
+"h.d": "نصمّم ونبني مواقع سريعة بالعربية والإنجليزية للشركات في قطر، بدءاً من شاشة الهاتف.",
+"h.ask": "اسأل عن موقعك",
+"rm.0": "خريطة الموقع",
+"rm.1": "التصميم",
+"rm.2": "الإطلاق",
+"sv.t": "تصميم مواقع للشركات في قطر.",
+"sv.lead": "نصمّم كل موقع ليقود الزائر إلى خطوة واحدة: أن يتصل بك، أو يحجز، أو يشتري.",
+"sv.0.n": "مواقع الشركات",
+"sv.0.d": "موقع واضح يعرّف بك وبما تقدّمه، ويدلّ عملاءك على طريقة الوصول إليك.",
+"sv.0.0": "خريطة الموقع وتجربة المستخدم",
+"sv.0.1": "صفحات الخدمات",
+"sv.0.2": "العنوان والخريطة",
+"sv.0.3": "التحليلات",
+"sv.1.n": "صفحات الهبوط",
+"sv.1.d": "صفحة لكل عرض، مبنية لتحوّل النقرات على إعلانك إلى استفسارات، وبداية مناسبة لتحكم على عملنا.",
+"sv.1.0": "صفحات الحملات",
+"sv.1.1": "نماذج الاستفسار",
+"sv.1.2": "التتبّع",
+"sv.1.3": "اختبارات A/B",
+"sv.2.n": "المتاجر الإلكترونية",
+"sv.2.d": "متجر باللغتين، مصمّم للشراء من الهاتف، من صفحة المنتج حتى الدفع.",
+"sv.2.0": "صفحات المنتجات",
+"sv.2.1": "السلة وإتمام الطلب",
+"sv.2.2": "الدفع الإلكتروني",
+"sv.2.3": "خيارات التوصيل",
+"sv.3.n": "العربية والإنجليزية",
+"sv.3.d": "كل صفحة عربية تُعرض من اليمين إلى اليسار، وكل لغة تُكتب بأسلوبها الخاص.",
+"sv.3.0": "تخطيط من اليمين إلى اليسار",
+"sv.3.1": "خطوط عربية",
+"sv.3.2": "نصوص باللغتين",
+"sv.3.3": "التبديل بين اللغتين",
+"fit.t": "أيّاً كانت نقطة البداية.",
+"fit.lead": "أخبرنا أين تقف اليوم، وسنقترح عليك الخطوة الأولى.",
+"fit.0": "ليس لديك موقع بعد",
+"fit.1": "موقع قديم أو بطيء",
+"fit.2": "موقع بالإنجليزية فقط",
+"fit.3": "إعلانات بلا صفحة هبوط",
+"fit.4": "جاهز للبيع عبر الإنترنت",
+"pr.t": "من خريطة الموقع إلى الإطلاق.",
+"pr.lead": "تراجع كل صفحة بنفسك قبل أن يُطلق الموقع.",
+"pr.0": "خريطة الموقع",
+"pr.0d": "نخطّط الصفحات بناءً على ما يبحث عنه عملاؤك، ومن هنا يبدأ [تحسين محركات البحث (SEO)](seo.html).",
+"pr.1": "التصميم",
+"pr.1d": "ترى الصفحات الرئيسية بالعربية والإنجليزية، على الهاتف أولاً ثم على الحاسوب.",
+"pr.2": "البرمجة",
+"pr.2d": "نُبقي كل صفحة خفيفة، ثم نختبرها على هواتف حقيقية وعبر شبكة الجوال.",
+"pr.3": "الإطلاق",
+"pr.3d": "يُطلق الموقع وقد جُهّزت فيه التحليلات وGoogle Search Console، ونربطه بملف نشاطك التجاري على جوجل إن وُجد.",
+"nd.t": "ما نحتاجه منك.",
+"nd.lead": "معظمه لديك أصلاً، ونساعدك في الباقي.",
+"nd.0": "هويتك",
+"nd.0d": "شعارك وألوانك وخطوطك، وإن لم تكن لديك هوية بعد، يمكننا أن [نصمّمها لك](branding.html) أولاً.",
+"nd.1": "المعلومات الأساسية",
+"nd.1d": "ماذا تبيع، ومن يشتري منك، وأين مقرّك، والأسئلة التي يكرّرها عملاؤك.",
+"nd.2": "النصوص والصور",
+"nd.2d": "أرسل ما لديك منها، ويستطيع [فريق المحتوى](content.html) لدينا أن يكتب الصفحات ويصوّر ما ينقص.",
+"nd.3": "بيانات الدخول",
+"nd.3d": "إن كان لديك اسم نطاق (دومين) أو موقع حالي، فسنحتاج إلى بيانات الدخول إليهما.",
+"nd.4": "شخص واحد",
+"nd.4d": "شخص من فريقك يجيب عن أسئلتنا ويراجع كل صفحة.",
+"q.t": "أسئلة عن المواقع.",
+"q.0": "هل يمكنكم إعادة تصميم موقعنا الحالي؟",
+"a.0": "نعم. نُبقي على ما ينجح، ونعيد بناء الباقي، ونوجّه عناوين الصفحات القديمة إلى الجديدة، فلا يصل أحد من رابط محفوظ أو من نتائج البحث إلى صفحة مفقودة.",
+"q.1": "بالعربية فقط، أم بالإنجليزية فقط، أم باللغتين؟",
+"a.1": "باللغة التي يقرؤها عملاؤك. وإن بدأت بلغة واحدة، نخطّط التصميم بحيث تُضاف الأخرى لاحقاً.",
+"q.2": "هل يمكننا تحديث الموقع بأنفسنا؟",
+"a.2": "نعم. أخبرنا بذلك من البداية، وسنجهّز الموقع بحيث يغيّر فريقك النصوص والصور بنفسه، أو يمكننا أن [نحدّثه لك](digital.html) كل شهر.",
+"q.3": "هل سيظهر موقعنا في المركز الأول على جوجل؟",
+"a.3": "لا أحد يستطيع أن يعد بذلك بصدق. نبني الموقع بحيث يقرؤه جوجل من اليوم الأول، أما ترتيبه في نتائج البحث فيحتاج إلى عمل يمتد لأشهر، وتعمل عليه [خدمة تحسين محركات البحث (SEO)](seo.html) بعد الإطلاق.",
+"q.4": "كم تكلفة الموقع؟",
+"a.4": "تعتمد على عدد الصفحات ووظيفة كل منها. نقدّم عرض السعر بعد أول مكالمة: سعر ثابت واحد، مكتوب، قبل أن يبدأ أي عمل.",
+"pd.t": "خدمات تكمّل موقعك.",
+"pd.lead": "اطلب الموقع وحده، أو معه ما يبقيه فعّالاً بعد الإطلاق.",
+"pd.go": "تفاصيل الخدمة",
+"pd.0.d": "بعد الإطلاق، نواصل العمل على ظهورك في جوجل شهراً بعد شهر.",
+"pd.0.0": "بحث الكلمات المفتاحية",
+"pd.0.1": "البحث المحلي",
+"pd.0.2": "التقرير الشهري",
+"pd.1.d": "حملات على جوجل وإنستقرام وتيك توك، توصل الناس إلى صفحة صُمّمت لهم.",
+"pd.1.0": "إعلانات البحث",
+"pd.1.1": "إعلانات السوشيال ميديا",
+"pd.1.2": "التتبّع",
+"pd.2.d": "نصوص وصور لكل صفحة، من فريقنا نفسه، لا صور جاهزة.",
+"pd.2.0": "محتوى المواقع",
+"pd.2.1": "التصوير الفوتوغرافي",
+"pd.2.2": "الفيديو",
+"pd.3.d": "يمكننا تحديث موقعك كل شهر، إلى جانب منشوراتك وإعلاناتك.",
+"pd.3.0": "تحديثات الموقع",
+"pd.3.1": "المنشورات والإعلانات",
+"pd.3.2": "التقرير الشهري",
+"wk.t": "موقع مفاهيمي، صُمّم للهاتف أولاً.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "تحسين محركات البحث"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r4"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r4"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$;
+  // related work: the booking site concept, full width; if the admin's list no longer has one, this
+  // discipline's projects fill in, then the rest. Every card carries the Concept badge (workCard)
+  const PAIR = ["saffar"], SIZE = ["wide"];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'digital'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 1);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // the questions open and close in place (the answers stay in the page for search and for readers without script)
+  $('#faq')?.addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+})();
+</script>
+</body>
+</html>

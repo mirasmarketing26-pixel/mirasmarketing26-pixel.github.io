@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>SEO services in Qatar, in Arabic and English — MIRAS</title>
+<meta name="description" content="SEO services in Qatar, in Arabic and English: technical fixes, keyword research, local SEO and a monthly report. No promised rankings.">
+<meta name="theme-color" content="#0D0F2E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. The hreflang pair below is the
+     same for both; the canonical and og:url differ, so the page script writes them for the language shown. -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/seo.html">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/seo.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/seo.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="SEO services in Qatar, in Arabic and English — MIRAS">
+<meta property="og:description" content="SEO services in Qatar, in Arabic and English: technical fixes, keyword research, local SEO and a monthly report. No promised rankings.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r4">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* seo.html (r2): the depth chart hero (on Deep) with the page's ask, what we work on, who it suits, what to expect month by
+   month, what we need from you (the ask again), questions, what pairs well with it. No related concepts: none of them
+   is search work. Shared rules: motifs.css, site.css. */
+
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* the page's ask: a plain underlined link under the lead (the header keeps the one Flare button); it sits at its own width,
+   and the chart's contours break around it (data-avoid on the canvas) */
+.hero > .more{align-self:flex-start;margin-top:clamp(18px,2.6vh,30px)}
+.nd-ask{margin-top:clamp(30px,4vw,48px)}
+/* the Arabic hero words run the whole measure, and the chart's island sits on that side in RTL: from 760px up they take
+   the start 70% only, so the island stays on open water (phones keep the full column; the island sits above the words) */
+@media (min-width:760px){html[lang=ar] .hero > svg.wave-title{width:70%}}
+/* services header, the scale move: the headline across cols 1–11 (it wraps, balanced), the lead under its far end (the diagonal) */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(20px,2.6vw,36px);margin-bottom:clamp(40px,5.5vw,76px)}
+.svc-head .display{grid-column:1 / span 11;margin:0;text-wrap:balance}
+.svc-head .lead{grid-column:6 / -1;margin:0;max-width:34ch;color:var(--soft);text-wrap:balance}
+@media (max-width:820px){.svc-head .display{grid-column:1 / -1}.svc-head .lead{grid-column:3 / -1}}
+@media (max-width:520px){.svc-head .lead{grid-column:2 / -1}}
+/* service rows: the name is the link and the whole row is its target; the row's call ("Ask about this", or "See the service"
+   where the row opens a page) is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* steps: the same rows without links (a name, then one line), under a header whose lead answers from the far side */
+.steps .svc-row > h3{font:var(--fs-sub);font-size:clamp(28px,2.8vw,44px);letter-spacing:var(--ls-sub)}
+html[lang=ar] .steps .svc-row > h3{font:var(--fs-sub)}
+/* who it suits: the headline in cols 1–6, the cases set large in a Flare-slashed line in 7–12 (the platforms band of
+   social-media.html and advertising.html) */
+.pl{row-gap:clamp(22px,3vw,36px);align-items:end}
+.pl-t{grid-column:1 / span 6;margin:0}
+.pl-b{grid-column:7 / -1;overflow-x:clip} /* the slash list's hidden first slash sits in the margin: kept inside the column */
+.pl-b .lead{margin:0;max-width:34ch;color:var(--soft)}
+.pl-b .pl-list{margin-top:clamp(18px,2.4vw,30px);font:var(--fs-sub);letter-spacing:var(--ls-sub)}
+@media (max-width:900px){.pl-t,.pl-b{grid-column:1 / -1}}
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 (as on contact.html) */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance}
+.k-faq .faq-list{grid-column:6 / -1}
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+.k-faq .ans a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+@media (max-width:959px){.k-faq-t,.k-faq .faq-list{grid-column:1 / -1}.k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+
+/* the Next band previews Social media: the contact strip, tilted like its hero, runs off the page edge (as on branding.html) */
+.next{overflow-x:clip}
+.next-art > .reel.mini{--fh:clamp(96px,8.6vw,124px);top:50%;bottom:auto;left:0;right:calc(-1 * var(--m));width:auto;max-width:none;height:auto;transform:translateY(-50%) rotate(-3deg)}
+html[dir=rtl] .next-art > .reel.mini{left:calc(-1 * var(--m));right:0;display:flex;justify-content:flex-end;transform:translateY(-50%) rotate(3deg)} /* frames run off the left edge */
+</style>
+</head>
+<body data-page="seo">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="./"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="./" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-deep" data-nav-dark>
+    <canvas class="motif" data-motif="chart" data-ink="tide60" data-labels="[data-i18n='sv.0.n'],[data-i18n='sv.1.n'],[data-i18n='sv.2.n']" data-here="#chHere" data-goal="#chGoal" data-avoid=".hero .lead, .hero > .more, .nav .brand, .nav-links a, .nav .lang, .nav .menu-btn" data-opts='{"route":[[.068,.14],[.23,.25],[.40,.29],[.57,.38]]}' aria-hidden="true"></canvas>
+    <span id="chHere" class="sr-only" data-i18n="ch.here">Today</span>
+    <span id="chGoal" class="sr-only" data-i18n="ch.goal">Your goal</span>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">SEO</h1>
+    <p class="lead" data-i18n="h.d">We help people in Qatar find your business on Google, whether they search in Arabic or English.</p>
+    <a class="more" href="contact.html?service=seo"><span data-i18n="h.ask">Ask about SEO</span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">SEO services in Qatar, in both languages.</h2><p class="lead" data-i18n="sv.lead">Search builds over months, and no one can honestly promise first place on Google.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.0.n" aria-describedby="svA0">Technical SEO</a></h3><div><p class="lead" data-i18n="sv.0.d">We fix what stops Google reading your site properly: slow pages, broken links and a messy structure.</p><ul class="slash"><li data-i18n="sv.0.0">Site audit</li><li data-i18n="sv.0.1">Speed on phones</li><li data-i18n="sv.0.2">Indexing &amp; sitemaps</li><li data-i18n="sv.0.3">Search Console</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.1.n" aria-describedby="svA1">Keyword research</a></h3><div><p class="lead" data-i18n="sv.1.d">People in Qatar search in Arabic and English, so we research both and give each search the right page.</p><ul class="slash"><li data-i18n="sv.1.0">Arabic searches</li><li data-i18n="sv.1.1">English searches</li><li data-i18n="sv.1.2">Search intent</li><li data-i18n="sv.1.3">Page plan</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv2"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.2.n" aria-describedby="svA2">On-page SEO</a></h3><div><p class="lead" data-i18n="sv.2.d">Titles, headings and copy written for people first, so each page reads well and tells Google what it is about.</p><ul class="slash"><li data-i18n="sv.2.0">Titles &amp; descriptions</li><li data-i18n="sv.2.1">Headings &amp; copy</li><li data-i18n="sv.2.2">Internal links</li><li data-i18n="sv.2.3">Structured data</li></ul><span class="svc-ask" id="svA2" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv3"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.3.n" aria-describedby="svA3">Local SEO</a></h3><div><p class="lead" data-i18n="sv.3.d">A complete, current Google Business Profile so people nearby find you, and reviews from real customers, never written by us.</p><ul class="slash"><li data-i18n="sv.3.0">Google Business Profile</li><li data-i18n="sv.3.1">Google Maps</li><li data-i18n="sv.3.2">Reviews from real customers</li><li data-i18n="sv.3.3">Hours, photos &amp; details</li></ul><span class="svc-ask" id="svA3" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv4"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.4.n" aria-describedby="svA4">Content people search for</a></h3><div><p class="lead" data-i18n="sv.4.d">Pages and guides that answer what your customers type into Google, in the language they type it in.</p><ul class="slash"><li data-i18n="sv.4.0">Service pages</li><li data-i18n="sv.4.1">Guides &amp; answers</li><li data-i18n="sv.4.2">Question pages</li><li data-i18n="sv.4.3">Updates to older pages</li></ul><span class="svc-ask" id="svA4" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv5"><a class="wave-underline" href="contact.html?service=seo" data-i18n="sv.5.n" aria-describedby="svA5">Monthly report</a></h3><div><p class="lead" data-i18n="sv.5.d">Every month, in plain words: what we changed, what it brought and what comes next.</p><ul class="slash"><li data-i18n="sv.5.0">Work done</li><li data-i18n="sv.5.1">Search visibility</li><li data-i18n="sv.5.2">Visits &amp; enquiries</li><li data-i18n="sv.5.3">Next month’s plan</li></ul><span class="svc-ask" id="svA5" aria-hidden="true"><span data-i18n="sv.ask">Ask about this</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-tide edge-top" id="fit" aria-labelledby="gfT">
+    <div class="wrap g12 pl">
+      <h2 class="heading pl-t" id="gfT" data-i18n="gf.t">For businesses people search for.</h2>
+      <div class="pl-b"><p class="lead" data-i18n="gf.lead">It suits you if customers look for what you sell on Google, and you can give it months.</p><ul class="slash pl-list"><li data-i18n="gf.0">A site few people find</li><li data-i18n="gf.1">A place customers visit</li><li data-i18n="gf.2">Customers in two languages</li><li data-i18n="gf.3">A new site, started right</li></ul></div>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top steps" id="expect" aria-labelledby="exT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="exT" data-i18n="ex.t">What to expect, month by month.</h2><p class="lead" data-i18n="ex.lead">Each month builds on the last, and the report shows you what moved.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="ex.0">An audit first</h3><div><p class="lead" data-i18n="ex.0d">We check your site, your searches and your competitors, then tell you plainly what is holding you back.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="ex.1">Fixes before new pages</h3><div><p class="lead" data-i18n="ex.1d">Technical problems come first, because good pages go nowhere if Google cannot read them.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="ex.2">Then the pages that matter</h3><div><p class="lead" data-i18n="ex.2d">We improve the pages that bring customers, then add new ones for what people search.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="ex.3">A plain report every month</h3><div><p class="lead" data-i18n="ex.3d">What changed in search, what it brought and what we work on next.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="ex.4">No promised rankings</h3><div><p class="lead" data-i18n="ex.4d">Google decides the order and changes it often, so we promise the work, not a position.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top steps" id="need" aria-labelledby="ndT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="ndT" data-i18n="nd.t">What we’ll need from you.</h2><p class="lead" data-i18n="nd.lead">A few logins, and what you know about your customers.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="nd.0">Access to your site</h3><div><p class="lead" data-i18n="nd.0d">The logins for your website, or an introduction to whoever runs it.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.1">Search Console &amp; analytics</h3><div><p class="lead" data-i18n="nd.1d">Access to Google Search Console and your analytics, or we connect them first if you have none.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.2">Your Google Business Profile</h3><div><p class="lead" data-i18n="nd.2d">Access to your listing, or the details we need to create one.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.3">What matters most</h3><div><p class="lead" data-i18n="nd.3d">The services, areas and customers that matter most to you.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="nd.4">Your customers’ questions</h3><div><p class="lead" data-i18n="nd.4d">What people ask you most, in their own words and in either language.</p></div></li>
+      </ol>
+      <a class="more nd-ask" href="contact.html?service=seo"><span data-i18n="h.ask">Ask about SEO</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="sec t-shore k-faq" id="questions" aria-labelledby="qT">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" id="qT" data-i18n="q.t">Straight answers about SEO.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Can you guarantee first place on Google?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">No, and no one honestly can. Google decides the order, changes it often and weighs things no agency controls. We promise the work, and show you every month what it changed.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">How long until we see results?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">SEO builds over months, not days, and every site starts from a different place. Your monthly report shows what is moving, so you are never guessing.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Do you do SEO in Arabic?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">Yes. We research Arabic searches and write Arabic pages directly, not as translations, because people often search with different words in each language.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span data-i18n="q.3">Do we need a new website first?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p data-i18n="a.3">Not always. We start with an audit of the site you have and tell you plainly whether it can do the job. If it can’t, we can <a href="websites.html">build one</a> that is ready for search.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span data-i18n="q.4">Can you get us more Google reviews?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p data-i18n="a.4">We help you ask real customers, with a direct link to your listing. We never write or buy reviews: it breaks Google’s rules and puts your listing at risk.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa5" id="qq5"><span data-i18n="q.5">Should we run ads as well?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa5" role="region" aria-labelledby="qq5"><div><p data-i18n="a.5">Not necessarily. Ads pay for a place in the results now; SEO earns one over time. Many businesses use both, and we can run <a href="advertising.html">paid ads</a> alongside your search work.</p></div></div></li></ul>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="paired" aria-labelledby="pdT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="pdT" data-i18n="pd.t">Pairs well with SEO.</h2><p class="lead" data-i18n="pd.lead">Search needs a site Google can read and pages worth reading.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="pd0"><a class="wave-underline" href="websites.html" data-i18n="s.websites" aria-describedby="pdA0">Website design</a></h3><div><p class="lead" data-i18n="pd.0.d">A fast, bilingual site, built so Google can read it from the first day.</p><span class="svc-ask" id="pdA0" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="pd1"><a class="wave-underline" href="content.html" data-i18n="s.content" aria-describedby="pdA1">Content</a></h3><div><p class="lead" data-i18n="pd.1.d">Copy, photos and video from our own team, so your pages are worth finding.</p><span class="svc-ask" id="pdA1" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <a class="next t-flare band edge-top" href="social-media.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Social media</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><div class="motif reel" data-motif="reel" data-opts='{"mini":true}' data-frames="57,129,193"></div></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@mirasmarketing.com" dir="ltr" data-cms="studio.email">hello@mirasmarketing.com</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="websites.html" data-i18n="s.websites">Website design</a><a href="seo.html" data-i18n="s.seo">SEO</a><a href="social-media.html" data-i18n="s.social">Social media</a><a href="advertising.html" data-i18n="s.ads">Paid ads</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · mirasmarketing.com</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "SEO services in Qatar, in Arabic and English — MIRAS", "ar": "تحسين محركات البحث (SEO) في قطر، بالعربية والإنجليزية — ميراس"}; window.PAGE_AR = {
+"meta.d": "خدمات تحسين محركات البحث (SEO) في قطر بالعربية والإنجليزية: إصلاحات تقنية، وبحث الكلمات المفتاحية، والظهور المحلي على خرائط جوجل، وتقرير شهري، دون وعود بتصدّر النتائج.",
+"h.word": "الظهور في البحث",
+"h.d": "نساعد الناس في قطر على الوصول إلى نشاطك عبر جوجل، سواء بحثوا بالعربية أو بالإنجليزية.",
+"h.ask": "اسأل عن تحسين الظهور في البحث",
+"ch.here": "اليوم",
+"ch.goal": "هدفك",
+"sv.t": "تحسين محركات البحث (SEO) في قطر، باللغتين.",
+"sv.lead": "الظهور في البحث يُبنى على مدى أشهر، ولا أحد يستطيع بصدق أن يعدك بالمركز الأول في جوجل.",
+"sv.0.n": "التحسين التقني",
+"sv.0.d": "نصلح ما يمنع جوجل من قراءة موقعك كما ينبغي: الصفحات البطيئة، والروابط المعطّلة، والبنية المربكة.",
+"sv.0.0": "تدقيق الموقع",
+"sv.0.1": "السرعة على الجوال",
+"sv.0.2": "الأرشفة وخريطة الموقع",
+"sv.0.3": "Google Search Console",
+"sv.1.n": "بحث الكلمات المفتاحية",
+"sv.1.d": "يبحث الناس في قطر بالعربية والإنجليزية، لذلك ندرس البحث في اللغتين ونخصّص لكل بحث الصفحة المناسبة له.",
+"sv.1.0": "عبارات البحث العربية",
+"sv.1.1": "عبارات البحث الإنجليزية",
+"sv.1.2": "نيّة البحث",
+"sv.1.3": "خطة الصفحات",
+"sv.2.n": "تحسين الصفحات",
+"sv.2.d": "عناوين ونصوص تُكتب للناس أولاً، فتُقرأ بسهولة وتُخبر جوجل بموضوع كل صفحة.",
+"sv.2.0": "العناوين والأوصاف",
+"sv.2.1": "العناوين الفرعية والنصوص",
+"sv.2.2": "الروابط الداخلية",
+"sv.2.3": "البيانات المنظّمة",
+"sv.3.n": "الظهور المحلي",
+"sv.3.d": "ملف نشاط تجاري على جوجل مكتمل ومحدّث ليجدك من هم بالقرب منك، وتقييمات من عملاء حقيقيين، لا نكتبها نحن أبداً.",
+"sv.3.0": "ملف النشاط التجاري على جوجل",
+"sv.3.1": "خرائط جوجل",
+"sv.3.2": "تقييمات من عملاء حقيقيين",
+"sv.3.3": "ساعات العمل والصور والبيانات",
+"sv.4.n": "محتوى يبحث عنه عملاؤك",
+"sv.4.d": "صفحات وأدلة تجيب عمّا يكتبه عملاؤك في جوجل، وباللغة التي يكتبون بها.",
+"sv.4.0": "صفحات الخدمات",
+"sv.4.1": "أدلة وإجابات",
+"sv.4.2": "صفحات الأسئلة الشائعة",
+"sv.4.3": "تحديث الصفحات القائمة",
+"sv.5.n": "التقرير الشهري",
+"sv.5.d": "كل شهر، وبلغة واضحة: ما الذي غيّرناه، وما الذي حقّقه، وما خطوتنا التالية.",
+"sv.5.0": "ما أنجزناه",
+"sv.5.1": "الظهور في البحث",
+"sv.5.2": "الزيارات والاستفسارات",
+"sv.5.3": "خطة الشهر القادم",
+"ex.t": "ما يمكنك أن تتوقعه، شهراً بعد شهر.",
+"ex.lead": "كل شهر يُبنى على ما قبله، ويُريك التقرير ما الذي تغيّر.",
+"ex.0": "التدقيق أولاً",
+"ex.0d": "نفحص موقعك وعبارات البحث ومنافسيك، ثم نخبرك بوضوح بما يعيقك.",
+"ex.1": "الإصلاح قبل الصفحات الجديدة",
+"ex.1d": "نبدأ بالمشكلات التقنية، فالصفحات الجيدة لا تتقدّم إن لم يستطع جوجل قراءتها.",
+"ex.2": "ثم الصفحات الأهم",
+"ex.2d": "نحسّن الصفحات التي تجلب العملاء، ثم نضيف صفحات جديدة لما يبحث عنه الناس.",
+"ex.3": "تقرير واضح كل شهر",
+"ex.3d": "ما الذي تغيّر في البحث، وما الذي حقّقه، وما الذي سنعمل عليه بعد ذلك.",
+"ex.4": "لا وعود بترتيب معيّن",
+"ex.4d": "جوجل هو من يحدّد الترتيب ويغيّره باستمرار، لذلك نَعِد بالعمل لا بمركز معيّن.",
+"gf.t": "للشركات التي يبحث عنها الناس.",
+"gf.lead": "تناسبك إن كان عملاؤك يبحثون في جوجل عمّا تبيعه، وكنت مستعداً لعمل يمتد لأشهر.",
+"gf.0": "موقع لا يجده إلا القليل",
+"gf.1": "مكان يزوره العملاء",
+"gf.2": "عملاء يبحثون بلغتين",
+"gf.3": "موقع جديد بأساس سليم",
+"nd.t": "ما نحتاجه منك.",
+"nd.lead": "بعض بيانات الدخول، وما تعرفه عن عملائك.",
+"nd.0": "الدخول إلى موقعك",
+"nd.0d": "بيانات الدخول إلى موقعك، أو تعريفنا بمن يديره.",
+"nd.1": "أدوات القياس",
+"nd.1d": "صلاحية الوصول إلى Google Search Console وأدوات التحليلات إن وُجدت، وإلا ربطناها أولاً.",
+"nd.2": "ملف نشاطك على جوجل",
+"nd.2d": "صلاحية الوصول إلى ملف نشاطك، أو البيانات اللازمة لإنشائه.",
+"nd.3": "ما يهمّك أكثر",
+"nd.3d": "الخدمات والمناطق والعملاء الأهم بالنسبة إليك.",
+"nd.4": "أسئلة عملائك",
+"nd.4d": "ما يسألك عنه الناس أكثر من غيره، بكلماتهم وبأيّ من اللغتين.",
+"q.t": "إجابات صريحة عن تحسين محركات البحث.",
+"q.0": "هل تضمنون تصدّر نتائج البحث في جوجل؟",
+"a.0": "لا، ولا أحد يستطيع ذلك بصدق. جوجل هو من يحدّد الترتيب، ويغيّره باستمرار، ويعتمد على عوامل لا تتحكّم فيها أي وكالة. نحن نَعِد بالعمل، ونُطلعك كل شهر على ما غيّره.",
+"q.1": "متى نرى النتائج؟",
+"a.1": "يحتاج تحسين محركات البحث إلى أشهر لا أيام، ولكل موقع نقطة بداية مختلفة. ويبيّن لك التقرير الشهري ما الذي تغيّر، فلا تضطر إلى التخمين.",
+"q.2": "هل تعملون على تحسين محركات البحث بالعربية؟",
+"a.2": "نعم. ندرس عبارات البحث العربية ونكتب الصفحات العربية مباشرة، لا ترجمةً عن الإنجليزية، لأن الناس كثيراً ما يبحثون بكلمات مختلفة في كل لغة.",
+"q.3": "هل نحتاج إلى موقع جديد أولاً؟",
+"a.3": "ليس دائماً. نبدأ بتدقيق موقعك الحالي، ونخبرك بوضوح إن كان قادراً على أداء المهمة. وإن لم يكن، يمكننا [بناء موقع جديد](websites.html) جاهز للبحث.",
+"q.4": "هل يمكنكم زيادة تقييماتنا على جوجل؟",
+"a.4": "نساعدك على طلبها من عملائك الحقيقيين، برابط مباشر إلى ملف نشاطك على جوجل. ولا نكتب التقييمات ولا نشتريها أبداً، فذلك يخالف قواعد جوجل ويعرّض ملفك للخطر.",
+"q.5": "هل نحتاج إلى إعلانات ممولة أيضاً؟",
+"a.5": "ليس بالضرورة. الإعلانات تشتري لك مكاناً في النتائج الآن، وتحسين محركات البحث يكسبه لك مع الوقت. كثير من الشركات تجمع بينهما، ويمكننا إدارة [الإعلانات الممولة](advertising.html) إلى جانب تحسين ظهورك في البحث.",
+"pd.t": "خدمات تكمّل ظهورك في البحث.",
+"pd.lead": "يحتاج الظهور في البحث إلى موقع يقرؤه جوجل، وصفحات تستحق القراءة.",
+"sv.go": "تفاصيل الخدمة",
+"pd.0.d": "موقع سريع بلغتين، مبنيّ ليقرأه جوجل من يومه الأول.",
+"pd.1.d": "نصوص وصور وفيديو يصنعها فريقنا، لتكون صفحاتك جديرة بأن يجدها الناس.",
+"nx.l": "التالي",
+"nx.t": "السوشيال ميديا"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r4"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r4"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$;
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // the questions open and close in place (the answers stay in the page for search and for readers without script)
+  $('#faq')?.addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+})();
+</script>
+</body>
+</html>

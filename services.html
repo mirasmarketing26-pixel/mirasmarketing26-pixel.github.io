@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}</style>
+<title>Marketing services in Qatar: websites, SEO &amp; ads — MIRAS</title>
+<meta name="description" content="Marketing services in Qatar, in Arabic and English: website design and SEO, plus strategy, branding, content, social media and paid ads.">
+<meta name="theme-color" content="#BFF0DD">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=r2">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- One file serves both languages: English at the plain address, Arabic at ?lang=ar. The hreflang pair below is the
+     same for both; the canonical and og:url differ, so the page script writes them for the language shown. -->
+<link rel="alternate" hreflang="en" href="https://www.mirasmarketing.com/services.html">
+<link rel="alternate" hreflang="ar" href="https://www.mirasmarketing.com/services.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://www.mirasmarketing.com/services.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MIRAS">
+<meta property="og:title" content="Marketing services in Qatar: websites, SEO &amp; ads — MIRAS">
+<meta property="og:description" content="Marketing services in Qatar, in Arabic and English: website design and SEO, plus strategy, branding, content, social media and paid ads.">
+<meta property="og:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.mirasmarketing.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="The MIRAS wordmark beside Mira riding a wave in front of an orange sun.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the faces load without blocking the first paint (the wave titles re-measure when they land) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,300..600&family=Martian+Mono:wght@400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="assets/motifs.css?v=r3">
+<link rel="stylesheet" href="assets/site.css?v=r4">
+<script>try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('miras-lang')==='ar'?'ar':'en';if(l==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';d.classList.add('pre-lang')}}catch(e){}</script>
+<style>
+/* services.html (r2): the hub the Services menu opens. The monogram drawn in water behind the hero; websites and SEO first,
+   on their own, their names a size up; then every service by stage (Start, Build, Grow), each one a link to its page; how a
+   project runs; questions; two concepts. Shared rules: motifs.css, site.css. */
+
+.hero > .sr-only{position:absolute}
+.hero > .lead{text-wrap:pretty} /* no one-word last line */
+/* services header, the scale move: the headline across cols 1–11 (it wraps, balanced), the lead under its far end (the diagonal) */
+.svc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:clamp(20px,2.6vw,36px);margin-bottom:clamp(40px,5.5vw,76px)}
+.svc-head .display{grid-column:1 / span 11;margin:0;text-wrap:balance}
+.svc-head .lead{grid-column:6 / -1;margin:0;max-width:34ch;color:var(--soft);text-wrap:balance}
+@media (max-width:820px){.svc-head .display{grid-column:1 / -1}.svc-head .lead{grid-column:3 / -1}}
+@media (max-width:520px){.svc-head .lead{grid-column:2 / -1}}
+/* service rows: the name is the link and the whole row is its target; the row's call ("Ask about this", or "See the service"
+   where the row opens a page) is always shown, full strength on hover or focus */
+.svc-row{position:relative}
+.svc-row .lead{text-wrap:pretty} /* no one-word last line */
+.svc-row > h3 > a{color:inherit;text-decoration:none}
+.svc-row > h3 > a::after{content:"";position:absolute;inset:0}
+.svc-ask{display:flex;align-items:center;gap:10px;width:max-content;margin-top:22px;font:var(--fs-small);color:var(--fg)}
+.svc-row:hover .svc-ask .arrow,.svc-row:focus-within .svc-ask .arrow{transform:translateX(4px)}
+html[dir=rtl] .svc-row:hover .svc-ask .arrow,html[dir=rtl] .svc-row:focus-within .svc-ask .arrow{transform:scaleX(-1) translateX(4px)}
+@media (hover:hover) and (pointer:fine){.svc-ask{opacity:.75;transition:opacity .3s var(--ease)}.svc-row:hover .svc-ask,.svc-row:focus-within .svc-ask{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc-ask{transition:none}}
+/* websites and SEO lead the page: their names take the head size, a step above every other row on the site */
+#services .svc-row > h3{font:var(--fs-head);letter-spacing:var(--ls-head)}
+/* the stages (Start, Build, Grow), one per row: the stage name, one line, then its services as links on hairlines (a name,
+   its line under it, the arrow at the far end). site.css draws any other list in a row as a slash list; this one is not */
+.svc-row ul.jy-list,html[dir=rtl] .svc-row ul.jy-list{display:block;margin:22px 0 0;padding:0;clip-path:none;font:inherit;border-top:1px solid var(--hair)}
+.svc-row ul.jy-list li::before{content:none}
+.jy-list li + li{border-top:1px solid var(--hair)}
+.jy-list a{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:20px;row-gap:3px;align-items:center;min-height:44px;padding:15px 0;text-decoration:none;color:var(--fg)}
+.jy-n{justify-self:start;font:500 clamp(18px,1.4vw,21px)/1.35 var(--sans)}
+html[lang=ar] .jy-n{font:600 clamp(18px,1.4vw,21px)/1.6 var(--ar)}
+.jy-d{grid-column:1;font:var(--fs-small);font-weight:400;color:var(--soft);text-wrap:pretty}
+.jy-list .arrow{grid-column:2;grid-row:1 / span 2}
+/* steps: the same rows without links (a name, then one line), under a header whose lead answers from the far side */
+.steps .svc-row > h3{font:var(--fs-sub);font-size:clamp(28px,2.8vw,44px);letter-spacing:var(--ls-sub)}
+html[lang=ar] .steps .svc-row > h3{font:var(--fs-sub)}
+/* FAQ: the question headline in cols 1–5 (it stays in view beside the list), the list in 6–12 (as on contact.html) */
+.k-faq .g12{align-items:start}
+.k-faq-t{grid-column:1 / span 5;position:sticky;top:110px;margin:0;text-wrap:balance}
+.k-faq .faq-list{grid-column:6 / -1}
+.k-faq .faq-list button > span:first-child{text-wrap:balance}
+.k-faq .ans p{text-wrap:pretty}
+.k-faq .ans a{color:inherit;text-decoration-color:var(--flare);text-decoration-thickness:1.5px;text-underline-offset:.22em}
+@media (max-width:959px){.k-faq-t,.k-faq .faq-list{grid-column:1 / -1}.k-faq-t{position:static;margin-bottom:clamp(28px,5vw,44px)}}
+/* phones: the card badge is 13px in both languages (Arabic already was) */
+@media (max-width:759px){html .badge,html .board .badge{font-size:13px}}
+
+/* the related pair, 7/5 or 5/7: the narrow card is drawn as a portrait board (.third) on 5 columns, and its board grows to the
+   wide card's height so both end on one line (the board art is cropped a little, never stretched) */
+@media (min-width:821px){#related > .card.third{grid-column:span 5;display:flex;flex-direction:column}#related > .card.third > .board{flex:1 1 auto;aspect-ratio:auto;min-height:0}}
+.related{padding-top:clamp(40px,7vh,80px)}
+#wkT{max-width:none} /* the related heading runs on one line beside "All work" (it wraps, balanced, only when the row is too narrow) */
+
+/* hero: the monogram drawn in water (the Branding hero's motif, on Foam); the lead ends well before its loop */
+.hero.t-foam .lead{max-width:34ch}
+@media (min-width:760px){.hero.t-foam > canvas.motif{width:107%}}
+</style>
+</head>
+<body data-page="services">
+<a class="skip-link" href="#main" data-i18n="a11y.main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="brand" href="./"><span class="sr-only" data-i18n="brand.name">MIRAS</span><span class="mask monogram" aria-hidden="true"></span><span class="mask wordmark" aria-hidden="true"></span></a>
+  <nav class="nav-links" aria-label="Main" data-i18n-aria="aria.main"><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services" aria-current="page">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+  <a class="lang" id="langBtn" href="?lang=ar" hreflang="ar" lang="ar">العربية</a>
+  <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="mnav" data-i18n="n.menu">Menu</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" data-i18n-aria="n.menu"><a href="./" data-i18n="n.home">Home</a><a href="work.html" data-i18n="n.work">Work</a><a href="services.html" data-i18n="n.services">Services</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+<main id="main">
+  <section class="hero t-foam">
+    <canvas class="motif" data-motif="mark" data-ink="deep" aria-hidden="true"></canvas>
+    <svg class="wave-title motif" data-motif="wavetext" aria-hidden="true"></svg><h1 class="wave-src sr-only" data-i18n="h.word">Services</h1>
+    <p class="lead" data-i18n="h.d">One team in Lusail for your website, search, brand, social media and ads, in Arabic and English.</p>
+  </section>
+
+  <section class="sec t-shore edge-top" id="services" aria-labelledby="svT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="svT" data-i18n="sv.t">Start where people find you.</h2><p class="lead" data-i18n="sv.lead">People check your website and Google before they get in touch, so that is where we begin.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 id="sv0"><a class="wave-underline" href="websites.html" data-i18n="s.websites" aria-describedby="svA0">Website design</a></h3><div><p class="lead" data-i18n="sv.0.d">Fast websites in Arabic and English, built for the phone first and ready for Google from launch day.</p><ul class="slash"><li data-i18n="sv.0.0">Company websites</li><li data-i18n="sv.0.1">Landing pages</li><li data-i18n="sv.0.2">Online stores</li><li data-i18n="sv.0.3">Ready for search</li></ul><span class="svc-ask" id="svA0" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+        <li class="svc-row"><h3 id="sv1"><a class="wave-underline" href="seo.html" data-i18n="s.seo" aria-describedby="svA1">SEO</a></h3><div><p class="lead" data-i18n="sv.1.d">We help people find you on Google, though it builds over months and no one can promise first place.</p><ul class="slash"><li data-i18n="sv.1.0">Technical SEO</li><li data-i18n="sv.1.1">Keyword research</li><li data-i18n="sv.1.2">Local search</li><li data-i18n="sv.1.3">On-page SEO</li></ul><span class="svc-ask" id="svA1" aria-hidden="true"><span data-i18n="sv.go">See the service</span><span class="arrow">→</span></span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-deep edge-top" id="journey" aria-labelledby="jyT">
+    <div class="wrap">
+      <div class="svc-head"><h2 class="display" id="jyT" data-i18n="jy.t">Marketing services for every stage.</h2><p class="lead" data-i18n="jy.lead">Start, build or grow in Qatar: hire us for one stage, or for all three.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="jy.0">Start</h3><div><p class="lead" data-i18n="jy.0d">Be easy to find, on your own website and on Google.</p><ul class="jy-list">
+          <li><a href="websites.html"><span class="jy-n wave-underline" data-i18n="s.websites">Website design</span><span class="jy-d" data-i18n="jy.0.0">Fast, bilingual sites, built for the phone first.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a href="seo.html"><span class="jy-n wave-underline" data-i18n="s.seo">SEO</span><span class="jy-d" data-i18n="jy.0.1">Found on Google Search and Maps, in Arabic and English.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul></div></li>
+        <li class="svc-row"><h3 data-i18n="jy.1">Build</h3><div><p class="lead" data-i18n="jy.1d">Know your customers, then give them a brand and something worth seeing.</p><ul class="jy-list">
+          <li><a href="strategy.html"><span class="jy-n wave-underline" data-i18n="s.strategy">Strategy</span><span class="jy-d" data-i18n="jy.1.0">Who you’re for, and what to tell them.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a href="branding.html"><span class="jy-n wave-underline" data-i18n="s.branding">Branding</span><span class="jy-d" data-i18n="jy.1.1">A name, a look and a voice people recognise.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a href="content.html"><span class="jy-n wave-underline" data-i18n="s.content">Content</span><span class="jy-d" data-i18n="jy.1.2">Video, photos and words, made by our own team.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul></div></li>
+        <li class="svc-row"><h3 data-i18n="jy.2">Grow</h3><div><p class="lead" data-i18n="jy.2d">Keep the people you have, and reach new ones every month.</p><ul class="jy-list">
+          <li><a href="social-media.html"><span class="jy-n wave-underline" data-i18n="s.social">Social media</span><span class="jy-d" data-i18n="jy.2.0">Your Instagram, TikTok and Snapchat, planned, posted and answered.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a href="advertising.html"><span class="jy-n wave-underline" data-i18n="s.ads">Paid ads</span><span class="jy-d" data-i18n="jy.2.1">Campaigns on Google, YouTube and social media, adjusted as results come in.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a href="digital.html"><span class="jy-n wave-underline" data-i18n="s.digital">Digital</span><span class="jy-d" data-i18n="jy.2.2">Website, search, posts and ads together, with a report every month.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-tide edge-top steps" id="process" aria-labelledby="prT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="prT" data-i18n="pr.t">How a project runs.</h2><p class="lead" data-i18n="pr.lead">The same steps for every project, so you always know what comes next.</p></div>
+      <ol class="svc-rows">
+        <li class="svc-row"><h3 data-i18n="pr.0">Listen</h3><div><p class="lead" data-i18n="pr.0d">We read what you have and talk to your customers.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.1">Plan</h3><div><p class="lead" data-i18n="pr.1d">You sign off one written plan and its targets.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.2">Create</h3><div><p class="lead" data-i18n="pr.2d">We make the work, and you review it before anything goes out.</p></div></li>
+        <li class="svc-row"><h3 data-i18n="pr.3">Launch</h3><div><p class="lead" data-i18n="pr.3d">It goes live, and you get a report every month.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec t-shore edge-top k-faq" id="questions" aria-labelledby="qT">
+    <div class="wrap g12">
+      <h2 class="display k-faq-t" id="qT" data-i18n="q.t">Before you ask.</h2>
+      <ul class="faq-list" id="faq"><li><button type="button" aria-expanded="false" aria-controls="qa0" id="qq0"><span data-i18n="q.0">Can we hire you for just one thing?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa0" role="region" aria-labelledby="qq0"><div><p data-i18n="a.0">Of course. Pick one service or all of them. If something else needs fixing first, we’ll say so.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa1" id="qq1"><span data-i18n="q.1">Where should we start?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa1" role="region" aria-labelledby="qq1"><div><p data-i18n="a.1">Usually with your <a href="websites.html">website</a> and how you show up in <a href="seo.html">Google search</a>, because that is where people look you up first. Tell us what you have, and we’ll suggest the first step.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa2" id="qq2"><span data-i18n="q.2">Do you work in Arabic?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa2" role="region" aria-labelledby="qq2"><div><p data-i18n="a.2">Yes. Everything we make can be done in Arabic, English or both, and each language is written on its own terms, not translated word for word.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa3" id="qq3"><span data-i18n="q.3">How much does it cost?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa3" role="region" aria-labelledby="qq3"><div><p data-i18n="a.3">It depends on what you need. We quote after a first call: one fixed price, in writing, before any work starts.</p></div></div></li><li><button type="button" aria-expanded="false" aria-controls="qa4" id="qq4"><span data-i18n="q.4">Can we see past work?</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="qa4" role="region" aria-labelledby="qq4"><div><p data-i18n="a.4">We’re new and have no client case study yet. Our concept projects show how we work, or we can start with a small project you can judge us on.</p></div></div></li></ul>
+    </div>
+  </section>
+
+  <section class="sec t-shore related" id="work" aria-labelledby="wkT">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="heading" id="wkT" data-i18n="wk.t">Concept projects, not client work.</h2><a class="more" href="work.html"><span data-i18n="wk.all">All work</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <a class="next t-tide band edge-top" href="websites.html"><p class="small" data-i18n="nx.l">Next</p><p class="display"><span data-i18n="nx.t">Website design</span><span class="arrow" aria-hidden="true">→</span></p><span class="next-art" aria-hidden="true"><canvas class="motif" data-motif="rise" data-ink="shore" data-opts='{"mini":true}'></canvas></span></a>
+</main>
+<footer class="foot t-deep" id="foot">
+  <div class="foot-ask">
+    <p class="foot-ask-l" data-i18n="ft.ask">Tell us what you’re working on.</p>
+    <a class="foot-mail" href="mailto:hello@mirasmarketing.com" dir="ltr" data-cms="studio.email">hello@mirasmarketing.com</a>
+    <p class="foot-ask-r"><span data-i18n="ft.reply">We reply within one working day.</span> <a class="pill flare" href="contact.html" data-i18n="n.start">Start a project</a></p>
+  </div>
+  <div class="foot-word" role="img" aria-label="MIRAS" data-i18n-aria="aria.brand">
+    <span class="mw mw-keep"></span><span class="mw mw-drop"></span>
+    <img class="foot-mira" src="assets/mira-ride.svg?v=r3" width="753" height="711" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="foot-row">
+    <p class="foot-tag"><span lang="en" data-cms="tagline.en">From the swell to the shore.</span> <span class="arx" lang="ar" dir="rtl" data-cms="tagline.ar">من الموج إلى الشاطئ.</span></p>
+    <nav aria-label="Footer" data-i18n-aria="aria.footer"><a href="work.html" data-i18n="n.work">Work</a><a href="websites.html" data-i18n="s.websites">Website design</a><a href="seo.html" data-i18n="s.seo">SEO</a><a href="social-media.html" data-i18n="s.social">Social media</a><a href="advertising.html" data-i18n="s.ads">Paid ads</a><a href="strategy.html" data-i18n="s.strategy">Strategy</a><a href="branding.html" data-i18n="s.branding">Branding</a><a href="content.html" data-i18n="s.content">Content</a><a href="digital.html" data-i18n="s.digital">Digital</a><a href="about.html" data-i18n="n.about">About</a><a href="contact.html" data-i18n="n.contact">Contact</a></nav>
+    <nav class="foot-legal" aria-label="Legal" data-i18n-aria="aria.legal"><a href="privacy.html" data-i18n="l.privacy">Privacy policy</a><a href="terms.html" data-i18n="l.terms">Terms &amp; conditions</a><a href="cookies.html" data-i18n="l.cookies">Cookie policy</a></nav>
+    <p data-i18n="f.copy">© 2026 MIRAS · mirasmarketing.com</p>
+  </div>
+</footer>
+<script>window.PAGE_TITLE = {"en": "Marketing services in Qatar: websites, SEO & ads — MIRAS", "ar": "خدمات التسويق في قطر: تصميم المواقع وتحسين محركات البحث والإعلانات — ميراس"}; window.PAGE_AR = {
+"meta.d": "خدمات التسويق في قطر من فريق واحد في لوسيل: تصميم المواقع وتحسين محركات البحث (SEO)، إلى جانب الاستراتيجية والهوية والمحتوى والسوشيال ميديا والإعلانات الممولة، بالعربية والإنجليزية.",
+"h.word": "خدماتنا",
+"h.d": "فريق واحد في لوسيل يتولّى موقعك وظهورك في البحث وهويتك وحساباتك على السوشيال ميديا وإعلاناتك، بالعربية والإنجليزية.",
+"sv.t": "ابدأ من حيث يجدك الناس.",
+"sv.lead": "يبحث عنك الناس في جوجل ويزورون موقعك قبل أن يتواصلوا معك، لذلك نبدأ من هناك.",
+"sv.go": "تفاصيل الخدمة",
+"sv.0.d": "مواقع سريعة بالعربية والإنجليزية، مصمّمة للهاتف أولاً وجاهزة لمحركات البحث من يوم الإطلاق.",
+"sv.0.0": "مواقع الشركات",
+"sv.0.1": "صفحات الهبوط",
+"sv.0.2": "المتاجر الإلكترونية",
+"sv.0.3": "التهيئة لمحركات البحث",
+"sv.1.d": "نساعد الناس على إيجادك في جوجل، وهو عمل يمتد لأشهر، ولا أحد يستطيع أن يعدك بالمركز الأول.",
+"sv.1.0": "التحسين التقني",
+"sv.1.1": "بحث الكلمات المفتاحية",
+"sv.1.2": "البحث المحلي",
+"sv.1.3": "تحسين الصفحات",
+"jy.t": "خدمات التسويق لكل مرحلة.",
+"jy.lead": "سواء كنت في مرحلة البداية أو البناء أو النمو في قطر، استعن بنا في مرحلة واحدة أو فيها جميعاً.",
+"jy.0": "البداية",
+"jy.0d": "اجعل الناس يجدونك بسهولة، على موقعك وفي جوجل.",
+"jy.0.0": "مواقع سريعة باللغتين، مصمّمة للهاتف أولاً.",
+"jy.0.1": "ظهورك في بحث جوجل وخرائط جوجل، بالعربية والإنجليزية.",
+"jy.1": "البناء",
+"jy.1d": "اعرف عملاءك، ثم امنحهم علامة يتذكّرونها ومحتوى يستحق المشاهدة.",
+"jy.1.0": "لمن تتوجّه، وماذا تقول له.",
+"jy.1.1": "اسم وشكل ونبرة يعرفها الناس.",
+"jy.1.2": "فيديو وصور ونصوص، يصنعها فريقنا.",
+"jy.2": "النمو",
+"jy.2d": "حافظ على جمهورك، واكسب جمهوراً جديداً كل شهر.",
+"jy.2.0": "نخطّط لحساباتك على إنستقرام وتيك توك وسناب شات، وننشر عليها، ونردّ على متابعيك.",
+"jy.2.1": "حملات على جوجل ويوتيوب والسوشيال ميديا، نعدّلها كلما وصلت النتائج.",
+"jy.2.2": "الموقع والبحث والمنشورات والإعلانات معاً، مع تقرير كل شهر.",
+"pr.t": "كيف يسير المشروع.",
+"pr.lead": "الخطوات نفسها في كل مشروع، فتعرف دائماً ما الخطوة التالية.",
+"pr.0": "نُصغي",
+"pr.0d": "نقرأ كل ما لديك، ونتحدّث إلى عملائك.",
+"pr.1": "نخطّط",
+"pr.1d": "توافق على خطة مكتوبة واحدة وأهدافها.",
+"pr.2": "نصنع",
+"pr.2d": "ننتج الأعمال، وتراجعها قبل أن يُنشر أي شيء.",
+"pr.3": "نُطلق",
+"pr.3d": "ينطلق المشروع، ويصلك تقرير كل شهر.",
+"q.t": "قبل أن تسأل.",
+"q.0": "هل يمكننا التعاون معكم في شيء واحد فقط؟",
+"a.0": "بالتأكيد. اختر خدمة واحدة أو خدماتنا كلها، وإن رأينا أن شيئاً آخر يحتاج إلى إصلاح أولاً، فسنخبرك.",
+"q.1": "من أين نبدأ؟",
+"a.1": "غالباً من [موقعك](websites.html) ومن [ظهورك في بحث جوجل](seo.html)، لأن الناس يبحثون عنك هناك أولاً. أخبرنا بما لديك، وسنقترح الخطوة الأولى.",
+"q.2": "هل تعملون بالعربية؟",
+"a.2": "نعم. كل ما نصنعه يمكن أن يكون بالعربية أو الإنجليزية أو باللغتين، وكل لغة تُكتب بروحها الخاصة، لا بترجمة حرفية.",
+"q.3": "كم التكلفة؟",
+"a.3": "تعتمد على ما تحتاجه. نقدّم عرض السعر بعد أول مكالمة: سعر ثابت واحد، مكتوب، قبل أن يبدأ أي عمل.",
+"q.4": "هل يمكننا رؤية أعمال سابقة؟",
+"a.4": "نحن جدد، ولا توجد لدينا دراسة حالة لعميل بعد. مشاريعنا المفاهيمية تُظهر طريقة عملنا، ويسعدنا أن نبدأ بمشروع صغير تحكم علينا من خلاله.",
+"wk.t": "مشاريع مفاهيمية، لا أعمال لعملاء.",
+"wk.all": "كل الأعمال",
+"nx.l": "التالي",
+"nx.t": "تصميم المواقع"
+};</script>
+<!-- Published content from the admin (admin/). It holds only what differs from this page; null means none. -->
+<script src="assets/content.js"></script>
+<script src="assets/work.js?v=r4"></script>
+<script src="assets/motifs.js?v=r3"></script>
+<script src="assets/site.js?v=r4"></script>
+<script>
+(() => {
+  const M = window.MIRAS, $ = M.$;
+  // related work: a pair chosen for this page, set 7/5 (the booking site, then the race the ads ran for); if the admin's list no longer has one, this
+  // discipline's projects fill in, then the rest. Every card carries the Concept badge (workCard)
+  const PAIR = ["saffar", "corniche-night-run"], SIZE = ["big", "third"];
+  M.onLang(l => {
+    const list = [...PAIR.map(s => WORK.find(p => p.slug === s)), ...WORK.filter(p => p.discipline === 'digital'), ...WORK].filter((p, i, a) => p && a.indexOf(p) === i).slice(0, 2);
+    $('#related').innerHTML = list.map((p, i) => workCard(p, l, SIZE[i])).join('');
+  });
+  // the Next band previews the next page's motif: a still frame that moves only while the band is hovered or focused
+  const nx = $('a.next'), nm = nx && window.MOTIFS?.get($('.next-art [data-motif]', nx));
+  if (nm && nm.animated) {
+    let hot = false; const wake = on => { hot = on; if (on) MOTIFS.kick(); };
+    try { Object.defineProperty(nm, 'animated', { configurable: true, get: () => hot && !MOTIFS.reduce }); } catch (e) {}
+    nx.addEventListener('pointerenter', () => wake(true), { passive: true }); nx.addEventListener('pointerleave', () => wake(false), { passive: true });
+    nx.addEventListener('focus', () => wake(true)); nx.addEventListener('blur', () => wake(false));
+  }
+  // the questions open and close in place (the answers stay in the page for search and for readers without script)
+  $('#faq')?.addEventListener('click', e => { const b = e.target.closest('button'); if (b) b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'); });
+})();
+</script>
+</body>
+</html>

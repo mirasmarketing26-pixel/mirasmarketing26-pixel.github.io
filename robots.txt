@@ -1,7 +1,6 @@
 # MIRAS website
-# PLACEHOLDER: miras.qa is a placeholder domain. Confirm the real domain with MIRAS and update the Sitemap line.
 User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://miras.qa/sitemap.xml
+Sitemap: https://www.mirasmarketing.com/sitemap.xml
