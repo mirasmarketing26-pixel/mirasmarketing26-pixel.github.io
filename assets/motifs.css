@@ -282,7 +282,9 @@ html[dir=rtl] .brief-mira{left:80%}
 .foot-ask > .foot-mail{grid-row:2;justify-self:start}
 .foot-ask-r{grid-row:3;grid-column:7 / -1;justify-self:end;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:14px 24px;text-align:end}
 @media (max-width:760px){.foot-mail{font-size:clamp(40px,13.5vw,64px)}.foot-ask-l{grid-column:1 / -1}.foot-ask-r{grid-column:1 / -1;justify-self:start;justify-content:flex-start;text-align:start}}
-.foot-mail{font:400 clamp(44px,9.5vw,170px)/1 var(--serif);letter-spacing:-.02em;color:var(--fg,var(--shore));text-decoration:none;max-width:100%;overflow-wrap:anywhere;direction:ltr;unicode-bidi:isolate}
+/* sized so the 24-character address (hello@mirasmarketing.com) holds one line from 320px up: about 8.9em wide, in a column of
+   100vw less two --m margins (84.6vw). This shorthand comes after the phone rule above, so it sets the phone size too */
+.foot-mail{font:400 clamp(28px,8.4vw,150px)/1 var(--serif);letter-spacing:-.02em;color:var(--fg,var(--shore));text-decoration:none;max-width:100%;overflow-wrap:anywhere;direction:ltr;unicode-bidi:isolate}
 .foot-mail{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 6' preserveAspectRatio='none'%3E%3Cpath d='M0 3C5 0 10 0 15 3S25 6 30 3 40 0 45 3 55 6 60 3 70 0 75 3 85 6 90 3 100 0 105 3 115 6 120 3' fill='none' stroke='%23FF5A23' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");background-position:0 100%;background-size:0% 8px;background-repeat:no-repeat;padding-bottom:12px;transition:background-size .5s var(--ease)}
 .foot-mail:hover,.foot-mail:focus-visible{background-size:100% 8px}
 .foot-art{position:relative;container-type:inline-size}

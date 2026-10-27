@@ -55,7 +55,9 @@ html[dir=rtl] .brand .wordmark{width:50px}
 .nav-links a{text-decoration:none;opacity:.8;padding:12px 0;position:relative}
 .nav-links a:hover,.nav-links a[aria-current=page]{opacity:1}
 .nav-links a[aria-current=page]::after{content:"";position:absolute;inset-inline:0;bottom:6px;height:2px;background:var(--flare)}
-.lang{background:none;border:0;cursor:pointer;font:500 15px/1 var(--ar);min-height:44px;padding:0 4px}
+/* the language switch is a link to this page in the other language (site.js switches in place on a click); it is drawn
+   as the button it was: its word centred in a 44px target, no underline until hover */
+.lang{display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;font:500 15px/1 var(--ar);min-height:44px;padding:0 4px;color:inherit;text-decoration:none}
 .lang:hover{text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.3em}
 html[lang=ar] .lang{font-family:var(--sans)}
 .nav .pill{min-height:44px;padding:0 20px;font-size:14px}
@@ -89,6 +91,9 @@ html[lang=ar] .mnav .mnav-sub a{font:500 21px/1.4 var(--ar)}
 .nav-links .nav-fly a:hover,.nav-links .nav-fly a:focus-visible,.nav-links .nav-fly a[aria-current=page]{opacity:1}
 .nav-links .nav-fly a[aria-current=page]::after{bottom:8px;inset-inline-end:auto;width:24px}
 html[lang=ar] .nav-links .nav-fly a{font-family:var(--ar)}
+/* the single-service pages (.nav-p) come first; a hairline sets them off from the four disciplines (.nav-g) */
+.nav-fly .nav-p + .nav-g,.mnav-sub .nav-p + .nav-g{border-top:1px solid color-mix(in srgb,var(--shore) 20%,transparent)}
+.mnav-sub .nav-p + .nav-g{margin-top:4px}
 @media (prefers-reduced-motion:reduce){.nav-fly{transition:none!important;transform:none}}
 @media (max-width:900px){.nav-links{display:none}.lang{margin-inline-start:auto}.menu-btn{display:block}}
 @media (max-width:520px){.brand .wordmark{display:none}.nav{gap:14px}.nav .pill{padding:0 14px}}
@@ -174,8 +179,9 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:28px 24px}
 .field textarea{resize:none;field-sizing:content;min-height:110px;max-height:40vh}
 .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--fg);box-shadow:0 1px 0 var(--fg)}
 html[lang=ar] .field input,html[lang=ar] .field textarea{font-family:var(--ar)}
-/* a phone number reads left to right, but it sits on the Arabic page's right edge like the label above it */
-html[dir=rtl] .field input[type=tel],html[dir=rtl] .field input[type=email]{text-align:right}
+/* a phone number reads left to right, but it sits on the Arabic page's right edge like the label above it; so do the free-text fields,
+   which take the direction of what is typed (dir=auto), when they are empty or hold English */
+html[dir=rtl] .field input[type=tel],html[dir=rtl] .field input[type=email],html[dir=rtl] .field [dir=auto]{text-align:right}
 fieldset.field{border:0}
 .picks{display:flex;flex-wrap:wrap;gap:8px}
 html[lang=ar] .err,html[lang=ar] .status-line{font-family:var(--ar)}
@@ -324,3 +330,17 @@ html[lang=ar] .legal-table td{line-height:1.8}
   html[lang=ar] .ab-mq > .sr-only{font:600 clamp(24px,7vw,48px)/1.6 var(--ar);letter-spacing:0}
 }
 
+/* ---------- The Arabic hint (offered by assets/site.js) ----------
+   Only for a browser set to Arabic that lands on the English site.
+   A thin Deep bar held to the foot of the screen, after everything else in the page: at the very end it sits under the
+   footer rather than over it, and it takes no room above it, so nothing on the page moves. It steps aside while the
+   consent bar asks. dir=rtl and lang=ar are on the bar itself (the page around it is English). */
+.ar-hint{--ring:var(--foam);position:sticky;bottom:0;z-index:38;display:flex;flex-wrap:wrap;align-items:center;column-gap:clamp(14px,2vw,24px);padding:4px var(--m) calc(4px + env(safe-area-inset-bottom,0px));background:var(--deep);color:var(--shore);box-shadow:0 -1px 0 color-mix(in srgb,var(--shore) 16%,transparent);font:400 15px/1.5 var(--ar)}
+.ar-hint p{margin-inline-end:auto;padding-block:10px}
+.ar-hint a,.ar-hint button{display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 var(--ar);color:var(--shore)}
+.ar-hint a{text-decoration:underline;text-decoration-color:var(--flare);text-decoration-thickness:2px;text-underline-offset:.5em}
+.ar-hint button{justify-content:center;min-width:44px;padding:0 4px;background:none;border:0;cursor:pointer;color:color-mix(in srgb,var(--shore) 78%,transparent)}
+.ar-hint button:hover,.ar-hint button:focus-visible{color:var(--shore)}
+body:has(.consent:not([hidden])) .ar-hint{display:none}
+html:has(.ar-hint){scroll-padding-bottom:64px}
+@media (max-width:520px){.ar-hint{padding-inline:16px;column-gap:14px}.ar-hint,.ar-hint a,.ar-hint button{font-size:14px}}

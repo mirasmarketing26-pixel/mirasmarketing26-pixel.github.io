@@ -20,6 +20,8 @@
    window.keyArt(p, lang, ratio, opts)  the project's identity board as an aria-hidden inline SVG; opts.plain = the pattern alone,
                                         opts.bare = the board without its name lockup */
 (() => {
+  // project.html's head preloads each default cover (slug → file and its DIMS width, below): a changed slug, cover or order
+  // here is changed in that map too
   const DEFAULT_WORK = [
     { slug: 'halwa-lab', discipline: 'branding', year: 2026, cover: 'assets/work/halwa-1.jpg', focal: '50% 58%', images: ['assets/work/halwa-2.jpg', 'assets/work/halwa-4.jpg', 'assets/work/halwa-5.jpg', 'assets/work/halwa-6.jpg', 'assets/work/halwa-7.jpg'],
       motif: 'arches',
@@ -29,7 +31,7 @@
         brief: 'A family sweets kitchen wanted its gift boxes in big stores, still looking like the family shop.',
         idea: 'We drew a pattern from the arches of old Doha and gave every flavour its own colour, like stalls in a souq.',
         made: ['Brand identity', 'Packaging system', 'Gift bags and stickers', 'Pattern library'] },
-      ar: { name: 'حلوى لاب', client: 'حلويات حِرفية', tags: ['الهوية', 'التغليف'], line: 'وصفات عائلية، بتغليف يناسب المتاجر الحديثة.',
+      ar: { name: 'حلوى لاب', client: 'حلويات حِرفية', tags: ['هوية', 'تغليف'], line: 'وصفات عائلية، بتغليف يناسب المتاجر الحديثة.',
         brief: 'مطبخ حلويات عائلي أراد أن تدخل علب هداياه المتاجر الكبرى، وأن تبقى تشبه دكّان العائلة.',
         idea: 'استوحينا نقشاً من أقواس الدوحة القديمة، ومنحنا كل نكهة لونها، كدكاكين السوق.',
         made: ['الهوية البصرية', 'نظام التغليف', 'أكياس الهدايا والملصقات', 'مكتبة النقوش'] } },
@@ -44,7 +46,7 @@
       ar: { name: 'سباق الكورنيش الليلي', client: 'فعالية رياضية', tags: ['حملة', 'سوشيال ميديا'], line: 'سباق في المدينة يتوهّج بعد الغروب.',
         brief: 'سباق مسائي جديد أراد أن يسجّل العدّاؤون فيه مبكراً.',
         idea: 'خطوط سرعة بالأزرق الكهربائي والأخضر الليموني، مأخوذة من ألوان الكورنيش ليلاً، على اللوحات وأرقام العدّائين والهواتف.',
-        made: ['فكرة الحملة', 'الإعلانات الخارجية والرقمية', 'محتوى منصّات التواصل', 'تصميم أطقم العدّائين'] } },
+        made: ['فكرة الحملة', 'الإعلانات الخارجية والرقمية', 'محتوى السوشيال ميديا', 'تصميم أطقم العدّائين'] } },
     { slug: 'bahr-kitchen', discipline: 'content', year: 2026, cover: 'assets/work/bahr-1.jpg', focal: '45% 52%', images: ['assets/work/bahr-2.jpg', 'assets/work/bahr-4.jpg', 'assets/work/bahr-5.jpg', 'assets/work/bahr-6.jpg', 'assets/work/bahr-7.jpg'],
       motif: 'waves',
       palette: [{ hex: '#1F8A8A', en: 'Sea teal', ar: 'فيروزي' }, { hex: '#FF7A59', en: 'Coral', ar: 'مرجاني' }, { hex: '#F2E3C6', en: 'Sand', ar: 'رملي' }, { hex: '#0E3B4A', en: 'Deep sea', ar: 'أزرق عميق' }],
@@ -56,14 +58,14 @@
       ar: { name: 'مطبخ بحر', client: 'مطعم مأكولات بحرية', tags: ['محتوى', 'تصوير'], line: 'محتوى شهر كامل، جاهز قبل يوم الافتتاح.',
         brief: 'مطعم مأكولات بحرية جديد بلا صور ولا منشورات، وموعد افتتاحه محدّد.',
         idea: 'نصوّر صيد اليوم في ضوء النهار، ثم نصنع منه فيديو الإطلاق ومحتوى شهر كامل.',
-        made: ['فيديو الإطلاق', 'تصوير الطعام', 'محتوى منصّات التواصل', 'تصميم القائمة'] } },
+        made: ['فيديو الإطلاق', 'تصوير الطعام', 'محتوى السوشيال ميديا', 'تصميم القائمة'] } },
     { slug: 'saffar', discipline: 'digital', year: 2026, cover: 'assets/work/saffar-1.jpg', focal: '60% 55%', images: ['assets/work/saffar-4.jpg', 'assets/work/saffar-5.jpg', 'assets/work/saffar-6.jpg', 'assets/work/saffar-7.jpg'],
       motif: 'dunes',
       palette: [{ hex: '#D98E4F', en: 'Dune', ar: 'لون الكثبان' }, { hex: '#B5523B', en: 'Terracotta', ar: 'طيني' }, { hex: '#F1DCC0', en: 'Sand', ar: 'رملي' }, { hex: '#2A1E3B', en: 'Desert night', ar: 'ليل الصحراء' }],
       fonts: { latin: 'Syne', arabic: 'Tajawal' },
       proto: { en: ['Where to?', 'When?', 'Who’s going?', 'Booked.'], ar: ['إلى أين؟', 'متى؟', 'من سيسافر؟', 'تمّ الحجز.'],
         opts: { en: [['Wadi Rum', 'Muscat', 'Salalah'], ['This weekend', 'Next month'], ['1', '2', '4+']], ar: [['وادي رم', 'مسقط', 'صلالة'], ['نهاية هذا الأسبوع', 'الشهر القادم'], ['1', '2', '4+']] },
-        next: { en: 'Next', ar: 'التالي' }, again: { en: 'Start again', ar: 'من جديد' } },
+        next: { en: 'Next', ar: 'التالي' }, again: { en: 'Start again', ar: 'ابدأ من جديد' } },
       en: { name: 'Saffar', client: 'Travel company', tags: ['Website', 'App'], line: 'Trips booked in three taps.',
         brief: 'A local travel company wanted customers to book on their phones instead of calling.',
         idea: 'Big photos, warm sand colours and one question per screen.',
@@ -522,12 +524,12 @@
   }
 
   /* ---- the board faces: one Google Fonts request for every family the projects use, only the letters the boards set ---- */
-  let fontsAsked = '', fontTimer = 0, io = null, idleAsked = false;
+  let fontsAsked = '', fontTimer = 0, io = null;
   // display=block: a face that is on its way holds its text back rather than showing it in the fallback first
   const fontUrl = (list, text) => `https://fonts.googleapis.com/css2?${list.map(f => 'family=' + f.fam.replace(/ /g, '+') + (f.w === 400 ? '' : `:wght@${f.w}`)).join('&')}&text=${encodeURIComponent(text)}&display=block`;
   // the names on the boards (and the project page's type) stay hidden until html.ka-ready (see style())
   const fontsReady = () => document.documentElement.classList.add('ka-ready');
-  /** Load the board faces now (the project page calls it at once; boards call it when the page is idle or one comes near). */
+  /** Load the board faces now (the project page calls it at once; boards call it when one comes near). */
   function fonts() {
     if (!document.head) return;
     const all = [], seen = new Set(), chars = new Set('Aa أب 0123456789');
@@ -555,17 +557,12 @@
     const faced = Promise.all(sheets).then(() => document.fonts && Promise.all(all.map(f => document.fonts.load(`${f.w} 40px "${f.fam}"`, text).catch(() => null))));
     Promise.race([faced, new Promise(r => setTimeout(r, 1200))]).then(fontsReady, fontsReady);
   }
-  // boards drawn into the page: the faces are asked for once the page is idle (a few kB, only the letters the boards set),
-  // or sooner when a board comes within a viewport of the screen
+  // boards drawn into the page: the faces (only the letters the boards set) are asked for when a board comes within a
+  // viewport of the screen, never before: a visitor who never scrolls to a board never downloads them
   function fontsSoon() {
     if (fontTimer || typeof document === 'undefined') return;
     fontTimer = setTimeout(() => {
       fontTimer = 0; style();
-      if (!idleAsked) {
-        idleAsked = true;
-        const idle = () => window.requestIdleCallback ? requestIdleCallback(() => fonts(), { timeout: 1500 }) : setTimeout(fonts, 200);
-        if (document.readyState === 'complete') idle(); else addEventListener('load', idle, { once: true });
-      }
       const boards = [...document.querySelectorAll('svg.ka')];
       if (!boards.length) return;
       if (!('IntersectionObserver' in window)) return fonts();
@@ -606,7 +603,7 @@
   window.workCard = (p, lang, cls = '') => {
     if (lang !== 'en' && lang !== 'ar') { if (typeof lang === 'string' && !cls) cls = lang; lang = document.documentElement.lang === 'ar' ? 'ar' : 'en'; }
     const x = p[lang] || p.en, at = WORK.indexOf(p), M = window.MIRAS, cms = k => M && at >= 0 ? ` data-cms="work.${at}.${k}"` : '';
-    const concept = M?.text ? M.text('c.concept') : lang === 'ar' ? 'مفاهيمي' : 'Concept', up = upId(p.cover);
+    const concept = M?.text ? M.text('c.concept') : lang === 'ar' ? 'مشروع مفاهيمي' : 'Concept', up = upId(p.cover);
     const size = String(cls).split(/\s+/).find(c => c in RATIO), phone = typeof matchMedia === 'function' && matchMedia('(max-width:820px)').matches;
     const img = photo(src(p.cover, p.slug)), own = !up && img.srcset && photo(p.cover).srcset;
     // a project without a cover photo shows its board alone

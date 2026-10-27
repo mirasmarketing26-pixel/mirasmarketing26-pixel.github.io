@@ -1,6 +1,8 @@
 /* MIRAS: shared behaviour for the inner pages.
    - Language: English comes from the page (data-i18n, data-i18n-aria, data-i18n-alt, hidden <div hidden> blocks),
      Arabic from SHARED_AR + window.PAGE_AR. ?lang=ar|en, then the visitor's last choice ('miras-lang'), then English.
+     The address follows the language: ?lang=ar in the address bar, the canonical and og:url, and on links to the site's
+     own pages; English has no lang. A browser set to Arabic on the English site is offered Arabic in a thin bar.
    - Content: assets/content.js (published from the admin) overrides the page. content.pages[<body data-page>].text,
      content.shared.text, content.work, content.studio, content.theme, content.tagline and content.schedule apply here.
      ?cms=preview and ?cms=export speak the same postMessage protocol as index.html.
@@ -90,7 +92,7 @@
   /* ---- markup tokens. The admin keeps only <em>, <br> and <span dir> as markup, so page copy carries links, bold and code
      as plain-text tokens, and the page turns them back into markup after sanitising:
        {email} → the studio's email (studio.email) as a link · [words](link) → a link · **words** → bold · `words` → code ---- */
-  const DEFAULT_EMAIL = 'hello@miras.qa';
+  const DEFAULT_EMAIL = 'hello@mirasmarketing.com';
   function tokenize(h) {
     return String(h ?? '')
       .replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (m, attrs, inner) => {
@@ -133,18 +135,29 @@
   // shared by every inner page (content.shared.text); the rest of a page's keys are its own (content.pages[page].text)
   const SHARED_EN = {
     'n.work': 'Work', 'n.services': 'Services', 'n.about': 'About', 'n.contact': 'Contact', 'n.start': 'Start a project', 'n.menu': 'Menu', 'n.close': 'Close', 'n.home': 'Home',
-    'f.copy': '© 2026 MIRAS · miras.qa',
+    'f.copy': '© 2026 MIRAS · mirasmarketing.com',
     's.strategy': 'Strategy', 's.branding': 'Branding', 's.content': 'Content', 's.digital': 'Digital',
+    's.websites': 'Website design', 's.seo': 'SEO', 's.social': 'Social media', 's.ads': 'Paid ads',
     'c.concept': 'Concept', 'c.all': 'All', 'cta.l': 'Start a project', 'cta.t': 'What’s your next project?', 'cta.d': 'Send us a few lines. We reply within one working day.', 'cta.b': 'Start a project', 'cta.w': 'See the work',
     'ft.ask': 'Tell us what you’re working on.', 'ft.reply': 'We reply within one working day.', 'sv.ask': 'Ask about this', 'a11y.main': 'Skip to content',
     'aria.main': 'Main', 'aria.footer': 'Footer', 'aria.legal': 'Legal', 'aria.brand': 'MIRAS', 'brand.name': 'MIRAS',
     'l.privacy': 'Privacy policy', 'l.terms': 'Terms &amp; conditions', 'l.cookies': 'Cookie policy',
   };
+  /* Arabic glossary, the same on every page, in index.html and in work.js: a brief → «الطلب» (never «موجز») · the social service →
+     «إدارة حسابات التواصل الاجتماعي» (short tag «سوشيال ميديا») · paid ads → «الإعلانات الممولة» · websites → «تصميم المواقع وصفحات
+     الهبوط» · Reels → «ريلز» · Concept → «مشروع مفاهيمي». English service names: Social media setup & management · Paid ads & SEO ·
+     Campaign ideas (the idea; buying and running the ads is Paid ads, advertising.html). Page names in menus (s.websites, s.seo,
+     s.social, s.ads): Website design · SEO · Social media · Paid ads / «تصميم المواقع» · «تحسين محركات البحث» (in running copy
+     «تحسين محركات البحث (SEO)») · «السوشيال ميديا» · «الإعلانات الممولة». A row or link that opens a service page uses these shared
+     keys (s.*), so its name is the menu's in both languages. Hero words that must fit a phone may be shorter than the menu name:
+     SEO «الظهور في البحث» (its ask «اسأل عن تحسين الظهور في البحث»), Paid ads «الإعلانات». Google in Arabic copy → «جوجل»
+     («خرائط جوجل», «ملف النشاط التجاري على جوجل»); tool names stay Latin (Google Search Console), and so do the legal pages. */
   const SHARED_AR = {
     'n.work': 'أعمالنا', 'n.services': 'خدماتنا', 'n.about': 'من نحن', 'n.contact': 'تواصل معنا', 'n.start': 'ابدأ مشروعك', 'n.menu': 'القائمة', 'n.close': 'إغلاق', 'n.home': 'الرئيسية',
-    'f.copy': '© 2026 ميراس · miras.qa',
+    'f.copy': '© 2026 ميراس · mirasmarketing.com',
     's.strategy': 'الاستراتيجية', 's.branding': 'العلامة التجارية', 's.content': 'المحتوى', 's.digital': 'التسويق الرقمي',
-    'c.concept': 'مفاهيمي', 'c.all': 'الكل', 'cta.l': 'ابدأ مشروعك', 'cta.t': 'ما مشروعك القادم؟', 'cta.d': 'أرسل لنا بضعة أسطر، وسنردّ خلال يوم عمل واحد.', 'cta.b': 'ابدأ مشروعك', 'cta.w': 'شاهد الأعمال',
+    's.websites': 'تصميم المواقع', 's.seo': 'تحسين محركات البحث', 's.social': 'السوشيال ميديا', 's.ads': 'الإعلانات الممولة',
+    'c.concept': 'مشروع مفاهيمي', 'c.all': 'الكل', 'cta.l': 'ابدأ مشروعك', 'cta.t': 'ما مشروعك القادم؟', 'cta.d': 'أرسل لنا بضعة أسطر، وسنردّ خلال يوم عمل واحد.', 'cta.b': 'ابدأ مشروعك', 'cta.w': 'شاهد الأعمال',
     'ft.ask': 'أخبرنا بما تعمل عليه.', 'ft.reply': 'نردّ خلال يوم عمل واحد.', 'sv.ask': 'اسأل عن هذه الخدمة', 'a11y.main': 'انتقل إلى المحتوى',
     'aria.main': 'القائمة الرئيسية', 'aria.footer': 'روابط التذييل', 'aria.legal': 'روابط قانونية', 'aria.brand': 'ميراس', 'brand.name': 'ميراس',
     'l.privacy': 'سياسة الخصوصية', 'l.terms': 'الشروط والأحكام', 'l.cookies': 'سياسة ملفات تعريف الارتباط',
@@ -360,23 +373,99 @@
     /** set the page's meta description (plain text), e.g. from a project's line in the current language */
     meta: s => { if (META && s != null) META.setAttribute('content', String(s).replace(/\s+/g, ' ').trim().slice(0, 300)); },
     settle: el => settle(el),
+    /** write the canonical and og:url again (project.html calls it once it has written the project's address pair) */
+    address: () => syncHead(M.lang),
   };
+
+  /* ================= the address: one file serves both languages (?lang=ar is the Arabic one) ================= */
+  // The head holds what both addresses share: the pair of hreflang alternates (en, ar, x-default). What differs, the
+  // canonical and og:url, is written here from that pair, so the address of the language shown names itself, ?lang=ar
+  // included (as Google asks, no canonical is in the raw HTML for a script to change). A page without the pair (the 404,
+  // an unknown project) gets neither. The address bar follows the language (lang=ar; lang=en or none for English), and so do
+  // the links to the site's own pages, so a reader and a crawler stay in the language they came in.
+  const OWN_HOSTS = new Set([location.host, 'www.mirasmarketing.com', 'mirasmarketing.com']);
+  const saveLang = l => { if (!cmsMode) try { localStorage.setItem('miras-lang', l); } catch (e) {} };
+  // the same address in a language: lang=ar set; for English lang is taken out, or set to lang=en when `named`; the rest
+  // of the query and the hash stay
+  function inLang(href, l, named) {
+    const m = /^([^?#]*)(?:\?([^#]*))?(#.*)?$/.exec(href), q = new URLSearchParams(m[2] || ''), want = l === 'ar' ? 'ar' : named ? 'en' : null;
+    if (want ? q.get('lang') === want : !q.has('lang')) return href;
+    if (want) q.set('lang', want); else q.delete('lang');
+    const s = String(q);
+    return m[1] + (s ? '?' + s : '') + (m[3] || '');
+  }
+  // this page in a language, as a path on this site (the switch and the Arabic hint link here). The English one names
+  // its language (lang=en), so a new tab or a copied link opens English even for a visitor who saved Arabic
+  const pageIn = l => inLang(location.pathname + location.search, l, true);
+  // the address bar: lang=ar in Arabic; in English lang=en when the address already had a lang (SITE-CONTRACT §6, the
+  // address the switch links to), else no lang. The canonical comes from the hreflang pair, never from this address
+  function syncUrl(l) {
+    if (cmsMode) return;
+    try { const now = location.pathname + location.search, to = inLang(now, l, new URLSearchParams(location.search).has('lang')); if (to !== now) history.replaceState(history.state, '', to + location.hash); } catch (e) {}
+  }
+  function syncHead(l) {
+    const head = document.head, alt = head.querySelector(`link[rel="alternate"][hreflang="${l === 'ar' ? 'ar' : 'en'}"]`);
+    let can = head.querySelector('link[rel="canonical"]'), og = head.querySelector('meta[property="og:url"]');
+    if (!alt) { can?.remove(); og?.remove(); return; }
+    const url = alt.getAttribute('href');
+    if (!can) { can = document.createElement('link'); can.rel = 'canonical'; head.querySelector('link[rel="alternate"][hreflang]').before(can); }
+    if (can.getAttribute('href') !== url) can.setAttribute('href', url);
+    if (!og) {
+      og = document.createElement('meta'); og.setAttribute('property', 'og:url');
+      const at = head.querySelector('meta[property="og:site_name"], meta[property="og:type"]'); if (at) at.after(og); else head.append(og);
+    }
+    if (og.getAttribute('content') !== url) og.setAttribute('content', url);
+  }
+  // a link to one of the site's own pages carries the language; mail, phone, other sites, #places on this page, files
+  // (images, PDFs, the sitemap), the admin and webmail are left as they are
+  function ownPage(a) {
+    const h = a.getAttribute('href');
+    if (!h || h[0] === '#' || a.id === 'langBtn' || a.hasAttribute('download') || a.hasAttribute('data-lang-keep')) return null;
+    let u; try { u = new URL(h, location.href); } catch (e) { return null; }
+    if ((u.protocol !== 'https:' && u.protocol !== 'http:') || !OWN_HOSTS.has(u.host)) return null;
+    const seg = u.pathname.split('/'), last = seg[seg.length - 1];
+    if (seg.includes('admin') || seg[1] === 'webmail' || seg[1] === 'assets' || (/\.\w+$/.test(last) && !/\.html?$/i.test(last))) return null;
+    return h;
+  }
+  function linkLang(a) { const h = ownPage(a); if (h == null) return; const to = inLang(h, M.lang); if (to !== h) a.setAttribute('href', to); }
+  const linksLang = () => { if (!cmsMode) $$('a[href]').forEach(linkLang); };
+  // in Arabic, links drawn later (work cards, a project's next link, a service's brief link) take lang=ar as they appear
+  const linkWatch = !cmsMode && 'MutationObserver' in window ? new MutationObserver(rs => {
+    for (const r of rs) {
+      if (r.type === 'attributes') { if (r.target.matches('a')) linkLang(r.target); }
+      else for (const n of r.addedNodes) if (n.nodeType === 1) { if (n.matches('a[href]')) linkLang(n); n.querySelectorAll('a[href]').forEach(linkLang); }
+    }
+  }) : null;
+  function watchLinks(on) {
+    if (!linkWatch) return;
+    linkWatch.disconnect();
+    if (on) linkWatch.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
+  }
+  // the switch is a link to this page in the other language (hreflang, and lang for its own word), so it works without
+  // this script and a new tab opens the other language; a plain click switches in place
+  function paintSwitch(l) {
+    const b = $('#langBtn'), to = l === 'ar' ? 'en' : 'ar'; if (!b) return;
+    b.textContent = to === 'ar' ? 'العربية' : 'English'; b.lang = to;
+    if (b.tagName === 'A') { b.setAttribute('hreflang', to); b.setAttribute('href', pageIn(to)); }
+  }
 
   function setLang(l) {
     M.lang = l; html.lang = l; html.dir = l === 'ar' ? 'rtl' : 'ltr';
+    syncUrl(l); // first, so the page hooks read the address of the language they draw
     $$('[data-i18n]').forEach(el => { const v = pick(el.dataset.i18n, l); if (v == null) return; const h = view(v); if (el.innerHTML !== h) el.innerHTML = h; }); // words already showing are left alone
     $$('[data-i18n-aria]').forEach(el => { const v = pick(el.dataset.i18nAria, l); if (v != null) el.setAttribute('aria-label', textOf(v)); });
     $$('[data-i18n-alt]').forEach(el => { const v = pick(el.dataset.i18nAlt, l); if (v != null) el.setAttribute('alt', textOf(v)); });
     // links to the studio's email outside the copy (contact details, legal pages)
     $$('a[data-cms="studio.email"]').forEach(a => { a.href = 'mailto:' + STUDIO.email; a.textContent = STUDIO.email; a.dir = 'ltr'; });
-    const b = $('#langBtn'); if (b) { b.textContent = l === 'ar' ? 'English' : 'العربية'; b.lang = l === 'ar' ? 'en' : 'ar'; }
+    paintSwitch(l);
     const t = window.PAGE_TITLE; if (t) document.title = t[l] || t.en;
     // before the page hooks, so a page can still write its own (project.html: MIRAS.meta(line) in its onLang hook)
     if (META) { const v = pick('meta.d', l); if (v != null) META.setAttribute('content', textOf(v)); }
-    if (!cmsMode) try { localStorage.setItem('miras-lang', l); } catch (e) {}
     paintConsent();
     hooks.forEach(fn => fn(l));
     syncShare(l);
+    // after the page hooks: project.html writes its address pair there, and the hooks draw cards and links
+    syncHead(l); linksLang(); watchLinks(l === 'ar');
     $$('[data-settle].settle').forEach(el => { el.classList.remove('settle'); settle(el); });
     showUploads();
     // motifs re-read direction, words and colours
@@ -392,14 +481,18 @@
     }
   }
   // the social cards follow the page: their title and description are the words the page has now (<title> and the
-  // description), and og:locale names the language. Crawlers that do not run scripts still read the static tags
+  // description), og:locale names the language (ar_AR is the Arabic locale Facebook knows), and the share image's alt
+  // text is in the language shown (English from the static tag). Crawlers that do not run scripts read the static tags
+  const SHARE_ALT = { en: document.head.querySelector('meta[property="og:image:alt"]')?.getAttribute('content') || '', ar: 'شعار ميراس، وبجانبه ميرا تركب موجة أمام شمس برتقالية.' };
   function syncShare(l) {
     const put = (sel, v) => { const m = document.head.querySelector(sel); if (m && v != null && v !== '') m.setAttribute('content', String(v)); };
     const title = document.title, desc = META ? META.getAttribute('content') : '';
     put('meta[property="og:title"]', title); put('meta[name="twitter:title"]', title);
     put('meta[property="og:description"]', desc); put('meta[name="twitter:description"]', desc);
-    put('meta[property="og:locale"]', l === 'ar' ? 'ar_QA' : 'en_GB');
-    put('meta[property="og:locale:alternate"]', l === 'ar' ? 'en_GB' : 'ar_QA');
+    put('meta[property="og:locale"]', l === 'ar' ? 'ar_AR' : 'en_GB');
+    put('meta[property="og:locale:alternate"]', l === 'ar' ? 'en_GB' : 'ar_AR');
+    const alt = SHARE_ALT[l === 'ar' ? 'ar' : 'en'];
+    put('meta[property="og:image:alt"]', alt); put('meta[name="twitter:image:alt"]', alt);
   }
   // a switch keeps the reader's place: the words nearest a third of the way down the screen stay where they were.
   // The page redraws its words in place, so the browser's own scroll anchoring does not hold them.
@@ -431,11 +524,48 @@
     requestAnimationFrame(tick);
     document.fonts?.ready?.then(() => { if (on) keep(); }, () => {});
   }
-  $('#langBtn')?.addEventListener('click', () => {
-    const l = M.lang === 'ar' ? 'en' : 'ar'; const keep = keepPlace(); render(l); keep(); holdPlace(keep);
-    // a shareable address: ?lang=ar (or lang=en when the address already said which)
-    if (!cmsMode) try { const u = new URL(location.href); if (l === 'ar' || u.searchParams.has('lang')) { u.searchParams.set('lang', l); history.replaceState(history.state, '', u); } } catch (e) {}
-  });
+  // the visitor picks a language (the switch, the Arabic hint): it is remembered ('miras-lang') and the page redraws in
+  // place; the address follows (setLang), so it can be shared as it is
+  function chooseLang(l) { const keep = keepPlace(); saveLang(l); render(l); keep(); holdPlace(keep); dropHint(); }
+  // a link that switches in place on a plain click; with a modifier key (or the middle button) the browser opens its address
+  function switchLink(a, to) {
+    const link = a.tagName === 'A', fresh = () => { if (link) a.setAttribute('href', pageIn(to())); };
+    a.addEventListener('pointerdown', fresh);
+    a.addEventListener('click', e => {
+      fresh();
+      if (link && (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+      e.preventDefault(); chooseLang(to());
+    });
+  }
+  const langBtn = $('#langBtn');
+  if (langBtn) switchLink(langBtn, () => M.lang === 'ar' ? 'en' : 'ar');
+
+  /* ---- the Arabic hint: a browser set to Arabic, on the English site, with no language in the address and none chosen
+     before, gets a thin bar offering the Arabic site. It never switches by itself; «إخفاء» hides it for good
+     ('miras-ar-hint'). It exists only for those browsers, so nobody else's page changes. ---- */
+  let arHint = null;
+  function dropHint() {
+    if (!arHint) return;
+    const m = document.getElementById('main') || $('main');
+    if (m && arHint.contains(document.activeElement)) { if (!m.hasAttribute('tabindex')) m.tabIndex = -1; m.focus({ preventScroll: true }); }
+    arHint.remove(); arHint = null;
+  }
+  function offerArabic(saved) {
+    if (cmsMode || arHint || M.lang !== 'en' || Q.has('lang') || saved === 'ar' || saved === 'en') return;
+    let first = '', off = null;
+    try { first = String((navigator.languages && navigator.languages[0]) || navigator.language || ''); } catch (e) {}
+    if (!/^ar(?:-|_|$)/i.test(first)) return;
+    try { off = localStorage.getItem('miras-ar-hint'); } catch (e) {}
+    if (off) return;
+    const bar = arHint = document.createElement('div');
+    bar.className = 'ar-hint'; bar.id = 'arHint'; bar.lang = 'ar'; bar.dir = 'rtl';
+    bar.setAttribute('role', 'region'); bar.setAttribute('aria-labelledby', 'arHintText');
+    bar.innerHTML = '<p id="arHintText">هذا الموقع متوفّر بالعربية.</p><a hreflang="ar" data-lang-keep>تصفّح بالعربية</a><button type="button">إخفاء</button>';
+    const a = bar.querySelector('a'); a.setAttribute('href', pageIn('ar'));
+    switchLink(a, () => 'ar');
+    bar.querySelector('button').addEventListener('click', () => { try { localStorage.setItem('miras-ar-hint', '1'); } catch (e) {} dropHint(); });
+    document.body.append(bar);
+  }
 
   /* ================= studio hours (studio.open/close/days/timezone, special days in studio.exceptions) ================= */
   const WD = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
@@ -655,16 +785,21 @@ html.cms-inspect [data-i18n]:hover,html.cms-inspect [data-cms]:hover{outline:2px
       mnav.append(foot);
     }
   }
-  // the four discipline pages, one tap from anywhere: an indented list under Services in the phone menu and a
-  // hover/focus flyout under Services on desktop (the words are shared keys, so the language switch translates them)
+  // the service pages, one tap from anywhere: an indented list under Services in the phone menu and a hover/focus flyout
+  // under Services on desktop (the words are shared keys, so the language switch translates them). Services itself opens
+  // services.html. The four single-service pages come first, websites and SEO leading (.nav-p), then the four disciplines
+  // (.nav-g; Digital is the monthly umbrella over the first four). [file, key]; data-page is the file's name
+  const SERVICE_PAGES = [['websites', 's.websites'], ['seo', 's.seo'], ['social-media', 's.social'], ['advertising', 's.ads']];
+  const DISCS = [['strategy', 's.strategy'], ['branding', 's.branding'], ['content', 's.content'], ['digital', 's.digital']];
+  M.servicePages = [...SERVICE_PAGES, ...DISCS].map(([page, key]) => ({ page, file: page + '.html', key }));
   (() => {
-    const DISCS = ['strategy', 'branding', 'content', 'digital'];
-    const links = () => DISCS.map(k => {
+    const link = cls => ([k, key]) => {
       const a = document.createElement('a'), svc = $('.nav-links a[data-i18n="n.services"], #mnav a[data-i18n="n.services"]');
-      a.href = ((svc?.getAttribute('href') || '').startsWith('/') ? '/' : '') + k + '.html'; a.dataset.i18n = 's.' + k; a.textContent = SHARED_EN['s.' + k];
+      a.href = ((svc?.getAttribute('href') || '').startsWith('/') ? '/' : '') + k + '.html'; a.dataset.i18n = key; a.textContent = SHARED_EN[key]; a.className = cls;
       if (PAGE === k) a.setAttribute('aria-current', 'page');
       return a;
-    });
+    };
+    const links = () => [...SERVICE_PAGES.map(link('nav-p')), ...DISCS.map(link('nav-g'))];
     const ms = $('#mnav a[data-i18n="n.services"]');
     if (ms && !$('#mnav .mnav-sub')) { const sub = document.createElement('div'); sub.className = 'mnav-sub'; sub.append(...links()); ms.after(sub); }
     const ds = $('.nav-links a[data-i18n="n.services"]');
@@ -707,14 +842,19 @@ html.cms-inspect [data-i18n]:hover,html.cms-inspect [data-cms]:hover{outline:2px
   try { askConsent(); } catch (e) {}
   let saved = null; try { saved = localStorage.getItem('miras-lang'); } catch (e) {}
   const asked = Q.get('lang');
+  // an address that names its language is the visitor's choice (a link from the Arabic site, a shared ?lang=ar), so it is
+  // remembered; English shown only because nothing was chosen is not, so the Arabic hint can still be offered later
+  if (asked === 'ar' || asked === 'en') saveLang(asked);
   // a content problem never stops the page: drawing falls back to the defaults, and the admin always hears 'miras:ready'
   // (once the page's own scripts have run, so its first 'miras:content' redraws them too)
   // an Arabic visit is laid out right to left from its first paint (the head script in every page sets lang, dir and
   // html.pre-lang); its nav, main and footer stay hidden until the words are in, including those the page's own script
   // writes after this one, so the page is shown once, already in Arabic (site.css: html.pre-lang)
-  const reveal = () => { announce(); html.classList.remove('pre-lang'); };
+  // The canonical, og:url and the links are written once more then too, for what the page's own script drew.
+  const reveal = () => { announce(); html.classList.remove('pre-lang'); try { syncHead(M.lang); linksLang(); } catch (e) {} };
   try { render(asked === 'ar' || asked === 'en' ? asked : saved === 'ar' ? 'ar' : 'en'); }
   finally { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal, { once: true }); else reveal(); }
+  try { offerArabic(saved); } catch (e) {}
   $$('[data-settle]').forEach(settle);
   watch();
   wake();
