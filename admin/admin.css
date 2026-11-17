@@ -52,7 +52,7 @@
   /* geometry (set by data-corners / data-density) */
   --r1:6px; --r2:10px; --r3:16px; --r4:22px;
   --pad:22px; --gap:16px; --row:44px; --ctl:36px;
-  --side-w:252px; --top-h:60px;
+  --side-w:252px; --bar-h:60px; --strip-h:46px; --top-h:var(--bar-h); /* --bar-h: the top bar; --top-h: where the page starts (the bar, plus the hub tab strip when there is one) */
   --ease:cubic-bezier(.2,.7,.2,1);
   --fs:14px; --fs-min:max(12px,.86rem);
 }
@@ -83,7 +83,9 @@ html[data-theme=dark][data-accent=foam]{--accent:var(--foam);--accent-ink:var(--
 html[data-theme=dark][data-accent=deep]{--accent:var(--shore);--accent-ink:var(--deep);--accent-text:var(--shore)}
 html[data-corners=sharp]{--r1:2px;--r2:4px;--r3:6px;--r4:8px}
 html[data-corners=round]{--r1:9px;--r2:14px;--r3:22px;--r4:30px}
-html[data-density=compact]{--pad:15px;--gap:11px;--row:36px;--ctl:31px;--top-h:52px}
+html[data-density=compact]{--pad:15px;--gap:11px;--row:36px;--ctl:31px;--bar-h:52px;--strip-h:42px}
+/* Simple view, on a page inside a hub: the tab strip sits under the top bar, so pages that size themselves from --top-h start below it */
+html[data-hub]{--top-h:calc(var(--bar-h) + var(--strip-h))}
 html[data-scale=s]{--fs:13px} html[data-scale=l]{--fs:15.5px}
 html[data-sidebar=collapsed]{--side-w:68px}
 
@@ -153,7 +155,7 @@ html[dir=rtl] .i.flip{transform:scaleX(-1)}
 .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;background:var(--side-bg);color:var(--side-ink);overflow:hidden;z-index:30}
 html[data-theme=dark] .side{box-shadow:inset -1px 0 0 rgba(242,234,219,.14)}
 html[data-theme=dark][dir=rtl] .side{box-shadow:inset 1px 0 0 rgba(242,234,219,.14)}
-.side-top{display:flex;align-items:center;gap:10px;height:var(--top-h);padding-inline:18px 10px;flex:none}
+.side-top{display:flex;align-items:center;gap:10px;height:var(--bar-h);padding-inline:18px 10px;flex:none}
 .brandmark{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
 .brandmark .mono-mask{width:32px;aspect-ratio:943/727;background:currentColor;-webkit-mask:url(img/monogram.png) center/contain no-repeat;mask:url(img/monogram.png) center/contain no-repeat;flex:none}
 .brandmark .word{display:flex;flex-direction:column;line-height:1.05;min-width:0}
@@ -213,10 +215,63 @@ html[data-sidebar=collapsed] .nav-item[data-badge]::after{content:"";position:ab
 html[data-sidebar=collapsed] .nav-item[aria-current=page][data-badge]::after{background:var(--side-bg);box-shadow:none}
 html[data-sidebar=collapsed] .me{justify-content:center}
 
+/* ---------- Simple view: the More group, the view switch, the hub tab strip (core.js, "Simple and Full view") ---------- */
+/* More is a disclosure row. Its pages keep the colour of their own category (data-cat), so a page you open there lights up as it would in Full view. */
+.nav-more{--g:var(--shore);margin-top:14px;padding-top:10px;border-top:1px solid var(--side-line)}
+.nav-more-list{display:flex;flex-direction:column;margin-top:2px;animation:morein .2s var(--ease) both}
+@keyframes morein{from{opacity:0;transform:translateY(-4px)}}
+.nav-more-list .nav-item[data-cat=work]{--g:var(--tide60)}
+.nav-more-list .nav-item[data-cat=clients]{--g:var(--flare)}
+.nav-more-list .nav-item[data-cat=site]{--g:var(--foam)}
+.nav-more-list .nav-item[data-cat=system]{--g:var(--shore)}
+.nav-more-list .nav-item:not([aria-current=page]) .i{color:var(--g);opacity:1}
+.more-toggle{position:relative;display:flex;align-items:center;gap:11px;width:100%;height:40px;padding-inline:10px;border-radius:var(--r2);color:var(--side-ink2);font-weight:500;font-size:1rem;text-align:start;white-space:nowrap;transition:background-color .15s,color .15s}
+@media (pointer:coarse){.more-toggle{height:44px}}
+.more-toggle:hover{background:var(--side-hover);color:var(--side-ink)}
+.more-toggle[aria-expanded=true]{color:var(--side-ink)}
+.more-toggle > .i{opacity:.9;width:16px;height:16px}
+.more-toggle .name{flex:1;overflow:hidden;text-overflow:ellipsis}
+.more-toggle .tail{display:contents}
+/* a dot (not a number): something inside has a count while More is closed */
+.more-pip{flex:none;width:8px;height:8px;border-radius:50%;background:var(--side-ink);box-shadow:0 0 0 2px var(--side-bg)}
+/* the chevron points inline-end when closed (mirrored in RTL) and down when open */
+.more-toggle .chev{flex:none;width:14px;height:14px;opacity:.85;transition:transform .2s var(--ease)}
+html[dir=rtl] .more-toggle .chev{transform:scaleX(-1)}
+.more-toggle[aria-expanded=true] .chev{transform:rotate(90deg)}
+html[dir=rtl] .more-toggle[aria-expanded=true] .chev{transform:scaleX(-1) rotate(90deg)}
+html[data-sidebar=collapsed] .more-toggle{justify-content:center;padding:0}
+html[data-sidebar=collapsed] .more-toggle .name,html[data-sidebar=collapsed] .more-toggle .tail,html[data-sidebar=collapsed] .more-toggle .chev{display:none}
+html[data-sidebar=collapsed] .more-toggle[data-badge]::after{content:"";position:absolute;top:8px;inset-inline-end:12px;width:7px;height:7px;border-radius:50%;background:var(--side-ink);box-shadow:0 0 0 2px var(--side-bg)}
+/* the Simple | Full switch: two options with icons and words; one icon button when the sidebar shows icons only */
+.mode-switch{margin-bottom:8px}
+.mode-switch .seg{display:flex;width:100%;background:rgba(242,234,219,.1);box-shadow:inset 0 0 0 1px var(--side-line)}
+.mode-switch .seg button{flex:1;justify-content:center;height:30px;color:var(--side-ink2)}
+.mode-switch .seg button:hover{color:var(--side-ink)}
+.mode-switch .seg button[aria-pressed=true]{background:var(--side-ink);color:var(--on-fill);box-shadow:none}
+.mode-switch .mode-btn{display:none;margin-inline:auto;color:var(--side-ink2)}
+.mode-switch .mode-btn:hover{background:var(--side-hover);color:var(--side-ink)}
+html[data-sidebar=collapsed] .mode-switch .seg{display:none}
+html[data-sidebar=collapsed] .mode-switch .mode-btn{display:grid}
+/* the hub tab strip: links to the pages of the hub you are in, under the top bar and outside the page (so the page keeps its height).
+   It scrolls sideways inside itself when the tabs don't fit, with a soft edge on the side that has more. */
+.hub-strip{--ms:0px;--me:0px;--tc:var(--foam);position:sticky;top:var(--bar-h);z-index:24;flex:none;height:var(--strip-h);display:flex;align-items:center;gap:6px;padding-inline:var(--pad);background:var(--bg);border-bottom:1px solid var(--line2);overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--ms),#000 calc(100% - var(--me)),transparent);mask-image:linear-gradient(to right,transparent,#000 var(--ms),#000 calc(100% - var(--me)),transparent)}
+html[dir=rtl] .hub-strip{-webkit-mask-image:linear-gradient(to left,transparent,#000 var(--ms),#000 calc(100% - var(--me)),transparent);mask-image:linear-gradient(to left,transparent,#000 var(--ms),#000 calc(100% - var(--me)),transparent)}
+.hub-strip::-webkit-scrollbar{display:none}
+.hub-strip[data-fade-start="1"]{--ms:28px} .hub-strip[data-fade-end="1"]{--me:28px}
+.hub-tab{flex:none;display:inline-flex;align-items:center;gap:8px;height:34px;padding-inline:4px 14px;border-radius:999px;color:var(--ink2);font-weight:500;font-size:.95rem;text-decoration:none;white-space:nowrap;transition:background-color .15s,color .15s}
+.hub-tab:hover{background:var(--hover);color:var(--ink)}
+.hub-tab .tab-ic{display:grid;place-items:center;width:26px;height:26px;border-radius:999px;background:var(--tc);color:var(--deep)}
+.hub-tab[aria-current=page]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.hub-tab[aria-current=page]:hover{background:color-mix(in srgb,var(--accent) 84%,var(--deep));color:var(--accent-ink)}
+/* touch: 40px targets (the strip grows to 52px); compact density keeps them smaller, and its own --strip-h wins */
+@media (pointer:coarse){:root{--strip-h:52px}.hub-tab{height:40px}.mode-switch .seg button{height:40px}}
+html[data-density=compact] .hub-tab{height:30px}
+
 /* main */
 .main{min-width:0;display:flex;flex-direction:column}
 /* the top bar is solid and carries a Tide rule under it (Tide60 in dark), so the header never blends into the page */
-.top{position:sticky;top:0;z-index:25;height:var(--top-h);display:flex;align-items:center;gap:10px;padding-inline:var(--pad);background:var(--bg);border-bottom:2px solid var(--accent-text);transition:border-color .2s}
+.top{position:sticky;top:0;z-index:25;height:var(--bar-h);display:flex;align-items:center;gap:10px;padding-inline:var(--pad);background:var(--bg);border-bottom:2px solid var(--accent-text);transition:border-color .2s}
 .top.scrolled{border-bottom-color:var(--accent-text)}
 .crumbs{display:flex;align-items:center;gap:8px;min-width:0;font-weight:500;color:var(--ink2)}
 .crumbs a{text-decoration:none} .crumbs a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
@@ -256,10 +311,12 @@ html[data-sidebar=collapsed] .me{justify-content:center}
 /* primary: the accent (Tide, white text: 7:1). Hover goes one step deeper in both themes */
 .btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:none}
 .btn.primary:hover{background:color-mix(in srgb,var(--accent) 84%,var(--deep))}
-/* Publish is always Tide with white text, whatever the accent preset */
+/* Publish is filled Tide with white text, whatever the accent preset, only while something waits to be published (core.js adds .primary then) */
 #publishBtn.btn.primary{background:var(--tide);color:#FFFFFF}
 #publishBtn.btn.primary:hover{background:color-mix(in srgb,var(--tide) 84%,var(--deep))}
-/* nothing to publish yet: still Tide, only a little lighter, so the button stays the one that matters */
+/* everything is published: a quiet outline (still there, still opens the dialog) so the filled button means "something to do" */
+#publishBtn.btn:not(.primary){background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--field-line)}
+#publishBtn.btn:not(.primary):hover{background:var(--hover);box-shadow:inset 0 0 0 1.5px var(--ink2)}
 #publishBtn.btn.primary[disabled]{opacity:.6}
 .btn.flare{background:var(--flare);color:var(--deep);box-shadow:none}
 .btn.flare:hover{background:color-mix(in srgb,var(--flare) 90%,var(--deep))}
@@ -486,7 +543,7 @@ html[data-theme=dark] .bulkbar{background:var(--shore);color:var(--deep)}
 .drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:61;width:min(var(--dw,520px),100vw);display:flex;flex-direction:column;background:var(--panel);box-shadow:var(--shadow3);animation:drawerin .3s var(--ease) both}
 html[dir=rtl] .drawer{animation-name:drawerin-rtl}
 @keyframes drawerin{from{transform:translateX(30px);opacity:0}} @keyframes drawerin-rtl{from{transform:translateX(-30px);opacity:0}}
-.drawer-head{display:flex;align-items:center;gap:10px;height:var(--top-h);padding-inline:20px 12px;border-bottom:1px solid var(--line);flex:none}
+.drawer-head{display:flex;align-items:center;gap:10px;height:var(--bar-h);padding-inline:20px 12px;border-bottom:1px solid var(--line);flex:none}
 .drawer-head .h3{flex:1}
 .drawer-body{flex:1;overflow:auto;padding:20px}
 .drawer-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 20px;border-top:1px solid var(--line);background:var(--panel2)}
@@ -529,7 +586,7 @@ html[data-theme=dark] .toast{background:var(--shore);color:var(--deep)}
 [data-tip-pos=end]:hover::after{bottom:auto;top:50%;left:calc(100% + 10px);transform:translateY(-50%)}
 html[dir=rtl] [data-tip-pos=end]:hover::after{left:auto;right:calc(100% + 10px)}
 html[data-theme=dark] [data-tip]:hover::after{background:var(--shore);color:var(--deep)}
-html[data-sidebar=expanded] .nav-item[data-tip]:hover::after,html:not([data-sidebar=collapsed]) .nav-item[data-tip]:hover::after{display:none}
+html[data-sidebar=expanded] .nav-item[data-tip]:hover::after,html:not([data-sidebar=collapsed]) .nav-item[data-tip]:hover::after,html:not([data-sidebar=collapsed]) .more-toggle[data-tip]:hover::after{display:none}
 
 /* =====================================================================
    CONTENT FIELDS (MA.form) — bilingual editing
@@ -636,7 +693,12 @@ html[data-theme=dark] .chart-tip{background:var(--shore);color:var(--deep)}
   .side{position:fixed;inset-block:0;inset-inline-start:0;width:272px;transform:translateX(-100%);transition:transform .28s var(--ease);z-index:65;box-shadow:var(--shadow3)}
   html[dir=rtl] .side{transform:translateX(100%)}
   html.nav-open .side{transform:none}
-  html.nav-open .side .word,html.nav-open .nav-item .name,html.nav-open .nav-group > .label,html.nav-open .side .me .who{display:revert}
+  html.nav-open .side .word,html.nav-open .nav-item .name,html.nav-open .nav-group > .label,html.nav-open .side .me .who,html.nav-open .more-toggle .name,html.nav-open .more-toggle .chev{display:revert}
+  html.nav-open .more-toggle .tail{display:contents}
+  html.nav-open .more-toggle{justify-content:flex-start;padding-inline:10px}
+  html.nav-open .more-toggle[data-badge]::after{display:none}
+  html.nav-open .mode-switch .seg{display:flex} html.nav-open .mode-switch .mode-btn{display:none}
+  .hub-strip{padding-inline:12px}
   .mob-only{display:inline-grid}
   .search-btn{min-width:0} .search-btn span,.search-btn kbd{display:none}
   .status-pill .txt{display:none}
@@ -644,7 +706,7 @@ html[data-theme=dark] .chart-tip{background:var(--shore);color:var(--deep)}
   .top{padding-inline:12px}
   .h1{font-size:2rem}
 }
-@media print{.side,.top{display:none}.app{display:block}}
+@media print{.side,.top,.hub-strip{display:none}.app{display:block}}
 
 /* tide-line status mark */
 .tl{width:18px;height:6px;flex:none;fill:none;stroke-width:1.8;stroke-linecap:round;overflow:visible}

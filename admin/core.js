@@ -190,6 +190,8 @@
     lang: 'en', home: 'overview', navOrder: [], navHidden: [], ambient: true, langLayout: 'side', previewLang: 'en', previewDevice: 'desktop',
     sampleData: new URLSearchParams(location.search).has('test'), viewAs: '', dateRange: '30d', me: '', digits: 'auto', calendar: 'gregory', // real numbers only; the demo data (Customize › Sample data) is opt-in
     singleKeys: true, keymap: {}, previewPanes: {}, // keyboard: bare-key shortcuts on/off and remapped combos {default → yours}; previewPane open/width per page
+    // sidebar view: 'simple' keeps the rest under More and folds six pages into two hubs; 'full' lists every page. The test harness (?test=) keeps 'full', which its suites assume.
+    mode: new URLSearchParams(location.search).has('test') ? 'full' : 'simple', moreOpen: false, hubLast: {}, // moreOpen: the More group stays open; hubLast: { hub id → the page last visited inside it }
   };
   let prefs = Object.assign({}, PREF_DEFAULTS, MA.db.get('prefs', {}));
   // The dashboard used to open with invented traffic, briefs and team. Real numbers only now: once per browser the sample data is switched off
@@ -211,7 +213,7 @@
     const d = document.documentElement;
     d.dataset.theme = MA.isDark() ? 'dark' : 'light';
     d.dataset.accent = prefs.accent; d.dataset.density = prefs.density; d.dataset.scale = prefs.scale; d.dataset.corners = prefs.corners;
-    d.dataset.sidebar = prefs.sidebar; d.dataset.motion = prefs.motion; d.dataset.layoutLangs = prefs.langLayout;
+    d.dataset.sidebar = prefs.sidebar; d.dataset.motion = prefs.motion; d.dataset.layoutLangs = prefs.langLayout; d.dataset.mode = prefs.mode === 'full' ? 'full' : 'simple';
     if (d.lang !== prefs.lang) { d.lang = prefs.lang; d.dir = MA.isRTL() ? 'rtl' : 'ltr'; }
     $('meta[name=theme-color]')?.setAttribute('content', MA.isDark() ? '#0C0F2C' : '#F4F0E7');
     if (prefs.lang === 'fa') loadPersianFont();
@@ -571,12 +573,13 @@
   /* ================= permissions ================= */
   MA.ROLES = {
     owner: ['*'],
-    admin: ['content.edit', 'content.publish', 'leads.view', 'leads.edit', 'analytics.view', 'media.edit', 'settings.edit', 'team.manage'],
-    editor: ['content.edit', 'media.edit', 'analytics.view', 'leads.view'],
+    admin: ['content.edit', 'content.publish', 'leads.view', 'leads.edit', 'analytics.view', 'media.edit', 'settings.edit', 'team.manage', 'plan.edit'],
+    editor: ['content.edit', 'media.edit', 'analytics.view', 'leads.view', 'plan.edit'],
     sales: ['leads.view', 'leads.edit', 'analytics.view'],
     viewer: ['leads.view', 'analytics.view'],
   };
-  MA.PERMS = ['content.edit', 'content.publish', 'leads.view', 'leads.edit', 'analytics.view', 'media.edit', 'settings.edit', 'team.manage'];
+  // plan.edit: add, move and change any Plan item. Without it, people see the whole plan and change only status and notes of items assigned to them (modules/plan.js).
+  MA.PERMS = ['content.edit', 'content.publish', 'leads.view', 'leads.edit', 'analytics.view', 'media.edit', 'settings.edit', 'team.manage', 'plan.edit'];
   MA.role = () => prefs.viewAs || MA.team?.me?.()?.role || 'owner';
   MA.can = perm => { if (!perm) return true; const p = MA.ROLES[MA.role()] || []; return p.includes('*') || p.includes(perm); };
 
@@ -1838,8 +1841,8 @@
     /** Which site section a text key belongs to (by prefix). Unknown prefixes become their own group. */
     groupOf(key) {
       const pre = String(key).split('.')[0];
-      // a11y.* (the skip link) is a screen-reader/keyboard label, so it sits with the aria labels; bp.* (the brief card) is in the contact section
-      const G = { nav: 'nav', cta: 'nav', aria: 'aria', a11y: 'aria', h: 'top', jg: 'top', hero: 'swells', plan: 'plan', wk: 'work', mk: 'make', hr: 'why', st: 'studio', q: 'faq', c: 'contact', f: 'contact', bp: 'contact', ft: 'foot', tag: 'tag', cons: 'cons' };
+      // a11y.* (the skip link) is a screen-reader/keyboard label, so it sits with the aria labels; brand.* (the logo link's hidden name) too; bp.* (the brief card) is in the contact section
+      const G = { nav: 'nav', cta: 'nav', aria: 'aria', a11y: 'aria', brand: 'aria', h: 'top', jg: 'top', hero: 'swells', plan: 'plan', wk: 'work', mk: 'make', hr: 'why', st: 'studio', q: 'faq', c: 'contact', f: 'contact', bp: 'contact', ft: 'foot', tag: 'tag', cons: 'cons' };
       if (/^j\d+$/.test(pre)) return 'top';
       return G[pre] || pre;
     },
@@ -2367,7 +2370,7 @@
         MA.h('a.brandmark', { href: '#/overview', 'aria-label': 'MIRAS' }, MA.h('span.mono-mask'), MA.h('span.word', MA.h('b', 'MIRAS'), MA.h('span', MA.L({ en: 'Studio admin', ar: 'استوديو الإدارة', fa: 'پنل استودیو' })))),
         MA.h('button.collapse', { type: 'button', 'aria-label': MA.t(prefs.sidebar === 'collapsed' ? 'expand' : 'collapse'), 'aria-expanded': String(prefs.sidebar !== 'collapsed'), 'data-tip': MA.t(prefs.sidebar === 'collapsed' ? 'expand' : 'collapse'), 'data-tip-pos': 'end', html: MA.icon('sidebar'), onclick: toggleSidebar })),
       MA.h('nav.side-scroll#nav', { 'aria-label': MA.t('menu') }),
-      MA.h('div.side-foot', MA.h('div.side-sea', { 'aria-hidden': 'true' }, MA.h('canvas.sea#sideSea', { style: 'color:var(--tide60)' })), MA.h('button.me#meBtn', { type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false' })));
+      MA.h('div.side-foot', MA.h('div.side-sea', { 'aria-hidden': 'true' }, MA.h('canvas.sea#sideSea', { style: 'color:var(--tide60)' })), modeSwitch(), MA.h('button.me#meBtn', { type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false' })));
     const top = MA.h('header.top#top',
       MA.h('button.icon-btn.mob-only', { type: 'button', 'aria-label': MA.t('menu'), html: MA.icon('list'), onclick: () => document.documentElement.classList.toggle('nav-open') }),
       MA.h('nav.crumbs#crumbs', { 'aria-label': MA.L({ en: 'Breadcrumb', ar: 'مسار التنقل', fa: 'مسیر صفحه' }) }), MA.h('div.spacer'),
@@ -2376,7 +2379,8 @@
       ui.iconBtn('eye', { tip: MA.t('previewSite'), tipPos: 'bottom', onclick: () => MA.preview.toggle() }),
       MA.h('button.icon-btn#bellBtn', { type: 'button', 'aria-label': MA.t('notifications'), 'aria-haspopup': 'dialog', 'data-tip': MA.t('notifications'), 'data-tip-pos': 'bottom', html: MA.icon('bell'), onclick: e => openBell(e.currentTarget) }),
       ui.iconBtn('sliders', { tip: MA.t('customize'), tipPos: 'bottom', onclick: () => MA.customize() }),
-      MA.h('button.btn.primary#publishBtn', { type: 'button', 'aria-keyshortcuts': MA.keys.aria(MA.keys.effective('shift+mod+p')), onclick: () => openPublish(), html: `${MA.icon('publish')}<span>${MA.t('publish')}</span>` }));
+      // filled (primary) only while there is something to publish; a quiet outline otherwise (updateStatus decides)
+      MA.h('button.btn#publishBtn', { type: 'button', 'aria-label': MA.t('publish'), 'aria-keyshortcuts': MA.keys.aria(MA.keys.effective('shift+mod+p')), onclick: () => openPublish(), html: `${MA.icon('publish')}<span>${MA.t('publish')}</span>` }));
     const main = MA.h('div.main', MA.h('div#ribbon'), top, MA.h('main.view#view', { tabindex: '-1' }));
     app.append(skip, MA.h('div.app', side, main));
     navSig = ''; renderNav(); renderMe(); updateStatus(); updateBell(); renderRibbon();
@@ -2396,55 +2400,205 @@
     return [...MODS].sort((a, b) => { const ia = order.indexOf(a.id), ib = order.indexOf(b.id); return (ia < 0 ? 999 + (a.order ?? 50) : ia) - (ib < 0 ? 999 + (b.order ?? 50) : ib); });
   }
   MA.orderedModules = orderedMods;
-  /* The sidebar is rebuilt only when its structure changes (order, hidden pages, language, roles); badge refreshes update the
+
+  /* ---- Simple and Full view ----
+     Full is the whole sidebar, one link per page. Simple shows Workspace (Overview, Inbox), Clients, Website (Pages & copy and the
+     hub "Website content") and a closed "More" group (Analytics, the hub "Site look & search", Settings, Team, History).
+     A hub is ONE sidebar link that stands for several pages. The pages themselves, their routes (#/services…), shortcuts (g w…),
+     search and palette entries are untouched: a hub only changes what the sidebar draws, and adds a tab strip under the top bar. */
+  MA.i18n.add({
+    en: { 'mode.label': 'View', 'mode.simple': 'Simple', 'mode.full': 'Full', 'mode.toSimple': 'Switch to Simple view', 'mode.toFull': 'Switch to Full view', 'mode.simpleOn': 'Simple view. The rest is under More.', 'mode.fullOn': 'Full view. Every page is in the sidebar.', 'cz.modeHint': 'Simple keeps the rest under More.' },
+    ar: { 'mode.label': 'طريقة العرض', 'mode.simple': 'بسيط', 'mode.full': 'كامل', 'mode.toSimple': 'التبديل إلى العرض البسيط', 'mode.toFull': 'التبديل إلى العرض الكامل', 'mode.simpleOn': 'العرض البسيط. الباقي تحت «المزيد».', 'mode.fullOn': 'العرض الكامل. كل الصفحات في الشريط الجانبي.', 'cz.modeHint': 'العرض البسيط يضع الباقي تحت «المزيد».' },
+    fa: { 'mode.label': 'حالت نمایش', 'mode.simple': 'ساده', 'mode.full': 'کامل', 'mode.toSimple': 'رفتن به نمای ساده', 'mode.toFull': 'رفتن به نمای کامل', 'mode.simpleOn': 'نمای ساده. بقیه زیر «بیشتر» است.', 'mode.fullOn': 'نمای کامل. همهٔ صفحه‌ها در نوار کناری هستند.', 'cz.modeHint': 'نمای ساده بقیه را زیر «بیشتر» می‌گذارد.' },
+  });
+  /** Hubs (Simple view only). members: page ids in tab order · group: the sidebar category it belongs to (and its colour) · more: sits under More. */
+  const HUBS = [
+    { id: 'content', members: ['services', 'process', 'faq'], group: 'site', more: false, icon: 'layers', title: { en: 'Website content', ar: 'محتوى الموقع', fa: 'محتوای وب‌سایت' } },
+    { id: 'look', members: ['brand', 'seo', 'media'], group: 'site', more: true, icon: 'sparkle', title: { en: 'Site look & search', ar: 'مظهر الموقع والبحث', fa: 'ظاهر و جستجوی سایت' } },
+  ];
+  const MORE_PAGES = ['analytics', 'settings', 'team', 'history']; // pages that move under More in Simple view (the hub "look" goes there too)
+  const mode = () => prefs.mode === 'full' ? 'full' : 'simple';
+  const modOf = id => MODS.find(m => m.id === id);
+  const hubOf = id => HUBS.find(h => h.members.includes(id)) || null;
+  const lockedMod = m => !!(m.perm && !MA.can(m.perm));
+  /** A hub's members in tab order: registered pages · shown (not hidden in Customize) · open (shown, and this role may open them). */
+  function hubMembers(hub) {
+    const all = hub.members.map(modOf).filter(Boolean), shown = all.filter(m => !prefs.navHidden.includes(m.id));
+    return { all, shown, open: shown.filter(m => !lockedMod(m)) };
+  }
+  /** Where a hub's sidebar link goes: the member last visited if it can still be opened, else the first one that can, else the first shown. */
+  function hubTarget(hub) {
+    const { shown, open } = hubMembers(hub), m = open.find(x => x.id === prefs.hubLast?.[hub.id]) || open[0] || shown[0];
+    return m ? '#/' + m.id : '#/overview';
+  }
+  /** UI-only state (More open, last page in a hub): saved with the preferences but without a 'prefs' event, so pages don't redraw for it. */
+  function quietPref(k, v) { if (MA.eq(prefs[k], v)) return; prefs[k] = v; MA.db.set('prefs', prefs); }
+
+  /* The sidebar is rebuilt only when its structure changes (order, hidden pages, language, roles, view); badge refreshes update the
      counts and names in place, so a focused link is never pulled out from under the keyboard. */
   let navSig = '';
   const badgeOf = m => { let b = null; try { b = m.badge?.(); } catch (e) {} if (b == null || b === false || b === 0 || b === '') return null; return typeof b === 'object' ? { n: b.n, quiet: !!b.quiet, label: b.label } : { n: b, quiet: false }; };
   const navName = (e, b, locked) => { const name = MA.L(e.title); if (locked) return MA.t('nav.locked', { name }); if (!b) return name; if (b.label) return `${name}, ${MA.strip(b.label)}`; const n = typeof b.n === 'number' ? b.n : /^\d+$/.test(String(b.n)) ? +b.n : null; return MA.t(b.quiet ? 'nav.badgeQuiet' : 'nav.badgeNew', n == null ? { name, n: b.n } : { name, n, count: n }); };
   /** The sidebar's links. A page is one link. A page that lists several (module.navItems()) gives one link per item, and each item
-   *  has its own match(ctx) for the current route, its own href and badge. Items share their page's permission and hide with it. */
+   *  has its own match(ctx) for the current route, its own href and badge. Items share their page's permission and hide with it.
+   *  Every entry also carries cat (its category, for the colour) and locked() (this role may not open it). */
   function navEntries(m) {
-    if (typeof m.navItems !== 'function') return [{ key: m.id, mod: m, title: m.title, icon: m.icon, href: '#/' + m.id, match: ctx => ctx.id === m.id, badge: () => m.badge?.() }];
+    const locked = () => lockedMod(m);
+    if (typeof m.navItems !== 'function') return [{ key: m.id, mod: m, title: m.title, icon: m.icon, href: '#/' + m.id, match: ctx => ctx.id === m.id, badge: () => m.badge?.(), cat: m.group, locked }];
     let items = []; try { items = m.navItems() || []; } catch (err) { console.error(err); }
-    return items.filter(it => it && it.href).map(it => ({ key: m.id + '/' + it.key, mod: m, title: it.title, icon: it.icon || m.icon, href: it.href, match: it.match, badge: () => it.badge?.() }));
+    return items.filter(it => it && it.href).map(it => ({ key: m.id + '/' + it.key, mod: m, title: it.title, icon: it.icon || m.icon, href: it.href, match: it.match, badge: () => it.badge?.(), cat: m.group, locked }));
+  }
+  /** A hub's one sidebar link. It is marked current on any member's route; its count adds up the members' counts. */
+  function hubEntry(hub) {
+    const mods = () => hubMembers(hub).shown;
+    return { key: 'hub:' + hub.id, hub, mod: mods()[0], title: hub.title, icon: hub.icon, cat: hub.group,
+      get href() { return hubTarget(hub); }, match: ctx => hub.members.includes(ctx.id), locked: () => !hubMembers(hub).open.length,
+      badge: () => { let n = 0, any = false, loud = false; for (const m of mods()) { const b = badgeOf(m); if (!b) continue; any = true; n += typeof b.n === 'number' ? b.n : /^\d+$/.test(String(b.n)) ? +b.n : 1; loud ||= !b.quiet; } return any ? { n, quiet: !loud } : null; } };
   }
   const navMatch = (e, ctx) => { try { return !!(e.match && e.match(ctx)); } catch (err) { return false; } };
+  /** The tooltip of a sidebar control. With icons only the styled tooltip is clipped by the sidebar's edge on hover, so the browser's own title carries the name there. */
+  const tipText = (el, text) => { el.dataset.tip = text; prefs.sidebar === 'collapsed' ? el.setAttribute('title', text) : el.removeAttribute('title'); };
   let navNow = [];   // the links as they are drawn, in order (markNav reads them)
   function paintNavItem(a, e) {
-    const b = badgeOf(e), locked = !!(e.mod.perm && !MA.can(e.mod.perm)), tail = a.querySelector('.tail');
-    a.setAttribute('aria-label', navName(e, b, locked)); a.dataset.tip = MA.L(e.title);
+    const b = badgeOf(e), locked = e.locked(), tail = a.querySelector('.tail'), href = e.href;
+    if (a.getAttribute('href') !== href) a.setAttribute('href', href); // a hub link follows the page last visited inside it
+    a.setAttribute('aria-label', navName(e, b, locked)); tipText(a, MA.L(e.title));
     b ? a.dataset.badge = '1' : delete a.dataset.badge;
     const html = locked ? MA.icon('lock', 'sm lock') : b ? `<span class="count${b.quiet ? ' quiet' : ''}" aria-hidden="true">${badgeText(b.n)}</span>` : '';
     if (tail.innerHTML !== html) tail.innerHTML = html;
   }
-  /** The sidebar's categories, in order. Clients is its own category, right after Workspace. */
-  const NAV_GROUPS = ['work', 'clients', 'site', 'system'];
+  /** The sidebar's categories, in order. Clients is its own category, right after Workspace. "more" only exists in Simple view. */
+  const NAV_GROUPS = ['work', 'clients', 'site', 'system', 'more'];
+  /** What the sidebar shows now: [{ g: category, es: entries }]. Pages keep the order of orderedMods() (module order, or the Customize order);
+   *  a hub takes the place of its first shown member. Pages hidden in Customize stay hidden in both views. */
+  function navPlan() {
+    const simple = mode() === 'simple', ord = orderedMods(), at = m => ord.indexOf(m), slots = [], hubbed = new Set();
+    if (simple) for (const hub of HUBS) {
+      const { all, shown } = hubMembers(hub);
+      all.forEach(m => hubbed.add(m.id)); // a member is never its own link in Simple view, even when it is hidden
+      if (shown.length) slots.push({ at: Math.min(...shown.map(at)), g: hub.more ? 'more' : hub.group, es: [hubEntry(hub)] });
+    }
+    for (const m of ord) {
+      if (prefs.navHidden.includes(m.id) || hubbed.has(m.id)) continue;
+      slots.push({ at: at(m), g: simple && MORE_PAGES.includes(m.id) ? 'more' : m.group, es: navEntries(m) });
+    }
+    return NAV_GROUPS.map(g => ({ g, es: slots.filter(s => s.g === g).sort((a, b) => a.at - b.at).flatMap(s => s.es) })).filter(x => x.es.length)
+      .map(x => { if (x.g === 'more') x.es.forEach(e => { e.more = true; }); return x; });
+  }
+  /* A badge function can save data while it is read (the inbox count normalises stored briefs) and that asks for another redraw in the middle of this one.
+     Drawing twice at once would build every group twice, so a request that arrives mid-draw waits and is served after it (at most twice more; the second pass is in place). */
+  let navBusy = false, navAgain = false;
   function renderNav() {
+    if (navBusy) { navAgain = true; return; }
+    navBusy = true;
+    try { for (let pass = 0; pass < 3; pass++) { navAgain = false; drawNav(); if (!navAgain) break; } } finally { navBusy = false; }
+  }
+  function drawNav() {
     const nav = $('#nav'); if (!nav) return;
-    const groups = NAV_GROUPS.map(g => [g, orderedMods().filter(m => m.group === g && !prefs.navHidden.includes(m.id)).flatMap(navEntries)])
-      .filter(([, es]) => es.length);
-    navNow = groups.flatMap(([, es]) => es);
-    const sig = prefs.lang + '|' + MA.role() + '|' + groups.map(([g, es]) => g + ':' + es.map(e => e.key).join(',')).join('|');
+    const groups = navPlan();
+    navNow = groups.flatMap(x => x.es);
+    const sig = prefs.lang + '|' + MA.role() + '|' + mode() + '|' + groups.map(x => x.g + ':' + x.es.map(e => e.key).join(',')).join('|');
     if (sig === navSig && nav.childElementCount) { for (const a of $$('.nav-item', nav)) { const e = navNow.find(x => x.key === a.dataset.id); if (e) paintNavItem(a, e); } markNav(); return; }
-    const had = nav.contains(document.activeElement) ? document.activeElement.dataset?.id : null;
+    const fa = nav.contains(document.activeElement) ? document.activeElement : null, had = fa ? (fa.dataset?.id || (fa.classList.contains('more-toggle') ? '#more' : null)) : null;
     navSig = sig; nav.innerHTML = '';
-    for (const [g, es] of groups) {
+    const link = (e, inMore) => {
+      const a = MA.h('a.nav-item', { href: e.href, dataset: inMore ? { id: e.key, cat: e.cat } : { id: e.key }, 'data-tip-pos': 'end', html: `${MA.icon(e.icon)}<span class="name">${esc(MA.L(e.title))}</span><span class="tail"></span>` });
+      paintNavItem(a, e); return a;
+    };
+    for (const { g, es } of groups) {
+      if (g === 'more') { nav.append(moreGroup(es, e => link(e, true))); continue; }
       // data-group sets the category colour in admin.css (--g): work Tide60, clients Flare, site Foam, system Shore
       const gid = 'navg-' + g, box = MA.h('div.nav-group', { role: 'group', 'aria-labelledby': gid, dataset: { group: g } }, MA.h('div.label', { id: gid }, MA.t('grp.' + g)));
-      for (const e of es) {
-        const a = MA.h('a.nav-item', { href: e.href, dataset: { id: e.key }, 'data-tip-pos': 'end', html: `${MA.icon(e.icon)}<span class="name">${esc(MA.L(e.title))}</span><span class="tail"></span>` });
-        paintNavItem(a, e); box.append(a);
-      }
+      for (const e of es) box.append(link(e, false));
       nav.append(box);
     }
     markNav();
-    if (had) nav.querySelector(`.nav-item[data-id="${CSS.escape(had)}"]`)?.focus({ preventScroll: true });
+    if (had) (had === '#more' ? nav.querySelector('.more-toggle') : nav.querySelector(`.nav-item[data-id="${CSS.escape(had)}"]`))?.focus({ preventScroll: true });
   }
   MA.renderNav = renderNav;
+  /** The "More" group: a disclosure button (aria-expanded + aria-controls) over the list of pages. It is built once per sidebar structure;
+   *  opening and closing only flip attributes (syncMore), so focus stays on the button. */
+  function moreGroup(es, make) {
+    const list = MA.h('div.nav-more-list#navMoreList');
+    es.forEach(e => list.append(make(e)));
+    const toggle = () => { quietPref('moreOpen', !prefs.moreOpen); syncMore(); };
+    const btn = MA.h('button.more-toggle', { type: 'button', 'aria-expanded': 'false', 'aria-controls': 'navMoreList', 'data-tip-pos': 'end', onclick: toggle,
+      // a real <button> answers Enter and Space natively; key events sent by scripts or assistive tools don't click it, so those are handled here
+      onkeydown: e => { if (!e.isTrusted && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(); } },
+      html: `${MA.icon('more')}<span class="name" id="navg-more">${esc(MA.t('more'))}</span><span class="tail"><span class="more-pip" aria-hidden="true" hidden></span></span>${MA.icon('chevRight', 'sm chev')}` });
+    return MA.h('div.nav-group.nav-more', { role: 'group', 'aria-labelledby': 'navg-more', dataset: { group: 'more' } }, btn, list);
+  }
+  /** Open state of More: the saved choice, or open on its own while the current page is inside it (never saved). Closed, a dot shows when a page inside has a count. */
+  function syncMore(ctx = current?.ctx || parseHash()) {
+    const box = $('.nav-more'); if (!box) return;
+    const btn = $('.more-toggle', box), list = $('#navMoreList', box), items = navNow.filter(e => e.more);
+    const open = !!prefs.moreOpen || items.some(e => navMatch(e, ctx)), flagged = open ? 0 : items.filter(e => badgeOf(e)).length, name = MA.t('more');
+    btn.setAttribute('aria-expanded', String(open)); list.hidden = !open; box.classList.toggle('open', open);
+    $('.more-pip', btn).hidden = !flagged; flagged ? btn.dataset.badge = '1' : delete btn.dataset.badge;
+    btn.setAttribute('aria-label', flagged ? MA.t('nav.badgeQuiet', { name, n: flagged, count: flagged }) : name); tipText(btn, name);
+  }
   /** Counts follow the digit preference (Persian digits in Persian). */
   const badgeText = n => typeof n === 'number' ? esc(MA.num(n)) : /^\d+$/.test(String(n ?? '')) ? esc(MA.num(+n)) : esc(n);
   /** The one link whose match(route) is true is the current page (a page with items marks only the item it is on). */
-  function markNav() { const ctx = current?.ctx || parseHash(), on = navNow.find(e => navMatch(e, ctx)); $$('.nav-item').forEach(a => a.dataset.id === on?.key ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')); }
+  function markNav() {
+    const ctx = current?.ctx || parseHash(), on = navNow.find(e => navMatch(e, ctx)), hub = hubOf(ctx.id), m = modOf(ctx.id);
+    if (hub && m && !lockedMod(m)) quietPref('hubLast', { ...prefs.hubLast, [hub.id]: ctx.id }); // remembered in both views, so a switch keeps the place
+    $$('.nav-item').forEach(a => a.dataset.id === on?.key ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    for (const e of navNow) if (e.hub) { const a = $(`.nav-item[data-id="${CSS.escape(e.key)}"]`); if (a && a.getAttribute('href') !== e.href) a.setAttribute('href', e.href); }
+    syncMore(ctx); syncHubStrip(ctx);
+  }
+  /** Simple view, on a page that belongs to a hub: its members as a row of links directly under the top bar. It sits outside the page, so the page
+   *  keeps all its own height (html[data-hub] adds the strip to --top-h for the pages that size themselves from it). Members hidden in Customize or
+   *  closed to this role are left out; with fewer than two left there is no strip. The strip scrolls sideways inside itself when it must. */
+  function syncHubStrip(ctx) {
+    const top = $('#top'), html = document.documentElement; if (!top) return;
+    const hub = mode() === 'simple' ? hubOf(ctx.id) : null, tabs = hub ? hubMembers(hub).open : [];
+    let strip = $('#hubStrip');
+    if (!hub || tabs.length < 2) { strip?.remove(); delete html.dataset.hub; return; }
+    const sig = prefs.lang + '|' + hub.id + '|' + tabs.map(m => m.id).join(',');
+    if (!strip || strip.dataset.sig !== sig) {
+      strip?.remove();
+      strip = MA.h('nav.hub-strip#hubStrip', { 'aria-label': MA.L(hub.title), dataset: { sig, cat: hub.group } },
+        tabs.map(m => MA.h('a.hub-tab', { href: '#/' + m.id, 'aria-label': MA.L(m.title), dataset: { id: m.id }, html: `<span class="tab-ic">${MA.icon(m.icon, 'sm')}</span><span class="name">${esc(MA.L(m.title))}</span>` })));
+      strip.addEventListener('scroll', () => fadeStrip(strip), { passive: true });
+      top.after(strip);
+    }
+    $$('.hub-tab', strip).forEach(a => a.dataset.id === ctx.id ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    html.dataset.hub = hub.id;
+    const cur = $('[aria-current]', strip);
+    if (cur) { const s = strip.getBoundingClientRect(), c = cur.getBoundingClientRect(); if (c.left < s.left + 12) strip.scrollLeft -= s.left + 12 - c.left; else if (c.right > s.right - 12) strip.scrollLeft += c.right - (s.right - 12); } // sideways, inside the strip only
+    fadeStrip(strip);
+  }
+  /** A soft edge on the side(s) of the strip that has more tabs out of sight. */
+  function fadeStrip(strip) { const x = Math.abs(strip.scrollLeft), max = strip.scrollWidth - strip.clientWidth; strip.dataset.fadeStart = x > 2 ? '1' : '0'; strip.dataset.fadeEnd = x < max - 2 ? '1' : '0'; }
+  addEventListener('resize', () => { const s = $('#hubStrip'); if (s) fadeStrip(s); });
+
+  /* ---- the Simple | Full switch: a segmented control in the sidebar footer, one icon button when the sidebar is icons-only, and the same control in Customize ---- */
+  let modeUI = null;
+  function modeSwitch() {
+    const seg = ui.seg([{ value: 'simple', label: MA.t('mode.simple'), icon: 'list' }, { value: 'full', label: MA.t('mode.full'), icon: 'grid' }], mode(), v => setMode(v), { label: MA.t('mode.label') });
+    seg.classList.add('mode-seg');
+    const btn = MA.h('button.icon-btn.mode-btn', { type: 'button', 'data-tip-pos': 'end', onclick: () => setMode(mode() === 'simple' ? 'full' : 'simple') });
+    modeUI = { seg, btn }; syncModeSwitch();
+    return MA.h('div.mode-switch', seg, btn);
+  }
+  /** The icon button names the view you would switch TO (its tooltip and its name), and shows that view's icon. */
+  function syncModeSwitch() {
+    if (!modeUI) return;
+    const m = mode(), to = m === 'simple' ? 'full' : 'simple', tip = MA.t(to === 'full' ? 'mode.toFull' : 'mode.toSimple');
+    modeUI.seg.set(m);
+    modeUI.btn.innerHTML = MA.icon(to === 'full' ? 'grid' : 'list'); modeUI.btn.setAttribute('aria-label', tip); tipText(modeUI.btn, tip);
+  }
+  /** Change the view: saves the preference, redraws the sidebar and strip at once, and tells screen readers. The control that was used keeps focus (it is never rebuilt). */
+  function setMode(v) {
+    v = v === 'full' ? 'full' : 'simple';
+    if (prefs.mode !== v) MA.prefs.set('mode', v);
+    renderNav(); syncModeSwitch();
+    MA.announce(MA.t(v === 'full' ? 'mode.fullOn' : 'mode.simpleOn'));
+  }
+  MA.mode = mode; MA.setMode = setMode;
+  /** The hubs, for pages and tests: [{ id, members: [page ids], group, more, icon, title }]. */
+  MA.hubs = () => HUBS.map(h => ({ ...h, members: [...h.members] }));
   function renderCrumbs(ctx, mod) {
     const c = $('#crumbs'); if (!c) return;
     c.innerHTML = '';
@@ -2546,7 +2700,8 @@
     pill.innerHTML = `${tlSvg(mark)}<span class="txt">${esc(txt)}</span>`;
     if (err) pill.setAttribute('title', MA.t('save.full')); else pill.removeAttribute('title');
     const pb = $('#publishBtn');
-    if (pb) { pb.disabled = !n || !MA.can('content.publish'); pb.classList.toggle('has-edits', n > 0); pb.querySelector('.tl')?.remove(); if (n > 0) pb.insertAdjacentHTML('beforeend', tlSvg('edited')); }
+    // Publish is the filled button only while something waits to go out; when everything is live it is a quiet outline that still opens the dialog
+    if (pb) { pb.disabled = off || !MA.can('content.publish'); pb.classList.toggle('has-edits', n > 0); pb.classList.toggle('primary', n > 0); pb.querySelector('.tl')?.remove(); if (n > 0) pb.insertAdjacentHTML('beforeend', tlSvg('edited')); }
   }
   MA.updateStatus = updateStatus;
   function openPublish() { if (MA.publish?.open) MA.publish.open(); else MA.go('#/history?tab=publish'); }
@@ -2588,6 +2743,7 @@
 
   /* ---- customize drawer: every control is named by its row label; the sidebar order works with ↑/↓ as well as by drag ---- */
   MA.customize = (focusSection) => {
+    let offMode = null; // the view switch here follows the one in the sidebar (and the palette)
     ui.drawer({ title: MA.t('cz.title'), width: 460, render: (body, LD) => {
       const sec = (t, id, ...kids) => { const hid = MA.uid('czs'); return MA.h('section', { style: 'margin-bottom:26px', 'aria-labelledby': hid, dataset: { cz: id } }, MA.h('h3.label', { id: hid, style: 'margin-bottom:12px' }, t), ...kids); };
       /** row(label, control-maker(labelId, hintId), hint) */
@@ -2668,6 +2824,7 @@
           row(MA.t('cz.text'), segp('scale', [['s', 'A'], ['m', '⁦A+⁩'], ['l', '⁦A++⁩']])), // isolated LTR, so RTL doesn't flip it to "+A"
           row(MA.t('cz.corners'), segp('corners', [['sharp', MA.t('cz.sharp')], ['soft', MA.t('cz.soft')], ['round', MA.t('cz.round')]]))),
         sec(MA.t('cz.layout'), 'layout',
+          row(MA.t('mode.label'), (id, hid) => { const sg = named(ui.seg([{ value: 'simple', label: MA.t('mode.simple'), icon: 'list' }, { value: 'full', label: MA.t('mode.full'), icon: 'grid' }], mode(), v => setMode(v), { size: 'sm' }), id, hid); offMode = MA.on('prefs', () => sg.set(mode())); return sg; }, MA.t('cz.modeHint')),
           row(MA.t('cz.sidebar'), segp('sidebar', [['expanded', MA.t('cz.expanded')], ['collapsed', MA.t('cz.collapsed')]])),
           row(MA.t('cz.langs'), segp('langLayout', [['side', MA.t('cz.side')], ['stack', MA.t('cz.stack')]])),
           row(MA.t('cz.home'), (id, hid) => named(ui.select(orderedMods().map(m => ({ value: m.id, label: MA.L(m.title) })), prefs.home, v => MA.prefs.set('home', v), { cls: 'sm' }), id, hid)),
@@ -2686,7 +2843,7 @@
         MA.h('button.btn.ghost.danger', { type: 'button', onclick: async () => { if (await ui.confirm(MA.t('cz.reset'), '', { danger: true })) { MA.closeLayers(); MA.prefs.reset(); } } }, MA.t('cz.reset')));
       LD.sortable = sortable; LD.keepOnRerender = true;
       if (focusSection) setTimeout(() => { const x = body.querySelector(`[data-cz="${focusSection}"]`); x?.scrollIntoView({ block: 'start' }); focusables(x || body)[0]?.focus({ preventScroll: true }); }, 60);
-    }, onClose: () => {} });
+    }, onClose: () => { offMode?.(); } });
   };
 
   /* ---- built-in commands + shortcuts ---- */
@@ -2713,6 +2870,10 @@
   MA.keys.bind('shift+d', () => MA.prefs.set('theme', MA.isDark() ? 'light' : 'dark'), () => MA.t('k.theme'), CORE);
   MA.commands.add({ id: 'theme', title: { en: 'Toggle light / dark', ar: 'التبديل بين الفاتح والداكن', fa: 'تغییر روشن و تیره' }, icon: 'moon', keywords: 'dark light theme mode', run: () => MA.prefs.set('theme', MA.isDark() ? 'light' : 'dark') });
   MA.commands.add({ id: 'customize', title: { en: 'Customize the admin', ar: 'تخصيص لوحة الإدارة', fa: 'شخصی‌سازی پنل' }, icon: 'sliders', keywords: 'preferences appearance density accent sidebar', run: () => MA.customize() });
+  // the two view switches are always listed (running the one for the current view just says where you are)
+  const modeTitle = k => ({ en: DICT.en[k], ar: DICT.ar[k], fa: DICT.fa[k] });
+  MA.commands.add({ id: 'mode-simple', title: modeTitle('mode.toSimple'), icon: 'list', keywords: 'simple view mode sidebar basic fewer more بسيط عرض ساده نما', run: () => setMode('simple') });
+  MA.commands.add({ id: 'mode-full', title: modeTitle('mode.toFull'), icon: 'grid', keywords: 'full view mode sidebar every page all كامل عرض کامل نما', run: () => setMode('full') });
   MA.commands.add({ id: 'preview', title: { en: 'Preview the site', ar: 'معاينة الموقع', fa: 'پیش‌نمایش سایت' }, icon: 'eye', shortcut: 'p', run: () => MA.preview.open() });
   MA.commands.add({ id: 'publish', title: { en: 'Publish changes', ar: 'نشر التعديلات', fa: 'انتشار تغییرات' }, icon: 'publish', shortcut: 'shift+mod+p', run: () => openPublish() });
   MA.commands.add({ id: 'checkpoint', title: { en: 'Save a checkpoint', ar: 'حفظ نقطة استرجاع', fa: 'ذخیرهٔ نقطهٔ بازگشت' }, icon: 'flag', shortcut: 'mod+s', when: () => MA.can('content.edit') && !!C.draft, run: () => { checkpoint(); } });
@@ -2775,7 +2936,7 @@
     MA.emit('boot');
     renderNav(); renderMe(); updateStatus(); renderRibbon();
     route();
-    MA.on('prefs', () => { renderRibbon(); updateStatus(); });
+    MA.on('prefs', () => { renderNav(); syncModeSwitch(); renderRibbon(); updateStatus(); }); // a changed view, hidden page or More state redraws the sidebar in place
     MA.on('content:published', updateStatus);
     MA.on('site:error', () => renderRibbon());
     MA.site.ready.then(fresh => {

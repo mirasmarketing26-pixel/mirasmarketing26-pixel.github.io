@@ -82,7 +82,10 @@
   const STAGES = [
     { id: 'new', en: 'New brief', ar: 'طلب جديد', fa: 'درخواست تازه', color: 'var(--tide)', target: 1 },
     { id: 'call', en: 'Discovery call', ar: 'مكالمة تعارف', fa: 'تماس آشنایی', color: 'var(--tide60)', target: 5 },
+    // optional real-estate steps (added Nov 2026): a property viewing, then the buyer's offer. Ids of the older stages never change.
+    { id: 'viewing', en: 'Viewing', ar: 'معاينة', fa: 'بازدید', color: '#0F8F8A', target: 7, optional: true },
     { id: 'proposal', en: 'Proposal sent', ar: 'أُرسل العرض', fa: 'پیشنهاد ارسال شد', color: '#C98A00', target: 10 },
+    { id: 'offer', en: 'Offer', ar: 'عرض شراء', fa: 'پیشنهاد خرید', color: '#9B4DCA', target: 10, optional: true },
     { id: 'negotiating', en: 'Negotiating', ar: 'تفاوض', fa: 'در حال مذاکره', color: 'var(--flare)', target: 14 },
     { id: 'won', en: 'Won', ar: 'تم الاتفاق', fa: 'قرارداد بسته شد', color: '#1E9E6E', closed: true },
     { id: 'lost', en: 'Lost', ar: 'لم يتم', fa: 'از دست رفت', color: 'var(--ink4)', closed: true },
@@ -95,6 +98,7 @@
     { id: 'instagram', en: 'Instagram', ar: 'إنستغرام', fa: 'اینستاگرام', icon: 'image' },
     { id: 'linkedin', en: 'LinkedIn', ar: 'لينكدإن', fa: 'لینکدین', icon: 'link' },
     { id: 'event', en: 'Event', ar: 'فعالية', fa: 'رویداد', icon: 'calendar' },
+    { id: 'cityscape', en: 'Cityscape', ar: 'سيتي سكيب', fa: 'سیتی‌اسکیپ', icon: 'pin' }, // the real-estate exhibition
     { id: 'manual', en: 'Added by hand', ar: 'أُضيف يدوياً', fa: 'افزوده‌شده به‌صورت دستی', icon: 'edit' },
     { id: 'import', en: 'Imported', ar: 'مستورد', fa: 'واردشده', icon: 'upload' },
   ];
@@ -123,10 +127,18 @@
     ['Elena Petrova', 'Art Basel Doha (pop-up)', 'en', ['remember', 'launch'], 'event', 45000, 'Campaign, signage and daily social content for a two-week art pop-up.'],
     ['Faisal Al-Naimi', 'Naimi Real Estate', 'ar', ['web', 'launch'], 'site', 67000, 'موقع للمشاريع الجديدة مع صفحات هبوط لكل مشروع.'],
   ];
+  // the two departments the studio runs (the Plan page supplies its own list at runtime: MA.plan.depts())
+  const DEPARTMENTS = ['MIRAS Marketing', 'MIRAS Real Estate'];
+  // a few samples carry the real-estate fields: by index into SAMPLE_PEOPLE; followUp is days from today (Qatar)
+  const SAMPLE_EXTRA = {
+    0: { department: 'MIRAS Real Estate', interest: 'Lusail Marina residences', budget: 90000, tentative: true },
+    5: { department: 'MIRAS Marketing', responded: true },
+    21: { source: 'cityscape', department: 'MIRAS Real Estate', interest: 'مشاريع لوسيل الجديدة', budget: 70000 },
+  };
   const STAGE_BY_AGE = ['new', 'new', 'new', 'call', 'call', 'proposal', 'proposal', 'negotiating', 'won', 'won', 'lost'];
   function sampleLeads() {
     const r = MA.rng('miras-leads-v1'), now = Date.now(), owners = ['u-owner', 'u-noor', 'u-rami'];
-    return SAMPLE_PEOPLE.map((p, i) => {
+    const list = SAMPLE_PEOPLE.map((p, i) => {
       const ageDays = Math.round(Math.pow(i / SAMPLE_PEOPLE.length, 1.25) * 58 + r() * 2), at = new Date(now - ageDays * DAY - r() * 8 * 3600e3);
       const stage = i < 4 ? 'new' : STAGE_BY_AGE[Math.min(STAGE_BY_AGE.length - 1, Math.floor(r() * STAGE_BY_AGE.length * (ageDays / 40 + .3)))];
       const [name, company, lang, waves, source, value, message] = p;
@@ -137,14 +149,22 @@
       if (stage !== 'new') timeline.push({ at: stageAt.toISOString(), type: 'stage', text: stage, by: owner });
       return { id: 'sample-' + (i + 1), at: at.toISOString(), name, email, phone: '', company, waves, message, lang, source, stage, value, owner,
         tags: i % 5 === 0 ? ['priority'] : i % 7 === 0 ? ['repeat client'] : [], notes: [], timeline, read: i >= 3, starred: i === 0 || i === 8, archived: false,
-        stageAt: stageAt.toISOString(), lastContact: stage === 'new' ? null : stageAt.toISOString(), snoozeUntil: null, sample: true };
+        stageAt: stageAt.toISOString(), lastContact: stage === 'new' ? null : stageAt.toISOString(), snoozeUntil: null, sample: true, ...SAMPLE_EXTRA[i] };
     });
+    // one open sample brief has a follow-up two days late (the first open one past "new"); stage generation above is unchanged
+    const late = list.find((l, i) => i >= 4 && !STAGES.find(s => s.id === l.stage)?.closed);
+    if (late) { const d = addDays(qDay(now), -2); Object.assign(late, { followUp: d, due: d, nextStep: late.lang === 'ar' ? 'معاودة الاتصال' : 'Call back' }); }
+    return list;
   }
   // the lead list is parsed once and kept in memory; another tab's write (storage event → 'db:leads') replaces it
   let leadCache = null;
   MA.on('db:leads', v => { if (v !== leadCache) leadCache = Array.isArray(v) ? v : null; });
   MA.on('db:*', () => { leadCache = null; });
-  const TRASH = 'leads.trash', TRASH_DAYS = 30, SEEN = 'leads.siteSeen';
+  const TRASH = 'leads.trash', TRASH_DAYS = 30, SEEN = 'leads.siteSeen', NO_SAMPLES = 'leads.samplesCleared';
+  // "Clear sample briefs" with sample data still on: remember it, so all() does not grow them back; switching sample data on again resets it
+  let sampleWas = null;
+  MA.on('prefs', p => { const on = !!p?.sampleData; if (on && sampleWas === false) MA.db.del(NO_SAMPLES); sampleWas = on; });
+  const isDay = s => /^\d{4}-\d{2}-\d{2}$/.test(String(s || ''));
   const str = (v, n = 2000) => v == null ? '' : String(v).slice(0, n);
   /** Briefs from the site that this browser already took in (so a deleted brief never comes back). First run: everything already listed or announced. */
   function seenSet() {
@@ -164,7 +184,7 @@
     },
     save(list) { leadCache = list; MA.db.set('leads', list); MA.emit('leads'); MA.renderNav?.(); },
     /** All leads visible right now (samples only while sample data is on). Archived included; filter yourself. */
-    all: () => { if (MA.prefs.get('sampleData') && !L.raw().some(l => l.sample)) L.save(L.raw().concat(sampleLeads())); return L.raw().filter(l => !l.sample || MA.prefs.get('sampleData')); },
+    all: () => { if (sampleWas == null) sampleWas = !!MA.prefs.get('sampleData'); if (MA.prefs.get('sampleData') && !MA.db.get(NO_SAMPLES, false) && !L.raw().some(l => l.sample)) L.save(L.raw().concat(sampleLeads())); return L.raw().filter(l => !l.sample || MA.prefs.get('sampleData')); },
     get: id => L.raw().find(l => l.id === id),
     add(p) {
       const me = MA.team.me(), list = L.raw(), now = new Date().toISOString();
@@ -212,7 +232,30 @@
     untrash(ids) { ids = [].concat(ids); const back = MA.db.get(TRASH, []).filter(x => ids.includes(x.lead?.id)).map(x => x.lead); if (back.length) L.restore(back); return back; },
     /** Delete for good: the given ids, or everything in the trash. → how many */
     purge(ids) { const t = MA.db.get(TRASH, []), keep = ids == null ? [] : t.filter(x => ![].concat(ids).includes(x.lead?.id)); MA.db.set(TRASH, keep); MA.emit('leads.trash'); return t.length - keep.length; },
-    clearSamples() { L.save(L.raw().filter(l => !l.sample)); },
+    clearSamples() { MA.db.set(NO_SAMPLES, true); L.save(L.raw().filter(l => !l.sample)); },
+    /** Store shape for a future server: list / get / save / remove (list = all visible leads). */
+    list: () => L.all(),
+    /* ---- real-estate friendly fields (all optional, Nov 2026): budget (number, QAR; older site briefs may hold the range text they picked),
+       interest ("Project of interest", text), department (text, one of departments()), followUp ('YYYY-MM-DD', a Qatar day),
+       responded (bool, "Reply sent"), tentative (bool, not confirmed yet). followUp is the same date as the Inbox's next-step `due`:
+       both keys are written together; followUp wins when both are set. */
+    departments() {
+      // the Plan's list (MA.plan.depts(): [{ id, name: { en, ar, fa } | text }]); a lead stores the English name, so it never changes with the language
+      let d = MA.plan?.depts || MA.plan?.departments; if (typeof d === 'function') { try { d = d.call(MA.plan); } catch (e) { d = null; } }
+      const nm = x => typeof x === 'string' ? x : !x ? '' : typeof x.name === 'string' ? x.name : (x.name?.en || MA.L(x.name) || x.label || x.en || x.id);
+      const names = Array.isArray(d) ? d.map(nm).filter(x => typeof x === 'string' && x.trim()).map(x => x.trim()) : [];
+      return names.length ? [...new Set(names)] : DEPARTMENTS.slice();
+    },
+    /** The follow-up day of a lead ('YYYY-MM-DD') or null. */
+    followUpOf: l => !l ? null : isDay(l.followUp) ? l.followUp : isDay(l.due) ? l.due : null,
+    /** Open = not won, not lost, not archived. */
+    isOpen: l => !!l && !l.archived && !L.stage(l.stage).closed,
+    /** Open leads whose follow-up day is today or earlier (Qatar). → leads */
+    followUpDue: () => { const td = qDay(Date.now()); return L.all().filter(l => { const d = L.followUpOf(l); return L.isOpen(l) && d && d <= td; }); },
+    /** Open leads with no follow-up day. → leads */
+    noFollowUp: () => L.all().filter(l => L.isOpen(l) && !L.followUpOf(l)),
+    /** Set (or clear with null) the follow-up day; keeps the Inbox's next-step date in step. */
+    setFollowUp: (id, day, opts) => L.update(id, { followUp: isDay(day) ? day : null, due: isDay(day) ? day : null }, opts),
     unread: () => L.all().filter(l => !l.read && !l.archived).length,
     /** Pull briefs the site saved on this browser (index.html → 'miras.leads.inbox'). Returns how many were new. A brief is taken in once: deleting it later is final. */
     importSite() {
@@ -259,9 +302,13 @@
       { key: 'services', label: 'Services', get: l => (l.services || []).map(id => MA.content.draft?.services?.find(x => x.id === id)?.en?.name || id).join('; ') }, { key: 'words', label: 'Words caught' }, { key: 'tags', label: 'Tags' }, { key: 'lang', label: 'Language' }, { key: 'message', label: 'Message' },
       { key: 'budget', label: 'Budget' }, { key: 'ref', label: 'Referrer' }, { key: 'utm', label: 'Campaign (UTM)', get: l => MA.isObj(l.utm) ? Object.entries(l.utm).map(([k, v]) => `${k}=${v}`).join('; ') : (l.utm || '') },
       { key: 'landing', label: 'Landing page' }, { key: 'channel', label: 'Channel' },
+      { key: 'interest', label: 'Project of interest' }, { key: 'department', label: 'Department' }, { key: 'followUp', label: 'Next follow-up', get: l => L.followUpOf(l) || '' },
+      { key: 'responded', label: 'Reply sent', get: l => l.responded ? 'yes' : '' }, { key: 'tentative', label: 'Tentative', get: l => l.tentative ? 'yes' : '' },
     ],
     /** Rows from a parsed CSV (MA.csv.parse) or a JSON array → leads. Header names are matched loosely. */
     fromRows(rows) {
+      const exact = (r, ...ks) => { for (const k of Object.keys(r)) if (ks.includes(k.toLowerCase().replace(/[^a-z]/g, ''))) return String(r[k] ?? ''); return ''; };
+      const yes = v => /^(yes|y|true|1|نعم|بله|✓)$/i.test(String(v || '').trim());
       const pick = (r, ...ks) => { for (const k of Object.keys(r)) if (ks.some(x => k.toLowerCase().replace(/[^a-z]/g, '').includes(x))) return r[k]; return ''; };
       const ids = new Set((MA.content.draft?.swells || []).map(s => s.id));
       return rows.map(r => ({ name: pick(r, 'name'), email: pick(r, 'email', 'mail'), phone: pick(r, 'phone', 'mobile', 'whatsapp'), company: pick(r, 'company', 'organisation', 'organization', 'business'),
@@ -270,7 +317,11 @@
         at: (Date.parse(pick(r, 'received', 'date', 'created', 'submitted')) ? new Date(pick(r, 'received', 'date', 'created', 'submitted')).toISOString() : new Date().toISOString()),
         services: String(pick(r, 'services')).split(/[;,]/).map(x => x.trim()).map(x => (MA.content.draft?.services || []).find(sv => sv.id === x || sv.en.name.toLowerCase() === x.toLowerCase())?.id).filter(Boolean),
         words: String(pick(r, 'words')).split(/[;,]/).map(x => x.trim()).filter(Boolean),
-        ...(pick(r, 'budget') ? { budget: String(pick(r, 'budget')) } : {}), ...(pick(r, 'referrer', 'ref') ? { ref: String(pick(r, 'referrer', 'ref')) } : {}), ...(pick(r, 'utm', 'campaign') ? { utm: String(pick(r, 'utm', 'campaign')) } : {}),
+        ...(pick(r, 'budget') ? { budget: /^[\d\s,.]+$/.test(String(pick(r, 'budget')).trim()) && +String(pick(r, 'budget')).replace(/[^\d.]/g, '') ? +String(pick(r, 'budget')).replace(/[^\d.]/g, '') : String(pick(r, 'budget')) } : {}),
+        ...(exact(r, 'projectofinterest', 'interest') ? { interest: String(exact(r, 'projectofinterest', 'interest')).trim().slice(0, 160) } : {}),
+        ...(exact(r, 'department', 'dept') ? { department: String(exact(r, 'department', 'dept')).trim().slice(0, 80) } : {}),
+        ...(isDay(String(exact(r, 'nextfollowup', 'followup').trim())) ? { followUp: exact(r, 'nextfollowup', 'followup').trim(), due: exact(r, 'nextfollowup', 'followup').trim() } : {}),
+        ...(yes(exact(r, 'replysent', 'responded')) ? { responded: true } : {}), ...(yes(exact(r, 'tentative')) ? { tentative: true } : {}), ...(pick(r, 'referrer', 'ref') ? { ref: String(pick(r, 'referrer', 'ref')) } : {}), ...(pick(r, 'utm', 'campaign') ? { utm: String(pick(r, 'utm', 'campaign')) } : {}),
         source: 'import', read: false })).filter(l => l.name || l.email);
     },
   };
