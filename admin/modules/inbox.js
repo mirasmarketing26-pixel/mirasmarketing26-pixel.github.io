@@ -310,6 +310,28 @@
     }),
   });
 
+  // real-estate friendly details (Nov 2026): budget, project of interest, department, next follow-up, reply sent, tentative
+  MA.i18n.add({
+    en: P({
+      details: 'Details', 'd.nSet': { one: 'One set', other: '{n} set' }, 'd.budget': 'Budget', 'd.budgetPick': 'They picked: {v}', 'd.interest': 'Project of interest', 'd.interestPh': 'Tower, compound, unit…',
+      'd.dept': 'Department', 'd.none': 'None', 'd.follow': 'Next follow-up', 'd.replied': 'Reply sent', 'd.tentative': 'Tentative', 'd.tentHint': 'Not confirmed yet', yes: 'Yes',
+      'fu.tomorrow': 'Tomorrow', 'fu.days': 'In {n} days', 'fu.week': 'Next week', 'fu.due': 'Follow-up due', 'fu.none': 'No follow-up set', 'fu.noneShort': 'No follow-up',
+      'fu.saved': 'Follow-up: {date}.', 'fu.cleared': 'Follow-up cleared.', 'f.follow': 'Follow-up', 'f.dept': 'Department', 'col.budget': 'Budget', 'col.interest': 'Project', 'col.dept': 'Department',
+    }),
+    ar: P({
+      details: 'التفاصيل', 'd.nSet': 'المعبّأ: {n}', 'd.budget': 'الميزانية', 'd.budgetPick': 'اختاروا: {v}', 'd.interest': 'المشروع المطلوب', 'd.interestPh': 'برج، مجمّع، وحدة…',
+      'd.dept': 'القسم', 'd.none': 'لا شيء', 'd.follow': 'المتابعة القادمة', 'd.replied': 'تم الرد', 'd.tentative': 'مبدئي', 'd.tentHint': 'غير مؤكد بعد', yes: 'نعم',
+      'fu.tomorrow': 'غداً', 'fu.days': 'بعد {n} أيام', 'fu.week': 'الأسبوع القادم', 'fu.due': 'متابعة مستحقة', 'fu.none': 'لا متابعة محددة', 'fu.noneShort': 'بلا متابعة',
+      'fu.saved': 'المتابعة: {date}.', 'fu.cleared': 'مُسحت المتابعة.', 'f.follow': 'المتابعة', 'f.dept': 'القسم', 'col.budget': 'الميزانية', 'col.interest': 'المشروع', 'col.dept': 'القسم',
+    }),
+    fa: P({
+      details: 'جزئیات', 'd.nSet': '{n} مورد پر شده', 'd.budget': 'بودجه', 'd.budgetPick': 'انتخاب آن‌ها: {v}', 'd.interest': 'پروژهٔ مورد نظر', 'd.interestPh': 'برج، مجتمع، واحد…',
+      'd.dept': 'بخش', 'd.none': 'هیچ', 'd.follow': 'پیگیری بعدی', 'd.replied': 'پاسخ داده شد', 'd.tentative': 'غیرقطعی', 'd.tentHint': 'هنوز تأیید نشده', yes: 'بله',
+      'fu.tomorrow': 'فردا', 'fu.days': '{n} روز دیگر', 'fu.week': 'هفتهٔ بعد', 'fu.due': 'موعد پیگیری', 'fu.none': 'پیگیری تعیین نشده', 'fu.noneShort': 'بی‌پیگیری',
+      'fu.saved': 'پیگیری: {date}.', 'fu.cleared': 'پیگیری پاک شد.', 'f.follow': 'پیگیری', 'f.dept': 'بخش', 'col.budget': 'بودجه', 'col.interest': 'پروژه', 'col.dept': 'بخش',
+    }),
+  });
+
   /* ================= state ================= */
   const LIMIT = 150; // list and table rows drawn at once ("Show more" adds the next batch)
   const S = { mounted: false, root: null, els: {}, view: 'list', f: null, openId: null, cursor: null, sel: new Set(), keep: new Set(),
@@ -317,8 +339,8 @@
   const store = { get: (k, d) => MA.db.get('inbox.' + k, d), set: (k, v) => MA.db.set('inbox.' + k, v), del: k => MA.db.del('inbox.' + k) };
   const VIEWS = ['list', 'board', 'table'];
   const TABS = ['reply', 'due', 'open', 'starred', 'won', 'lost', 'archived'];
-  const FK = ['stage', 'swell', 'service', 'word', 'source', 'channel', 'campaign', 'owner', 'lang', 'tag'];
-  const STAGE_ICON = { new: 'inbox', call: 'phone', proposal: 'file', negotiating: 'chat', won: 'star', lost: 'close' };
+  const FK = ['stage', 'swell', 'service', 'word', 'source', 'channel', 'campaign', 'owner', 'lang', 'tag', 'follow', 'dept'];
+  const STAGE_ICON = { new: 'inbox', call: 'phone', viewing: 'eye', proposal: 'file', offer: 'tag', negotiating: 'chat', won: 'star', lost: 'close' };
   const EV_ICON = { created: 'inbox', stage: 'flag', assign: 'user', archive: 'archive', unarchive: 'inbox', snooze: 'clock', contact: 'reply', value: 'tag', next: 'calendar', lost: 'close' };
   const TINT = { tide: 'var(--tide)', flare: 'var(--flare)', deep: 'var(--ink)', foam: 'var(--foam)', shore: 'var(--bg2)' };
   const DEF_COLS = ['company', 'stage', 'due', 'swells', 'value', 'days', 'owner', 'at'];
@@ -390,15 +412,19 @@
   const qWeekday = ds => new Date(ds + 'T12:00:00Z').getUTCDay();
   const addDays = (ds, n) => MA.qDay(Date.parse(ds + 'T12:00:00Z') + n * DAY);
   const atQatar = (ds, hm = '09:00') => new Date(`${ds}T${hm}:00+03:00`);
-  // follow-ups: lead.nextStep (text) and lead.due ('YYYY-MM-DD', a day in the studio's time zone)
+  // follow-ups: lead.nextStep (text) and the follow-up day ('YYYY-MM-DD', a day in the studio's time zone): lead.followUp, or the older lead.due.
+  // Both keys are written together (MA.leads.setFollowUp / setNext), so older admins and other pages read the same date.
   const today = () => MA.qDay(now());
   const isDay = s => /^\d{4}-\d{2}-\d{2}$/.test(String(s || ''));
+  const dueDay = l => L.followUpOf(l);
   const dayDiff = (a, b) => Math.round((Date.parse(b + 'T12:00:00Z') - Date.parse(a + 'T12:00:00Z')) / DAY);
-  const hasNext = l => !!(l.nextStep || isDay(l.due));
-  const dueIn = l => isDay(l.due) ? dayDiff(today(), l.due) : null;
-  const isDue = l => !l.archived && !isClosed(l) && isDay(l.due) && l.due <= today();
+  const hasNext = l => !!(l.nextStep || dueDay(l));
+  const dueIn = l => dueDay(l) ? dayDiff(today(), dueDay(l)) : null;
+  const isDue = l => !l.archived && !isClosed(l) && !!dueDay(l) && dueDay(l) <= today();
+  /** 'due' (follow-up day is today or earlier) · 'none' (open, no follow-up day) · '' (closed, archived, or a later day) */
+  const fuState = l => !L.isOpen(l) ? '' : !dueDay(l) ? 'none' : dueDay(l) <= today() ? 'due' : '';
   const dayFmt = (ds, o = {}) => MA.date(ds + 'T12:00:00Z', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC', ...o });
-  const dueText = l => { const d = dueIn(l); return d == null ? '' : d < 0 ? t('overdue') : d === 0 ? t('dueToday') : d === 1 ? t('dueTomorrow') : t('dueOn', { date: dayFmt(l.due) }); };
+  const dueText = l => { const d = dueIn(l); return d == null ? '' : d < 0 ? t('overdue') : d === 0 ? t('dueToday') : d === 1 ? t('dueTomorrow') : t('dueOn', { date: dayFmt(dueDay(l)) }); };
   const lostLabel = r => LOST.includes(r) ? t('lost.' + r) : String(r || '');
   // attribution (site briefs carry ref + utm since the 13 Oct site contract; CSV imports may carry them as text)
   function utmOf(l) {
@@ -436,7 +462,14 @@
   const unsnap = snaps => snaps.forEach(s => { if (L.get(s.id)) L.update(s.id, s.patch); });
   const rankKey = l => typeof l.rank === 'number' ? l.rank : -ts(l.at);
   const colLeads = (list, stage) => list.filter(l => l.stage === stage).sort((a, b) => rankKey(a) - rankKey(b));
-  const collapsedCols = () => { const c = store.get('collapsed', ['lost']); return Array.isArray(c) ? c : ['lost']; };
+  // the optional real-estate stages (viewing, offer) start collapsed, once, also for boards saved before they existed
+  const OPT_STAGES = () => L.STAGES.filter(s => s.optional).map(s => s.id);
+  const collapsedCols = () => {
+    let c = store.get('collapsed', null);
+    if (!Array.isArray(c)) c = ['lost'];
+    if (!store.get('optCollapsed', false)) { c = [...new Set([...c, ...OPT_STAGES()])]; store.set('collapsed', c); store.set('optCollapsed', true); }
+    return c;
+  };
   const isTrash = () => S.f?.tab === 'deleted';
 
   /* ================= filters (URL) ================= */
@@ -466,13 +499,15 @@
     if (skip !== 'owner' && f.owner.length && !f.owner.includes(l.owner || 'none')) return false;
     if (skip !== 'lang' && f.lang.length && !f.lang.includes(l.lang === 'ar' ? 'ar' : 'en')) return false;
     if (skip !== 'tag' && f.tag.length && !(l.tags || []).some(x => f.tag.includes(x))) return false;
+    if (skip !== 'follow' && f.follow.length && !f.follow.includes(fuState(l))) return false;
+    if (skip !== 'dept' && f.dept.length && !f.dept.includes(l.department || '')) return false;
     if (skip !== 'value') {
       if (f.min !== '' && !(hasVal(l.value) && +l.value >= +f.min)) return false;
       if (f.max !== '' && !(hasVal(l.value) && +l.value <= +f.max)) return false;
     }
     if (f.q) {
       // folded: Arabic and Persian letter variants, digits, case and accents don't matter
-      const hay = MA.fold([l.name, l.company, l.email, l.phone, l.message, l.nextStep, campaignOf(l), ...(l.tags || []), ...(l.words || []), ...(l.services || []).flatMap(x => [svcName(x, 'en'), svcName(x, 'ar')])].join(' '));
+      const hay = MA.fold([l.name, l.company, l.email, l.phone, l.message, l.nextStep, l.interest, l.department, campaignOf(l), ...(l.tags || []), ...(l.words || []), ...(l.services || []).flatMap(x => [svcName(x, 'en'), svcName(x, 'ar')])].join(' '));
       if (!MA.fold(f.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
     }
     return true;
@@ -495,9 +530,10 @@
     at: l => ts(l.at), name: l => display(l).toLowerCase(), company: l => (l.company || '').toLowerCase(), stage: l => L.STAGES.findIndex(s => s.id === l.stage),
     value: l => +l.value || 0, days: l => isClosed(l) ? -1 : daysIn(l), source: l => sourceName(l.source), owner: l => ownerName(l.owner), lang: l => l.lang || 'en',
     lastContact: l => ts(l.lastContact), services: l => (l.services || []).map(x => svcName(x)).join(','), words: l => wordsOf(l).join(','), tags: l => (l.tags || []).join(','), swells: l => (l.waves || []).map(w => swellName(w)).join(','), email: l => l.email || '', phone: l => l.phone || '',
-    due: l => isDay(l.due) && !isClosed(l) ? Date.parse(l.due) : Infinity,
+    due: l => dueDay(l) && !isClosed(l) ? Date.parse(dueDay(l)) : Infinity,
+    budget: l => typeof l.budget === 'number' ? l.budget : -1, interest: l => String(l.interest || '').toLowerCase(), dept: l => l.department || '',
   };
-  const ASC_FIRST = ['name', 'company', 'owner', 'source', 'lang', 'tags', 'swells', 'services', 'words', 'email', 'phone', 'stage', 'due'];
+  const ASC_FIRST = ['name', 'company', 'owner', 'source', 'lang', 'tags', 'swells', 'services', 'words', 'email', 'phone', 'stage', 'due', 'interest', 'dept'];
   const sortState = () => { const s = store.get('sort', { key: 'at', dir: 'desc' }); return s && SORTS[s.key] ? s : { key: 'at', dir: 'desc' }; };
   function sortLeads(list) {
     const { key, dir } = sortState(), fn = SORTS[key], m = dir === 'asc' ? 1 : -1;
@@ -545,6 +581,9 @@
     } },
     { k: 'lang', label: t('f.lang'), icon: 'language', opts: () => [{ v: 'en', label: langName('en') }, { v: 'ar', label: langName('ar') }], of: l => [l.lang === 'ar' ? 'ar' : 'en'] },
     { k: 'tag', label: t('f.tag'), icon: 'tag', opts: () => allTags().map(x => ({ v: x, label: x, lang: MA.langOf(x) })), of: l => l.tags || [] },
+    { k: 'follow', label: t('f.follow'), icon: 'calendar', opts: () => [{ v: 'due', label: t('fu.due') }, { v: 'none', label: t('fu.none') }], of: l => [fuState(l)].filter(Boolean) },
+    { k: 'dept', label: t('f.dept'), icon: 'layers', of: l => l.department ? [l.department] : [],
+      opts: () => [...new Set([...L.departments(), ...L.all().map(l => l.department).filter(Boolean)])].map(d => ({ v: d, label: d, lang: MA.langOf(d) })) },
     { k: 'value', label: t('f.value'), icon: 'target', range: true },
   ];
 
@@ -555,12 +594,15 @@
     const late = isLate(l), d = daysIn(l), st = L.stage(l.stage);
     return h('span', { class: 'ib-days' + (late ? ' late' : ''), title: t('inStage', { d: daysLabel(d) }) + (late ? ' · ' + t('pastTarget', { d: daysLabel(st.target) }) : '') }, daysShort(d));
   }
-  /** "Due today" / "Overdue" / "Due Thu 16 Oct" for an open brief with a next step date. */
+  /** "Due today" / "Overdue" / "Due Thu 16 Oct" for an open brief with a follow-up day. */
   function dueChip(l) {
-    if (!isDay(l.due) || isClosed(l) || l.archived) return null;
+    if (!dueDay(l) || isClosed(l) || l.archived) return null;
     const d = dueIn(l);
-    return h('span', { class: 'ib-due' + (d < 0 ? ' late' : d === 0 ? ' today' : ''), title: [l.nextStep, dayFmt(l.due, { year: 'numeric' })].filter(Boolean).join(' · ') }, MA.frag(MA.icon('calendar', 'sm')), h('span', dueText(l)));
+    return h('span', { class: 'ib-due' + (d < 0 ? ' late' : d === 0 ? ' today' : ''), title: [d <= 0 ? t('fu.due') : '', l.nextStep, dayFmt(dueDay(l), { year: 'numeric' })].filter(Boolean).join(' · ') }, MA.frag(MA.icon('calendar', 'sm')), h('span', dueText(l)));
   }
+  /** Quiet marker on an open brief that has no follow-up day yet. */
+  const noFuChip = l => fuState(l) === 'none' ? h('span.ib-nofu', { title: t('fu.none') }, MA.frag(MA.icon('calendar', 'sm')), h('span', t('fu.noneShort'))) : null;
+  const tentChip = l => l.tentative && !l.archived ? h('span.ib-tent', { title: t('d.tentHint') }, MA.frag(MA.icon('info', 'sm')), h('span', t('d.tentative'))) : null;
   const lostChip = l => l.stage === 'lost' && l.lostReason ? h('span.ib-lostr', LOST.includes(l.lostReason) ? {} : vAttrs(l.lostReason), lostLabel(l.lostReason)) : null;
   function swellChips(waves, max = 9) {
     const box = h('span.ib-sws'), list = waves || [];
@@ -648,7 +690,9 @@
       b ? `${t('budget')}: ${b.text}` : null,
       `${t('hl.stage')}: ${stageName(l.stage)}${isClosed(l) ? '' : ` (${daysLabel(daysIn(l))})`}`, `${t('hl.source')}: ${sourceName(l.source)} · ${t('hl.received')}: ${fullWhen(l.at)}`,
       ch ? `${t('attr.channel')}: ${channelName(ch)}${u.campaign ? ' · ' + u.campaign : ''}` : null,
-      hasNext(l) ? `${t('next')}: ${[l.nextStep, isDay(l.due) ? dayFmt(l.due) : ''].filter(Boolean).join(' · ')}` : null,
+      hasNext(l) ? `${t('next')}: ${[l.nextStep, dueDay(l) ? dayFmt(dueDay(l)) : ''].filter(Boolean).join(' · ')}` : null,
+      l.interest ? `${t('d.interest')}: ${l.interest}` : null, l.department ? `${t('d.dept')}: ${l.department}` : null,
+      l.responded ? t('d.replied') : null, l.tentative ? `${t('d.tentative')} (${t('d.tentHint')})` : null,
       (l.services || []).length ? `${t('services')}: ${joinL(l.services.map(x => svcName(x)))}` : null,
       (l.words || []).length ? `${t('words')}: ${joinL(l.words)}` : null,
     ].filter(Boolean).join('\n') + (l.message ? '\n\n' + l.message : '');
@@ -820,18 +864,18 @@
   function setNext(id, text, due, { done = false } = {}) {
     const l = L.get(id); if (!l || !canEdit()) return;
     text = String(text || '').trim().slice(0, 200); due = isDay(due) ? due : null;
-    if (!done && (l.nextStep || '') === text && (isDay(l.due) ? l.due : null) === due) return;
-    const snaps = [snap(l, ['nextStep', 'due', 'timeline'])];
+    if (!done && (l.nextStep || '') === text && dueDay(l) === due) return;
+    const snaps = [snap(l, ['nextStep', 'due', 'followUp', 'timeline'])];
     if (S.f && !l.archived && inTab(l, S.f.tab)) S.keep.add(id); // the brief you're working on stays put
     S.refocus = 'next';
-    const log = done ? { type: 'next', text: l.nextStep || (isDay(l.due) ? dayFmt(l.due) : ''), done: true } : text || due ? { type: 'next', text, due } : { type: 'next', text: '', clear: true };
-    L.update(id, { nextStep: text, due }, { log });
+    const log = done ? { type: 'next', text: l.nextStep || (dueDay(l) ? dayFmt(dueDay(l)) : ''), done: true } : text || due ? { type: 'next', text, due } : { type: 'next', text: '', clear: true };
+    L.update(id, { nextStep: text, due, followUp: due }, { log });
     MA.toast(done ? t('nextDoneT', { text: esc(log.text) }) : text || due ? t('nextSaved') : t('nextCleared'), { icon: done ? 'check' : 'calendar', undo: () => unsnap(snaps) });
   }
   function nextPop(anchor, id) {
     const l = L.get(id); if (!l || !canEdit()) return;
     const txt = h('input.input.sm', { maxLength: 200, placeholder: t('nextPh'), dir: 'auto', autocomplete: 'off' }); txt.value = l.nextStep || '';
-    const date = h('input.input.sm', { type: 'date', dir: 'ltr' }); date.value = isDay(l.due) ? l.due : '';
+    const date = h('input.input.sm', { type: 'date', dir: 'ltr' }); date.value = dueDay(l) || '';
     const err = h('p.err', { hidden: true }, t('nextNeed'));
     let P = null;
     const save = () => { const v = txt.value.trim(), d = isDay(date.value) ? date.value : null; if (!v && !d) { err.hidden = false; txt.focus(); return; } P?.close(true); setNext(id, v, d); };
@@ -1154,10 +1198,10 @@
     const nm = display(l), facts = srFacts(l);
     r.append(h('div.ib-gut', h('i.ib-udot'), cb),
       h('div.ib-rmain',
-        h('div.ib-r1', h('b.ib-rname.truncate', vAttrs(nm), nm), facts ? h('span.sr-only', ', ' + facts) : null, l.starred ? starIcon() : null, h('time.ib-when', { datetime: l.at, title: fullWhen(l.at) }, ago(l.at))),
+        h('div.ib-r1', h('b.ib-rname.truncate', vAttrs(nm), nm), facts ? h('span.sr-only', ', ' + facts) : null, l.starred ? starIcon() : null, tentChip(l), h('time.ib-when', { datetime: l.at, title: fullWhen(l.at) }, ago(l.at))),
         l.company && l.name ? h('div.ib-r2.truncate', vAttrs(l.company), l.company) : null,
         l.message ? h('div.ib-r3.truncate', vAttrs(l.message), l.message) : null,
-        h('div.ib-r4', stagePill(l.stage), lostChip(l), dueChip(l), daysChip(l), hasVal(l.value) ? h('span.ib-val', moneyShort(l.value)) : null,
+        h('div.ib-r4', stagePill(l.stage), lostChip(l), dueChip(l), noFuChip(l), daysChip(l), hasVal(l.value) ? h('span.ib-val', moneyShort(l.value)) : null,
           isSnoozed(l) ? h('span.ib-snz', { html: MA.icon('clock', 'sm'), title: t('snoozedUntil', { when: whenFmt(l.snoozeUntil) }) }) : null,
           h('span.grow'), avatarOf(l.owner, 'xs'))));
     return r;
@@ -1287,12 +1331,82 @@
       words.length ? [h('dt', t('words')), h('dd.ib-words-v', words.map(w => h('span.tag.ib-word', vAttrs(w), w)))] : null) : null;
     el.append(h('section.ib-sec', h('div.ib-sec-h', h('span.label', t('message'))),
       l.message ? h('div.ib-msg', { dir: msgLang === 'en' ? 'ltr' : 'rtl', lang: msgLang }, l.message) : h('p.faint.small', t('noMessage')), picks));
+    const more = detailsBox(l, edit); if (more) el.append(more);
     const attr = attribution(l); if (attr) el.append(attr);
     if (edit || (l.tags || []).length) el.append(h('section.ib-sec', h('div.ib-sec-h', h('span.label', t('tags'))), tagEditor(l, edit)));
     const tl = h('div.ib-tl');
     (l.timeline || []).slice().sort((a, b) => ts(b.at) - ts(a.at)).forEach(ev => tl.append(ev.type === 'note' ? noteItem(ev) : evLine(ev)));
     el.append(h('section.ib-sec', h('div.ib-sec-h', h('span.label', t('activity'))), edit ? composer(l) : null, tl));
     return el;
+  }
+  /** Optional details (closed by default, so briefs that don't use them stay short): budget, project of interest, department,
+   *  next follow-up (with quick picks), reply sent, tentative. Each control saves on change. */
+  function detailsBox(l, edit) {
+    const fu = dueDay(l), budNum = typeof l.budget === 'number' && isFinite(l.budget) ? l.budget : null, budTxt = budNum == null ? budgetOf(l) : null;
+    const filled = [budNum != null || budTxt, l.interest, l.department, fu, l.responded, l.tentative].filter(Boolean).length;
+    if (!edit && !filled) return null;
+    const box = h('details.ib-sec.ib-more-d', { dataset: { id: l.id } });
+    if (S.dOpen === l.id) box.open = true;
+    box.addEventListener('toggle', () => { if (box.open) S.dOpen = l.id; else if (S.dOpen === l.id) S.dOpen = null; });
+    box.append(h('summary.ib-more-s', { dataset: { k: 'details' } }, h('span.ib-more-chev', { html: MA.icon('chevRight', 'sm flip') }), h('span.label', t('details')),
+      filled ? h('span.ib-more-n', t('d.nSet', { n: MA.num(filled) })) : null));
+    const grid = h('div.ib-dgrid'); box.append(grid);
+    const deptAttrs = v => ({ dir: 'auto', lang: MA.langOf(v) });
+    if (!edit) {
+      const row2 = (k, v) => [h('dt', t(k)), h('dd', v)];
+      grid.append(h('dl.ib-dlist',
+        budNum != null ? row2('d.budget', qar(budNum)) : budTxt ? row2('d.budget', h('span', budTxt.lang ? sAttrs(budTxt.lang) : {}, budTxt.text)) : null,
+        l.interest ? row2('d.interest', h('span', vAttrs(l.interest), l.interest)) : null,
+        l.department ? row2('d.dept', h('span', deptAttrs(l.department), l.department)) : null,
+        fu ? row2('d.follow', dayFmt(fu, { year: 'numeric' })) : null,
+        l.responded ? row2('d.replied', t('yes')) : null,
+        l.tentative ? row2('d.tentative', t('d.tentHint')) : null));
+      return box;
+    }
+    const set = patch => { const cur = L.get(l.id); if (!cur || !canEdit()) return; if (Object.keys(patch).every(k => (cur[k] ?? null) === (patch[k] ?? null))) return; L.update(l.id, patch); };
+    // budget (QAR): a number; a site brief's chosen range stays until a number replaces it
+    const bud = h('input.input.sm', { type: 'number', min: '0', step: '1000', inputmode: 'numeric', dir: 'ltr', dataset: { k: 'd-budget' }, placeholder: budTxt ? budTxt.text : '' });
+    bud.value = budNum != null ? String(budNum) : '';
+    bud.addEventListener('change', () => { const raw = bud.value.trim(); if (raw === '') { if (budNum != null) set({ budget: null }); return; } const v = Math.max(0, Math.round(+raw)); if (isFinite(v)) set({ budget: v }); });
+    const budF = ui.field(esc(t('d.budget')), bud);
+    if (budNum != null) budF.append(h('p.hint.ib-dhint', qar(budNum)));
+    else if (budTxt) budF.append(h('p.hint.ib-dhint', t('d.budgetPick', { v: '' }), h('span', budTxt.lang ? sAttrs(budTxt.lang) : {}, budTxt.text)));
+    // project of interest
+    const intr = h('input.input.sm', { maxLength: 160, dir: 'auto', autocomplete: 'off', placeholder: t('d.interestPh'), dataset: { k: 'd-interest' } });
+    intr.value = l.interest || '';
+    intr.addEventListener('change', () => set({ interest: intr.value.trim().slice(0, 160) }));
+    // department: the Plan page's list when it has one, else MIRAS Marketing / MIRAS Real Estate (names, not translated)
+    const depts = [...new Set([...L.departments(), ...(l.department ? [l.department] : [])])];
+    const dept = ui.select([{ value: '', label: t('d.none') }, ...depts.map(d => ({ value: d, label: d }))], l.department || '', v => set({ department: v }));
+    dept.dataset.k = 'd-dept'; dept.classList.add('sm');
+    // next follow-up: a Qatar day, with quick picks
+    const fuIn = h('input.input.sm', { type: 'date', dir: 'ltr', dataset: { k: 'd-follow' } }); fuIn.value = fu || '';
+    fuIn.addEventListener('change', () => setFollow(l.id, isDay(fuIn.value) ? fuIn.value : null, 'd-follow'));
+    const quick = h('div.ib-quick.ib-fuq', [['fu.tomorrow', 1], ['fu.days', 3], ['fu.week', 7]].map(([k, n]) =>
+      h('button.btn.sm.ghost', { type: 'button', dataset: { k: 'fu-' + n, days: n }, onclick: () => setFollow(l.id, MA.addDays(today(), n), 'fu-' + n) }, t(k, { n: MA.num(n) }))));
+    if (fu) quick.append(h('button.btn.sm.ghost', { type: 'button', dataset: { k: 'fu-clear' }, onclick: () => setFollow(l.id, null, 'd-follow') }, t('clear')));
+    const fuF = ui.field(esc(t('d.follow')), fuIn); fuF.append(quick);
+    if (fu) fuF.append(h('p.hint.ib-dhint', { class: fuState(l) === 'due' ? 'is-due' : '' }, dayFmt(fu, { year: 'numeric' }) + (fuState(l) === 'due' ? ' · ' + t('fu.due') : '')));
+    // two ticks
+    const tick = (k, key, hint) => {
+      const cb = h('input.check', { type: 'checkbox', checked: !!l[key], dataset: { k: 'd-' + key } });
+      cb.addEventListener('change', () => { const cur = L.get(l.id); if (cur && !!cur[key] !== cb.checked) S.refocus = 'd-' + key; set({ [key]: cb.checked }); });
+      return h('label.ib-dtick', cb, h('span', t(k)), hint ? h('span.faint', '· ' + hint) : null);
+    };
+    grid.append(budF, ui.field(esc(t('d.interest')), intr), ui.field(esc(t('d.dept')), dept), fuF,
+      h('div.ib-dticks', tick('d.replied', 'responded'), tick('d.tentative', 'tentative', t('d.tentHint'))));
+    return box;
+  }
+  /** Set or clear the follow-up day (MA.leads.setFollowUp writes followUp and the next-step due together). */
+  function setFollow(id, day, focusKey) {
+    const l = L.get(id); if (!l || !canEdit()) return; day = isDay(day) ? day : null;
+    if (dueDay(l) === day) return;
+    if (focusKey) S.refocus = focusKey; // pointer clicks don't always focus a button; the same control keeps focus after the redraw
+    const snaps = [snap(l, ['followUp', 'due', 'timeline'])];
+    if (S.f && !l.archived && inTab(l, S.f.tab)) S.keep.add(id); // the brief you're working on stays put
+    const log = day || l.nextStep ? { type: 'next', text: l.nextStep || '', due: day } : { type: 'next', text: '', clear: true };
+    L.setFollowUp(id, day, { log });
+    MA.toast(day ? t('fu.saved', { date: esc(dayFmt(day)) }) : t('fu.cleared'), { icon: 'calendar', undo: () => unsnap(snaps) });
   }
   /** Where a site brief came from: channel, referrer, UTM campaign and the first page. Nothing shows when the brief carried none. */
   function attribution(l) {
@@ -1311,7 +1425,7 @@
     const d = dueIn(l), bar = h('div', { class: 'ib-next' + (!closed && d != null ? d < 0 ? ' late' : d === 0 ? ' today' : '' : '') });
     bar.append(h('span.ib-next-i', { html: MA.icon('calendar', 'sm') }));
     if (!has) { bar.append(h('button.ib-link.ib-next-add', { type: 'button', dataset: { k: 'next' }, onclick: e => nextPop(e.currentTarget, l.id) }, t('nextAdd'))); return bar; }
-    const parts = [h('span.label.ib-next-l', t('next')), l.nextStep ? h('span.ib-next-t', vAttrs(l.nextStep), l.nextStep) : null, isDay(l.due) ? h('span.ib-next-d', closed ? dayFmt(l.due) : dueText(l)) : null];
+    const parts = [h('span.label.ib-next-l', t('next')), l.nextStep ? h('span.ib-next-t', vAttrs(l.nextStep), l.nextStep) : null, dueDay(l) ? h('span.ib-next-d', closed ? dayFmt(dueDay(l)) : dueText(l)) : null];
     bar.append(edit ? h('button.ib-next-main', { type: 'button', dataset: { k: 'next' }, title: t('nextEdit'), onclick: e => nextPop(e.currentTarget, l.id) }, ...parts) : h('div.ib-next-main', ...parts));
     if (edit) { const dn = ui.iconBtn('check', { tip: t('nextDone'), size: 'sm', onclick: () => setNext(l.id, '', null, { done: true }) }); dn.dataset.act = 'nextdone'; bar.append(dn); }
     return bar;
@@ -1399,7 +1513,7 @@
 
   /* ================= board ================= */
   function cardLabel(l) {
-    return [display(l), l.company && l.name ? l.company : '', hasVal(l.value) ? money(l.value) : '', dueText(l) && !isClosed(l) ? dueText(l) : '', l.stage === 'lost' && l.lostReason ? lostLabel(l.lostReason) : '', srFacts(l)].filter(Boolean).join(', ');
+    return [display(l), l.company && l.name ? l.company : '', hasVal(l.value) ? money(l.value) : '', dueText(l) && !isClosed(l) ? dueText(l) : '', fuState(l) === 'none' ? t('fu.none') : '', l.tentative ? t('d.tentative') : '', l.stage === 'lost' && l.lostReason ? lostLabel(l.lostReason) : '', srFacts(l)].filter(Boolean).join(', ');
   }
   function card(l, rid) {
     S.last?.objs.set(l.id, l);
@@ -1410,6 +1524,7 @@
       l.company && l.name ? h('div.ib-c2.truncate', vAttrs(l.name), l.name) : null,
       l.stage === 'lost' && l.lostReason ? h('div.ib-c2.truncate', lostChip(l)) : null,
       (l.waves || []).length ? h('div.ib-c3', swellChips(l.waves, 2)) : null,
+      noFuChip(l) || tentChip(l) ? h('div.ib-cm', noFuChip(l), tentChip(l)) : null,
       h('div.ib-c4', hasVal(l.value) ? h('span.ib-val', moneyShort(l.value)) : h('span.faint', '—'), h('span.grow'), dueChip(l), daysChip(l),
         isSnoozed(l) ? h('span.ib-snz', { html: MA.icon('clock', 'sm') }) : null, avatarOf(l.owner, 'xs')));
   }
@@ -1533,6 +1648,9 @@
     { id: 'services', label: t('col.services'), sort: 'services', cell: l => (l.services || []).length ? svcChips(l.services, 1) : '—' },
     { id: 'words', label: t('col.words'), sort: 'words', cell: l => (l.words || []).length ? h('span.truncate.ib-twords', vAttrs(joinL(l.words)), joinL(l.words)) : '—' },
     { id: 'value', label: t('col.value'), sort: 'value', num: true, cell: l => money(l.value) },
+    { id: 'budget', label: t('col.budget'), sort: 'budget', num: true, cell: l => typeof l.budget === 'number' ? qar(l.budget) : h('span.faint', '—') },
+    { id: 'interest', label: t('col.interest'), sort: 'interest', cell: l => l.interest ? h('span.truncate', vAttrs(l.interest), l.interest) : h('span.faint', '—') },
+    { id: 'dept', label: t('col.dept'), sort: 'dept', cell: l => l.department ? h('span.truncate', { dir: 'auto', lang: MA.langOf(l.department) }, l.department) : h('span.faint', '—') },
     { id: 'days', label: t('col.days'), sort: 'days', num: true, cell: l => daysChip(l) || '—' },
     { id: 'owner', label: t('col.owner'), sort: 'owner', cell: l => l.owner ? h('span.ib-towner', avatarOf(l.owner, 'xs'), h('span', ownerName(l.owner))) : h('span.faint', t('unassigned')) },
     { id: 'source', label: t('col.source'), sort: 'source', cell: l => { const ch = channelOf(l); return sourceName(l.source) + (ch ? ' · ' + channelName(ch) : ''); } },
@@ -2127,7 +2245,7 @@
     for (const l of L.raw()) {
       if (l.sample || l.archived) continue;
       const patch = {}, href = '#/inbox/' + encodeURIComponent(l.id);
-      if (isDue(l) && l.dueNotified !== l.due) { MA.notify.push({ key: 'inbox.notify.due', vars: { name: display(l) }, text: l.nextStep || '', icon: 'calendar', href: href + '?tab=due' }); patch.dueNotified = l.due; }
+      if (isDue(l) && l.dueNotified !== dueDay(l)) { MA.notify.push({ key: 'inbox.notify.due', vars: { name: display(l) }, text: l.nextStep || '', icon: 'calendar', href: href + '?tab=due' }); patch.dueNotified = dueDay(l); }
       if (l.snoozeUntil && ts(l.snoozeUntil) <= t0 && l.snoozeNotified !== l.snoozeUntil) { MA.notify.push({ key: 'inbox.notify.snooze', vars: { name: display(l) }, text: l.company || '', icon: 'clock', href }); patch.snoozeNotified = l.snoozeUntil; }
       if (Object.keys(patch).length) { L.update(l.id, patch); n++; }
     }
@@ -2137,5 +2255,5 @@
 
   // handles for the headless tests (tests/inbox.test.js) and for other pages (Overview: due follow-ups, sources)
   MA.inbox = { state: S, TABS, parseImport, mailtoOf, waOf, replyParts, fillTpl, templates, tplEditor, needsReply, isDue, importDlg, exportCsv, briefText,
-    reportRows, reportDlg, howDlg, teamOn, channelOf, campaignOf, budgetOf, setNext, nextPop, remind };
+    reportRows, reportDlg, howDlg, teamOn, channelOf, campaignOf, budgetOf, setNext, nextPop, remind, setFollow, fuState, csvColumns };
 })();

@@ -244,3 +244,40 @@ html:is([lang=ar],[lang=fa]) .m-analytics .an-delta,html:is([lang=ar],[lang=fa])
 /* services added: empty state (sample data has no service picks) */
 .m-analytics .an-sv-empty{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:var(--r2);background:var(--panel2);color:var(--ink2);font-size:.93rem;line-height:1.5}
 .m-analytics .an-sv-empty .i{flex:none;margin-top:2px;color:var(--accent-text)}
+
+/* ---------- followers: counts typed in by hand (MA.followers) ---------- */
+.m-analytics .an-card[data-card=followers]{margin-bottom:var(--gap)}
+.m-analytics .an-fo-manual{gap:6px;color:var(--ink2)}
+.m-analytics .an-fo-manual .i{width:14px;height:14px}
+.m-analytics .an-fo-rows{container-type:inline-size;display:flex;flex-direction:column;margin:4px 0 12px}
+.m-analytics .an-fo-row{display:grid;grid-template-columns:minmax(7rem,1.1fr) minmax(6rem,.8fr) minmax(0,1.6fr) auto;align-items:center;gap:8px 16px;padding:10px 0;border-top:1px solid var(--line)}
+.m-analytics .an-fo-row:first-child{border-top:0}
+.m-analytics .an-fo-name{display:flex;flex-direction:column;min-width:0}
+.m-analytics .an-fo-name b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-analytics .an-fo-dept,.m-analytics .an-fo-when,.m-analytics .an-fo-cl,.m-analytics .an-fo-first{font-size:.93rem;color:var(--ink2)}
+.m-analytics .an-fo-num{display:flex;flex-direction:column;line-height:1.15}
+.m-analytics .an-fo-num b{font:400 1.9rem/1.05 var(--serif);letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums}
+html:is([lang=ar],[lang=fa]) .m-analytics .an-fo-num b{font-family:'Instrument Serif',var(--ui);letter-spacing:0}
+.m-analytics .an-fo-chgs{display:flex;flex-wrap:wrap;gap:4px 18px;min-width:0}
+.m-analytics .an-fo-c{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap}
+.m-analytics .an-fo-chg b{font-weight:600}
+.m-analytics .an-fo-today{display:flex;align-items:center;gap:6px}
+.m-analytics .an-fo-in{width:8.5rem;text-align:end}
+.m-analytics .an-fo-in[aria-invalid=true]{box-shadow:inset 0 0 0 2px var(--bad)}
+.m-analytics .an-fo-seg{margin-bottom:8px}
+.m-analytics .an-fo-chart{min-height:40px}
+.m-analytics .an-fo-acts{display:inline-flex;gap:2px}
+.m-analytics .an-fo-acc{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:8px;align-items:center}
+.m-analytics.stack .an-fo-acclist{display:flex;flex-direction:column;gap:8px}
+@container (max-width:620px){
+  .m-analytics .an-fo-row{grid-template-columns:minmax(0,1fr) auto}
+  .m-analytics .an-fo-chgs{grid-column:1 / -1;grid-row:2}
+  .m-analytics .an-fo-today{grid-column:1 / -1;grid-row:3}
+  .m-analytics .an-fo-in{flex:1;min-width:0;width:auto}
+  .m-analytics .an-fo-num{align-items:flex-end}
+}
+@media (max-width:560px){.m-analytics .an-fo-acc{grid-template-columns:minmax(0,1fr) auto}.m-analytics .an-fo-acc select{grid-column:1;grid-row:2}}
+/* the Followers head wraps instead of squeezing its title (phones) */
+.m-analytics .an-card[data-card=followers] .card-head{flex-wrap:wrap;row-gap:6px}
+.m-analytics .an-card[data-card=followers] .card-head .h3{flex:1 0 auto}
+@media (max-width:560px){.m-analytics .page-head .actions{flex-wrap:wrap}.m-analytics .an-range{flex:1 1 100%}.m-analytics .an-range-btn b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}

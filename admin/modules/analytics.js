@@ -538,7 +538,8 @@
     if (src === 'none') {
       const e = pv ? { title: esc(T('none.titleOn', { name: pv.name })), text: esc(T('none.textOn', { name: pv.name }) + (pv.live ? '' : ' ' + T('src.pending', { name: pv.name }))) }
         : { title: esc(T('none.title')), text: esc(T('none.text')) };
-      wrap.append(MA.h('div.card.an-none', { dataset: { provider: pv?.provider || '' } }, MA.ui.empty({ ...e, pose: 'arrive', actions: noneActions(pv) })), ...[sharedCard(), attrCard(period())].filter(Boolean), connectionCard(), foot());
+      wrap.append(MA.h('div.card.an-none', { dataset: { provider: pv?.provider || '' } }, MA.ui.empty({ ...e, pose: 'arrive', actions: noneActions(pv) })), ...[sharedCard(), attrCard(period())].filter(Boolean), followersCard(), connectionCard(), foot());
+      fillFollowers();
       return restore(fk, y);
     }
     wrap.append(banner(src, pv));
@@ -547,7 +548,8 @@
     partialDay = P.R.n === 1 && P.R.to === today();
     if (!P.cur.visitors && !P.cur.views) {
       wrap.append(MA.h('div.card.an-none', MA.ui.empty({ title: esc(T('emptyRange.title')), text: esc(T('emptyRange.text', { range: rangePhrase(P.R) })), icon: 'calendar', compact: true,
-        actions: [MA.ui.btn(T('emptyRange.btn', { n: MA.num(90) }), { kind: 'primary', onclick: () => setRange('90d') })] })), MA.h('div.an-row', liveCard(), connectionCard()), foot());
+        actions: [MA.ui.btn(T('emptyRange.btn', { n: MA.num(90) }), { kind: 'primary', onclick: () => setRange('90d') })] })), MA.h('div.an-row', liveCard(), connectionCard()), followersCard(), foot());
+      fillFollowers();
       return restore(fk, y);
     }
     const main = mainCard(P, sample);
@@ -557,12 +559,16 @@
       MA.h('div.an-row', breakdownCard(P, sample), liveCard()),
       MA.h('div.an-row.even', reachCard(P, sample), funnelCard(P, sample)),
       ...[attrCard(P)].filter(Boolean),
+      followersCard(),
       MA.h('div.an-row', swellsCard(P, sample), momentsCard(P, sample)),
       MA.h('div.an-row', heatCard(P, sample), filmCard(P, sample)),
       MA.h('div.an-row.even', faqCard(P, sample), servicesCard(P)),
       connectionCard(), foot());
+    fillFollowers();
     restore(fk, y);
   }
+  /** The followers chart is drawn once its card is on the page, so it can take the card's width. */
+  const fillFollowers = () => wrap?.querySelector('[data-card=followers]')?._fill?.();
   function restore(fk, y) {
     if (Math.abs(scrollY - y) > 1) scrollTo(0, y);
     if (fk) wrap.querySelector(`[data-fk="${fk}"]`)?.focus({ preventScroll: true });
@@ -1205,6 +1211,230 @@
     return el;
   }
 
+  /* ---------------- followers: counts the team types in by hand (no app is read) ----------------
+     Store MA.followers (list/get/save/remove, accounts, latest, growth), kept in MA.db 'followers' (snapshots) and 'followers.accounts'.
+     One snapshot per account per Qatar day: a second entry that day replaces the first. The Settings backup saves every miras.admin.* key,
+     so both are in the backup and restore. A server can replace this object later with the same calls. */
+  const FO_I18N = {
+      en: { title: 'Followers', manual: 'Typed in', manualTip: 'Counts typed in by the team, not read from the apps.', accounts: 'Accounts', today: 'Today',
+        todayFor: 'Today’s count for {name}', saved: '{name}: {n} saved.', total: 'Total', sinceLast: 'Since last', first: 'First count', flat: 'No change',
+        emptyT: 'No counts yet', emptyX: 'Type today’s follower count for each account.', sum: '{total} followers in all.', sumG: '{total} followers in all, {chg} {range}.',
+        note: 'Typed in by the team. One count per account per day; a new one that day replaces it.', need2: 'Add counts on two days to draw a line.',
+        chart: 'Followers of {name}, {range}', chartDesc: 'From {a} on {d1} to {b} on {d2}.', 'col.date': 'Date', 'col.account': 'Account', 'col.count': 'Followers', 'col.change': 'Change', 'col.act': 'Actions',
+        edit: 'Edit count', del: 'Delete count', deleted: 'Count deleted.', bad: 'Type a whole number.', 'acc.name': 'Name', 'acc.dept': 'Department', 'acc.noDept': 'None',
+        'acc.add': 'Add account', 'acc.remove': 'Remove {name}', 'acc.saved': 'Accounts saved.', 'acc.keep': 'Counts of a removed account are kept.', 'acc.need': 'Give every account a name.',
+        cmd: 'Type follower counts', none: 'No counts in this range.', show: 'Show' },
+      ar: { title: 'المتابعون', manual: 'إدخال يدوي', manualTip: 'أرقام يكتبها الفريق، لا تُقرأ من التطبيقات.', accounts: 'الحسابات', today: 'اليوم',
+        todayFor: 'عدد اليوم لحساب {name}', saved: 'حُفظ {name}: {n}.', total: 'المجموع', sinceLast: 'منذ آخر مرة', first: 'أول رقم', flat: 'بلا تغيير',
+        emptyT: 'لا أرقام بعد', emptyX: 'اكتب عدد المتابعين اليوم لكل حساب.', sum: 'مجموع المتابعين: {total}.', sumG: 'مجموع المتابعين: {total}، والتغيّر {chg} {range}.',
+        note: 'يكتبها الفريق. رقم واحد لكل حساب في اليوم، والرقم الجديد في اليوم نفسه يحلّ محلّه.', need2: 'أضف أرقام يومين لرسم الخط.',
+        chart: 'متابعو {name}، {range}', chartDesc: 'من {a} في {d1} إلى {b} في {d2}.', 'col.date': 'التاريخ', 'col.account': 'الحساب', 'col.count': 'المتابعون', 'col.change': 'التغيّر', 'col.act': 'إجراءات',
+        edit: 'تعديل الرقم', del: 'حذف الرقم', deleted: 'حُذف الرقم.', bad: 'اكتب عدداً صحيحاً.', 'acc.name': 'الاسم', 'acc.dept': 'القسم', 'acc.noDept': 'بلا قسم',
+        'acc.add': 'إضافة حساب', 'acc.remove': 'إزالة {name}', 'acc.saved': 'حُفظت الحسابات.', 'acc.keep': 'تبقى أرقام الحساب المحذوف محفوظة.', 'acc.need': 'أعطِ كل حساب اسماً.',
+        cmd: 'اكتب أعداد المتابعين', none: 'لا أرقام في هذه الفترة.', show: 'عرض' },
+      fa: { title: 'دنبال‌کنندگان', manual: 'ورود دستی', manualTip: 'عددهایی که تیم وارد می‌کند، نه از خود اپ‌ها.', accounts: 'حساب‌ها', today: 'امروز',
+        todayFor: 'عدد امروز {name}', saved: '{name}: {n} ذخیره شد.', total: 'مجموع', sinceLast: 'از دفعهٔ قبل', first: 'نخستین عدد', flat: 'بدون تغییر',
+        emptyT: 'هنوز عددی نیست', emptyX: 'عدد امروز دنبال‌کنندگان هر حساب را بنویسید.', sum: 'مجموع دنبال‌کنندگان: {total}.', sumG: 'مجموع دنبال‌کنندگان: {total}؛ تغییر {chg} {range}.',
+        note: 'تیم وارد می‌کند. هر حساب روزی یک عدد؛ عدد تازه در همان روز جای قبلی را می‌گیرد.', need2: 'عدد دو روز را وارد کنید تا خط کشیده شود.',
+        chart: 'دنبال‌کنندگان {name}، {range}', chartDesc: 'از {a} در {d1} تا {b} در {d2}.', 'col.date': 'تاریخ', 'col.account': 'حساب', 'col.count': 'دنبال‌کننده', 'col.change': 'تغییر', 'col.act': 'کارها',
+        edit: 'ویرایش عدد', del: 'حذف عدد', deleted: 'عدد حذف شد.', bad: 'یک عدد صحیح بنویسید.', 'acc.name': 'نام', 'acc.dept': 'بخش', 'acc.noDept': 'بدون بخش',
+        'acc.add': 'افزودن حساب', 'acc.remove': 'حذف {name}', 'acc.saved': 'حساب‌ها ذخیره شد.', 'acc.keep': 'عددهای حساب حذف‌شده نگه داشته می‌شوند.', 'acc.need': 'برای هر حساب نامی بنویسید.',
+        cmd: 'وارد کردن عدد دنبال‌کنندگان', none: 'در این بازه عددی نیست.', show: 'نمایش' },
+  };
+  {
+    const pre = o => Object.fromEntries(Object.entries(o).map(([k, v]) => ['analytics.fo.' + k, v]));
+    MA.i18n.add({ en: pre(FO_I18N.en), ar: pre(FO_I18N.ar), fa: pre(FO_I18N.fa) });
+  }
+  const FT = (k, v) => T('fo.' + k, v);
+  const FO_KEY = 'followers', FO_ACC = 'followers.accounts';
+  const FO_DEFAULT = [{ id: 'instagram', name: 'Instagram' }, { id: 'tiktok', name: 'TikTok' }, { id: 'linkedin', name: 'LinkedIn' }];
+  const FO_DEPTS = [{ id: 'mkt', name: { en: 'MIRAS Marketing', ar: 'ميراس للتسويق', fa: 'میراس مارکتینگ' } }, { id: 're', name: { en: 'MIRAS Real Estate', ar: 'ميراس العقارية', fa: 'میراس املاک' } }];
+  const foDepts = () => { try { const d = MA.plan?.depts?.(); if (Array.isArray(d) && d.length) return d; } catch (e) {} return FO_DEPTS; };
+  const foDeptName = id => { const d = foDepts().find(x => x.id === id); return d ? MA.L(d.name) : ''; };
+  const foStr = (v, max = 80) => typeof v === 'string' ? v.trim().slice(0, max) : '';
+  const foCount = v => { const n = typeof v === 'string' ? Number(v.replace(/[\s,٬]/g, '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))) : Number(v); return Number.isInteger(n) && n >= 0 && n <= 1e10 ? n : null; };
+  const foCanEdit = () => MA.can('plan.edit') || MA.can('settings.edit');
+  /** Stored snapshots as clean records (anything unreadable is skipped, unknown fields are kept). */
+  const foRaw = () => { const v = MA.db.get(FO_KEY, []); return Array.isArray(v) ? v.filter(s => MA.isObj(s) && typeof s.id === 'string' && s.id && typeof s.account === 'string' && validDs(s.date) && foCount(s.count) != null).map(s => ({ ...s, count: foCount(s.count) })) : []; };
+  const foByDate = (a, b) => String(a.date).localeCompare(String(b.date)) || String(a.at || '').localeCompare(String(b.at || ''));
+  const foRange = range => { const R = M().range(range && typeof range === 'object' ? normRange(range) : (M().RANGES[range] ? range : '30d')); return { from: R.from, to: R.to, key: R.key }; };
+  const F = MA.followers = {
+    /** [{ id, name, dept? }]: the accounts counted (default Instagram, TikTok, LinkedIn). */
+    accounts() { const v = MA.db.get(FO_ACC, null); return Array.isArray(v) ? v.filter(a => MA.isObj(a) && typeof a.id === 'string' && a.id && foStr(a.name)).map(a => ({ ...a, name: foStr(a.name), dept: foStr(a.dept) })) : MA.clone(FO_DEFAULT); },
+    /** Replace the accounts: [{ id?, name, dept? }]. Snapshots of a removed account stay stored. → true | false (no right, or a nameless account). */
+    saveAccounts(list) {
+      if (!foCanEdit() || !Array.isArray(list)) return false;
+      const clean = list.filter(MA.isObj).map(a => ({ id: foStr(a.id) || MA.uid('fa-'), name: foStr(a.name), dept: foStr(a.dept) }));
+      if (clean.some(a => !a.name)) return false;
+      const ok = MA.db.set(FO_ACC, clean); if (ok) MA.emit('followers', { type: 'accounts' }); return ok;
+    },
+    accountName: id => F.accounts().find(a => a.id === id)?.name || '',
+    /** filter: { account, from, to } (Qatar days, inclusive) → snapshots of current accounts, oldest first. */
+    list(f = {}) {
+      const ids = new Set(F.accounts().map(a => a.id));
+      return foRaw().filter(s => ids.has(s.account) && (!f.account || s.account === f.account) && (!f.from || s.date >= f.from) && (!f.to || s.date <= f.to)).sort(foByDate);
+    },
+    get: id => foRaw().find(s => s.id === id) || null,
+    /** { id?, account, count, date? (default today in Qatar) } → the saved snapshot, or null. The same account and day replaces what is there. */
+    save(input) {
+      if (!foCanEdit() || !MA.isObj(input)) return null;
+      const count = foCount(input.count), list = foRaw(), byId = input.id ? list.find(s => s.id === input.id) : null;
+      const account = foStr(input.account) || byId?.account, date = validDs(input.date) ? input.date : byId?.date || today();
+      if (count == null || !account || !F.accounts().some(a => a.id === account) || date > today()) return null;
+      const same = list.find(s => s.account === account && s.date === date && s.id !== byId?.id);
+      const keep = list.filter(s => s !== byId && s !== same);
+      const me = MA.team?.me?.() || {};
+      const snap = { ...(byId || same || {}), id: byId?.id || same?.id || input.id || MA.uid('fo-'), account, date, count, by: me.id || '', at: new Date().toISOString() };
+      if (!MA.db.set(FO_KEY, [...keep, snap].sort(foByDate))) return null;
+      MA.emit('followers', { type: byId || same ? 'update' : 'add', item: snap, before: byId || same || null });
+      return snap;
+    },
+    /** → the removed snapshot (save() puts it back), or null. */
+    remove(id) {
+      if (!foCanEdit()) return null;
+      const list = foRaw(), s = list.find(x => x.id === id); if (!s) return null;
+      MA.db.set(FO_KEY, list.filter(x => x !== s)); MA.emit('followers', { type: 'remove', item: s }); return s;
+    },
+    /** asOf: a Qatar day (default today) → { total, n, date, accounts: [{ id, name, dept, count, date }] } with the newest count of each account. */
+    latest(asOf = today()) {
+      const accs = F.accounts().map(a => { const s = F.list({ account: a.id, to: asOf }).at(-1); return s ? { id: a.id, name: a.name, dept: a.dept, count: s.count, date: s.date } : null; }).filter(Boolean);
+      return { total: accs.reduce((t, a) => t + a.count, 0), n: accs.length, date: accs.reduce((m, a) => a.date > m ? a.date : m, ''), accounts: accs };
+    },
+    /** range: a preset key ('30d'…) or { from, to } → { from, to, total: { first, last, change, from }, accounts: [{ id, name, dept, first, last, change, prev, sincePrev, n }] }.
+        change = last − first in the range (null with fewer than two counts); sincePrev = the newest count − the one before it (null if there is none). */
+    growth(range = '30d') {
+      const R = foRange(range), all = F.accounts().map(a => {
+        const inR = F.list({ account: a.id, from: R.from, to: R.to }), first = inR[0] || null, last = inR.at(-1) || null;
+        const upTo = last ? F.list({ account: a.id, to: last.date }) : [], prev = upTo.length > 1 ? upTo.at(-2) : null;
+        return { id: a.id, name: a.name, dept: a.dept, n: inR.length, first, last, change: inR.length > 1 ? last.count - first.count : null, prev, sincePrev: last && prev ? last.count - prev.count : null };
+      });
+      const grown = all.filter(a => a.change != null);
+      return { from: R.from, to: R.to, key: R.key, accounts: all,
+        total: { first: grown.reduce((t, a) => t + a.first.count, 0), last: grown.reduce((t, a) => t + a.last.count, 0), change: grown.length ? grown.reduce((t, a) => t + a.change, 0) : null, from: grown.reduce((m, a) => !m || a.first.date < m ? a.first.date : m, '') } };
+    },
+    canEdit: foCanEdit,
+    /** The i18n keys this store and its card use. */
+    strings: () => Object.keys(FO_I18N.en).map(k => 'analytics.fo.' + k),
+  };
+  /** "▲ +40" · "▼ −12" · "No change": the sign and arrow say it, the colour only repeats it. */
+  function foChg(n, cls = '') {
+    if (n == null) return null;
+    const dir = n > 0 ? 'up good' : n < 0 ? 'down bad' : 'flat';
+    return MA.h('span', { class: `delta ${dir} an-fo-chg ${cls}`.trim() }, MA.h('b', n ? `${n > 0 ? '▲' : '▼'} ${MA.num(n, { signDisplay: 'always' })}` : FT('flat')));
+  }
+  const foChgText = n => n ? `${n > 0 ? '▲' : '▼'} ${MA.num(n, { signDisplay: 'always' })}` : FT('flat');
+  const foTag = (el, d) => { Object.assign(el.dataset, d); return el; };
+  let foPick = '';
+  function followersCard() {
+    const edit = foCanEdit(), accs = F.accounts(), rangeKey = S.range, G = F.growth(rangeKey), L = F.latest(), R = M().range(rangeKey), rname = rangeName(R);
+    const badge = MA.h('span.badge.outline.an-fo-manual', { title: FT('manualTip') }, MA.iconEl('edit', 'sm'), MA.h('span', FT('manual')));
+    const extra = [badge];
+    if (edit) { const b = MA.ui.btn(FT('accounts'), { size: 'sm', kind: 'ghost', icon: 'settings', onclick: () => foAccounts() }); b.dataset.fk = 'fo-accounts'; extra.push(b); }
+    const el = card('followers', { title: FT('title'), extra });
+    const body = el.querySelector('.card-body');
+    // one row per account: the newest count, the change since the count before, the change in the range, and (for editors) today's box
+    const rows = MA.h('div.an-fo-rows', { role: 'list' }, accs.map(a => {
+      const g = G.accounts.find(x => x.id === a.id) || {}, lt = L.accounts.find(x => x.id === a.id), todays = F.list({ account: a.id, from: today(), to: today() })[0];
+      const row = MA.h('div.an-fo-row', { role: 'listitem', dataset: { account: a.id } },
+        MA.h('div.an-fo-name', MA.h('b', { dir: 'auto' }, a.name), a.dept && foDeptName(a.dept) ? MA.h('span.an-fo-dept', foDeptName(a.dept)) : null),
+        MA.h('div.an-fo-num', MA.h('b.num', lt ? MA.num(lt.count) : '—'), lt ? MA.h('span.an-fo-when', fmtDay(lt.date)) : null),
+        MA.h('div.an-fo-chgs',
+          lt ? MA.h('span.an-fo-c', MA.h('span.an-fo-cl', FT('sinceLast')), g.sincePrev != null ? foChg(g.sincePrev, 'last') : MA.h('span.an-fo-first', FT('first'))) : null,
+          g.change != null ? MA.h('span.an-fo-c', MA.h('span.an-fo-cl', rname), foChg(g.change, 'range')) : null));
+      if (edit) {
+        const inp = MA.h('input.input.an-fo-in', { type: 'text', inputmode: 'numeric', dir: 'ltr', autocomplete: 'off', placeholder: FT('today'), 'aria-label': FT('todayFor', { name: a.name }), value: todays ? String(todays.count) : '', dataset: { fk: 'fo-in-' + a.id } });
+        const go = () => foSaveToday(a, inp);
+        inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+        const sb = MA.ui.btn(MA.t('save'), { size: 'sm', icon: 'check', onclick: go }); sb.dataset.fk = 'fo-save-' + a.id;
+        row.append(MA.h('div.an-fo-today', inp, sb));
+      }
+      return row;
+    }));
+    const any = F.list().length;
+    const summary = !L.n ? FT('emptyX') : G.total.change != null ? FT('sumG', { total: MA.num(L.total), chg: foChgText(G.total.change), range: rangePhrase(R) }) : FT('sum', { total: MA.num(L.total) });
+    // the chart: one account at a time, drawn only from the days that have a count (nothing is filled in between)
+    const withData = accs.filter(a => F.list({ account: a.id, from: R.from, to: R.to }).length);
+    if (!withData.some(a => a.id === foPick)) foPick = withData[0]?.id || '';
+    let viz = null;
+    if (withData.length) {
+      const box = MA.h('div.an-fo-chart');
+      const drawChart = () => {
+        box.innerHTML = '';
+        const a = accs.find(x => x.id === foPick), pts = F.list({ account: foPick, from: R.from, to: R.to });
+        if (pts.length < 2) { box.append(MA.h('p.an-note', FT('need2'))); return; }
+        const w = Math.max(280, Math.round(box.clientWidth || wrap?.clientWidth / 2 || 560));
+        const ch = MA.chart.lines([{ label: a.name, values: pts.map(s => s.count), color: 'var(--an-line)' }], pts.map(s => fmtDay(s.date).replace(/[‎‏؜]/g, '')),
+          { w, h: 150, xEvery: Math.ceil(pts.length / Math.max(2, Math.floor(w / 90))), yFmt: v => MA.compact(Math.round(v)), label: FT('chart', { name: a.name, range: rname }),
+            desc: FT('chartDesc', { a: MA.num(pts[0].count), d1: fmtDay(pts[0].date), b: MA.num(pts.at(-1).count), d2: fmtDay(pts.at(-1).date) }) });
+        box.append(ch);
+        if (MA.isRTL()) mirrorTime(ch); // time runs right to left, like the main chart
+      };
+      const seg = withData.length > 1 ? MA.ui.seg(withData.map(a => ({ value: a.id, label: a.name })), foPick, v => { foPick = v; drawChart(); }, { size: 'sm', label: FT('show') }) : null;
+      if (seg) seg.classList.add('an-fo-seg');
+      viz = MA.h('div', seg, box);
+      el._fill = drawChart;
+    }
+    // the table: every count in the range, newest first, with edit and delete for editors
+    const table = !any ? null : () => {
+      const snaps = F.list({ from: R.from, to: R.to }).reverse();
+      if (!snaps.length) return MA.h('p.an-note', FT('none'));
+      const prevOf = s => { const l = F.list({ account: s.account, to: s.date }).filter(x => x.id !== s.id); return l.at(-1) || null; };
+      const cols = [{ label: FT('col.date'), get: s => fmtDayLong(s.date) }, { label: FT('col.account'), get: s => F.accountName(s.account) }, { label: FT('col.count'), num: true, get: s => MA.num(s.count) },
+        { label: FT('col.change'), num: true, get: s => { const p = prevOf(s); return p ? foChg(s.count - p.count) || '—' : '—'; } }];
+      if (edit) cols.push({ label: FT('col.act'), get: s => MA.h('span.an-fo-acts',
+        foTag(MA.ui.iconBtn('edit', { tip: FT('edit'), size: 'sm', onclick: () => foEdit(s) }), { fk: 'fo-edit-' + s.id, act: 'fo-edit' }),
+        foTag(MA.ui.iconBtn('trash', { tip: FT('del'), size: 'sm', onclick: () => foDelete(s) }), { fk: 'fo-del-' + s.id, act: 'fo-del' })) });
+      const t = tableEl(cols, snaps); t.classList.add('an-fo-table'); return t;
+    };
+    if (!any && !edit) body.append(MA.ui.empty({ title: esc(FT('emptyT')), text: esc(FT('emptyX')), icon: 'team', compact: true }));
+    else body.append(figure('followers', { summary, viz, table, note: FT('note') }));
+    body.querySelector('.an-fig')?.insertBefore(rows, body.querySelector('.an-viz'));
+    if (!table) el.querySelector('.an-tbtn')?.remove();
+    return el;
+  }
+  function foSaveToday(a, inp) {
+    const n = foCount(inp.value);
+    if (n == null) { inp.setAttribute('aria-invalid', 'true'); MA.toast(esc(FT('bad')), { tone: 'bad' }); inp.focus(); return; }
+    const before = F.list({ account: a.id, from: today(), to: today() })[0] || null;
+    const s = F.save({ account: a.id, count: n });
+    if (!s) return;
+    MA.toast(esc(FT('saved', { name: a.name, n: MA.num(n) })), { undo: () => { if (before) F.save(before); else F.remove(s.id); } });
+  }
+  async function foEdit(s) {
+    const v = await MA.ui.prompt(esc(FT('edit')), { value: String(s.count), label: esc(`${F.accountName(s.account)} · ${fmtDayLong(s.date)}`), ok: MA.t('save') });
+    if (v == null) return;
+    const n = foCount(v); if (n == null) { MA.toast(esc(FT('bad')), { tone: 'bad' }); return; }
+    const before = { ...s }; if (F.save({ id: s.id, count: n })) MA.toast(esc(FT('saved', { name: F.accountName(s.account), n: MA.num(n) })), { undo: () => F.save(before) });
+  }
+  function foDelete(s) {
+    const gone = F.remove(s.id); if (!gone) return;
+    MA.toast(esc(FT('deleted')), { undo: () => F.save(gone) });
+  }
+  function foAccounts() {
+    if (!foCanEdit()) return;
+    const rows = F.accounts().map(a => ({ ...a })), list = MA.h('div.an-fo-acclist'), err = MA.h('p.err.small', { hidden: true, role: 'alert' });
+    const depts = foDepts();
+    const draw = () => {
+      list.innerHTML = '';
+      rows.forEach((r, i) => {
+        const name = MA.h('input.input', { value: r.name, dir: 'auto', 'aria-label': `${FT('acc.name')} ${MA.num(i + 1)}`, oninput: e => { r.name = e.target.value; } });
+        const dept = MA.h('select.select', { 'aria-label': `${FT('acc.dept')} ${MA.num(i + 1)}`, onchange: e => { r.dept = e.target.value; } },
+          MA.h('option', { value: '' }, FT('acc.noDept')), depts.map(d => MA.h('option', { value: d.id, selected: d.id === r.dept }, MA.L(d.name))));
+        const rm = MA.ui.iconBtn('trash', { tip: FT('acc.remove', { name: r.name || MA.num(i + 1) }), size: 'sm', onclick: () => { rows.splice(i, 1); draw(); list.querySelector('input')?.focus(); } });
+        list.append(MA.h('div.an-fo-acc', name, dept, rm));
+      });
+    };
+    draw();
+    const add = MA.ui.btn(FT('acc.add'), { icon: 'plus', size: 'sm', kind: 'ghost', onclick: () => { rows.push({ id: '', name: '', dept: '' }); draw(); [...list.querySelectorAll('input')].pop()?.focus(); } });
+    MA.ui.modal({ title: esc(FT('accounts')), body: MA.h('div.stack.m-analytics', list, add, MA.h('p.hint', FT('acc.keep')), err),
+      actions: [{ label: MA.t('cancel'), kind: 'ghost' }, { label: MA.t('save'), kind: 'primary', run: () => {
+        const clean = rows.map(r => ({ ...r, name: String(r.name || '').trim() }));
+        if (clean.some(r => !r.name)) { err.hidden = false; err.textContent = FT('acc.need'); return false; }
+        if (!F.saveAccounts(clean)) return false;
+        MA.toast(esc(FT('acc.saved')));
+      } }] });
+  }
+
   function connectionCard() {
     const a = MA.content.draft?.studio?.analytics || {}, name = PROVIDERS[a.provider], id = String(a.id || '').trim();
     const canSet = MA.can('settings.edit') && canOpen('settings');
@@ -1314,6 +1544,7 @@
   MA.commands.add({ id: 'analytics.export', icon: 'download', keywords: 'analytics csv export download traffic تصدير خروجی', title: { en: 'Export traffic as CSV', ar: 'تصدير الزيارات بصيغة CSV', fa: 'خروجی CSV از بازدیدها' }, when: () => MA.can('analytics.view') && M().source() !== 'none', run: () => exportCSV() });
   MA.commands.add({ id: 'analytics.compare', icon: 'chart', shortcut: 'x', keywords: 'analytics compare previous period مقارنة مقایسه', title: { en: 'Turn traffic comparison on or off', ar: 'تشغيل مقارنة الزيارات أو إيقافها', fa: 'روشن یا خاموش کردن مقایسهٔ بازدید' }, when: () => !!root?.isConnected, run: () => setCompare(!S.compare) });
   MA.commands.add({ id: 'analytics.clear', icon: 'trash', keywords: 'analytics events clear local browser مسح پاک کردن رویداد', title: { en: "Clear this browser's site events…", ar: 'مسح أحداث الموقع من هذا المتصفح…', fa: 'پاک کردن رویدادهای سایت در این مرورگر…' }, when: () => MA.can('settings.edit') && M().hasLocal(), run: () => clearEvents() });
+  MA.commands.add({ id: 'analytics.followers', icon: 'team', keywords: 'followers instagram tiktok linkedin social count growth متابعون متابعين دنبال‌کننده فالوور', title: { en: FO_I18N.en.cmd, ar: FO_I18N.ar.cmd, fa: FO_I18N.fa.cmd }, when: () => MA.can('analytics.view'), run: () => MA.go('#/analytics?focus=followers') });
   MA.commands.add({ id: 'analytics.sample', icon: 'eye', keywords: 'analytics sample data demo hide show تجريبي نمونه', title: { en: 'Show or hide sample traffic data', ar: 'إظهار بيانات الزيارات التجريبية أو إخفاؤها', fa: 'نمایش یا پنهان کردن دادهٔ نمونهٔ بازدید' }, when: () => !!root?.isConnected, run: () => setSample(!M().sampleOn()) });
 
   /** Shared with the Overview (and anyone else): where real visitors are counted, the shared dashboard, attribution. */
@@ -1350,12 +1581,14 @@
       MA.onView('content:published', redrawSoon);
       MA.onView('content:change', ({ path } = {}) => { if (!path || /^(swells|services|sgroups|faq|studio|sections|layout)/.test(path)) redrawSoon(); });
       MA.onView('leads', redrawSoon); // where briefs come from
+      MA.onView('followers', redrawSoon); // follower counts typed in here or in another place
+      MA.onView('db:' + FO_KEY, redrawSoon); MA.onView('db:' + FO_ACC, redrawSoon); // …or in another tab
       MA.onView('db:' + SHARE_KEY, redrawSoon); // the shared dashboard link (here or in Settings)
       MA.onView('prefs', () => { const s = sigOf(); if (s !== sig) { sig = s; S.range = normRange(MA.prefs.get('dateRange')); draw(); } });
       const timer = setInterval(() => liveRefresh?.(), 10000);
       MA.cleanup(() => clearInterval(timer));
       let lastW = wrap.clientWidth;
-      const ro = new ResizeObserver(MA.debounce(() => { const w = wrap?.clientWidth || 0; if (w && Math.abs(w - lastW) > 24) { lastW = w; wrap.querySelector('.an-main')?._fill?.(); } }, 150));
+      const ro = new ResizeObserver(MA.debounce(() => { const w = wrap?.clientWidth || 0; if (w && Math.abs(w - lastW) > 24) { lastW = w; wrap.querySelector('.an-main')?._fill?.(); fillFollowers(); } }, 150));
       ro.observe(wrap);
       MA.cleanup(() => { ro.disconnect(); root = wrap = liveEl = null; liveRefresh = null; });
       focusCard(ctx.query.get('focus'));

@@ -1,9 +1,11 @@
 /* =====================================================================
    MIRAS admin — Overview: the customizable home of the admin.
    · Header: greeting by first name, the date in Lusail, and a live studio status line
-     computed from the draft's studio hours with the same rules as the site's clock.
+     computed from the draft's studio hours with the same rules as the site's clock. One button, Customize
+     (layouts, add a widget, arrange); while arranging it becomes Done.
    · Sea band: an MA.sea canvas whose roughness is today's visitors vs the usual for this weekday
-     (same weekday over the last 4 weeks, at this hour), plus one plain sentence.
+     (same weekday over the last 4 weeks, at this hour), plus one plain sentence. With no visitor data it is a slim strip.
+   · Default board (no saved layout): the Simple preset: Today (up to three big chips), Waiting on us, Clients waiting on us, Visitors.
    · Widget board: 4-column grid, sizes S 1×1 · M 2×1 · L 2×2 · W 4×1, container queries per tile.
      Arrange mode (E): drag with pointer events + FLIP reflow, keyboard lift/move/drop with live
      announcements, size menu, remove with undo, Esc restores, Done saves.
@@ -35,6 +37,7 @@
     'dur.hm': ['{h} h {m} min', '{h} س و{m} د', '{h} ساعت و {m} دقیقه'],
     'dur.m': ['{m} min', '{m} د', '{m} دقیقه'],
     layout: ['Layout', 'التخطيط', 'چیدمان'],
+    customize: ['Customize', 'تخصيص', 'شخصی‌سازی'],
     addWidget: ['Add widget', 'إضافة أداة', 'افزودن ابزارک'],
     arrange: ['Arrange', 'ترتيب', 'مرتب‌سازی'],
     barTitle: ['Arranging', 'وضع الترتيب', 'حالت مرتب‌سازی'],
@@ -90,7 +93,7 @@
     presetApplied: ['Switched to the {name} layout.', 'انتقلت إلى تخطيط «{name}».', 'چیدمان «{name}» اعمال شد.'],
     blankT: ['A clear horizon', 'أفق صافٍ', 'افقی صاف'],
     blankX: ['Add the widgets you check every day, or start from a ready-made layout.', 'أضِف الأدوات التي تراجعها كل يوم، أو ابدأ من تخطيط جاهز.', 'ابزارک‌هایی را که هر روز سر می‌زنید اضافه کنید، یا از یک چیدمان آماده شروع کنید.'],
-    useFounder: ['Use the Founder layout', 'استخدم تخطيط المؤسس', 'استفاده از چیدمان بنیان‌گذار'],
+    useSimple: ['Use the Simple layout', 'استخدم التخطيط البسيط', 'استفاده از چیدمان ساده'],
     'k.arrange': ['Arrange the overview', 'ترتيب النظرة العامة', 'مرتب‌سازی نمای کلی'],
     prevPeriod: ['Previous period', 'الفترة السابقة', 'دورهٔ قبل'],
     noDataT: ['Waiting for the first visit', 'بانتظار أول زيارة', 'در انتظار نخستین بازدید'],
@@ -117,9 +120,8 @@
     'sea.nobase': ['Nothing on the same weekday in the last {w} weeks to compare with yet. {n} visitors so far today.',
       'لا زيارات في اليوم نفسه خلال الأسابيع الـ{w} الماضية لنقارن بها بعد. الزوار اليوم حتى الآن: {n}.',
       'هنوز در همین روزِ هفته طی {w} هفتهٔ گذشته داده‌ای برای مقایسه نداریم. امروز تا این لحظه {n} بازدیدکننده.'],
-    'sea.none': ['No visitor data yet. Connect analytics in Settings, or open the site in this browser, and the sea will start to move.',
-      'لا بيانات عن الزوار بعد. اربط أداة التحليلات من الإعدادات، أو افتح الموقع في هذا المتصفح، وسيبدأ البحر بالحركة.',
-      'هنوز دادهٔ بازدیدی نداریم. ابزار آمار را در «تنظیمات» وصل کنید یا سایت را در همین مرورگر باز کنید تا دریا به حرکت درآید.'],
+    // no visitor data: one short line in a slim band
+    'sea.none': ['No visitor data yet. Connect analytics in Settings.', 'لا بيانات للزوار بعد. اربط التحليلات من الإعدادات.', 'هنوز دادهٔ بازدیدی نیست. آمار را در «تنظیمات» وصل کنید.'],
     'sea.basis': ['Compared with the same weekday over the last {w} weeks, at this hour in Lusail.', 'مقارنةً باليوم نفسه خلال الأسابيع الـ{w} الماضية، في مثل هذه الساعة بتوقيت لوسيل.', 'در مقایسه با همین روزِ هفته در {w} هفتهٔ گذشته، در همین ساعت به وقت لوسیل.'],
     'sea.sofar': ['So far today', 'حتى الآن اليوم', 'امروز تا این لحظه'],
     'sea.usualNow': ['Usual by now', 'المعتاد حتى الآن', 'معمولِ این ساعت'],
@@ -226,7 +228,7 @@
     noDataOnT: ['Real visitors are counted in {name}', 'يُحتسب الزوار الحقيقيون في {name}', 'بازدیدکنندگان واقعی در {name} شمرده می‌شوند'],
     noDataOnX: ['No visits are logged in this browser yet. Open {name} to see every visitor, or turn on sample data in Customize.', 'لا زيارات مسجّلة في هذا المتصفح بعد. افتح {name} لترى كل الزوار، أو فعّل البيانات التجريبية من التخصيص.', 'هنوز بازدیدی در این مرورگر ثبت نشده. {name} را باز کنید تا همهٔ بازدیدکنندگان را ببینید، یا دادهٔ نمونه را در «شخصی‌سازی» روشن کنید.'],
     openDash: ['Open the {name} dashboard', 'افتح لوحة {name}', 'باز کردن داشبورد {name}'],
-    'sea.noneOn': ['No visits are logged in this browser yet. Real visitors are counted in {name}.', 'لا زيارات مسجّلة في هذا المتصفح بعد. يُحتسب الزوار الحقيقيون في {name}.', 'هنوز بازدیدی در این مرورگر ثبت نشده. بازدیدکنندگان واقعی در {name} شمرده می‌شوند.'],
+    'sea.noneOn': ['Real visitors are counted in {name}.', 'يُحتسب الزوار الحقيقيون في {name}.', 'بازدیدکنندگان واقعی در {name} شمرده می‌شوند.'],
     // visitors over time: a named chart, and every value as a table
     'tbl.show': ['Table', 'جدول', 'جدول'], 'tbl.tip': ['Show the numbers as a table', 'اعرض الأرقام في جدول', 'نمایش عددها به‌صورت جدول'], 'tbl.date': ['Date', 'التاريخ', 'تاریخ'],
     'w.vc.label': ['Visitors per day, {range}', 'الزوار يومياً، {range}', 'بازدیدکنندگان روزانه، {range}'],
@@ -258,6 +260,40 @@
     'w.rv.frame': ['{name}: shared dashboard', '{name}: لوحة مشتركة', '{name}: داشبورد اشتراکی'],
     'w.rv.settings': ['Open settings', 'افتح الإعدادات', 'باز کردن تنظیمات'],
     'w.rv.embed': ['Embed a dashboard', 'اعرض لوحة', 'نمایش داشبورد'],
+    // Today: up to three big chips, or one calm line
+    'td.briefs': ['Briefs waiting', 'طلبات بالانتظار', 'درخواست‌های منتظر'],
+    'td.clients': ['Clients waiting', 'عملاء بالانتظار', 'مشتریان منتظر'],
+    'td.publish': ['Unpublished', 'غير منشورة', 'منتشرنشده'],
+    'td.clear': ['All clear', 'كل شيء جاهز', 'همه‌چیز مرتب است'],
+    // Clients waiting on us: what each line is
+    'cw.changes': ['Changes', 'تعديلات', 'اصلاح‌ها'],
+    'cw.comment': ['Comment', 'تعليق', 'دیدگاه'],
+    'cw.approved': ['Approved', 'موافقة', 'تأیید'],
+    'cw.like': ['Like', 'إعجاب', 'پسند'],
+    'cw.dislike': ['Dislike', 'عدم إعجاب', 'نپسند'],
+    'cw.client': ['Client', 'عميل', 'مشتری'],
+    'w.cw.emptyT': ['Nobody waiting', 'لا أحد ينتظر', 'کسی منتظر نیست'],
+    'w.cw.emptyX': ['Client comments and approvals show here.', 'تظهر هنا تعليقات العملاء وموافقاتهم.', 'دیدگاه‌ها و تأییدهای مشتری‌ها این‌جا دیده می‌شوند.'],
+    'w.cw.failT': ["Couldn't load clients", 'تعذّر تحميل العملاء', 'مشتری‌ها بارگذاری نشدند'],
+    // Today: my late Plan items plus briefs whose follow-up day has come
+    'td.overdue': ['Overdue', 'متأخر', 'عقب‌افتاده'],
+    // This week: the next seven days of the Plan
+    'w.plan.emptyT': ['Nothing planned', 'لا شيء في الخطة', 'برنامه‌ای نیست'],
+    'w.plan.emptyX': ['Posts, shoots and tasks for the next {n} days show here.', 'تظهر هنا المنشورات والتصوير والمهام للأيام الـ{n} القادمة.', 'پست‌ها، فیلم‌برداری‌ها و کارهای {n} روز آینده این‌جا دیده می‌شوند.'],
+    'w.plan.add': ['Add to plan', 'أضف إلى الخطة', 'افزودن به برنامه'],
+    'w.plan.today': ['Today', 'اليوم', 'امروز'],
+    'w.plan.tomorrow': ['Tomorrow', 'غداً', 'فردا'],
+    'w.plan.tent': ['Tentative', 'مبدئي', 'احتمالی'],
+    'w.plan.off': ["The plan isn't available here.", 'الخطة غير متاحة هنا.', 'برنامه این‌جا در دسترس نیست.'],
+    // Followers: counts typed in on the Analytics page
+    'w.fo.cap': [{ one: 'followers · {n} account', other: 'followers · {n} accounts' }, 'متابعون · الحسابات: {n}', 'دنبال‌کننده · {n} حساب'],
+    'w.fo.since': ['since {d}', 'منذ {d}', 'از {d}'],
+    'w.fo.last': ['Last count {d}', 'آخر رقم {d}', 'آخرین عدد {d}'],
+    'w.fo.flat': ['No change', 'بلا تغيير', 'بدون تغییر'],
+    'w.fo.manual': ['Typed in', 'إدخال يدوي', 'ورود دستی'],
+    'w.fo.emptyT': ['No counts yet', 'لا أرقام بعد', 'هنوز عددی نیست'],
+    'w.fo.emptyX': ['Type follower counts on Analytics.', 'اكتب أعداد المتابعين في التحليلات.', 'عدد دنبال‌کنندگان را در «آمار» وارد کنید.'],
+    'w.fo.go': ['Type counts', 'اكتب الأرقام', 'وارد کردن عددها'],
   };
   const dict = i => Object.fromEntries(Object.entries(COPY).map(([k, v]) => ['overview.' + k, v[i] ?? v[0]]));
   MA.i18n.add({ en: dict(0), ar: dict(1), fa: dict(2) });
@@ -426,8 +462,93 @@
     return { items: out.map(fix), checked, areas };
   }
 
+  /* ---- clients waiting on us: the team's side of the client portal ----
+     The same calls the Clients page makes (PortalAPI.admin), read once and kept here. An item needs the team when a client asked for changes
+     on a deliverable (the Approvals page, "Changes") or did something we have not read yet (the Clients inbox and its sidebar badge:
+     a comment, a decision, a like or dislike). A changes request that is still unread is one item, not two. */
+  const CL = { state: 'idle', items: [], sig: '', at: 0, job: null };   // state: idle · loading · ready · failed
+  const portal = () => window.PortalAPI?.admin || null;
+  const clientsOk = () => MA.can('leads.view') && !!modOk('clients');
+  function clientItems(clients, projects, notes) {
+    const out = [], covered = new Set(), cname = id => { const c = clients.find(x => x.id === id); return (c && (c.name || c.company)) || ''; };
+    const project = id => projects.find(p => p.id === id) || null;
+    projects.forEach(p => (p.deliverables || []).forEach(d => {
+      if (d.status !== 'changes') return;
+      covered.add(d.id);
+      out.push({ id: 'd:' + d.id, kind: 'changes', pid: p.id, cid: p.clientId, name: cname(p.clientId), project: p.title || '', at: d.approval?.createdAt || d.createdAt || '' });
+    }));
+    (notes || []).filter(n => !n.readAt).forEach(n => {
+      if (n.kind === 'approval' && n.value === 'changes' && covered.has(n.deliverableId)) return;
+      const p = project(n.projectId), body = String(n.body || '');
+      const kind = n.kind === 'comment' ? 'comment' : n.kind === 'approval' ? (n.value === 'changes' ? 'changes' : 'approved')
+        : (n.value === 'dislike' || (!n.value && /disliked/i.test(body))) ? 'dislike' : 'like';
+      out.push({ id: 'n:' + n.id, kind, pid: n.projectId || null, cid: n.clientId, name: cname(n.clientId), project: p?.title || '', at: n.createdAt || '' });
+    });
+    const byNew = (a, b) => String(b.at).localeCompare(String(a.at));
+    return [...out.filter(i => i.kind === 'changes').sort(byNew), ...out.filter(i => i.kind !== 'changes').sort(byNew)];
+  }
+  /** Reads the portal. Calls MA.emit('ov:clients') when what the Overview shows has changed, so tiles repaint once. */
+  function loadClients() {
+    const api = portal();
+    if (!api) { if (CL.state !== 'ready') { CL.state = 'failed'; } return Promise.resolve(); }
+    if (CL.state === 'idle') CL.state = 'loading';
+    if (CL.job) return CL.job;
+    CL.job = Promise.resolve().then(() => Promise.all([api.listClients(), api.listProjects(), api.listNotifications()])).then(([c, p, n]) => {
+      const items = clientItems(c || [], p || [], (n && n.items) || []), sig = items.map(i => i.id + i.kind + i.at).join('|'), fresh = CL.state !== 'ready' || sig !== CL.sig;
+      Object.assign(CL, { state: 'ready', items, sig, at: Date.now() });
+      if (fresh) MA.emit('ov:clients');
+    }).catch(e => {
+      const was = CL.state; CL.at = Date.now();
+      if (was !== 'ready') { CL.state = 'failed'; if (was !== 'failed') MA.emit('ov:clients'); }
+    }).finally(() => { CL.job = null; });
+    return CL.job;
+  }
+  /** What the tiles show: loading (first read still running), failed, or ready with the items and the page they belong on. */
+  function clientsView() {
+    if (CL.state === 'idle') loadClients();
+    const items = CL.items, hasChanges = items.some(i => i.kind === 'changes');
+    // changes requests are listed on Approvals; everything else a client did is in their inbox
+    return { state: CL.state, items, n: items.length, href: hasChanges ? '#/clients/approvals' : '#/clients/inbox' };
+  }
+  /** Read the portal again without blanking what is shown: tiles repaint only if something changed. */
+  const refreshClients = () => { if (clientsOk()) loadClients(); };
+  // the Clients page may have changed it in this or another tab: look again when this window is used, or the portal's storage changes
+  addEventListener('focus', () => { if (page?.usesPortal()) refreshClients(); });
+  addEventListener('storage', e => { if (page?.usesPortal() && e.key === 'miras.portal.v1') refreshClients(); });
+
+  /* ---- the Plan and the follower counts (modules/plan.js: MA.plan · modules/analytics.js: MA.followers) ----
+     Every call is guarded: with either module missing the Overview still draws, and the tiles say so calmly. */
+  const planApi = () => (MA.plan && typeof MA.plan.list === 'function' && modOk('plan')) ? MA.plan : null;
+  const foApi = () => (MA.followers && typeof MA.followers.latest === 'function') ? MA.followers : null;
+  const safe = (fn, fb) => { try { return fn(); } catch (e) { console.error('[overview] data', e); return fb; } };
+  /** Today's "Overdue" chip: my late Plan items plus open briefs whose follow-up day has passed. It opens the Plan's Overdue filter on my items,
+      or the Inbox's follow-up filter when only briefs are due. */
+  function overdueNow() {
+    const P = planApi(), mine = P ? safe(() => P.overdue().filter(it => P.isMine(it)), []) : [];
+    // only briefs that are really late (follow-up day before today), the same rule as the Plan: one due today is not overdue
+    const td = MA.qDay(Date.now());
+    const leads = MA.can('leads.view') && modOk('inbox') && typeof MA.leads?.followUpDue === 'function'
+      ? safe(() => MA.leads.followUpDue().filter(l => { const d = MA.leads.followUpOf?.(l) || l.followUp || l.due; return !!d && d < td; }), []) : [];
+    return { n: mine.length + leads.length, plan: mine.length, leads: leads.length, sample: [...mine, ...leads].some(x => x.sample),
+      href: mine.length || !leads.length ? '#/plan?f=overdue&mine=1' : '#/inbox?follow=due' };
+  }
+  const PLAN_DAYS = 7, PLAN_KINDS = ['post', 'shoot', 'task'];
+  /** Plan items (posts, shoots, tasks) dated today through the next six days that are not done yet, soonest first. */
+  function planWeek() {
+    const P = planApi(); if (!P) return null;
+    const from = MA.qDay(Date.now()), to = MA.addDays(from, PLAN_DAYS - 1), done = new Set(P.DONE || ['done', 'published']);
+    return safe(() => P.list({ kinds: PLAN_KINDS, from, to }).filter(it => !done.has(it.status)), []);
+  }
+  const planIcon = k => MA.icons['pl-' + k] ? 'pl-' + k : 'calendar';
+  function planDay(ds) {
+    const t = MA.qDay(Date.now());
+    return ds === t ? tt('w.plan.today') : ds === MA.addDays(t, 1) ? tt('w.plan.tomorrow') : dfmt(ds, { weekday: 'short', day: 'numeric' });
+  }
+  /** "▲ +120" · "▼ −8" · "No change": the sign and arrow carry it, the colour only repeats it. */
+  const foChg = n => h('span', { class: 'delta ' + (n > 0 ? 'up good' : n < 0 ? 'down bad' : 'flat') }, h('b', n ? `${n > 0 ? '▲' : '▼'} ${MA.num(n, { signDisplay: 'always' })}` : tt('w.fo.flat')));
+
   /* =================== widget catalog =================== */
-  const CATS = ['leads', 'traffic', 'content', 'studio', 'notes'];
+  const CATS =['leads', 'traffic', 'content', 'studio', 'notes'];
   const SZ = { S: [1, 1], M: [2, 1], L: [2, 2], W: [4, 1] };
   const szMeta = z => `${MA.num(SZ[z][0])}×${MA.num(SZ[z][1])}`;
   /** Language-free size mark: the tile's footprint on the 4-column grid. */
@@ -440,7 +561,8 @@
   const optRange = (def = '30d') => ({ key: 'range', def, label: () => tt('opt.range'), choices: () => RANGE_KEYS.map(v => ({ value: v, label: MA.L(MA.metrics.RANGES[v]) })) });
   const optRows = (def = 5, list = [3, 5, 8]) => ({ key: 'rows', def, label: () => tt('opt.rows'), choices: () => list.map(v => ({ value: v, label: tt('opt.nRows', { n: MA.num(v) }) })) });
   const settingsOf = t => { const s = {}; (W[t.w].opts || []).forEach(o => { const v = t.s?.[o.key], ok = o.choices().some(c => String(c.value) === String(v)); s[o.key] = ok ? (typeof o.def === 'number' ? +v : v) : o.def; }); return s; };
-  const catalog = () => ORDER.map(id => W[id]).filter(d => !d.perm || MA.can(d.perm));
+  // a widget whose data module is missing (avail) is left out of the drawer; a tile already on a board says so calmly
+  const catalog = () => ORDER.map(id => W[id]).filter(d => (!d.perm || MA.can(d.perm)) && (!d.avail || safe(d.avail, false)));
   const LIVE_MINS = 5;
 
   widget({ id: 'waiting', cat: 'leads', icon: 'inbox', perm: 'leads.view', sizes: ['W', 'L', 'M'], size: 'W', on: ['leads', 'content:change'], opts: [optRows(5)], link: 'inbox',
@@ -452,7 +574,8 @@
       const rows = h('div.ov-rows', list.map(l => leadRow(l)));
       if (all.length > list.length) rows.append(h('a.ov-morelink', { href: '#/inbox' }, tt('andMore', { n: MA.num(all.length - list.length) })));
       b.append(rows);
-      return { sample: list.some(l => l.sample), badge: [MA.num(all.length), 'warn'] };
+      // with a Today tile on the board the count is shown there, once
+      return { sample: list.some(l => l.sample), badge: x.page?.has?.('today') ? null : [MA.num(all.length), 'warn'] };
     } });
 
   widget({ id: 'newest', cat: 'leads', icon: 'mail', perm: 'leads.view', sizes: ['M', 'L', 'S'], size: 'M', on: ['leads', 'content:change'], opts: [optRows(5)], link: 'inbox',
@@ -474,7 +597,8 @@
       const open = MA.leads.all().filter(l => !l.archived && !MA.leads.stage(l.stage).closed);
       if (!open.length) { b.append(emptyMini({ icon: 'board', title: tt('w.pipe.emptyT'), text: tt('w.pipe.emptyX') })); return {}; }
       const byV = x.s.measure !== 'count';
-      const rows = MA.leads.STAGES.filter(s => !s.closed).map(s => { const ls = open.filter(l => l.stage === s.id); return { s, n: ls.length, v: ls.reduce((a, l) => a + (+l.value || 0), 0) }; });
+      // optional stages (Viewing, Offer) are listed only when a brief is in them
+      const rows = MA.leads.STAGES.filter(s => !s.closed).map(s => { const ls = open.filter(l => l.stage === s.id); return { s, n: ls.length, v: ls.reduce((a, l) => a + (+l.value || 0), 0) }; }).filter(r => !r.s.optional || r.n);
       const totV = rows.reduce((a, r) => a + r.v, 0), m = r => byV ? r.v : r.n;
       const bar = h('div.ov-stack', { role: 'img', 'aria-label': rows.map(r => `${MA.L(r.s)}: ${byV ? money(r.v) : MA.num(r.n)}`).join(tt('listSep')) },
         rows.filter(r => m(r) > 0).map(r => h('i', { style: `flex-grow:${m(r)};background:${r.s.color}`, title: `${MA.L(r.s)} · ${byV ? money(r.v) : MA.num(r.n)}` })));
@@ -849,8 +973,111 @@
       return {};
     } });
 
+  /** Today: what needs the team right now, as up to three big chips (a number and one or two words). Chips with nothing to do, and chips this
+      role may not use, are left out; with nothing at all it is one calm line. Colours follow the sidebar categories (Workspace, Clients, Website). */
+  widget({ id: 'today', cat: 'studio', icon: 'bolt', sizes: ['W'], size: 'W', on: ['leads', 'content:change', 'content:published', 'versions', 'ov:clients', 'plan'],
+    title: { en: 'Today', ar: 'اليوم', fa: 'امروز' },
+    desc: { en: 'What needs you now: briefs, clients, changes to publish and late work.', ar: 'ما ينتظرك الآن: الطلبات والعملاء والتعديلات للنشر والمتأخر.', fa: 'آنچه الان منتظر شماست: درخواست‌ها، مشتری‌ها، تغییرات برای انتشار و کارهای عقب‌افتاده.' },
+    render(b, x) {
+      const chips = [], go = fn => () => { if (!x.preview) fn(); };
+      let sample = false;
+      if (MA.can('leads.view') && modOk('inbox')) { const w = waitingList(); if (w.length) { sample = w.some(l => l.sample); chips.push({ id: 'briefs', g: 'work', icon: 'inbox', n: w.length, label: tt('td.briefs'), href: '#/inbox' }); } }
+      if (clientsOk()) {
+        const cv = clientsView();
+        // while the portal is read, the Clients slot is held (same size), so the others do not move when it arrives
+        if (cv.state === 'loading') chips.push({ id: 'clients', g: 'clients', wait: true });
+        else if (cv.state === 'ready' && cv.n) chips.push({ id: 'clients', g: 'clients', icon: 'team', n: cv.n, label: tt('td.clients'), href: cv.href });
+      }
+      if (MA.can('content.publish')) { const n = MA.content.changes().length; if (n) chips.push({ id: 'publish', g: 'site', icon: 'publish', n, label: tt('td.publish'), run: go(() => MA.openPublish()) }); }
+      const od = overdueNow();
+      if (od.n) { sample = sample || od.sample; chips.push({ id: 'overdue', g: 'work', icon: 'warn', n: od.n, label: tt('td.overdue'), href: od.href }); }
+      if (!chips.length) {
+        b.append(h('p.ov-clear', { dataset: { state: 'clear' } }, h('span.ov-clear-ic', MA.iconEl('check', 'sm')), h('b', tt('td.clear'))));
+        return {};
+      }
+      const chipEl = c => c.wait ? h('div.ov-chip.is-wait', { dataset: { chip: c.id, g: c.g }, 'aria-hidden': 'true' }, h('span.ov-chip-ic'), h('span.ov-chip-n'), h('span.ov-chip-l'))
+        : h(c.href ? 'a.ov-chip' : 'button.ov-chip', { href: c.href || null, type: c.href ? null : 'button', 'aria-haspopup': c.run ? 'dialog' : null, onclick: c.run || null, dataset: { chip: c.id, g: c.g } },
+          h('span.ov-chip-ic', MA.iconEl(c.icon)), h('span.ov-chip-n.num', MA.num(c.n)), h('span.ov-chip-l', c.label), h('span.ov-chip-go', MA.iconEl('arrowRight', 'sm')));
+      b.append(h('ul.ov-today', { 'aria-busy': chips.some(c => c.wait) ? 'true' : null }, chips.map(c => h('li', chipEl(c)))));
+      return { sample };
+    } });
+
+  /** Clients waiting on us: up to a few lines, each a client, what they did, and when. Opens that project. */
+  const CW_ICON = { changes: 'edit', comment: 'chat', approved: 'check', like: 'star', dislike: 'down' };
+  widget({ id: 'clientsWait', cat: 'leads', icon: 'team', perm: 'leads.view', sizes: ['M', 'L', 'W'], size: 'M', on: ['ov:clients'], opts: [optRows(5)], link: 'clients',
+    title: { en: 'Clients waiting on us', ar: 'عملاء ينتظروننا', fa: 'مشتریان منتظر ما' },
+    desc: { en: 'Approvals, comments and likes from clients that need the team.', ar: 'موافقات وتعليقات وإعجابات من العملاء تحتاج إلى الفريق.', fa: 'تأییدها، دیدگاه‌ها و پسندهای مشتری‌ها که به تیم نیاز دارند.' },
+    render(b, x) {
+      if (!clientsOk()) { b.append(emptyMini({ pose: 'present', title: tt('w.cw.emptyT'), text: tt('w.cw.emptyX') })); return {}; }
+      const cv = clientsView();
+      if (cv.state === 'loading') { b.append(h('div.ov-rows', { 'aria-busy': 'true' }, [0, 1, 2].map(() => h('div.ov-row.ov-skel', { 'aria-hidden': 'true' }, h('i'), h('i'))))); return {}; }
+      if (cv.state === 'failed') {
+        const again = MA.ui.btn(MA.t('retry'), { size: 'sm', icon: 'refresh', onclick: () => { if (!x.preview) { CL.state = 'idle'; x.repaint?.(); } } }); again.dataset.act = 'retry';
+        b.append(emptyMini({ icon: 'warn', title: tt('w.cw.failT'), actions: x.preview ? [] : [again] })); return {};
+      }
+      if (!cv.n) { b.append(emptyMini({ pose: 'present', title: tt('w.cw.emptyT'), text: tt('w.cw.emptyX') })); return {}; }
+      const list = cv.items.slice(0, x.s.rows);
+      const rows = h('div.ov-rows.ov-cw', list.map(i => {
+        const word = tt('cw.' + i.kind), name = i.name || tt('cw.client');
+        return h('a.ov-row.ov-cwrow', { href: i.pid ? '#/clients/projects/' + encodeURIComponent(i.pid) : cv.href, class: 'k-' + i.kind, dataset: { kind: i.kind, project: i.pid || '' } },
+          h('span.ov-cwic', { title: word }, MA.iconEl(CW_ICON[i.kind], 'sm')),
+          h('span.ov-cwname', h('b.truncate', { lang: MA.langOf(name), dir: 'auto' }, name), i.project ? [h('span.ov-cwsep', { 'aria-hidden': 'true' }, '·'), h('span.ov-cwproj.truncate', { lang: MA.langOf(i.project), dir: 'auto' }, i.project)] : null),
+          h('span.ov-cwst', word),
+          i.at ? h('time.ov-when', { datetime: i.at }, since(i.at)) : null);
+      }));
+      if (cv.n > list.length) rows.append(h('a.ov-morelink', { href: cv.href }, tt('andMore', { n: MA.num(cv.n - list.length) })));
+      b.append(rows);
+      // with a Today tile on the board the count is shown there, once
+      return { badge: x.page?.has?.('today') ? null : [MA.num(cv.n), 'warn'] };
+    } });
+
+  /** This week: the next seven days of the Plan (posts, shoots and tasks), one compact line each: kind icon, day, title, a Tentative mark. */
+  widget({ id: 'plan', cat: 'studio', icon: 'calendar', sizes: ['M', 'L', 'W'], size: 'M', on: ['plan', 'team'], opts: [optRows(4, [3, 4, 6, 8])], link: 'plan', avail: () => !!planApi(),
+    title: { en: 'This week', ar: 'هذا الأسبوع', fa: 'این هفته' },
+    desc: { en: 'Posts, shoots and tasks in the next 7 days.', ar: 'المنشورات والتصوير والمهام في الأيام السبعة القادمة.', fa: 'پست‌ها، فیلم‌برداری‌ها و کارهای هفت روز آینده.' },
+    render(b, x) {
+      const all = planWeek();
+      if (!all) { b.append(emptyMini({ icon: 'calendar', title: tt('w.plan.off') })); return {}; }
+      if (!all.length) {
+        const acts = !x.preview && safe(() => MA.plan.canEdit(), false) ? [MA.ui.btn(tt('w.plan.add'), { size: 'sm', icon: 'plus', href: '#/plan?new=1' })] : [];
+        b.append(emptyMini({ pose: 'ride', title: tt('w.plan.emptyT'), text: tt('w.plan.emptyX', { n: MA.num(PLAN_DAYS) }), actions: acts }));
+        return {};
+      }
+      const max = x.size === 'L' ? Math.max(8, x.s.rows) : x.s.rows, list = all.slice(0, max), kindName = k => safe(() => MA.plan.kindName(k), k);
+      const rows = h('div.ov-rows.tight.ov-plan', list.map(it => h('a.ov-row.ov-planrow', { href: '#/plan?item=' + encodeURIComponent(it.id), dataset: { item: it.id, kind: it.kind }, class: it.tentative ? 'is-tent' : '' },
+        h('span.ov-planic', { 'data-kind': it.kind, title: kindName(it.kind) }, MA.iconEl(planIcon(it.kind), 'sm'), h('span.sr-only', kindName(it.kind))),
+        h('span.ov-planday', planDay(it.date), it.time ? h('span.ov-plantime.num', ' · ' + clockStr(it.time)) : null),
+        h('span.ov-row-main', h('span.truncate', { dir: 'auto', lang: MA.langOf(it.title) }, it.title)),
+        it.tentative ? h('span.ov-tent', tt('w.plan.tent')) : null)));
+      if (all.length > list.length) rows.append(h('a.ov-morelink', { href: '#/plan?view=week' }, tt('andMore', { n: MA.num(all.length - list.length) })));
+      b.append(rows);
+      return { sample: list.some(it => it.sample) };
+    } });
+
+  /** Followers: the newest total of the counts the team typed in on Analytics, and how it grew in the chosen range. */
+  widget({ id: 'followers', cat: 'traffic', icon: 'team', perm: 'analytics.view', sizes: ['S', 'M'], size: 'S', on: ['followers', 'db:followers', 'db:followers.accounts'], opts: [optRange('30d')], link: 'analytics', avail: () => !!foApi(),
+    title: { en: 'Followers', ar: 'المتابعون', fa: 'دنبال‌کنندگان' },
+    desc: { en: 'Follower counts typed in by the team, and their growth.', ar: 'أعداد المتابعين التي يكتبها الفريق، ونموّها.', fa: 'عدد دنبال‌کنندگان که تیم وارد می‌کند، و رشدش.' },
+    render(b, x) {
+      const F = foApi(), go = modOk('analytics') ? '#/analytics?focus=followers' : null;
+      const L = F ? safe(() => F.latest(), null) : null;
+      if (!L || !L.n) {
+        const acts = go && !x.preview ? [MA.ui.btn(tt('w.fo.go'), { size: 'sm', icon: 'edit', href: go })] : [];
+        b.append(emptyMini({ icon: 'team', title: tt('w.fo.emptyT'), text: tt('w.fo.emptyX'), actions: acts }));
+        return {};
+      }
+      const G = safe(() => F.growth(x.s.range), null), ch = G?.total?.change;
+      b.append(h('p.ov-cap', tt('w.fo.cap', { count: L.n, n: MA.num(L.n) })), h(go ? 'a.ov-fo-big' : 'div.ov-fo-big', { href: go }, big(MA.num(L.total))));
+      b.append(ch != null ? h('p.ov-cmp.ov-fo-g', foChg(ch), ' ', h('span.vs', tt('w.fo.since', { d: dfmt(G.total.from) }))) : h('p.ov-cmp', tt('w.fo.last', { d: dfmt(L.date) })));
+      if (x.size !== 'S') b.append(h('div.ov-rows.tight', L.accounts.map(a => { const g = G?.accounts?.find(y => y.id === a.id);
+        return h('div.ov-row', h('span.ov-row-main', h('b.truncate', { dir: 'auto' }, a.name)), h('span.num', MA.num(a.count)), g?.change != null ? foChg(g.change) : null); })));
+      return { badge: [tt('w.fo.manual'), 'outline'] };
+    } });
+
   /* =================== presets =================== */
   const PRESETS = {
+    // the first screen: few things, big numbers, one obvious thing to do. Each number once (Today holds the counts; the sea band is "visitors today")
+    simple: { en: 'Simple', ar: 'بسيط', fa: 'ساده', tiles: [['today', 'W'], ['waiting', 'M'], ['clientsWait', 'M'], ['visitors', 'S']] },
     // each number once: the sea band is the one "visitors today" summary and the header line is the one studio clock
     founder: { en: 'Founder', ar: 'المؤسس', fa: 'بنیان‌گذار', tiles: [['waiting', 'W'], ['pipeline', 'M'], ['won', 'S'], ['changes', 'S'], ['visitorsChart', 'L'], ['channels', 'M'], ['reach', 'M'], ['activity', 'M'], ['live', 'S'], ['backup', 'S']] },
     producer: { en: 'Producer', ar: 'المنتج', fa: 'تهیه‌کننده', tiles: [['changes', 'M'], ['clock', 'S'], ['quick', 'S'], ['arabic', 'L'], ['activity', 'M'], ['notes', 'M'], ['newest', 'M'], ['swells', 'M']] },
@@ -861,7 +1088,7 @@
   const presetLayout = id => ({ v: 1, preset: id, tiles: PRESETS[id].tiles.map(([w, size]) => ({ id: w, w, size, s: {} })) });
   function loadLayout() {
     const raw = MA.db.get(KEY(), null);
-    if (!raw || !Array.isArray(raw.tiles)) return presetLayout('founder');
+    if (!raw || !Array.isArray(raw.tiles)) return presetLayout('simple');   // nothing saved yet: the Simple layout (a saved layout is never touched)
     const seen = new Set();
     return { v: 1, preset: raw.preset || '', tiles: raw.tiles.filter(t => t && W[t.w] && t.id && !seen.has(t.id) && seen.add(t.id))
       .map(t => ({ id: String(t.id), w: t.w, size: W[t.w].sizes.includes(t.size) ? t.size : W[t.w].size, s: MA.isObj(t.s) ? t.s : {} })) };
@@ -919,8 +1146,8 @@
   const PH_SVG = '<svg viewBox="0 0 120 22" aria-hidden="true"><path d="M2 8c10-6 19 6 29 0s19-6 29 0 19 6 29 0 19-6 29 0"/><path d="M2 15c10-6 19 6 29 0s19-6 29 0 19 6 29 0 19-6 29 0"/></svg>';
 
   function mount(view, ctx) {
-    const P = { layout: loadLayout(), me: meId(), arranging: false, snap: null, lift: null, drag: null, pend: null, drawer: null, part: daypart() };
-    let alive = true, presetBtn = null, arrangeBtn = null, statusEl = null;
+    const P = { layout: loadLayout(), me: meId(), arranging: false, snap: null, lift: null, drag: null, pend: null, drawer: null, part: daypart(), today: false };
+    let alive = true, customizeBtn = null, doneBtn = null, statusEl = null;
     const root = h('div.m-overview.ov-page');
     const head = h('header.ov-head');
     const sea = h('section.ov-sea', { 'aria-label': tt('sea.label') });
@@ -943,14 +1170,14 @@
       const me = MA.team.me(), first = firstName(me?.name), g = tt('greet.' + daypart());
       const date = MA.date(Date.now(), { weekday: 'long', day: 'numeric', month: 'long', timeZone: tz() });
       statusEl = h('p.ov-status', { 'aria-live': 'off' });
-      presetBtn = MA.ui.btn(tt('layout'), { icon: 'layers', kind: 'ghost', onclick: e => presetMenu(e.currentTarget) });
-      presetBtn.append(MA.iconEl('chevDown', 'sm')); presetBtn.setAttribute('aria-haspopup', 'menu'); presetBtn.dataset.act = 'presets';
-      const addBtn = MA.ui.btn(tt('addWidget'), { icon: 'plus', onclick: () => openAdd() }); addBtn.dataset.act = 'add';
-      arrangeBtn = MA.ui.btn(tt('arrange'), { icon: 'grid', onclick: () => enterArrange() }); arrangeBtn.dataset.act = 'arrange'; arrangeBtn.append(h('kbd', 'E')); arrangeBtn.hidden = P.arranging;
+      // one button: Customize (layouts, add a widget, arrange). While arranging it is replaced by Done.
+      customizeBtn = MA.ui.btn(tt('customize'), { icon: 'layers', onclick: e => customizeMenu(e.currentTarget) });
+      customizeBtn.append(MA.iconEl('chevDown', 'sm')); customizeBtn.setAttribute('aria-haspopup', 'menu'); customizeBtn.dataset.act = 'customize'; customizeBtn.hidden = P.arranging;
+      doneBtn = MA.ui.btn(MA.t('done'), { icon: 'check', kind: 'primary', onclick: () => exitArrange(true) }); doneBtn.dataset.act = 'head-done'; doneBtn.hidden = !P.arranging;
       head.innerHTML = '';
       head.append(h('div.ov-hello', h('p.label.ov-eyebrow', `${date} · ${placeName()}`),
         h('h1.h1', { html: first ? tt('greetName', { g: esc(g), name: `<em>${esc(first)}</em>` }) : tt('greetBare', { g: esc(g) }) }), statusEl),
-        h('div.ov-actions', presetBtn, addBtn, arrangeBtn));
+        h('div.ov-actions', customizeBtn, doneBtn));
       drawStatus();
     }
     function drawStatus() {
@@ -967,17 +1194,22 @@
     /* ---------- sea band ---------- */
     const S = { eye: h('p.ov-sea-eye'), sent: h('p.ov-sea-sent'), basis: h('p.ov-sea-basis'), stats: h('dl.ov-sea-stats'), cv: h('canvas.ov-sea-cv', { 'aria-hidden': 'true' }) };
     sea.append(h('div.ov-sea-text', S.eye, S.sent, S.basis), S.stats, S.cv);
-    let seaApi = null;
+    let seaApi = null, seaSlim = null;
     function drawSea() {
       if (!MA.can('analytics.view')) { sea.hidden = true; return; }
       const s = seaState(); sea.hidden = false; sea.dataset.kind = s.kind;
-      S.eye.innerHTML = ''; S.eye.append(...[h('span.label', tt('sea.label')), s.word ? h('b.ov-sea-word', tt('sea.' + s.word)) : null, s.sample ? MA.ui.sample() : null].filter(Boolean));
+      // no visitor data: a slim strip (a few waves and one short line), not the tall band
+      const slim = s.kind === 'none';
+      S.eye.innerHTML = ''; if (!slim) S.eye.append(...[h('span.label', tt('sea.label')), s.word ? h('b.ov-sea-word', tt('sea.' + s.word)) : null, s.sample ? MA.ui.sample() : null].filter(Boolean));
       S.sent.innerHTML = seaSentence(s);
       S.basis.textContent = s.kind === 'none' || s.kind === 'nobase' ? '' : tt('sea.basis', { w: MA.num(SEA_WEEKS) });
       S.stats.innerHTML = '';
       const stat = (k, v) => S.stats.append(h('div', h('dt', k), h('dd.num', v)));
       if (s.kind !== 'none') { stat(tt('sea.sofar'), MA.num(s.so)); if (s.avg) { stat(tt('sea.usualNow'), MA.num(Math.round(s.exp))); stat(tt('sea.usualDay', { day: s.day }), MA.num(Math.round(s.avg))); } }
-      if (!seaApi) seaApi = MA.sea(S.cv, { lines: 11, rough: s.rough, alpha: .62, width: 1.1, calm: .95, speed: .7 }); else seaApi.set(s.rough);
+      // the strip is short, so its sea has fewer lines and a little more swell to be seen. Going between the strip and the band draws on a fresh canvas.
+      if (seaApi && seaSlim !== slim) { seaApi.destroy(); seaApi = null; const cv = h('canvas.ov-sea-cv', { 'aria-hidden': 'true' }); S.cv.replaceWith(cv); S.cv = cv; }
+      const rough = slim ? Math.max(.22, s.rough) : s.rough;
+      if (!seaApi) { seaSlim = slim; seaApi = MA.sea(S.cv, slim ? { lines: 6, rough, alpha: .8, width: 1.1, calm: .95, speed: .7 } : { lines: 11, rough, alpha: .62, width: 1.1, calm: .95, speed: .7 }); } else seaApi.set(rough);
       try { MA.siteSea?.set(MA.clamp(s.rough * .9, .08, .8)); } catch (e) {}
     }
 
@@ -997,7 +1229,7 @@
     }
     function paint(el) { paintBody(el._body, el._t, { badges: el._badges, api }); el._w = el._body.clientWidth; }
     function drawBoard() {
-      memo = new Map(); board.innerHTML = '';
+      memo = new Map(); board.innerHTML = ''; P.today = api.has('today');
       const vis = visible();
       if (!vis.length) { board.append(blankState()); labelTiles(); return; }
       vis.forEach((t, i) => board.append(tileEl(t, i)));
@@ -1008,7 +1240,7 @@
     }
     function blankState() {
       const add = MA.ui.btn(tt('addWidget'), { icon: 'plus', kind: 'primary', onclick: () => openAdd() }); add.dataset.act = 'blank-add';
-      return h('div.ov-blank', { role: 'listitem' }, MA.ui.empty({ title: tt('blankT'), text: tt('blankX'), pose: 'present', actions: [add, MA.ui.btn(tt('useFounder'), { kind: 'ghost', onclick: () => applyPreset('founder') })] }));
+      return h('div.ov-blank', { role: 'listitem' }, MA.ui.empty({ title: tt('blankT'), text: tt('blankX'), pose: 'present', actions: [add, MA.ui.btn(tt('useSimple'), { kind: 'ghost', onclick: () => applyPreset('simple') })] }));
     }
     function labelTiles() {
       const els = tileEls(), n = els.length;
@@ -1019,6 +1251,8 @@
         else { el.removeAttribute('aria-roledescription'); el.removeAttribute('aria-describedby'); el.setAttribute('aria-label', nameOf(el)); }
       });
       drawStatus();
+      // Today holds the counts: Waiting on us and Clients waiting on us drop their own count badge while it is on the board
+      if (api.has('today') !== P.today) { P.today = api.has('today'); els.filter(e => e.dataset.w === 'waiting' || e.dataset.w === 'clientsWait').forEach(paint); }
     }
     /** DOM order (after a drag or a keyboard move) → layout order. Tiles hidden by permissions keep their place at the end. */
     function syncOrder() {
@@ -1115,18 +1349,29 @@
       announce(tt('presetApplied', { name }));
       MA.toast(tt('presetApplied', { name: esc(name) }), { undo: () => { if (!alive) { MA.db.set(KEY(), prev); return; } P.layout = prev; save(); drawBoard(); setChrome(); } });
     }
-    function presetMenu(anchor) {
-      anchor = anchor && anchor.isConnected ? anchor : presetBtn;
+    /** The presets as menu items (a tick on the one on the board). */
+    function presetItems() {
       const sig = JSON.stringify(P.layout.tiles.map(t => [t.w, t.size]));
-      MA.ui.menu(anchor, [{ heading: tt('presetsHead') }, ...Object.entries(PRESETS).map(([id, p]) => ({
-        label: MA.L(p), meta: esc(p.tiles.length ? tt('nWidgets', { n: MA.num(p.tiles.length) }) : tt('startEmpty')), checked: sig === JSON.stringify(p.tiles), run: () => applyPreset(id) }))], { align: 'end' });
+      return Object.entries(PRESETS).map(([id, p]) => ({ label: MA.L(p), meta: esc(p.tiles.length ? tt('nWidgets', { n: MA.num(p.tiles.length) }) : tt('startEmpty')), checked: sig === JSON.stringify(p.tiles), run: () => applyPreset(id) }));
+    }
+    function presetMenu(anchor) {
+      anchor = anchor && anchor.isConnected ? anchor : customizeBtn;
+      MA.ui.menu(anchor, [{ heading: tt('presetsHead') }, ...presetItems()], { align: 'end' });
+    }
+    /** The one header menu: layouts, Add widget, Arrange. */
+    function customizeMenu(anchor) {
+      anchor = anchor && anchor.isConnected ? anchor : customizeBtn;
+      MA.ui.menu(anchor, [{ heading: tt('layout') }, ...presetItems(), '-',
+        { label: tt('addWidget'), icon: 'plus', run: () => openAdd() },
+        { label: tt('arrange'), icon: 'grid', meta: '<kbd>E</kbd>', run: () => enterArrange() }], { align: 'end', label: tt('customize') });
     }
 
     /* ---------- arrange mode ---------- */
     function setChrome() {
       root.classList.toggle('is-arranging', P.arranging);
       root.classList.toggle('bob', P.arranging && !MA.reducedMotion());
-      if (arrangeBtn) arrangeBtn.hidden = P.arranging;
+      if (customizeBtn) customizeBtn.hidden = P.arranging;
+      if (doneBtn) doneBtn.hidden = !P.arranging;
       bar.hidden = !P.arranging; bar.innerHTML = '';
       if (P.arranging) {
         const cancel = MA.ui.btn(MA.t('cancel'), { size: 'sm', onclick: () => exitArrange(false) }); cancel.dataset.act = 'cancel'; cancel.append(h('kbd', 'Esc'));
@@ -1153,7 +1398,7 @@
       if (keep) save();
       setChrome();
       announce(keep ? tt('a11y.saved') : tt('a11y.discarded'));
-      arrangeBtn?.focus({ preventScroll: true });
+      customizeBtn?.focus({ preventScroll: true });
     }
     const idxOf = el => tileEls().indexOf(el);
     function lift(el) { P.lift = { el, from: idxOf(el) }; el.classList.add('ov-lifted'); announce(posMsg('a11y.lifted', el, idxOf(el) + 1, tileEls().length)); }
@@ -1331,11 +1576,11 @@
       });
       P.drawer?.redraw?.();
     }
-    ['leads', 'metrics', 'content:published', 'activity', 'prefs', 'sample', 'team', 'versions', 'backup', 'content:saveError', 'db:analytics.shareUrl'].forEach(evt => MA.onView(evt, () => want(evt)));
+    ['leads', 'metrics', 'content:published', 'activity', 'prefs', 'sample', 'team', 'versions', 'backup', 'content:saveError', 'db:analytics.shareUrl', 'ov:clients', 'plan', 'followers', 'db:followers', 'db:followers.accounts'].forEach(evt => MA.onView(evt, () => want(evt)));
     // connecting an analytics service changes what the traffic widgets say when there is no data: repaint them as for new metrics
     MA.onView('content:change', ({ path } = {}) => { want('content:change'); if (!path || /^studio\/analytics/.test(path)) want('metrics'); });
 
-    const t15 = setInterval(() => { if (!alive) return; drawStatus(); tileEls().filter(e => e.dataset.w === 'clock').forEach(paint); }, 15000);
+    const t15 = setInterval(() => { if (!alive) return; drawStatus(); tileEls().filter(e => e.dataset.w === 'clock').forEach(paint); if (api.usesPortal() && Date.now() - CL.at > 20000) refreshClients(); }, 15000);
     const t10 = setInterval(() => { if (!alive || P.drag) return; tileEls().filter(e => e.dataset.w === 'live').forEach(paint); }, 10000);
     const t60 = setInterval(() => { if (!alive) return; memo = new Map(); drawSea(); if (daypart() !== P.part) { P.part = daypart(); drawHead(); } }, 60000);
     const ro = new ResizeObserver(MA.debounce(() => {
@@ -1347,7 +1592,7 @@
     /* ---------- keyboard: E toggles arrange mode (page-scoped, removed on route change) ---------- */
     MA.keys.bindView('e', () => { if (!alive) return; P.arranging ? exitArrange(true) : enterArrange(); }, () => tt('k.arrange'));
 
-    const api = { enterArrange, exitArrange, openAdd, presetMenu, applyPreset, addWidget, showMe, removeTile };
+    const api = { enterArrange, exitArrange, openAdd, presetMenu, customizeMenu, applyPreset, addWidget, showMe, removeTile, has: w => P.layout.tiles.some(t => t.w === w), usesPortal: () => tileEls().some(e => e.dataset.w === 'today' || e.dataset.w === 'clientsWait') };
     page = api;
     MA.cleanup(() => {
       alive = false; if (page === api) page = null;
@@ -1356,6 +1601,7 @@
     });
 
     drawHead(); drawSea(); drawBoard(); setChrome();
+    if (api.usesPortal()) refreshClients();
     if (ctx?.query?.get('arrange') === '1') setTimeout(() => alive && enterArrange(), 60);
     else if (ctx?.query?.get('add') === '1') setTimeout(() => alive && openAdd(), 60);
     if (pending) { const f = pending; pending = null; setTimeout(() => alive && f(api), 80); }
@@ -1379,12 +1625,14 @@
   const goThen = fn => { if (page && MA.ctx().id === 'overview') fn(page); else { pending = fn; MA.go('#/overview'); } };
   MA.commands.add({ id: 'overview.arrange', title: tri('cmd.arrange'), icon: 'grid', shortcut: 'e', keywords: 'arrange layout widgets tiles dashboard home move resize ترتيب تخطيط بطاقات چیدمان مرتب‌سازی ابزارک', run: () => goThen(p => p.enterArrange()) });
   MA.commands.add({ id: 'overview.add', title: tri('cmd.add'), icon: 'plus', keywords: 'widget tile dashboard overview add أداة إضافة افزودن ابزارک', run: () => goThen(p => p.openAdd()) });
-  MA.commands.add({ id: 'overview.preset', title: tri('cmd.preset'), icon: 'layers', keywords: 'layout preset founder producer sales content blank تخطيط جاهز چیدمان آماده', run: () => goThen(p => p.presetMenu()) });
+  MA.commands.add({ id: 'overview.preset', title: tri('cmd.preset'), icon: 'layers', keywords: 'layout preset simple founder producer sales content blank تخطيط جاهز بسيط چیدمان آماده ساده', run: () => goThen(p => p.presetMenu()) });
 
   MA.module({
     id: 'overview', group: 'work', order: 10, icon: 'tide', shortcut: 'g o', keywords: 'home dashboard widgets الرئيسية نمای کلی خانه',
     title: { en: 'Overview', ar: 'نظرة عامة', fa: 'نمای کلی' },
     render(view, ctx) { mount(view, ctx); },
+    /** For the tests: forget what was read from the portal, so the next paint starts from "loading". */
+    resetClients() { CL.state = 'idle'; CL.items = []; CL.sig = ''; CL.at = 0; },
     search(q) {
       const ql = String(q).toLowerCase().trim(); if (!ql) return [];
       const on = new Set(loadLayout().tiles.map(t => t.w)), out = [];

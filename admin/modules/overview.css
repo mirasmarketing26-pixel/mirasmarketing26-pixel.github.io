@@ -18,15 +18,14 @@ html[data-density=compact] .m-overview.ov-page{--ov-row:168px}
 .m-overview .ov-dim{color:var(--ink4)}
 .m-overview .ov-pulse{width:8px;height:8px;border-radius:50%;background:var(--ink4);flex:none}
 .m-overview .ov-pulse.on{background:var(--good);box-shadow:0 0 0 4px var(--good-bg)}
-.m-overview .ov-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.m-overview .ov-actions .btn kbd{height:1.2rem;min-width:1.2rem;font-size:var(--fs-min);margin-inline-start:2px;background:var(--panel3)}
-/* phones: the header stacks, the text first and then one full-width button per row, so nothing runs past the screen */
+.m-overview .ov-actions{display:flex;gap:8px;align-items:center}
+/* one button: Customize, which becomes Done while arranging */
+/* phones: the header stacks, the text first and then the one button across the full width, so nothing runs past the screen */
 @media (max-width:560px){
   .m-overview .ov-head{align-items:stretch;gap:18px}
   .m-overview .ov-hello{flex:1 1 100%}
-  .m-overview .ov-actions{flex:1 1 100%;flex-direction:column;align-items:stretch;gap:8px}
-  .m-overview .ov-actions .btn{width:100%}
-  .m-overview .ov-actions .btn.ghost{background:var(--panel);color:var(--ink);box-shadow:inset 0 0 0 1px var(--field-line),var(--shadow1)}   /* the Layout button keeps the outline of the others */
+  .m-overview .ov-actions{flex:1 1 100%;align-items:stretch}
+  .m-overview .ov-actions .btn{flex:1 1 100%;justify-content:center;min-height:44px}
 }
 /* the shell's top bar (admin.css) was about 75px wider than a 390px phone, so the whole page scrolled sideways. Only while the Overview
    is on screen: the search button stays a 36px icon button (its words are hidden on a phone already) and the gaps tighten.
@@ -53,7 +52,15 @@ html:is([lang=ar],[lang=fa]) .m-overview .ov-sea-sent{font-size:1.12rem;line-hei
 .m-overview .ov-sea-stats > div:first-child dd{color:var(--accent-text)}
 .m-overview .ov-sea-cv{display:block;flex:0 0 calc(100% + var(--pad) * 2);height:112px;margin:0 calc(var(--pad) * -1);color:var(--tide);opacity:.8}
 html[data-theme=dark] .m-overview .ov-sea-cv{color:var(--tide60);opacity:.8}
-.m-overview .ov-sea[data-kind=none] .ov-sea-cv{opacity:.4}
+.m-overview .ov-sea-eye:empty,.m-overview .ov-sea-stats:empty{display:none}
+/* no visitor data: a slim strip, about 60px. A few waves sit at the far end and fade out under the one short line. */
+.m-overview .ov-sea[data-kind=none]{flex-wrap:nowrap;align-items:center;min-height:56px;padding:10px var(--pad);gap:12px}
+.m-overview .ov-sea[data-kind=none] .ov-sea-text{position:relative;z-index:1;flex:0 1 auto}
+.m-overview .ov-sea[data-kind=none] .ov-sea-sent{font:500 1rem/1.4 var(--ui);max-width:none}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-sea[data-kind=none] .ov-sea-sent{font-size:1rem;line-height:1.6}
+.m-overview .ov-sea[data-kind=none] .ov-sea-cv{position:absolute;inset:0;width:100%;height:100%;flex:none;margin:0;opacity:.55;-webkit-mask-image:linear-gradient(to right,transparent 38%,#000 85%);mask-image:linear-gradient(to right,transparent 38%,#000 85%)}
+html[dir=rtl] .m-overview .ov-sea[data-kind=none] .ov-sea-cv{-webkit-mask-image:linear-gradient(to left,transparent 38%,#000 85%);mask-image:linear-gradient(to left,transparent 38%,#000 85%)}
+html[data-theme=dark] .m-overview .ov-sea[data-kind=none] .ov-sea-cv{opacity:.7}
 
 /* ---------- board ---------- */
 .m-overview .ov-boardwrap{container:ovboard/inline-size}
@@ -335,3 +342,78 @@ html:is([lang=ar],[lang=fa]) .m-overview .ov-note{line-height:1.6}
 .m-overview .ov-code{font:400 .93rem/1.4 var(--mono);color:var(--ink);direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
 /* backups */
 .m-overview .ov-ok.is-due .warn{color:var(--warn)}
+
+/* ---------- Today: up to three big chips, or one calm line ---------- */
+.m-overview .ov-today{list-style:none;flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:12px;align-items:stretch;min-width:0}
+.m-overview .ov-today > li{display:flex;min-width:0}
+.m-overview .ov-chip{--g:var(--tide60);flex:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;align-content:center;align-items:center;column-gap:16px;min-width:0;min-height:84px;padding:14px 18px;border-radius:var(--r3);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line2);color:var(--ink);text-decoration:none;text-align:start;cursor:pointer;transition:background-color .15s,box-shadow .15s}
+.m-overview .ov-chip[data-g=work]{--g:var(--tide60)}
+.m-overview .ov-chip[data-g=clients]{--g:var(--flare)}
+.m-overview .ov-chip[data-g=site]{--g:var(--foam)}
+.m-overview a.ov-chip:hover,.m-overview button.ov-chip:hover{background:var(--hover);box-shadow:inset 0 0 0 1px var(--line3)}
+.m-overview .ov-chip-go{grid-row:1/3;grid-column:3;display:grid;place-items:center;margin-inline-start:12px;color:var(--ink3);transition:transform .15s var(--ease),color .15s}
+html[dir=rtl] .m-overview .ov-chip-go{transform:scaleX(-1)}
+.m-overview a.ov-chip:hover .ov-chip-go,.m-overview button.ov-chip:hover .ov-chip-go{color:var(--ink);transform:translateX(3px)}
+html[dir=rtl] .m-overview a.ov-chip:hover .ov-chip-go,html[dir=rtl] .m-overview button.ov-chip:hover .ov-chip-go{transform:scaleX(-1) translateX(3px)}
+/* the global focus ring squares a focused element's corners: chips and lines keep theirs */
+.m-overview .ov-chip:focus-visible{border-radius:var(--r3)}
+.m-overview .ov-row:focus-visible{border-radius:var(--r2)}
+.m-overview .ov-chip-ic{grid-row:1/3;display:grid;place-items:center;width:52px;height:52px;border-radius:var(--r2);background:var(--g);color:var(--on-fill)}
+.m-overview .ov-chip-ic .i{width:26px;height:26px}
+.m-overview .ov-chip-n{grid-column:2;grid-row:1;font:400 2.7rem/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-overview .ov-chip-l{grid-column:2;grid-row:2;font-size:.93rem;color:var(--ink2);line-height:1.35}
+html:is([lang=ar],[lang=fa]) .m-overview .ov-chip-n,html:is([lang=ar],[lang=fa]) .m-overview .ov-clear b{font-family:'Instrument Serif',var(--ui);letter-spacing:0}
+html[lang=fa] .m-overview .ov-chip-n,html[lang=fa] .m-overview .ov-clear b{font-weight:500}
+/* the Clients slot while the portal is read: same size, nothing in it, so the others do not move */
+.m-overview .ov-chip.is-wait{background:var(--panel3);box-shadow:none;cursor:default}
+.m-overview .ov-chip.is-wait .ov-chip-ic{background:var(--line2)}
+.m-overview .ov-chip.is-wait .ov-chip-n{height:2.4rem;width:3ch;border-radius:var(--r1);background:var(--line2)}
+.m-overview .ov-chip.is-wait .ov-chip-l{height:.9rem;width:9ch;border-radius:var(--r1);background:var(--line)}
+@container tile (max-width:520px){
+  .m-overview .ov-today{grid-template-columns:minmax(0,1fr);gap:8px}
+  .m-overview .ov-chip{min-height:72px;padding:10px 14px}
+  .m-overview .ov-chip-ic{width:46px;height:46px}
+  .m-overview .ov-chip-n{font-size:2.3rem}
+}
+/* nothing to do: one calm line */
+.m-overview .ov-clear{flex:1;display:flex;align-items:center;gap:14px;min-height:72px;margin:0}
+.m-overview .ov-clear-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--good-bg);color:var(--good);flex:none}
+.m-overview .ov-clear b{font:400 1.7rem/1.2 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+
+/* ---------- Clients waiting on us ---------- */
+.m-overview .ov-cwrow{--t:var(--ink2);gap:10px}
+.m-overview .ov-cwrow.k-changes{--t:var(--bad)}
+.m-overview .ov-cwrow.k-comment{--t:var(--accent-text)}
+.m-overview .ov-cwrow.k-approved,.m-overview .ov-cwrow.k-like{--t:var(--good)}
+.m-overview .ov-cwrow.k-dislike{--t:var(--warn)}
+.m-overview .ov-cwic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;flex:none;background:color-mix(in srgb,var(--t) 14%,transparent);color:var(--t)}
+/* the client, then the project: each cuts off at its own end, so a long English name in an Arabic admin still shows its first words */
+.m-overview .ov-cwname{flex:1;min-width:0;display:flex;align-items:baseline;gap:6px;font-size:.93rem;line-height:1.3}
+.m-overview .ov-cwname b{flex:0 1 auto;min-width:0;max-width:70%;font-weight:600}
+.m-overview .ov-cwsep{flex:none;color:var(--ink3)}
+.m-overview .ov-cwproj{flex:0 1 auto;min-width:0;color:var(--ink3)}
+/* a narrow tile (a phone) has room for the client only; the status word tells the lines apart */
+@container tile (max-width:430px){.m-overview .ov-cwsep,.m-overview .ov-cwproj{display:none}.m-overview .ov-cwname b{max-width:100%}}
+.m-overview .ov-cwst{flex:none;font-size:.93rem;font-weight:600;color:var(--t)}
+/* a narrow tile keeps the word for screen readers and shows the icon and its colour */
+@container tile (max-width:330px){.m-overview .ov-cwst{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
+.m-overview .ov-row.ov-skel{min-height:42px;pointer-events:none}
+.m-overview .ov-skel i{display:block;height:.9rem;border-radius:var(--r1);background:var(--line)}
+.m-overview .ov-skel i:first-child{width:28px;height:28px;border-radius:50%;background:var(--line2)}
+.m-overview .ov-skel i:last-child{flex:1;max-width:60%}
+
+/* This week: the Plan's next seven days. Kind colours come from the Plan page (modules/plan.css), with fallbacks if it is missing. */
+.m-overview .ov-planrow{gap:10px}
+.m-overview .ov-planic{--k:var(--pl-task,var(--accent-text));--kb:var(--pl-task-bg,var(--panel3));flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:var(--r1);background:var(--kb);color:var(--k)}
+.m-overview .ov-planic[data-kind=post]{--k:var(--pl-post,var(--accent-text));--kb:var(--pl-post-bg,var(--panel3))}
+.m-overview .ov-planic[data-kind=shoot]{--k:var(--pl-shoot,var(--accent-text));--kb:var(--pl-shoot-bg,var(--panel3))}
+.m-overview .ov-planday{flex:none;min-width:5.5em;font-size:.93rem;font-weight:600;color:var(--ink2);white-space:nowrap}
+.m-overview .ov-plantime{font-weight:400}
+.m-overview .ov-planrow .ov-row-main > span{font-size:.93rem}
+/* Tentative: a dashed edge plus the word (never colour alone) */
+.m-overview .ov-tent{flex:none;font-size:.93rem;font-weight:600;line-height:1.4;padding:0 7px;border:1px dashed var(--ink2);border-radius:999px;color:var(--ink);white-space:nowrap}
+@container tile (max-width:330px){.m-overview .ov-planday{min-width:0}.m-overview .ov-plantime{display:none}}
+/* Followers */
+.m-overview .ov-fo-big{display:block;color:inherit;text-decoration:none;border-radius:var(--r1)}
+.m-overview a.ov-fo-big:hover .ov-big{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.m-overview .ov-fo-g .delta b{font-weight:600}
